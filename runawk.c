@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2006 Aleksey Cheusov
+ *
+ * This material is provided "as is", with absolutely no warranty
+ * expressed or implied. Any use is at your own risk.
+ *
+ * Permission to use or copy this software for any purpose is hereby
+ * granted without fee, provided the above notices are retained on all
+ * copies.  Permission to modify the code and to distribute modified
+ * code is granted, provided the above notices are retained, and a
+ * notice that the code was modified is included with the above
+ * copyright notice.
+ *
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -8,8 +23,10 @@
 #define BUFSIZ 4096
 #endif
 
-#if defined(__linux__)
+#ifndef HAVE_WGETLN
+#if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFlyBSD__) && !defined(__INTERIX)
 #include "fgetln.c"
+#endif
 #endif
 
 static void usage (void)
