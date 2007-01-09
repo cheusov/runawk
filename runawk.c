@@ -51,15 +51,15 @@ runawk 0.6 written by Aleksey Cheusov\n\
 ");
 }
 
-const char **includes = NULL;
-int includes_count = 0;
+static const char **includes = NULL;
+static int includes_count    = 0;
 
-char *awkpath = NULL;
-size_t awkpath_len = 0;
+static char *awkpath      = NULL;
+static size_t awkpath_len = 0;
 
-char cwd [2048];
+static char cwd [2048];
 
-const char *search_file (const char *dir, const char *name)
+static const char *search_file (const char *dir, const char *name)
 {
 	/* search in AWKPATH env. */
 	const char *curr_dir = NULL;
@@ -67,7 +67,7 @@ const char *search_file (const char *dir, const char *name)
 	size_t i;
 
 	/* dir argument */
-	snprintf (buf, sizeof (buf), "%s/%s", cwd, name);
+	snprintf (buf, sizeof (buf), "%s/%s", dir, name);
 	if (!access (buf, R_OK)){
 		return strdup (buf);
 	}
@@ -95,7 +95,7 @@ static void invalid_use_directive (int num, const char *line, const char *fn)
 
 static void push_uniq (const char *dir, const char *name);
 
-void scan_for_use (const char *name)
+static void scan_for_use (const char *name)
 {
 	char dir [BUFSIZ];
 	char *p = NULL;
@@ -109,6 +109,7 @@ void scan_for_use (const char *name)
 	while (len--){
 		if (dir [len] == '/'){
 			dir [len] = 0;
+			break;
 		}
 	}
 
@@ -241,14 +242,14 @@ int main (int argc, char **argv)
 		++argv;
 	}
 
-	/* files */
+	/* program_file */
 	if (argc < 1){
 		usage ();
 		exit (30);
 	}
 
 	--argc;
-	push_uniq (cwd, *argv++);
+	push (cwd, *argv++);
 
 	/* exec */
 	new_argc = includes_count * 2 + argc + 1;
