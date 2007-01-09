@@ -57,13 +57,13 @@ static int includes_count    = 0;
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
 
-static char cwd [2048];
+static char cwd [PATH_MAX];
 
 static const char *search_file (const char *dir, const char *name)
 {
 	/* search in AWKPATH env. */
 	const char *curr_dir = NULL;
-	char buf [2048];
+	char buf [PATH_MAX];
 	size_t i;
 
 	/* dir argument */
@@ -97,7 +97,7 @@ static void push_uniq (const char *dir, const char *name);
 
 static void scan_for_use (const char *name)
 {
-	char dir [BUFSIZ];
+	char dir [PATH_MAX];
 	char *p = NULL;
 	char *n = NULL;
 	char *line = NULL;
