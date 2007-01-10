@@ -9,7 +9,7 @@ AWK_PROG=/usr/bin/awk
 all: runawk
 
 runawk : runawk.c fgetln.c
-	$(CC) -o runawk -DAWK_PROG='"${AWK_PROG}"' -Wall -O0 -g $(CFLAGS) runawk.c $(LDFLAGS)
+	$(CC) -o runawk -DAWK_PROG='"${AWK_PROG}"' -O $(CFLAGS) runawk.c $(LDFLAGS)
 
 .PHONY : clean
 clean:
