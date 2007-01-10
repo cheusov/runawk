@@ -18,6 +18,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
 
 #ifndef BUFSIZ
 #define BUFSIZ 4096
@@ -95,11 +96,27 @@ static void invalid_use_directive (int num, const char *line, const char *fn)
 
 static void push_uniq (const char *dir, const char *name);
 
+static const char *extract_qstring (char *line, const char *fn, char *s)
+{
+	char *p = NULL;
+	char *n = NULL;
+
+	p = strchr (s, '"');
+	if (p)
+		n = strchr (p + 1, '"');
+
+	if (!p || !n){
+		invalid_use_directive (0, line, fn);
+		exit (36);
+	}
+
+	*n = 0;
+	return strdup (p+1);
+}
+
 static void scan_for_use (const char *name)
 {
 	char dir [PATH_MAX];
-	char *p = NULL;
-	char *n = NULL;
 	char *line = NULL;
 	size_t len = 0;
 	FILE *fd = NULL;
@@ -124,17 +141,7 @@ static void scan_for_use (const char *name)
 			line [len-1] = 0;
 
 		if (!strncmp (line, "#use ", 5)){
-			p = strchr (line + 5, '"');
-			if (p)
-				n = strchr (p + 1, '"');
-
-			if (!p || !n){
-				invalid_use_directive (0, line, name);
-				exit (36);
-			}
-
-			*n = 0;
-			push_uniq (dir, strdup (p+1));
+			push_uniq (dir, extract_qstring (line, name, line + 5));
 		}
 	}
 	if (ferror (fd)){
@@ -259,7 +266,7 @@ int main (int argc, char **argv)
 		exit (38);
 	}
 
-	new_argv [0] = "/usr/bin/gawk";
+	new_argv [0] = AWK_PROG;
 	for (i=0; i < includes_count; ++i){
 		new_argv [i+i+1]   = "-f";
 		new_argv [i+i+2] = includes [i];
@@ -276,6 +283,6 @@ int main (int argc, char **argv)
 
 		return 0;
 	}else{
-		return execv ("/usr/bin/gawk", (char *const *) new_argv);
+		return execv (AWK_PROG, (char *const *) new_argv);
 	}
 }
