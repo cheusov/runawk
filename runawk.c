@@ -60,6 +60,8 @@ static size_t awkpath_len = 0;
 
 static char cwd [PATH_MAX];
 
+static const char *interp = AWK_PROG;
+
 static const char *search_file (const char *dir, const char *name)
 {
 	/* search in AWKPATH env. */
@@ -90,7 +92,7 @@ static const char *search_file (const char *dir, const char *name)
 static void invalid_use_directive (int num, const char *line, const char *fn)
 {
 	fprintf (stderr,
-			 "error: invalid #use directive at line #%d,\n line=`%s`\n file=`%s`\n",
+			 "error: invalid directive at line #%d,\n line=`%s`\n file=`%s`\n",
 			 num, line, fn);
 }
 
@@ -142,6 +144,9 @@ static void scan_for_use (const char *name)
 
 		if (!strncmp (line, "#use ", 5)){
 			push_uniq (dir, extract_qstring (line, name, line + 5));
+		}
+		if (!strncmp (line, "#interp ", 5)){
+			interp = extract_qstring (line, name, line + 8);
 		}
 	}
 	if (ferror (fd)){
@@ -264,12 +269,11 @@ int main (int argc, char **argv)
 	push (cwd, *argv++);
 
 	/* exec */
-	ll_push (AWK_PROG, &new_argv, &new_argc);
+	ll_push (interp, &new_argv, &new_argc);
 	for (i=0; i < includes_count; ++i){
 		ll_push ("-f",         &new_argv, &new_argc);
 		ll_push (includes [i], &new_argv, &new_argc);
 	}
-/*	ll_push ("--", &new_argv, &new_argc); */
 	for (i=0; i < argc; ++i){
 		ll_push (argv [i], &new_argv, &new_argc);
 	}
@@ -282,6 +286,6 @@ int main (int argc, char **argv)
 
 		return 0;
 	}else{
-		return execv (AWK_PROG, (char *const *) new_argv);
+		return execv (interp, (char *const *) new_argv);
 	}
 }
