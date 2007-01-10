@@ -150,6 +150,20 @@ static void scan_for_use (const char *name)
 	}
 }
 
+static void ll_push (const char *item, const char ***array, size_t *array_size)
+{
+	*array = (const char **) realloc (
+		*array, (*array_size + 1) * sizeof (char *));
+
+	if (!*array){
+		perror ("realloc(3) failed");
+		exit (31);
+	}
+
+	(*array) [*array_size] = item;
+	++*array_size;
+}
+
 static void push (const char *dir, const char *name)
 {
 	const char *new_name = NULL;
@@ -165,16 +179,7 @@ static void push (const char *dir, const char *name)
 	}
 
 	/* add to queue */
-	includes = (const char **) realloc (
-		includes, (includes_count + 1) * sizeof (char *));
-
-	if (!includes){
-		perror ("realloc(3) failed");
-		exit (31);
-	}
-
-	includes [includes_count] = name;
-	++includes_count;
+	ll_push (name, &includes, &includes_count);
 
 	/* recursive snanning for #use directive */
 	scan_for_use (name);
@@ -259,25 +264,19 @@ int main (int argc, char **argv)
 	push (cwd, *argv++);
 
 	/* exec */
-	new_argc = includes_count * 2 + argc + 1;
-	new_argv = malloc ((argc + 1) * sizeof (char *));
-	if (!new_argv){
-		perror ("malloc(3) failed");
-		exit (38);
-	}
-
-	new_argv [0] = AWK_PROG;
+	ll_push (AWK_PROG, &new_argv, &new_argc);
 	for (i=0; i < includes_count; ++i){
-		new_argv [i+i+1]   = "-f";
-		new_argv [i+i+2] = includes [i];
+		ll_push ("-f",         &new_argv, &new_argc);
+		ll_push (includes [i], &new_argv, &new_argc);
 	}
+/*	ll_push ("--", &new_argv, &new_argc); */
 	for (i=0; i < argc; ++i){
-		new_argv [includes_count * 2 + i + 1] = argv [i];
+		ll_push (argv [i], &new_argv, &new_argc);
 	}
-	new_argv [new_argc] = NULL;
+	ll_push (NULL, &new_argv, &new_argc);
 
 	if (debug){
-		for (i=0; i < new_argc; ++i){
+		for (i=0; i < new_argc - 1; ++i){
 			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
 		}
 
