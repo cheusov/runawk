@@ -274,6 +274,9 @@ int main (int argc, char **argv)
 		ll_push ("-f",         &new_argv, &new_argc);
 		ll_push (includes [i], &new_argv, &new_argc);
 	}
+
+	ll_push ("--", &new_argv, &new_argc);
+
 	for (i=0; i < argc; ++i){
 		ll_push (argv [i], &new_argv, &new_argc);
 	}
