@@ -183,11 +183,11 @@ static void push (const char *dir, const char *name)
 		name = new_name;
 	}
 
-	/* add to queue */
-	ll_push (name, &includes, &includes_count);
-
 	/* recursive snanning for #use directive */
 	scan_for_use (name);
+
+	/* add to queue */
+	ll_push (name, &includes, &includes_count);
 }
 
 static void push_uniq (const char *dir, const char *name)
