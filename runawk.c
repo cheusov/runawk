@@ -289,6 +289,6 @@ int main (int argc, char **argv)
 
 		return 0;
 	}else{
-		return execv (interp, (char *const *) new_argv);
+		return execvp (interp, (char *const *) new_argv);
 	}
 }
