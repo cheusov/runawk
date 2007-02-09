@@ -13,6 +13,8 @@
  *
  */
 
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -54,6 +56,23 @@ runawk 0.6 written by Aleksey Cheusov\n\
 
 static const char **includes = NULL;
 static int includes_count    = 0;
+
+static const char **temp_files = NULL;
+static int temp_files_count    = 0;
+
+void remove_tmp_files ()
+{
+	int i;
+	for (i=0; i < temp_files_count; ++i){
+		unlink (temp_files [i]);
+	}
+}
+
+void clean_and_exit (int status)
+{
+	remove_tmp_files ();
+	exit (status);
+}
 
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
@@ -109,7 +128,7 @@ static const char *extract_qstring (char *line, const char *fn, char *s)
 
 	if (!p || !n){
 		invalid_use_directive (0, line, fn);
-		exit (36);
+		clean_and_exit (36);
 	}
 
 	*n = 0;
@@ -135,7 +154,7 @@ static void scan_for_use (const char *name)
 	fd = fopen (name, "r");
 	if (!fd){
 		fprintf (stderr, "fopen(%s) failed: %s\n", name, strerror (errno));
-		exit (35);
+		clean_and_exit (35);
 	}
 
 	while (line = fgetln (fd, &len), line != NULL){
@@ -151,7 +170,7 @@ static void scan_for_use (const char *name)
 	}
 	if (ferror (fd)){
 		perror ("fgeln(3) failed");
-		exit (36);
+		clean_and_exit (36);
 	}
 }
 
@@ -162,7 +181,7 @@ static void ll_push (const char *item, const char ***array, size_t *array_size)
 
 	if (!*array){
 		perror ("realloc(3) failed");
-		exit (31);
+		clean_and_exit (31);
 	}
 
 	(*array) [*array_size] = item;
@@ -178,7 +197,7 @@ static void push (const char *dir, const char *name)
 		new_name = search_file (dir, name);
 		if (!new_name){
 			fprintf (stderr, "Cannot find file `%s`, check AWKPATH environment variable\n", name);
-			exit (34);
+			clean_and_exit (34);
 		}
 		name = new_name;
 	}
@@ -207,12 +226,37 @@ static void push_uniq (const char *dir, const char *name)
 	push (dir, name);
 }
 
+static const char *get_tmp_name ()
+{
+	char tmp_name [PATH_MAX];
+	static int intern_count = 0;
+	char *dup = NULL;
+
+	snprintf (tmp_name, sizeof (tmp_name),
+			  "/tmp/runawk.%d.%d",
+			  (int) getpid (), intern_count);
+
+	++intern_count;
+
+	dup = strdup (tmp_name);
+	if (!dup){
+		perror ("strdup(3) failed");
+		clean_and_exit (1);
+	}
+
+	ll_push (dup, &temp_files, &temp_files_count);
+}
+
 int main (int argc, char **argv)
 {
 	int i;
 	const char ** new_argv = NULL;
 	int new_argc = 0;
 	int debug = 0;
+	const char *tmp_name = NULL;
+	FILE *fd = NULL;
+	pid_t pid = 0;
+	int child_status = 0;
 
 	--argc, ++argv;
 
@@ -227,7 +271,7 @@ int main (int argc, char **argv)
 		awkpath = strdup (awkpath);
 		if (!awkpath){
 			perror ("strdup failed");
-			exit (33);
+			clean_and_exit (33);
 		}
 
 		awkpath_len = strlen (awkpath);
@@ -241,17 +285,17 @@ int main (int argc, char **argv)
 	/* cwd */
 	if (!getcwd (cwd, sizeof (cwd))){
 		perror ("getcwd (3) failed");
-		exit (32);
+		clean_and_exit (32);
 	}
 
-	/* opts, no getopt(3) here */
+	/* options, no getopt(3) here */
 	if (argc && !strcmp (argv [0], "-h")){
 		usage ();
-		return 0;
+		clean_and_exit (0);
 	}
 	if (argc && !strcmp (argv [0], "-V")){
 		version ();
-		return 0;
+		clean_and_exit (0);
 	}
 	if (argc && !strcmp (argv [0], "-d")){
 		debug = 1;
@@ -259,14 +303,42 @@ int main (int argc, char **argv)
 		++argv;
 	}
 
-	/* program_file */
-	if (argc < 1){
-		usage ();
-		exit (30);
+	/* -e options */
+	while (argc && !strcmp (argv [0], "-e")){
+		if (argc == 1){
+			fprintf (stderr, "missing argument for -e option");
+			clean_and_exit (1);
+		}
+
+		tmp_name = get_tmp_name ();
+		fd = fopen (tmp_name, "w");
+		if (!fd){
+			perror ("fopen(3) failed");
+			clean_and_exit (1);
+		}
+		fputs (argv [1], fd);
+		fputs ("\n", fd);
+		if (fclose (fd)){
+			perror ("fclose(3) failed");
+			clean_and_exit (1);
+		}
+
+		push ("", tmp_name);
+
+		argc -= 2;
+		argv += 2;
 	}
 
-	--argc;
-	push (cwd, *argv++);
+	if (!includes_count){
+		/* program_file */
+		if (argc < 1){
+			usage ();
+			clean_and_exit (30);
+		}
+
+		--argc;
+		push (cwd, *argv++);
+	}
 
 	/* exec */
 	ll_push (interp, &new_argv, &new_argc);
@@ -286,9 +358,25 @@ int main (int argc, char **argv)
 		for (i=0; i < new_argc - 1; ++i){
 			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
 		}
-
-		return 0;
 	}else{
-		return execvp (interp, (char *const *) new_argv);
+		pid = fork ();
+		switch (pid){
+			case -1:
+				perror ("fork(2) failed");
+				clean_and_exit (1);
+				break;
+
+			case 0:
+				execvp (interp, (char *const *) new_argv);
+				break;
+
+			default:
+//				wait (&child_status);
+				waitpid (-1, &child_status, 0);
+//				fprintf (stderr, "status = %d\n", child_status);
+				clean_and_exit (WEXITSTATUS (child_status));
+		}
 	}
+
+	exit (0);
 }
