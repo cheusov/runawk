@@ -80,6 +80,7 @@ static size_t awkpath_len = 0;
 static char cwd [PATH_MAX];
 
 static const char *interp = AWK_PROG;
+static int line_num = 0;
 
 static const char *search_file (const char *dir, const char *name)
 {
@@ -128,7 +129,7 @@ static const char *extract_qstring (char *line, const char *fn, char *s)
 
 	if (!p || !n){
 		invalid_use_directive (0, line, fn);
-		clean_and_exit (36);
+		clean_and_exit (37);
 	}
 
 	*n = 0;
@@ -157,7 +158,10 @@ static void scan_for_use (const char *name)
 		clean_and_exit (35);
 	}
 
+	line_num = 0;
 	while (line = fgetln (fd, &len), line != NULL){
+		++line_num;
+
 		if (line [len-1] == '\n')
 			line [len-1] = 0;
 
@@ -241,10 +245,12 @@ static const char *get_tmp_name ()
 	dup = strdup (tmp_name);
 	if (!dup){
 		perror ("strdup(3) failed");
-		clean_and_exit (1);
+		clean_and_exit (38);
 	}
 
 	ll_push (dup, &temp_files, &temp_files_count);
+
+	return dup;
 }
 
 int main (int argc, char **argv)
@@ -307,20 +313,20 @@ int main (int argc, char **argv)
 	while (argc && !strcmp (argv [0], "-e")){
 		if (argc == 1){
 			fprintf (stderr, "missing argument for -e option");
-			clean_and_exit (1);
+			clean_and_exit (39);
 		}
 
 		tmp_name = get_tmp_name ();
 		fd = fopen (tmp_name, "w");
 		if (!fd){
 			perror ("fopen(3) failed");
-			clean_and_exit (1);
+			clean_and_exit (40);
 		}
 		fputs (argv [1], fd);
 		fputs ("\n", fd);
 		if (fclose (fd)){
 			perror ("fclose(3) failed");
-			clean_and_exit (1);
+			clean_and_exit (41);
 		}
 
 		push ("", tmp_name);
@@ -363,7 +369,7 @@ int main (int argc, char **argv)
 		switch (pid){
 			case -1:
 				perror ("fork(2) failed");
-				clean_and_exit (1);
+				clean_and_exit (42);
 				break;
 
 			case 0:
