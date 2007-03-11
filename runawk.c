@@ -26,6 +26,14 @@
 #define BUFSIZ 4096
 #endif
 
+#ifndef STDIN_FILENAME
+#define STDIN_FILENAME "/dev/stdin"
+#endif
+
+#ifndef AWK_PROG
+#define AWK_PROG "awk"
+#endif
+
 #ifndef HAVE_WGETLN
 #if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFlyBSD__) && !defined(__INTERIX)
 #include "fgetln.c"
@@ -263,6 +271,7 @@ int main (int argc, char **argv)
 	FILE *fd = NULL;
 	pid_t pid = 0;
 	int child_status = 0;
+	int all_with_dash = 1;
 
 	--argc, ++argv;
 
@@ -295,18 +304,20 @@ int main (int argc, char **argv)
 	}
 
 	/* options, no getopt(3) here */
-	if (argc && !strcmp (argv [0], "-h")){
-		usage ();
-		clean_and_exit (0);
-	}
-	if (argc && !strcmp (argv [0], "-V")){
-		version ();
-		clean_and_exit (0);
-	}
-	if (argc && !strcmp (argv [0], "-d")){
-		debug = 1;
-		--argc;
-		++argv;
+	if (argc && argv [0][0] == '-'){
+		if (strchr (argv [0], 'h')){
+			usage ();
+			clean_and_exit (0);
+		}
+		if (strchr (argv [0], 'V')){
+			version ();
+			clean_and_exit (0);
+		}
+		if (strchr (argv [0], 'd')){
+			debug = 1;
+			--argc;
+			++argv;
+		}
 	}
 
 	/* -e options */
@@ -356,8 +367,17 @@ int main (int argc, char **argv)
 	ll_push ("--", &new_argv, &new_argc);
 
 	for (i=0; i < argc; ++i){
+		if (argv [i][0] != '-'){
+			all_with_dash = 0;
+		}
+
 		ll_push (argv [i], &new_argv, &new_argc);
 	}
+
+	if (argc && all_with_dash){
+		ll_push (STDIN_FILENAME, &new_argv, &new_argc);
+	}
+
 	ll_push (NULL, &new_argv, &new_argc);
 
 	if (debug){
