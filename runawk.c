@@ -63,10 +63,10 @@ runawk 0.6 written by Aleksey Cheusov\n\
 }
 
 static const char **includes = NULL;
-static int includes_count    = 0;
+static size_t includes_count = 0;
 
 static const char **temp_files = NULL;
-static int temp_files_count    = 0;
+static size_t temp_files_count = 0;
 
 void remove_tmp_files ()
 {
@@ -265,7 +265,7 @@ int main (int argc, char **argv)
 {
 	int i;
 	const char ** new_argv = NULL;
-	int new_argc = 0;
+	size_t new_argc = 0;
 	int debug = 0;
 	const char *tmp_name = NULL;
 	FILE *fd = NULL;
@@ -381,7 +381,7 @@ int main (int argc, char **argv)
 	ll_push (NULL, &new_argv, &new_argc);
 
 	if (debug){
-		for (i=0; i < new_argc - 1; ++i){
+		for (i=0; i < (int)new_argc - 1; ++i){
 			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
 		}
 	}else{
