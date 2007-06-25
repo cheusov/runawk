@@ -63,10 +63,10 @@ runawk 0.6 written by Aleksey Cheusov\n\
 }
 
 static const char **includes = NULL;
-static size_t includes_count = 0;
+static int includes_count = 0;
 
 static const char **temp_files = NULL;
-static size_t temp_files_count = 0;
+static int temp_files_count = 0;
 
 void remove_tmp_files ()
 {
@@ -186,7 +186,7 @@ static void scan_for_use (const char *name)
 	}
 }
 
-static void ll_push (const char *item, const char ***array, size_t *array_size)
+static void ll_push (const char *item, const char ***array, int *array_size)
 {
 	*array = (const char **) realloc (
 		*array, (*array_size + 1) * sizeof (char *));
@@ -264,14 +264,15 @@ static const char *get_tmp_name ()
 int main (int argc, char **argv)
 {
 	int i;
+	const char *tmp_name   = NULL;
+	const char *progname   = NULL;
 	const char ** new_argv = NULL;
-	size_t new_argc = 0;
-	int debug = 0;
-	const char *tmp_name = NULL;
-	FILE *fd = NULL;
-	pid_t pid = 0;
-	int child_status = 0;
-	int all_with_dash = 1;
+	int new_argc           = 0;
+	int debug              = 0;
+	FILE *fd               = NULL;
+	pid_t pid              = 0;
+	int child_status       = 0;
+	int all_with_dash      = 1;
 
 	--argc, ++argv;
 
@@ -346,6 +347,7 @@ int main (int argc, char **argv)
 		argv += 2;
 	}
 
+	progname = interp;
 	if (!includes_count){
 		/* program_file */
 		if (argc < 1){
@@ -354,11 +356,17 @@ int main (int argc, char **argv)
 		}
 
 		--argc;
-		push (cwd, *argv++);
+		push (cwd, *argv);
+		progname = *argv;
+#if 0
+		setprogname (*argv);
+		setproctitle (*argv);
+#endif
+		++argv;
 	}
 
 	/* exec */
-	ll_push (interp, &new_argv, &new_argc);
+	ll_push (progname, &new_argv, &new_argc);
 	for (i=0; i < includes_count; ++i){
 		ll_push ("-f",         &new_argv, &new_argc);
 		ll_push (includes [i], &new_argv, &new_argc);
@@ -381,8 +389,8 @@ int main (int argc, char **argv)
 	ll_push (NULL, &new_argv, &new_argc);
 
 	if (debug){
-		for (i=0; i < (int)new_argc - 1; ++i){
-			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
+		for (i=0; i < new_argc - 1; ++i){
+			fprintf (stderr, "new_argv [%d] = %s\n", i, new_argv [i]);
 		}
 	}else{
 		pid = fork ();
