@@ -1,0 +1,107 @@
+runawk - small wrapper for AWK interpreter that impements module
+system and helps to write the standalone AWK programs.
+
+======================================================================
+Documentation:
+
+You can use runawk by beginning your script with
+
+   #!/usr/local/bin/runawk
+
+line or 
+
+   #!/usr/bin/awk -f
+
+or something like this.
+
+------------------------------------------------------------
+Modules are enabled like this
+
+  #use "module1.awk"
+  #use "module2.awk"
+
+that is the line that specifies module name is treated as a comment line
+by normal AWK interpreter and is processed by runawk especially.
+
+Note that AWK modules can also "use" another module and so forth.
+All them are collected and each one is added to the list of
+arguments prepanded with -f option.
+That is "#use" directive is *NOT* like #include directive in C language.
+It is more like to Perl's "use" command.
+
+Also note that modules are added to the list of arguments only once,
+i.e. with no duplications.
+
+Example:
+
+  file prog:
+     #!/usr/local/bin/runawk
+
+     #use "A.awk"
+     #use "B.awk"
+     #use "E.awk"
+
+     PROG code
+     ...
+
+  file B.awk:
+     #use "A.awk"
+     #use "C.awk"
+     B code
+     ...
+
+  file C.awk:
+     #use "A.awk"
+     #use "D.awk"
+
+     C code
+     ...
+
+  A.awk and D.awk don't contain #use directive
+
+If you run
+
+  runawk prog file1 file2
+
+then actually
+
+  awk -f A.awk -f D.awk -f C.awk -f B.awk -f E.awk -f prog -- file1 file2
+
+command will run.
+
+In order to pass arguments to AWK script, but the AWK interpreter, runawk
+treat their arguments beginning with - sign (until normal file is found)
+especially. The following command
+
+  runawk prog2 -h -f=file -o=output file1 file2
+
+will actually run
+
+  awk -f prog2 -- -x -f=file -o=output file1 file2
+
+and therefore -s, -f, -o option will be passed to ARGV/ARGC variables
+together with file1 and file2. When all arguments begin with -
+stdin is added to the end of argument list, that is running
+
+  runawk prog3 --value=value
+
+the following 
+
+  awk -f prog3 -- --value=value -
+
+will be run.
+
+------------------------------------------------------------
+
+For some reason you may prefer one AWK interpreter or another like this.
+
+  file prog:
+     #!/usr/local/bin/runawk
+
+     #use "A.awk"
+     #use "B.awk"
+     #use "E.awk"
+
+     #interp "/usr/pkg/bin/nbawk"
+
+     PROG code
