@@ -3,7 +3,7 @@
 runawk: small wrapper for AWK interpreter that impements module
 system and helps to write standalone AWK programs.
 
-author:                        Aleksey Cheusov <vle@gmx.net>
+author:                                  Aleksey Cheusov <vle@gmx.net>
 
 project's home page:           http://sourceforge.net/projects/~runawk
 
@@ -49,13 +49,16 @@ This is why I wrote runawk.
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
 2) cd runawk-X-Y-Z
+
 3) edit Makefile
    for you needs
+
 4) make
+
 5) make install
 
 Note that no documentation is installed (yet?).
-Documentation is in this this file (README), read below.
+Documentation is in this file (README), read below.
 
 ======================================================================
 
@@ -141,6 +144,12 @@ the following command
   awk -f A.awk -f D.awk -f C.awk -f B.awk -f E.awk -f prog -- file1 file2
 
 will actually run.
+
+------------------------------
+
+AWKPATH environment variable specifies a colon separated list
+of search directories where module files are searched if they were
+mentioned in #use directive with leading slash (`/').
 
 ------------------------------
 
