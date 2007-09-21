@@ -2,9 +2,12 @@
 # defaults
 
 # default awk program
+#AWK_PROG=/usr/bin/awk
 AWK_PROG=awk
+
 # stdin filename
-STDIN_FILENAME=/dev/stdin
+#STDIN_FILENAME=/dev/stdin
+STDIN_FILENAME=-
 
 ##################################################
 
