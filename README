@@ -148,8 +148,8 @@ will actually run.
 ------------------------------
 
 AWKPATH environment variable specifies a colon separated list
-of search directories where module files are searched if they were
-mentioned in #use directive with leading slash (`/').
+of search directories where module are searched if they were
+mentioned in #use directive without a leading slash (`/').
 
 ------------------------------
 
