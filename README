@@ -5,6 +5,42 @@ system and helps to write standalone AWK programs.
 
 ======================================================================
 
+
+
+                              MOTIVATION
+
+
+
+After years of using AWK for programming I've found that
+despite of its simplicity and limitations AWK is good enough
+for scripting a wide range of different tasks. AWK is not as poweful
+as their bigger counterparts like Perl, Ruby, TCL and others
+but it has their own advantages like compactness, simplicity
+and availability on almost all UNIX-like systems.
+
+But! Unfortunately awk interpreters (and standards that describe it)
+lacks some important features and sometimes behave unexpectedly.
+
+Problems I see (in short):
+1) AWK lacks support for modules.
+2) #!/usr/bin/awk -f
+   scripts require extra `--' before arguments passed to script.
+   IMHO, this is inconvenient.
+3) If #!/usr/bin/awk -f script require both options and
+   to read from stdin you should add /dev/stdin or `-'
+   as a file explicitely.
+   IMHO, this is inconvenient too.
+
+This is why I wrote runawk.
+
+======================================================================
+
+
+
+                             DOCUMENTATION
+
+
+
 Under UNIX-like OS-es you can use runawk
 by beginning your script with
 
