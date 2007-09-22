@@ -66,8 +66,9 @@ cvsdist:
 ChangeLog:
 	@(echo "***** Making new ChangeLog..."; \
 	rm -f ChangeLog; \
-	AWK=gawk rcs2log -i 2 -r -d'2007-09-20<' . \
+	AWK=gawk rcs2log -i 2 -r -d'2007-09-24<' . \
 	| sed -e 's,/cvsroot/runawk/,,g' \
 	      -e 's,cheusov@[^>]*,vle@gmx.net,g' \
+	      -e 's,author  <[^>]*,Aleksey Cheusov <vle@gmx.net,g' \
               -e 's,\(.*\)<\([^@<>]\+\)@\([^@<>]\+\)>\(.*\),\1<\2 at \3}\4,g' \
 	> ChangeLog;)
