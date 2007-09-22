@@ -33,8 +33,8 @@ clean:
 
 .PHONY : install
 install: runawk
-	mkdir -p ${ROOT}/bin && cp runawk ${ROOT}/bin
+	mkdir -p ${DESTDIR}${ROOT}/bin && cp runawk ${DESTDIR}${ROOT}/bin
 
 .PHONY : uninstall
 uninstall:
-	rm -f ${ROOT}/bin/runawk
+	rm -f ${DESTDIR}${ROOT}/bin/runawk
