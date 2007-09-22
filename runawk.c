@@ -53,11 +53,11 @@ README file in a distribution contains the documentation\n\
 ");
 }
 
+static const char *runawk_version = "0.7";
+
 static void version (void)
 {
-	puts ("\
-runawk 0.6 written by Aleksey Cheusov\n\
-");
+	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
 static const char **includes = NULL;
