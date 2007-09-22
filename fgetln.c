@@ -20,6 +20,10 @@ fgetln(FILE *fp, size_t *len)
 
 	if (fgets (buf, sizeof (buf), fp)){
 		*len = strlen (buf);
+		if (buf [*len-1] == '\n'){
+			--*len;
+			buf [*len] = 0;
+		}
 		return buf;
 	}else{
 		return NULL;
