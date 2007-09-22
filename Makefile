@@ -9,6 +9,13 @@ AWK_PROG=awk
 #STDIN_FILENAME=/dev/stdin
 STDIN_FILENAME=-
 
+# where to install
+#ROOT=/usr
+ROOT=/usr/local
+
+# you should not set this here
+#DESTDIR=
+
 ##################################################
 
 CPPFLAGS=-DSTDIN_FILENAME='"${STDIN_FILENAME}"' -DAWK_PROG='"${AWK_PROG}"'
@@ -23,3 +30,11 @@ runawk : runawk.c fgetln.c
 .PHONY : clean
 clean:
 	rm -f *.o *~ core* *.core runawk
+
+.PHONY : install
+install: runawk
+	mkdir -p ${ROOT}/bin && cp runawk ${ROOT}/bin
+
+.PHONY : uninstall
+uninstall:
+	rm -f ${ROOT}/bin/runawk
