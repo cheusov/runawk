@@ -18,7 +18,7 @@ WARFLAGS=-Wall -Werror
 all: runawk
 
 runawk : runawk.c fgetln.c
-	$(CC) -o runawk -O $(CPPFLAGS) $(CFLAGS) $(WARFLAGS) runawk.c $(LDFLAGS)
+	$(CC) -o runawk $(CPPFLAGS) $(CFLAGS) $(WARFLAGS) runawk.c $(LDFLAGS)
 
 .PHONY : clean
 clean:
