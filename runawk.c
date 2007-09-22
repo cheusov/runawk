@@ -68,6 +68,9 @@ static int includes_count = 0;
 static const char **temp_files = NULL;
 static int temp_files_count = 0;
 
+static char *awkpath      = NULL;
+static size_t awkpath_len = 0;
+
 void remove_tmp_files ()
 {
 	int i;
@@ -79,11 +82,16 @@ void remove_tmp_files ()
 void clean_and_exit (int status)
 {
 	remove_tmp_files ();
+
+	if (includes)
+		free (includes);
+	if (temp_files)
+		free (temp_files);
+	if (awkpath)
+		free (awkpath);
+
 	exit (status);
 }
-
-static char *awkpath      = NULL;
-static size_t awkpath_len = 0;
 
 static char cwd [PATH_MAX];
 
