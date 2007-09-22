@@ -43,15 +43,14 @@
 static void usage (void)
 {
 	puts ("\
-runawk provides include files for programs written in awk\n\
+runawk - wrapper for the AWK interpreter\n\
 usage: runawk [OPTIONS] program_file [arguments...]\n\
- \"program_file\" (prepanded with -f) and \"arguments\"\n\
- are passed to awk interpreter\n\
 OPTIONS:\n\
   -h    display this screen\n\
   -V    display version information\n\
-  -d    list new argv array, do not run interpreter\n\
-        this option is for debugging only\n\
+  -d    debugging mode, just list new argv array, do not run interpreter\n\
+\n\
+README file in a distribution contains the documentation\n\
 ");
 }
 
@@ -413,9 +412,7 @@ int main (int argc, char **argv)
 				break;
 
 			default:
-//				wait (&child_status);
 				waitpid (-1, &child_status, 0);
-//				fprintf (stderr, "status = %d\n", child_status);
 				clean_and_exit (WEXITSTATUS (child_status));
 		}
 	}
