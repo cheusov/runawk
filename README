@@ -147,9 +147,11 @@ will actually run.
 
 ------------------------------
 
-AWKPATH environment variable specifies a colon separated list
-of search directories where module are searched if they were
-mentioned in #use directive without a leading slash (`/').
+Modules (and submodules) are first searched in a directory were main
+program (module) is placed and then AWKPATH environment variable is
+checked.  AWKPATH variable specifies a colon separated
+list of search directories where modules are searched if the path
+in #use directive is relative.
 
 ------------------------------
 
