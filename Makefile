@@ -10,8 +10,8 @@ AWK_PROG=awk
 STDIN_FILENAME=-
 
 # where to install
-#ROOT=/usr
-ROOT=/usr/local
+#PREFIX=/usr
+PREFIX=/usr/local
 
 # you should not set this here
 #DESTDIR=
@@ -33,11 +33,11 @@ clean:
 
 .PHONY : install
 install: runawk
-	mkdir -p ${DESTDIR}${ROOT}/bin && cp runawk ${DESTDIR}${ROOT}/bin
+	mkdir -p ${DESTDIR}${PREFIX}/bin && cp runawk ${DESTDIR}${PREFIX}/bin
 
 .PHONY : uninstall
 uninstall:
-	rm -f ${DESTDIR}${ROOT}/bin/runawk
+	rm -f ${DESTDIR}${PREFIX}/bin/runawk
 
 .PHONY : cvsdist
 cvsdist:
