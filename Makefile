@@ -1,13 +1,8 @@
 ##################################################
-# defaults
 
-# default awk program
-#AWK_PROG=/usr/bin/awk
-AWK_PROG=awk
-
-# stdin filename
-STDIN_FILENAME=/dev/stdin
-#STDIN_FILENAME=-
+# example of redefining defaults
+#CPPFLAGS+=	-DSTDIN_FILENAME='"/path/to/stdin/file"'    # /dev/stdin
+#CPPFLAGS+=	-DAWK_PROG='"/path/to/your/favourite/awk"'  # awk
 
 # where to install
 #PREFIX=/usr
@@ -16,9 +11,11 @@ PREFIX=/usr/local
 # you should not set this here
 #DESTDIR=
 
+# BSD install
+INSTALL=install -s -m 0755
+
 ##################################################
 
-CPPFLAGS=-DSTDIN_FILENAME='"${STDIN_FILENAME}"' -DAWK_PROG='"${AWK_PROG}"'
 WARFLAGS=-Wall -Werror
 
 .PHONY : all
@@ -33,7 +30,7 @@ clean:
 
 .PHONY : install
 install: runawk
-	mkdir -p ${DESTDIR}${PREFIX}/bin && cp runawk ${DESTDIR}${PREFIX}/bin
+	mkdir -p ${DESTDIR}${PREFIX}/bin && ${INSTALL} runawk ${DESTDIR}${PREFIX}/bin
 
 .PHONY : uninstall
 uninstall:
