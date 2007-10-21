@@ -6,8 +6,8 @@
 AWK_PROG=awk
 
 # stdin filename
-#STDIN_FILENAME=/dev/stdin
-STDIN_FILENAME=-
+STDIN_FILENAME=/dev/stdin
+#STDIN_FILENAME=-
 
 # where to install
 #PREFIX=/usr
