@@ -13,7 +13,7 @@
  */
 
 char *
-fgetln(FILE *fp, size_t *len)
+my_fgetln(FILE *fp, size_t *len)
 {
 	static char buf [4096];
 
@@ -28,3 +28,5 @@ fgetln(FILE *fp, size_t *len)
 		return NULL;
 	}
 }
+
+#define fgetln my_fgetln
