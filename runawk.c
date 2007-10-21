@@ -33,6 +33,10 @@
 #define AWK_PROG "awk"
 #endif
 
+#ifndef ARRAY_SZ
+#define ARRAY_SZ 1000
+#endif
+
 #ifndef HAVE_WGETLN
 #if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFlyBSD__) && !defined(__INTERIX)
 #include "fgetln.c"
@@ -60,10 +64,10 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
-static const char **includes = NULL;
+static const char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
-static const char **temp_files = NULL;
+static const char *temp_files [ARRAY_SZ];
 static int temp_files_count = 0;
 
 static char *awkpath      = NULL;
@@ -81,10 +85,6 @@ void clean_and_exit (int status)
 {
 	remove_tmp_files ();
 
-	if (includes)
-		free (includes);
-	if (temp_files)
-		free (temp_files);
 	if (awkpath)
 		free (awkpath);
 
@@ -187,22 +187,22 @@ static void scan_for_use (const char *name)
 		}
 	}
 	if (ferror (fd)){
-		perror ("fgeln(3) failed");
+		perror ("fgetln(3) failed");
 		clean_and_exit (36);
 	}
 }
 
-static void ll_push (const char *item, const char ***array, int *array_size)
+static void ll_push (
+	const char *item,
+	const char **array,
+	int *array_size)
 {
-	*array = (const char **) realloc (
-		*array, (*array_size + 1) * sizeof (char *));
-
-	if (!*array){
-		perror ("realloc(3) failed");
+	if (*array_size == ARRAY_SZ){
+		fprintf (stderr, "too big array\n");
 		clean_and_exit (31);
 	}
 
-	(*array) [*array_size] = item;
+	array [*array_size] = item;
 	++*array_size;
 }
 
@@ -224,7 +224,7 @@ static void push (const char *dir, const char *name)
 	scan_for_use (name);
 
 	/* add to queue */
-	ll_push (name, &includes, &includes_count);
+	ll_push (name, includes, &includes_count);
 }
 
 static void push_uniq (const char *dir, const char *name)
@@ -262,23 +262,23 @@ static const char *get_tmp_name ()
 		clean_and_exit (38);
 	}
 
-	ll_push (dup, &temp_files, &temp_files_count);
+	ll_push (dup, temp_files, &temp_files_count);
 
 	return dup;
 }
 
 int main (int argc, char **argv)
 {
-	int i;
+	const char *new_argv [ARRAY_SZ];
 	const char *tmp_name   = NULL;
 	const char *progname   = NULL;
-	const char ** new_argv = NULL;
 	int new_argc           = 0;
 	int debug              = 0;
 	FILE *fd               = NULL;
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
+	int i;
 
 	--argc, ++argv;
 
@@ -372,27 +372,27 @@ int main (int argc, char **argv)
 	}
 
 	/* exec */
-	ll_push (progname, &new_argv, &new_argc);
+	ll_push (progname, new_argv, &new_argc);
 	for (i=0; i < includes_count; ++i){
-		ll_push ("-f",         &new_argv, &new_argc);
-		ll_push (includes [i], &new_argv, &new_argc);
+		ll_push ("-f",         new_argv, &new_argc);
+		ll_push (includes [i], new_argv, &new_argc);
 	}
 
-	ll_push ("--", &new_argv, &new_argc);
+	ll_push ("--", new_argv, &new_argc);
 
 	for (i=0; i < argc; ++i){
 		if (argv [i][0] != '-'){
 			all_with_dash = 0;
 		}
 
-		ll_push (argv [i], &new_argv, &new_argc);
+		ll_push (argv [i], new_argv, &new_argc);
 	}
 
 	if (argc && all_with_dash){
-		ll_push (STDIN_FILENAME, &new_argv, &new_argc);
+		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
-	ll_push (NULL, &new_argv, &new_argc);
+	ll_push (NULL, new_argv, &new_argc);
 
 	if (debug){
 		for (i=0; i < new_argc - 1; ++i){
