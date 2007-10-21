@@ -26,7 +26,7 @@
 #endif
 
 #ifndef STDIN_FILENAME
-#define STDIN_FILENAME "-"
+#define STDIN_FILENAME "/dev/stderr"
 #endif
 
 #ifndef AWK_PROG
