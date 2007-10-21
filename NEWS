@@ -1,3 +1,19 @@
+Version 0.8.0, by Aleksey Cheusov, Sun, 21 Oct 2007 17:19:46 +0300
+
+ FIXED: return code of execvp is not analysed, i.e. when running
+ an interpreter fails, runawk silently exits with zero exit status.
+ Now it fails with exit status 1 and print an error to stderr.
+
+ stdin filename defaults to "/dev/stdin"
+
+ ROOT variable in Makefile has been renamed
+ to more commonly used PREFIX
+
+ realloc(2) is not used anymore. arrays[ARRAY_SZ] are used now.
+
+ AWK and STDIN_FILENAME variables are removed from Makefile.
+ Use CPPFLAGS for changing defaults.
+
 ----------------------------------------------------------------------
 Version 0.7.0, by Aleksey Cheusov, Sat, 22 Sep 2007 02:30:26 +0300
 
