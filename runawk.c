@@ -57,7 +57,7 @@ README file in a distribution contains the documentation\n\
 ");
 }
 
-static const char *runawk_version = "0.7.0";
+static const char *runawk_version = "0.8.0";
 
 static void version (void)
 {
