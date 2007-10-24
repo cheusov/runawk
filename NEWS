@@ -1,3 +1,7 @@
+Version 0.8.1, by Aleksey Cheusov, Wed, 24 Oct 2007 14:46:12 +0300
+ FIXED: default stdin file should be /std/stdin, not /dev/stderr,
+ I've made a typo.
+
 Version 0.8.0, by Aleksey Cheusov, Sun, 21 Oct 2007 17:19:46 +0300
 
  FIXED: return code of execvp is not analysed, i.e. when running
