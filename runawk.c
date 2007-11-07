@@ -52,6 +52,7 @@ OPTIONS:\n\
   -h    display this screen\n\
   -V    display version information\n\
   -d    debugging mode, just list new argv array, do not run interpreter\n\
+  -i    add \"stdin\" file name to a list of awk arguments\n\
 \n\
 README file in a distribution contains the documentation\n\
 ");
@@ -278,6 +279,7 @@ int main (int argc, char **argv)
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
+	int add_stdin          = 0;
 	int i;
 
 	--argc, ++argv;
@@ -322,9 +324,13 @@ int main (int argc, char **argv)
 		}
 		if (strchr (argv [0], 'd')){
 			debug = 1;
-			--argc;
-			++argv;
 		}
+		if (strchr (argv [0], 'i')){
+			add_stdin = 1;
+		}
+
+		--argc;
+		++argv;
 	}
 
 	/* -e options */
@@ -388,7 +394,7 @@ int main (int argc, char **argv)
 		ll_push (argv [i], new_argv, &new_argc);
 	}
 
-	if (argc && all_with_dash){
+	if (add_stdin || (argc && all_with_dash)){
 		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
