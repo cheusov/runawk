@@ -281,6 +281,7 @@ int main (int argc, char **argv)
 	int all_with_dash      = 1;
 	int add_stdin          = 0;
 	int i;
+	int not_e              = 0;
 
 	--argc, ++argv;
 
@@ -324,13 +325,17 @@ int main (int argc, char **argv)
 		}
 		if (strchr (argv [0], 'd')){
 			debug = 1;
+			not_e = 1;
 		}
 		if (strchr (argv [0], 'i')){
 			add_stdin = 1;
+			not_e     = 1;
 		}
 
-		--argc;
-		++argv;
+		if (not_e){
+			--argc;
+			++argv;
+		}
 	}
 
 	/* -e options */
