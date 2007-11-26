@@ -7,16 +7,22 @@
 # where to install
 #PREFIX=/usr
 PREFIX=/usr/local
+BINDIR=${PREFIX}/bin
+DATADIR=${PREFIX}/share/runawk
 
 # you should not set this here
 #DESTDIR=
 
 # BSD install
-INSTALL=install -s -m 0755
+INSTALL_PROGRAM=	install -s -m 0755
+INSTALL_DIR=		install -d -m 0755
+INSTALL_DATA=		install -m 0644
 
 ##################################################
 
-WARFLAGS=-Wall -Werror
+WARFLAGS=		-Wall -Werror
+
+MODULES=		alt_assert.awk
 
 .PHONY : all
 all: runawk
@@ -30,11 +36,19 @@ clean:
 
 .PHONY : install
 install: runawk
-	mkdir -p ${DESTDIR}${PREFIX}/bin && ${INSTALL} runawk ${DESTDIR}${PREFIX}/bin
+	${INSTALL_DIR} ${DESTDIR}${BINDIR} && \
+	${INSTALL_PROGRAM} runawk ${DESTDIR}${BINDIR} && \
+	${INSTALL_DIR} ${DESTDIR}${DATADIR} && \
+	for m in ${MODULES}; do \
+	   ${INSTALL_DATA} modules/$${m} ${DESTDIR}${DATADIR}; \
+	done
 
 .PHONY : uninstall
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/runawk
+	for m in ${MODULES}; do \
+	   rm -f ${DESTDIR}${DATADIR}/$${m}; \
+	done
 
 .PHONY : cvsdist
 cvsdist:
