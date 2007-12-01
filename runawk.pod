@@ -1,0 +1,246 @@
+=head1 NAME
+
+runawk - wrapper for AWK interpreter
+
+=head1 SYNOPSIS
+
+B<runawk> I<[options]> I<program_file>
+
+B<runawk> I<-e> I<program>
+
+=head1 DESCRIPTION
+
+After years of using AWK for programming I've found that
+despite of its simplicity and limitations AWK is good enough
+for scripting a wide range of different tasks. AWK is not as poweful
+as their bigger counterparts like Perl, Ruby, TCL and others
+but it has their own advantages like compactness, simplicity
+and availability on almost all UNIX-like systems.
+
+But! Unfortunately awk interpreters (and standards that describe it)
+lacks some important features and sometimes behave unexpectedly.
+
+Problems I see (in short)
+=over 2
+=item 1
+
+AWK lacks support for modules.
+
+=item 2
+
+C<#!/usr/bin/awk -f> scripts require extra `--' before
+arguments passed to script. IMHO, this is inconvenient.
+
+=item 3
+
+If C<#!/usr/bin/awk -f> script require both options and
+to read from stdin you should add /dev/stdin or `-'
+as a file explicitely.
+IMHO, this is inconvenient too.
+
+B<runawk> was created to solve all these problems
+
+=head1 OPTIONS
+
+=over 6
+
+=item B<-d>
+
+Turn on a debugging mode in which B<runawk> prints argument list
+with which real B<awk> interpreter will be run
+
+=item B<-e> I<program>
+
+Specify program. If I<-e> is not specified program is read from
+I<program_file>.
+
+=back
+
+=head1 DETAILS
+
+=head2 Standalone script
+
+Under UNIX-like OS-es you can use runawk
+by beginning your script with
+
+   #!/usr/local/bin/runawk
+
+line or something like this instead of
+
+   #!/usr/bin/awk -f
+
+or similar.
+
+=head2 AWK modules
+
+Modules are enabled like this
+
+  #use "module1.awk"
+  #use "module2.awk"
+
+that is the line that specifies module name is treated as a comment line
+by normal AWK interpreter but is processed by runawk especially.
+
+Note that #use should begin with column 0,
+no spaces are allowed before it.
+
+Also note that AWK modules can also "use" another modules and so forth.
+All them are collected in a depth-first order
+and each one is added to the list of
+awk interpreter arguments prepanded with -f option.
+That is "#use" directive is *NOT* like #include directive in C language,
+module's code is not included to the main program file.
+Runawk's modules are more like to Perl's "use" command.
+
+Also note that modules are added to the list of arguments only once,
+i.e. with no duplications.
+
+Position of #use directive in a source file doesn't matter.
+
+Example:
+
+  file prog:
+     #!/usr/local/bin/runawk
+
+     #use "A.awk"
+     #use "B.awk"
+     #use "E.awk"
+
+     PROG code
+     ...
+
+  file B.awk:
+     #use "A.awk"
+     #use "C.awk"
+     B code
+     ...
+
+  file C.awk:
+     #use "A.awk"
+     #use "D.awk"
+
+     C code
+     ...
+
+  A.awk and D.awk don't contain #use directive
+
+If you run
+
+  runawk prog file1 file2
+
+  or
+
+  /path/to/prog file1 file2
+
+the following command
+
+  awk -f A.awk -f D.awk -f C.awk -f B.awk -f E.awk -f prog -- file1 file2
+
+will actually run.
+
+=head2 Module search strategy
+
+Modules (and submodules) are first searched in a directory were main
+program (module) is placed and then AWKPATH environment variable is
+checked.  AWKPATH variable specifies a colon separated
+list of search directories where modules are searched if the path
+in #use directive is relative.
+
+=head2 AWK interpreter and its arguments
+
+In order to pass arguments to AWK script correctly, runawk
+treats their arguments beginning with `-' sign especially.
+The following command
+
+  runawk prog2 -h -f=file -o=output file1 file2
+
+  or
+
+  /path/to/prog2 -h -f=file -o=output file1 file2
+
+will actually run
+
+  awk -f prog2 -- -x -f=file -o=output file1 file2
+
+and therefore -s, -f, -o option will be passed to ARGV/ARGC variables
+together with file1 and file2. When all arguments begin with `-',
+stdin stream is added to the end of argument list, that is running
+
+  runawk prog3 --value=value
+
+  or
+
+  /path/to/prog3 --value=value
+
+the following 
+
+  awk -f prog3 -- --value=value -
+
+will be run.
+
+=head2 Program as an argument
+
+Runawk can obtain the script from a command line like this
+
+ /path/to/runawk -e '
+ #use "assert.awk"
+
+ {
+   assert($1 >= 0 && $1 <= 10, "Bad value: " $1)
+ }'
+
+=head2 Selecting a preferred AWK interpreter
+
+For some reason you may prefer one AWK interpreter or another like this.
+
+  file prog:
+     #!/usr/local/bin/runawk
+
+     #use "A.awk"
+     #use "B.awk"
+
+     #interp "/usr/pkg/bin/nbawk"
+
+     PROG code
+
+The reason may be efficiency for a particular task, useful
+and non-standard extension or enything else.
+
+Note that #interp directive should also begin with column 0,
+no spaces are allowed before it.
+
+=head1 ENVIRONMENT
+
+=over 6
+
+=item I<AWKPATH>
+
+Directories where B<awk> modules are searched
+
+=back
+
+=head1 AUTHOR
+
+Copyright (c) 2007, Aleksey Cheusov <vle@gmx.net>
+
+Permission to use, copy, modify, distribute and sell this software
+and its documentation for any purpose is hereby granted without
+fee, provided that the above copyright notice appear in all copies
+and that both that copyright notice and this permission notice
+appear in supporting documentation.  I make no
+representations about the suitability of this software for any
+purpose.  It is provided "as is" without express or implied
+warranty.
+
+=head1 HOME
+
+L<http://sourceforge.net/projects/runawk>
+
+=head1 BUGS/FEEDBACK
+
+Please send any comments, questions, bug reports etc. to me
+by e-mail Aleksey Cheusov <vle@gmx.net>.
+Feature requests are also welcomed.
+
+=head1 SEE ALSO
+L<awk(1)>
