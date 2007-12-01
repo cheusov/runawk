@@ -17,6 +17,9 @@ DATADIR=${PREFIX}/share/runawk
 INSTALL_PROGRAM=	install -s -m 0755
 INSTALL_DIR=		install -d -m 0755
 INSTALL_DATA=		install -m 0644
+INSTALL_MAN=		$(INSTALL_DATA)
+
+POD2MAN=		pod2man
 
 ##################################################
 
@@ -25,10 +28,14 @@ WARFLAGS=		-Wall -Werror
 MODULES=		alt_assert.awk
 
 .PHONY : all
-all: runawk
+all: runawk runawk.1
 
 runawk : runawk.c fgetln.c
 	$(CC) -o runawk $(CPPFLAGS) $(CFLAGS) $(WARFLAGS) runawk.c $(LDFLAGS)
+
+runawk.1 : runawk.pod
+	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
+	   -c 'RUNAWK manual page' runawk.pod > $@
 
 .PHONY : clean
 clean:
