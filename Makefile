@@ -1,22 +1,26 @@
 ##################################################
 
-# example of redefining defaults
-#CPPFLAGS+=	-DSTDIN_FILENAME='"/path/to/stdin/file"'    # /dev/stdin
-#CPPFLAGS+=	-DAWK_PROG='"/path/to/your/favourite/awk"'  # awk
-
 PREFIX?=/usr/local
 BINDIR?=${PREFIX}/bin
 MANDIR?=${PREFIX}/man
 DATADIR?=${PREFIX}/share/runawk
 
-PROG=			runawk
-SRCS=			runawk.c
+AWK_PROG?=		/usr/bin/awk
+STDIN_FILENAME?=	/dev/stdin
 
 POD2MAN?=		pod2man
 
 INSTALL_MODULE?=	${INSTALL_FILE} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
 
 ##################################################
+
+PROG=			runawk
+SRCS=			runawk.c
+
+##################################################
+
+CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
+CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 
 MODULES=		alt_assert.awk
 
