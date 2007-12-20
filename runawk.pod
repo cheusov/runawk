@@ -21,15 +21,42 @@ But! Unfortunately awk interpreters (and standards that describe it)
 lacks some important features and sometimes behave unexpectedly.
 
 Problems I see (in short)
+
 =over 2
+
 =item 1
 
 AWK lacks support for modules.
 
 =item 2
 
-C<#!/usr/bin/awk -f> scripts require extra `--' before
-arguments passed to script. IMHO, this is inconvenient.
+In order to pass arguments to C<#!/usr/bin/awk -f> script (not to awk
+interpreter), it is necessary to prepand a list of
+arguments with -- (two minus signes).
+
+Example:
+
+awk_program:
+
+    #!/usr/bin/awk -f
+
+    BEGIN {
+       for (i=1; i < ARGC; ++i){
+          printf "ARGV [%d]=%s\n", i, ARGV [i]
+       }
+    }
+
+Shell session:
+
+    %~/bin/awk_program  --opt1 --opt2
+    /usr/bin/awk: unknown option --opt1 ignored
+
+    /usr/bin/awk: unknown option --opt2 ignored
+
+    %~/bin/awk_program -- --opt1 --opt2
+    ARGV [1]=--opt1
+    ARGV [2]=--opt2
+    %
 
 =item 3
 
@@ -37,6 +64,8 @@ If C<#!/usr/bin/awk -f> script require both options and
 to read from stdin you should add /dev/stdin or `-'
 as a file explicitely.
 IMHO, this is inconvenient too.
+
+=back
 
 B<runawk> was created to solve all these problems
 
@@ -60,7 +89,7 @@ I<program_file>.
 
 =head2 Standalone script
 
-Under UNIX-like OS-es you can use runawk
+Under UNIX-like OS-es you can use B<runawk>
 by beginning your script with
 
    #!/usr/local/bin/runawk
@@ -79,7 +108,7 @@ Modules are enabled like this
   #use "module2.awk"
 
 that is the line that specifies module name is treated as a comment line
-by normal AWK interpreter but is processed by runawk especially.
+by normal AWK interpreter but is processed by B<runawk> especially.
 
 Note that #use should begin with column 0,
 no spaces are allowed before it.
@@ -148,7 +177,7 @@ in #use directive is relative.
 
 =head2 AWK interpreter and its arguments
 
-In order to pass arguments to AWK script correctly, runawk
+In order to pass arguments to AWK script correctly, B<runawk>
 treats their arguments beginning with `-' sign especially.
 The following command
 
@@ -180,7 +209,7 @@ will be run.
 
 =head2 Program as an argument
 
-Runawk can obtain the script from a command line like this
+B<Runawk> can obtain the script from a command line like this
 
  /path/to/runawk -e '
  #use "assert.awk"
