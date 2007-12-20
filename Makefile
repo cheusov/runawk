@@ -4,57 +4,37 @@
 #CPPFLAGS+=	-DSTDIN_FILENAME='"/path/to/stdin/file"'    # /dev/stdin
 #CPPFLAGS+=	-DAWK_PROG='"/path/to/your/favourite/awk"'  # awk
 
-# where to install
-#PREFIX=/usr
-PREFIX=/usr/local
-BINDIR=${PREFIX}/bin
-DATADIR=${PREFIX}/share/runawk
+PREFIX?=/usr/local
+BINDIR?=${PREFIX}/bin
+MANDIR?=${PREFIX}/man
+DATADIR?=${PREFIX}/share/runawk
 
-# you should not set this here
-#DESTDIR=
+PROG=			runawk
+SRCS=			runawk.c
 
-# BSD install
-INSTALL_PROGRAM=	install -s -m 0755
-INSTALL_DIR=		install -d -m 0755
-INSTALL_DATA=		install -m 0644
-INSTALL_MAN=		$(INSTALL_DATA)
+POD2MAN?=		pod2man
 
-POD2MAN=		pod2man
+INSTALL_MODULE?=	${INSTALL_FILE} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
 
 ##################################################
 
-WARFLAGS=		-Wall -Werror
-
 MODULES=		alt_assert.awk
-
-.PHONY : all
-all: runawk runawk.1
-
-runawk : runawk.c fgetln.c
-	$(CC) -o runawk $(CPPFLAGS) $(CFLAGS) $(WARFLAGS) runawk.c $(LDFLAGS)
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
 	   -c 'RUNAWK manual page' runawk.pod > $@
 
-.PHONY : clean
-clean:
-	rm -f *.o *~ core* *.core runawk
+.PHONY: clean-my
+clean: clean-my
+clean-my:
+	rm -f *~ core* runawk.1
 
-.PHONY : install
-install: runawk
-	${INSTALL_DIR} ${DESTDIR}${BINDIR} && \
-	${INSTALL_PROGRAM} runawk ${DESTDIR}${BINDIR} && \
-	${INSTALL_DIR} ${DESTDIR}${DATADIR} && \
+.PHONY: install-modules
+install: install-modules
+install-modules:
+	${INSTALL_DIR} ${DESTDIR}${DATADIR}; \
 	for m in ${MODULES}; do \
-	   ${INSTALL_DATA} modules/$${m} ${DESTDIR}${DATADIR}; \
-	done
-
-.PHONY : uninstall
-uninstall:
-	rm -f ${DESTDIR}${PREFIX}/bin/runawk
-	for m in ${MODULES}; do \
-	   rm -f ${DESTDIR}${DATADIR}/$${m}; \
+	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${DATADIR}; \
 	done
 
 .PHONY : cvsdist
@@ -90,3 +70,5 @@ ChangeLog:
 	      -e 's,author  <[^>]*,Aleksey Cheusov <vle@gmx.net,g' \
               -e 's,\(.*\)<\([^@<>]\+\)@\([^@<>]\+\)>\(.*\),\1<\2 at \3}\4,g' \
 	> ChangeLog;)
+
+.include <bsd.prog.mk>
