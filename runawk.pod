@@ -10,29 +10,33 @@ B<runawk> I<-e> I<program>
 
 =head1 DESCRIPTION
 
-After years of using AWK for programming I've found that
-despite of its simplicity and limitations AWK is good enough
-for scripting a wide range of different tasks. AWK is not as poweful
-as their bigger counterparts like Perl, Ruby, TCL and others
-but it has their own advantages like compactness, simplicity
-and availability on almost all UNIX-like systems.
+After years of using AWK for programming I've found that despite of
+its simplicity and limitations AWK is good enough for scripting a wide
+range of different tasks. AWK is not as poweful as their bigger
+counterparts like Perl, Ruby, TCL and others but it has their own
+advantages like compactness, simplicity and availability on almost all
+UNIX-like systems. I personally also like its data-driven nature and
+token orientation, very useful technique for simple text processing
+utilities.
 
-But! Unfortunately awk interpreters (and standards that describe it)
-lacks some important features and sometimes behave unexpectedly.
+But! Unfortunately awk interpreters lacks some important features and
+sometimes work not as good as it whould be.
 
-Problems I see (in short)
+Problems I see (some of them, of course)
 
 =over 2
 
 =item 1
 
-AWK lacks support for modules.
+AWK lacks support for modules. Even if you create small programs, you
+need have library functions that are used regulary. So, you need
+support modules.
 
 =item 2
 
 In order to pass arguments to C<#!/usr/bin/awk -f> script (not to awk
 interpreter), it is necessary to prepand a list of
-arguments with -- (two minus signes).
+arguments with -- (two minus signes). In my view, this is badly.
 
 Example:
 
@@ -48,22 +52,46 @@ awk_program:
 
 Shell session:
 
-    %~/bin/awk_program  --opt1 --opt2
+    % awk_program  --opt1 --opt2
     /usr/bin/awk: unknown option --opt1 ignored
 
     /usr/bin/awk: unknown option --opt2 ignored
 
-    %~/bin/awk_program -- --opt1 --opt2
+    % awk_program -- --opt1 --opt2
     ARGV [1]=--opt1
     ARGV [2]=--opt2
     %
 
 =item 3
 
-If C<#!/usr/bin/awk -f> script require both options and
-to read from stdin you should add /dev/stdin or `-'
-as a file explicitely.
-IMHO, this is inconvenient too.
+When C<#!/usr/bin/awk -f> script handles arguments (options) and needs
+to read from stdin when nomfiles are specified, it is necessary to add
+/dev/stdin or `-' as a file explicitely.
+This is badly too.
+
+Example:
+
+awk_program:
+
+    #!/usr/bin/awk -f
+
+    BEGIN {
+       if (ARGV [1] == "--flag"){
+          flag = 1
+          ARGV [1] = "" # to not read file named "--flag"
+       }
+    }
+
+    {
+       print "flag=" flag
+    }
+
+Shell session:
+
+    % echo test | awk_program -- --flag
+    % echo test | awk_program -- --flag /dev/stdin
+    flag=1
+    %
 
 =back
 
