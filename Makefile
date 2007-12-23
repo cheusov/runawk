@@ -11,21 +11,21 @@ STDIN_FILENAME?=	/dev/stdin
 POD2MAN?=		pod2man
 POD2HTML?=		pod2html
 
-INSTALL_MODULE?=	${INSTALL} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
-INSTALL_DIR?=		${INSTALL} -d -o ${BINOWN} -g ${BINGRP} -m 755
-
 ##################################################
 
 PROG=			runawk
 SRCS=			runawk.c
+
+MODULES!=		echo modules/*.awk
+
+FILES=			${MODULES}
+FILESDIR=		${MODULESDIR}
 
 ##################################################
 
 CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CPPFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
-
-MODULES=		alt_assert.awk abs.awk min.awk max.awk
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
@@ -38,14 +38,6 @@ clean: clean-my
 clean-my:
 	rm -f *~ core* runawk.1 runawk.cat1 ktrace* ChangeLog *.tmp
 	rm -f runawk.html tests/_*
-
-.PHONY: install-modules
-install: install-modules
-install-modules:
-	${INSTALL_DIR} ${DESTDIR}${MODULESDIR}; \
-	for m in ${MODULES}; do \
-	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${MODULESDIR}/$${m}; \
-	done
 
 .PHONY : cvsdist
 cvsdist:
