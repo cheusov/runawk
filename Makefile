@@ -12,6 +12,7 @@ POD2MAN?=		pod2man
 POD2HTML?=		pod2html
 
 INSTALL_MODULE?=	${INSTALL} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
+INSTALL_DIR?=		${INSTALL} -d -o ${BINOWN} -g ${BINGRP} -m 755
 
 ##################################################
 
