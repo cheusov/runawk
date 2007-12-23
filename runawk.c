@@ -281,9 +281,9 @@ int main (int argc, char **argv)
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
-	add_stdin_t add_stdin = stdin_default;
+	add_stdin_t add_stdin  = stdin_default;
+	const char *p          = NULL;
 	int i;
-	int not_e              = 0;
 
 	--argc, ++argv;
 
@@ -316,58 +316,57 @@ int main (int argc, char **argv)
 	}
 
 	/* options, no getopt(3) here */
-	if (argc && argv [0][0] == '-'){
-		if (strchr (argv [0], 'h')){
-			usage ();
-			clean_and_exit (0);
-		}
-		if (strchr (argv [0], 'V')){
-			version ();
-			clean_and_exit (0);
-		}
-		if (strchr (argv [0], 'd')){
-			debug = 1;
-			not_e = 1;
-		}
-		if (strchr (argv [0], 'i')){
-			add_stdin = stdin_yes;
-			not_e     = 1;
-		}
-		if (strchr (argv [0], 'I')){
-			add_stdin = stdin_no;
-			not_e     = 1;
-		}
+	for (; argc && argv [0][0] == '-'; --argc, ++argv){
+		/* -e */
+		if (!strcmp (argv [0], "-e")){
+			if (argc == 1){
+				fprintf (stderr, "missing argument for -e option");
+				clean_and_exit (39);
+			}
 
-		if (not_e){
+			tmp_name = get_tmp_name ();
+			fd = fopen (tmp_name, "w");
+			if (!fd){
+				perror ("fopen(3) failed");
+				clean_and_exit (40);
+			}
+			fputs (argv [1], fd);
+			fputs ("\n", fd);
+			if (fclose (fd)){
+				perror ("fclose(3) failed");
+				clean_and_exit (41);
+			}
+
+			push ("", tmp_name);
+
 			--argc;
 			++argv;
-		}
-	}
-
-	/* -e options */
-	while (argc && !strcmp (argv [0], "-e")){
-		if (argc == 1){
-			fprintf (stderr, "missing argument for -e option");
-			clean_and_exit (39);
+			continue;
 		}
 
-		tmp_name = get_tmp_name ();
-		fd = fopen (tmp_name, "w");
-		if (!fd){
-			perror ("fopen(3) failed");
-			clean_and_exit (40);
+		/* -h -V -d -i -I etc. */
+		for (p = argv [0]+1; *p; ++p){
+			switch (*p){
+				case 'h':
+					usage ();
+					clean_and_exit (0);
+				case 'V':
+					version ();
+					clean_and_exit (0);
+				case 'd':
+					debug = 1;
+					break;
+				case 'i':
+					add_stdin = stdin_yes;
+					break;
+				case 'I':
+					add_stdin = stdin_no;
+					break;
+				default:
+					fprintf (stderr, "unknown option -%c\n", *p);
+					clean_and_exit (1);
+			}
 		}
-		fputs (argv [1], fd);
-		fputs ("\n", fd);
-		if (fclose (fd)){
-			perror ("fclose(3) failed");
-			clean_and_exit (41);
-		}
-
-		push ("", tmp_name);
-
-		argc -= 2;
-		argv += 2;
 	}
 
 	progname = interp;
