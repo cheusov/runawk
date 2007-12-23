@@ -43,7 +43,7 @@ install: install-modules
 install-modules:
 	${INSTALL_DIR} ${DESTDIR}${MODULESDIR}; \
 	for m in ${MODULES}; do \
-	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${MODULESDIR}; \
+	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${MODULESDIR}/$${m}; \
 	done
 
 .PHONY : cvsdist
