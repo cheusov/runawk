@@ -125,31 +125,31 @@ All these probles are solved by runawk and this is why I wrote it.
 
                              INSTALLATION
 
-
+0) BSD make is required. I name it just 'make' but ist real name may
+   vary.  bmake and pmake are possible names.
 
 1) Uncompress tarball you've downloaded like this
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
 2) cd runawk-X-Y-Z
 
-3) edit Makefile
-   for you needs
+3) make [YOUR_SETTINGS]
 
-4) make
+4) (optional!) make install-dirs
 
 5) make install
 
-There are many Makefile variables that can be changed during installation.
-Runawk's own variables (All they are at the begining of Makefile):
+There are a lot of Makefile variables that can be changed during
+installation.  Runawk's own variables (All they are at the begining of
+Makefile):
 
  PREFIX         - where runawk is installed to
  MODULESDIR     - directory where modules are installed to
- AWK_PROG       - path awk interpreter
+ AWK_PROG       - path to awk interpreter
  STDIN_FILENAME - path to stdin device file
- INSTALL_MODULE - program for installing modules
 
 BSD make's variables (most commonly used,
-for all others - see make's documentation)
+for all others - see make's documentation and .mk files)
 
  BINDIR - where runawk executable itself is installed to
  MANDIR - where manual pages are installed to

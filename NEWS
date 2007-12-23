@@ -1,9 +1,10 @@
 ======================================================================
-Version 0.9.0, by Aleksey Cheusov, Sun, 23 Dec 2007 20:30:05 +0200
+Version 0.9.0, by Aleksey Cheusov, Sun, 23 Dec 2007 22:20:23 +0200
 
-    After lots of thoughts I switched to BSD make.  This makes some
-    changes in building process, see README/INSTALLATION section for
-    a brief description.
+    I switched to BSD make. I really hate automake and its approach in
+    general. I'm not expert in BSD, but their 'make' looks much
+    better. But using it makes some changes in building process, see
+    README/INSTALLATION section for a brief description.
 
     ADDED: man page for runawk. HTML version runawk.html can also be
     generated from runawk.pod using pod2html, see Makefile.

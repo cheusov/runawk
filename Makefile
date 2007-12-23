@@ -11,6 +11,8 @@ STDIN_FILENAME?=	/dev/stdin
 POD2MAN?=		pod2man
 POD2HTML?=		pod2html
 
+INST_DIR?=		${INSTALL} -d
+
 ##################################################
 
 PROG=			runawk
@@ -36,6 +38,14 @@ clean: clean-my
 clean-my:
 	rm -f *~ core* runawk.1 runawk.cat1 ktrace* ChangeLog *.tmp
 	rm -f runawk.html tests/_*
+
+##################################################
+.PHONY: install-dirs
+install-dirs:
+	$(INST_DIR) ${DESTDIR}${BINDIR}
+	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
+	$(INST_DIR) ${DESTDIR}${MODULESDIR}
+#	$(INST_DIR) ${MANDIR}/cat1 ???
 
 ##################################################
 
