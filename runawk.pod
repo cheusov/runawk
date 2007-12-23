@@ -235,11 +235,15 @@ You can check this by running
 =head2 Module search strategy
 
 Modules are first searched in a directory were main
-program (module) is placed, then AWKPATH environment variable is
-checked.  AWKPATH variable specifies a colon separated
-list of search directories where modules are searched if the path
-in I<#use> directive is relative.
-Absolute path to the module is also allowed.
+program (or module in which #use directive is specified) is placed.
+If it is not found there, then
+AWKPATH environment variable is
+checked. AWKPATH keeps a colon separated
+list of search directories.
+Finally, module is searched in system runawk modules directory,
+by default PREFIX/share/runawk but this can be changed at build time.
+
+An absolute path of the module can also be specified.
 
 =head2 AWK interpreter and its arguments
 
@@ -332,15 +336,16 @@ representations about the suitability of this software for any
 purpose.  It is provided "as is" without express or implied
 warranty.
 
-=head1 HOME
-
-L<http://sourceforge.net/projects/runawk>
-
 =head1 BUGS/FEEDBACK
 
 Please send any comments, questions, bug reports etc. to me
-by e-mail Aleksey Cheusov <vle@gmx.net>.
+by e-mail Aleksey Cheusov <vle@gmx.net>
+or (even better) register them at sourceforge project home.
 Feature requests are also welcomed.
+
+=head1 HOME
+
+L<http://sourceforge.net/projects/runawk>
 
 =head1 SEE ALSO
 L<awk(1)>

@@ -37,6 +37,10 @@
 #define ARRAY_SZ 1000
 #endif
 
+#ifndef MODULESDIR
+#define MODULESDIR "/usr/local/share/runawk"
+#endif
+
 #ifndef HAVE_WGETLN
 #if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFlyBSD__) && !defined(__INTERIX)
 #include "fgetln.c"
@@ -96,7 +100,9 @@ void clean_and_exit (int status)
 
 static char cwd [PATH_MAX];
 
-static const char *interp = AWK_PROG;
+static const char *interp     = AWK_PROG;
+static const char *sys_awkdir = MODULESDIR;
+
 static int line_num = 0;
 
 static const char *search_file (const char *dir, const char *name)
@@ -121,6 +127,12 @@ static const char *search_file (const char *dir, const char *name)
 				return strdup (buf);
 			}
 		}
+	}
+
+	/* system directory for modules */
+	snprintf (buf, sizeof (buf), "%s/%s", sys_awkdir, name);
+	if (!access (buf, R_OK)){
+		return strdup (buf);
 	}
 
 	return NULL;
