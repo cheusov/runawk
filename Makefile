@@ -9,6 +9,7 @@ AWK_PROG?=		/usr/bin/awk
 STDIN_FILENAME?=	/dev/stdin
 
 POD2MAN?=		pod2man
+POD2HTML?=		pod2html
 
 INSTALL_MODULE?=	${INSTALL_FILE} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
 
@@ -27,6 +28,8 @@ MODULES=		alt_assert.awk
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
 	   -c 'RUNAWK manual page' runawk.pod > $@
+runawk.html : runawk.pod
+	$(POD2HTML) --infile=runawk.pod --outfile=$@
 
 .PHONY: clean-my
 clean: clean-my
