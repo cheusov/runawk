@@ -1,11 +1,13 @@
 ======================================================================
 
 runawk: small wrapper for AWK interpreter that impements module
-system and helps to write standalone AWK programs.
+system and helps much in writing standalone AWK programs.
 
 author:                                  Aleksey Cheusov <vle@gmx.net>
 
-project's home page:           http://sourceforge.net/projects/runawk
+project's home page:            http://sourceforge.net/projects/runawk
+
+licence:                                                   MIT license
 
 ======================================================================
 
@@ -15,37 +17,107 @@ project's home page:           http://sourceforge.net/projects/runawk
 
 
 
-After years of using AWK for programming I've found that
-despite of its simplicity and limitations AWK is good enough
-for scripting a wide range of different tasks. AWK is not as poweful
-as their bigger counterparts like Perl, Ruby, TCL and others
-but it has their own advantages like compactness, simplicity
-and availability on almost all UNIX-like systems.
-
-But! Unfortunately awk interpreters (and standards that describe it)
-lacks some important features and sometimes behave unexpectedly.
-
-Problems I see (in short):
-1) AWK lacks support for modules.
-2) #!/usr/bin/awk -f
-   scripts require extra `--' before arguments passed to script.
-   IMHO, this is inconvenient.
-3) If #!/usr/bin/awk -f script require both options and
-   to read from stdin you should add /dev/stdin or `-'
-   as a file explicitely.
-   IMHO, this is inconvenient too.
-
-This is why I wrote runawk.
-
-======================================================================
+After years of using AWK for programming I've found that despite of
+its simplicity and limitations AWK is good enough for scripting a wide
+range of different tasks. AWK is not as poweful as their bigger
+counterparts like Perl, Ruby, TCL and others but it has their own
+advantages like compactness, simplicity and availability on almost all
+UNIX-like systems. I personally also like its data-driven nature and
+token orientation, very useful technique for simple text processing
+utilities.
 
 
+But! Unfortunately awk interpreters lacks some important features and
+sometimes work not as good as it whould be.
 
-                               LICENCE
+Some problems I see (some of them, of course).
+
+1)
+
+AWK lacks support for modules. Even if I create small programs, I
+often want to use the functions created earlier and already used in
+other scripts. That is, it whould great to orginise functions into
+so called libraries (modules).
+
+2)
+
+In order to pass arguments to #!/usr/bin/awk -f script (not to awk
+interpreter), it is necessary to prepand a list of
+arguments with -- (two minus signes). In my view, this looks badly.
+
+Example:
+
+awk_program:
+
+    #!/usr/bin/awk -f
+
+    BEGIN {
+       for (i=1; i < ARGC; ++i){
+          printf "ARGV [%d]=%s\n", i, ARGV [i]
+       }
+    }
+
+Shell session:
+
+    % awk_program --opt1 --opt2
+    /usr/bin/awk: unknown option --opt1 ignored
+
+    /usr/bin/awk: unknown option --opt2 ignored
+
+    % awk_program -- --opt1 --opt2
+    ARGV [1]=--opt1
+    ARGV [2]=--opt2
+    %
+
+In my opinion awk_program script should work like this (just like
+normal programs do)
+
+    % awk_program --opt1 --opt2
+    ARGV [1]=--opt1
+    ARGV [2]=--opt2
+    %
+
+It is possible using runawk.
+
+3)
+
+When #!/usr/bin/awk -f script handles arguments (options) and wants
+to read from stdin, it is necessary to add
+/dev/stdin (or `-') as a last argument explicitely.
+
+Example:
+
+awk_program:
+
+    #!/usr/bin/awk -f
+
+    BEGIN {
+       if (ARGV [1] == "--flag"){
+          flag = 1
+          ARGV [1] = "" # to not read file named "--flag"
+       }
+    }
+
+    {
+       print "flag=" flag " $0=" $0
+    }
+
+Shell session:
+
+    % echo test | awk_program -- --flag
+    % echo test | awk_program -- --flag /dev/stdin
+    flag=1 $0=test
+    %
+
+Ideally awk_program should work like this
+
+    % echo test | awk_program --flag
+    flag=1 $0=test
+    %
 
 
 
-runawk is MIT licenced (similar to new BSD licence)
+All these probles are solved by runawk and this is why I wrote it.
 
 ======================================================================
 
@@ -69,173 +141,3 @@ runawk is MIT licenced (similar to new BSD licence)
 
 Note that no documentation is installed (yet?).
 Documentation is in this file (README), read below.
-
-======================================================================
-
-
-
-                             DOCUMENTATION
-
-
-
-Under UNIX-like OS-es you can use runawk
-by beginning your script with
-
-   #!/usr/local/bin/runawk
-
-line or something like this instead of
-
-   #!/usr/bin/awk -f
-
-or similar.
-
-------------------------------------------------------------
-Modules are enabled like this
-
-  #use "module1.awk"
-  #use "module2.awk"
-
-that is the line that specifies module name is treated as a comment line
-by normal AWK interpreter but is processed by runawk especially.
-
-Note that #use should begin with column 0,
-no spaces are allowed before it.
-
-Also note that AWK modules can also "use" another modules and so forth.
-All them are collected in a depth-first order
-and each one is added to the list of
-awk interpreter arguments prepanded with -f option.
-That is "#use" directive is *NOT* like #include directive in C language,
-module's code is not included to the main program file.
-Runawk's modules are more like to Perl's "use" command.
-
-Also note that modules are added to the list of arguments only once,
-i.e. with no duplications.
-
-Position of #use directive in a source file doesn't matter.
-
-Example:
-
-  file prog:
-     #!/usr/local/bin/runawk
-
-     #use "A.awk"
-     #use "B.awk"
-     #use "E.awk"
-
-     PROG code
-     ...
-
-  file B.awk:
-     #use "A.awk"
-     #use "C.awk"
-     B code
-     ...
-
-  file C.awk:
-     #use "A.awk"
-     #use "D.awk"
-
-     C code
-     ...
-
-  A.awk and D.awk don't contain #use directive
-
-If you run
-
-  runawk prog file1 file2
-
-  or
-
-  /path/to/prog file1 file2
-
-the following command
-
-  awk -f A.awk -f D.awk -f C.awk -f B.awk -f E.awk -f prog -- file1 file2
-
-will actually run.
-
-------------------------------
-
-Modules (and submodules) are first searched in a directory were main
-program (module) is placed and then AWKPATH environment variable is
-checked.  AWKPATH variable specifies a colon separated
-list of search directories where modules are searched if the path
-in #use directive is relative.
-
-------------------------------
-
-In order to pass arguments to AWK script correctly, runawk
-treats their arguments beginning with `-' sign especially.
-The following command
-
-  runawk prog2 -h -f=file -o=output file1 file2
-
-  or
-
-  /path/to/prog2 -h -f=file -o=output file1 file2
-
-will actually run
-
-  awk -f prog2 -- -x -f=file -o=output file1 file2
-
-and therefore -s, -f, -o option will be passed to ARGV/ARGC variables
-together with file1 and file2. When all arguments begin with `-',
-stdin stream is added to the end of argument list, that is running
-
-  runawk prog3 --value=value
-
-  or
-
-  /path/to/prog3 --value=value
-
-the following 
-
-  awk -f prog3 -- --value=value -
-
-will be run.
-
-------------------------------------------------------------
-
-Runawk can obtain the script from a command line like this
-
-/path/to/runawk -e '
-#use "assert.awk"
-
-{
-  assert($1 >= 0 && $1 <= 10, "Bad value: " $1)
-}'
-
-------------------------------------------------------------
-
-For some reason you may prefer one AWK interpreter or another like this.
-
-  file prog:
-     #!/usr/local/bin/runawk
-
-     #use "A.awk"
-     #use "B.awk"
-
-     #interp "/usr/pkg/bin/nbawk"
-
-     PROG code
-
-The reason may be efficiency for a particular task, useful
-and non-standard extension or enything else.
-
-Note that #interp directive should also begin with column 0,
-no spaces are allowed before it.
-
-======================================================================
-
-
-
-                                 FEEDBACK
-
-
-
-Please send any comments, questions, bug reports etc. to me
-by e-mail Aleksey Cheusov <vle@gmx.net>.
-Feature requests are also welcomed.
-
-======================================================================
