@@ -52,7 +52,8 @@ OPTIONS:\n\
   -h    display this screen\n\
   -V    display version information\n\
   -d    debugging mode, just list new argv array, do not run interpreter\n\
-  -i    add \"stdin\" file name to a list of awk arguments\n\
+  -i    always add \"stdin\" file name to a list of awk arguments\n\
+  -I    do not add \"stdin\" file name to a list of awk arguments\n\
 \n\
 README file in a distribution contains the documentation\n\
 ");
@@ -268,6 +269,8 @@ static const char *get_tmp_name ()
 	return dup;
 }
 
+typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
+
 int main (int argc, char **argv)
 {
 	const char *new_argv [ARRAY_SZ];
@@ -279,7 +282,7 @@ int main (int argc, char **argv)
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
-	int add_stdin          = 0;
+	add_stdin_t add_stdin = stdin_default;
 	int i;
 	int not_e              = 0;
 
@@ -328,7 +331,11 @@ int main (int argc, char **argv)
 			not_e = 1;
 		}
 		if (strchr (argv [0], 'i')){
-			add_stdin = 1;
+			add_stdin = stdin_yes;
+			not_e     = 1;
+		}
+		if (strchr (argv [0], 'I')){
+			add_stdin = stdin_no;
 			not_e     = 1;
 		}
 
@@ -399,7 +406,9 @@ int main (int argc, char **argv)
 		ll_push (argv [i], new_argv, &new_argc);
 	}
 
-	if (add_stdin || (argc && all_with_dash)){
+	if (add_stdin == stdin_yes ||
+		(argc && all_with_dash && add_stdin != stdin_no))
+	{
 		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
