@@ -415,7 +415,7 @@ int main (int argc, char **argv)
 
 	if (debug){
 		for (i=0; i < new_argc - 1; ++i){
-			fprintf (stderr, "new_argv [%d] = %s\n", i, new_argv [i]);
+			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
 		}
 	}else{
 		pid = fork ();
