@@ -28,9 +28,10 @@ Problems I see (some of them, of course)
 
 =item 1
 
-AWK lacks support for modules. Even if you create small programs, you
-need have library functions that are used regulary. So, you need
-support modules.
+AWK lacks support for modules. Even if I create small programs, I
+often want to use the functions created earlier and already used in
+other scripts. That is, it whould great to orginise functions into
+libraries (modules). B<runawk> does this.
 
 =item 2
 
@@ -52,7 +53,7 @@ awk_program:
 
 Shell session:
 
-    % awk_program  --opt1 --opt2
+    % awk_program --opt1 --opt2
     /usr/bin/awk: unknown option --opt1 ignored
 
     /usr/bin/awk: unknown option --opt2 ignored
@@ -62,12 +63,20 @@ Shell session:
     ARGV [2]=--opt2
     %
 
+In my opinion I<awk_program> script should work like this
+
+    % awk_program --opt1 --opt2
+    ARGV [1]=--opt1
+    ARGV [2]=--opt2
+    %
+
+It is possible using B<runawk>.
+
 =item 3
 
-When C<#!/usr/bin/awk -f> script handles arguments (options) and needs
-to read from stdin when nomfiles are specified, it is necessary to add
-/dev/stdin or `-' as a file explicitely.
-This is badly too.
+When C<#!/usr/bin/awk -f> script handles arguments (options) and wants
+to read from stdin, it is necessary to add
+/dev/stdin (or `-') as a last argument explicitely.
 
 Example:
 
@@ -83,14 +92,20 @@ awk_program:
     }
 
     {
-       print "flag=" flag
+       print "flag=" flag " $0=" $0
     }
 
 Shell session:
 
     % echo test | awk_program -- --flag
     % echo test | awk_program -- --flag /dev/stdin
-    flag=1
+    flag=1 $0=test
+    %
+
+Ideally I<awk_program> should work like this
+
+    % echo test | awk_program --flag
+    flag=1 $0=test
     %
 
 =back
@@ -101,10 +116,18 @@ B<runawk> was created to solve all these problems
 
 =over 6
 
+=item B<-V>
+
+Display version information.
+
+=item B<-h>
+
+Display help information.
+
 =item B<-d>
 
 Turn on a debugging mode in which B<runawk> prints argument list
-with which real B<awk> interpreter will be run
+with which real B<awk> interpreter will be run.
 
 =item B<-e> I<program>
 
@@ -112,6 +135,9 @@ Specify program. If I<-e> is not specified program is read from
 I<program_file>.
 
 =back
+
+B<NOTE:> all options must be specified as a single token, i.e. I<-Vh>,
+not I<-V -h>
 
 =head1 DETAILS
 
@@ -130,7 +156,7 @@ or similar.
 
 =head2 AWK modules
 
-Modules are enabled like this
+In order to activate modules you should add them into awk script like this
 
   #use "module1.awk"
   #use "module2.awk"
@@ -138,21 +164,23 @@ Modules are enabled like this
 that is the line that specifies module name is treated as a comment line
 by normal AWK interpreter but is processed by B<runawk> especially.
 
-Note that #use should begin with column 0,
-no spaces are allowed before it.
+Note that I<#use> should begin with column 0,
+no spaces are allowed before it and no spaces are allowed between
+I<#> and I<use>.
 
 Also note that AWK modules can also "use" another modules and so forth.
 All them are collected in a depth-first order
 and each one is added to the list of
 awk interpreter arguments prepanded with -f option.
-That is "#use" directive is *NOT* like #include directive in C language,
-module's code is not included to the main program file.
-Runawk's modules are more like to Perl's "use" command.
+That is I<#use> directive is *NOT* similar to I<#include> in 
+C programming language,
+runawk's module code is not inserted into the place of I<#use>.
+Runawk's modules are closer to Perl's "use" command.
+In case some module is mentioned more than once, only one -f
+will be added for it, i.e duplications are removed automatically.
 
-Also note that modules are added to the list of arguments only once,
-i.e. with no duplications.
-
-Position of #use directive in a source file doesn't matter.
+Position of I<#use> directive in a source file does matter, i.e.
+the earlier module is mentioned, the earlier -f will be generated for it.
 
 Example:
 
@@ -195,13 +223,17 @@ the following command
 
 will actually run.
 
+You can check this by running
+
+  runawk -d prog file1 file2
+
 =head2 Module search strategy
 
 Modules (and submodules) are first searched in a directory were main
 program (module) is placed and then AWKPATH environment variable is
 checked.  AWKPATH variable specifies a colon separated
 list of search directories where modules are searched if the path
-in #use directive is relative.
+in I<#use> directive is relative.
 
 =head2 AWK interpreter and its arguments
 
@@ -263,7 +295,7 @@ For some reason you may prefer one AWK interpreter or another like this.
 The reason may be efficiency for a particular task, useful
 and non-standard extension or enything else.
 
-Note that #interp directive should also begin with column 0,
+Note that I<#interp> directive should also begin with column 0,
 no spaces are allowed before it.
 
 =head1 ENVIRONMENT
