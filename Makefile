@@ -34,7 +34,8 @@ runawk.html : runawk.pod
 .PHONY: clean-my
 clean: clean-my
 clean-my:
-	rm -f *~ core* runawk.1
+	rm -f *~ core* runawk.1 runawk.cat1 ktrace* ChangeLog *.tmp
+	rm -f runawk.html tests/_*
 
 .PHONY: install-modules
 install: install-modules
@@ -81,7 +82,7 @@ ChangeLog:
 .PHONY : test
 test : runawk
 	set -e; cd tests; \
-	./test.sh > test.res; \
-	diff -u test.out test.res
+	./test.sh > _test.res; \
+	diff -u test.out _test.res
 
 .include <bsd.prog.mk>
