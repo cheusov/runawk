@@ -50,11 +50,12 @@ runawk - wrapper for an AWK interpreter\n\
 usage: runawk [OPTIONS] program_file [arguments...]\n\
        runawk [OPTIONS] -e program [arguments...]\n\
 OPTIONS:\n\
-  -h    display this screen\n\
-  -V    display version information\n\
-  -d    debugging mode, just list new argv array, do not run interpreter\n\
-  -i    always add \"stdin\" file name to a list of awk arguments\n\
-  -I    do not add \"stdin\" file name to a list of awk arguments\n\
+  -h|--help           display this screen\n\
+  -V|--version        display version information\n\
+  -d|--debug          debugging mode, just list argv array for awk,\n\
+                      awk interpreter is not run\n\
+  -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
+  -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
 ");
 }
 
@@ -317,6 +318,36 @@ int main (int argc, char **argv)
 
 	/* options, no getopt(3) here */
 	for (; argc && argv [0][0] == '-'; --argc, ++argv){
+		/* --help */
+		if (!strcmp (argv [0], "--help")){
+			usage ();
+			clean_and_exit (0);
+		}
+
+		/* --version */
+		if (!strcmp (argv [0], "--version")){
+			version ();
+			clean_and_exit (0);
+		}
+
+		/* --debug */
+		if (!strcmp (argv [0], "--debug")){
+			debug = 1;
+			continue;
+		}
+
+		/* --with-stdin */
+		if (!strcmp (argv [0], "--with-stdin")){
+			add_stdin = stdin_yes;
+			continue;
+		}
+
+		/* --without-stdin */
+		if (!strcmp (argv [0], "--without-stdin")){
+			add_stdin = stdin_no;
+			continue;
+		}
+
 		/* -e */
 		if (!strcmp (argv [0], "-e")){
 			if (argc == 1){

@@ -13,7 +13,7 @@ new_argv [3] = --
 new_argv [4] = --long-option
 new_argv [5] = /dev/stdin
 --------------------------------------------------
-------- args: -d _test_program -o=file
+------- args: --debug _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
@@ -21,7 +21,14 @@ new_argv [3] = --
 new_argv [4] = -o=file
 new_argv [5] = /dev/stdin
 --------------------------------------------------
-------- args: -dI _test_program -o=file
+------- args: -d --without-stdin _test_program -o=file
+new_argv [0] = _test_program
+new_argv [1] = -f
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
+new_argv [3] = --
+new_argv [4] = -o=file
+--------------------------------------------------
+------- args: --debug -I _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
@@ -37,6 +44,15 @@ new_argv [4] = fn1
 new_argv [5] = fn2
 --------------------------------------------------
 ------- args: -di _test_program arg1 arg2
+new_argv [0] = _test_program
+new_argv [1] = -f
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
+new_argv [3] = --
+new_argv [4] = arg1
+new_argv [5] = arg2
+new_argv [6] = /dev/stdin
+--------------------------------------------------
+------- args: --debug --with-stdin _test_program arg1 arg2
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
