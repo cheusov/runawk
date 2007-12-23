@@ -2,7 +2,7 @@
 # public domain
 
 # abs -- absolute value function
-function abs(v){
+function abs (v){
 	if (v < 0)
 		return -v
 	else
