@@ -116,36 +116,33 @@ B<runawk> was created to solve all these problems
 
 =over 6
 
-=item B<-V>
-
-Display version information.
-
-=item B<-h>
+=item B<-h>|B<--help>
 
 Display help information.
 
-=item B<-d>
+=item B<-V>|B<--version>
+
+Display version information.
+
+=item B<-d>|B<--debug>
 
 Turn on a debugging mode in which B<runawk> prints argument list
 with which real B<awk> interpreter will be run.
 
-=item B<-i>
+=item B<-i>|B<--with-stdin>
 
 Always add stdin file name to a list of awk arguments
 
-=item B<-I>
+=item B<-I>|B<--without-stdin>
 
 Do not add stdin file name to a list of awk arguments
 
-=item B<-e> I<program>
+=item B<-e>|B<--execute> I<program>
 
 Specify program. If I<-e> is not specified program is read from
 I<program_file>.
 
 =back
-
-B<NOTE:> all options must be specified as a single token, i.e. I<-Vh>,
-not I<-V -h>
 
 =head1 DETAILS/INTERNALS
 
@@ -303,7 +300,8 @@ I<#interp> command like this
 
      #interp "/usr/pkg/bin/nbawk"
 
-     ... your code here
+     # your code here
+     ...
 
 The reason may be efficiency for a particular task, useful but
 not standard extensions or enything else.
