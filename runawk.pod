@@ -31,13 +31,13 @@ Problems I see (some of them, of course)
 AWK lacks support for modules. Even if I create small programs, I
 often want to use the functions created earlier and already used in
 other scripts. That is, it whould great to orginise functions into
-libraries (modules). B<runawk> does this.
+so called libraries (modules).
 
 =item 2
 
 In order to pass arguments to C<#!/usr/bin/awk -f> script (not to awk
 interpreter), it is necessary to prepand a list of
-arguments with -- (two minus signes). In my view, this is badly.
+arguments with -- (two minus signes). In my view, this looks badly.
 
 Example:
 
