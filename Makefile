@@ -62,6 +62,7 @@ cvsdist:
 	cvs export -fd runawk-$${VERSION} -r runawk-$${VERSION_CVS} runawk && \
 	cd runawk-$${VERSION} && \
 	mv /tmp/runawk.ChangeLog.$${VERSION} ChangeLog && \
+	$(MAKE) runawk.1 && \
 	chmod -R a+rX,g-w . && \
 	cd .. && \
 	echo "***** Taring and zipping runawk-$${VERSION}.tar.gz..." && \
