@@ -1,3 +1,7 @@
+# written by Aleksey Cheusov <vle@gmx.net>
+# public domain
+
+# abort -- cause abnormal program termination
 function abort (msg, status){
 	printf "error: %s\n", msg > "/dev/stderr"
 	printf "       ARGV[0]=%s\n", ARGV[0] > "/dev/stderr"
@@ -14,6 +18,7 @@ function abort (msg, status){
 	exit status
 }
 
+# assert -- expression verification function
 function assert (cond, msg, status){
 	if (!cond){
 		abort("assertion failed: " msg, status)
