@@ -1,7 +1,44 @@
+----------------------------------------------------------------------
+Version 0.9.0, by Aleksey Cheusov, Sun, 23 Dec 2007 18:43:32 +0200
+
+ After lots of thoughts I switched to BSD make.  This makes some
+ changes in building process, see README/INSTALLATION section for
+ a brief description.
+
+ ADDED: man page for runawk. HTML version runawk.html can also be
+ generated from runawk.pod using pod2html, see Makefile.
+
+ ADDED: -i/-I options for forcing/disabling adding /dev/stdin to
+ the list of awk arguments. See man page for more information.
+
+ A few AWK modules are installed to PREFIX/share/runawk: abs.awk,
+ min.awk, max.awk and alt_assert.awk. This directory is also checked
+ while searching for modules. See man page for more details.
+
+ AWK_PROG and STDIN_FILENAME Makefile variables can be passed to make
+ program to change a path to an actual AWK interpreter (/usr/bin/awk
+ by default) and stdin file (/dev/stdin by default).
+
+ Lots of improvements in documentation
+
+ ADDED: regression tests. Run them by running 'make test' and let
+ me know if somethiung fails.
+
+ debugging output is sent stdout, not stderr
+
+ ADDED: long synonyms for short options, --help, --version etc.
+
+ clean-ups in Makefile
+
+ options handling improvements
+
+----------------------------------------------------------------------
 Version 0.8.1, by Aleksey Cheusov, Wed, 24 Oct 2007 14:46:12 +0300
+
  FIXED: default stdin file should be /std/stdin, not /dev/stderr,
  I've made a typo.
 
+----------------------------------------------------------------------
 Version 0.8.0, by Aleksey Cheusov, Sun, 21 Oct 2007 17:19:46 +0300
 
  FIXED: return code of execvp is not analysed, i.e. when running
