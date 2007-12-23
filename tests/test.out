@@ -1,45 +1,45 @@
 --------------------------------------------------
-------- args: -d test_program
-new_argv [0] = test_program
+------- args: -d _test_program
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 --------------------------------------------------
-------- args: -d test_program --long-option
-new_argv [0] = test_program
+------- args: -d _test_program --long-option
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 new_argv [4] = --long-option
 new_argv [5] = /dev/stdin
 --------------------------------------------------
-------- args: -d test_program -o=file
-new_argv [0] = test_program
+------- args: -d _test_program -o=file
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 new_argv [4] = -o=file
 new_argv [5] = /dev/stdin
 --------------------------------------------------
-------- args: -dI test_program -o=file
-new_argv [0] = test_program
+------- args: -dI _test_program -o=file
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 new_argv [4] = -o=file
 --------------------------------------------------
-------- args: -d test_program fn1 fn2
-new_argv [0] = test_program
+------- args: -d _test_program fn1 fn2
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 new_argv [4] = fn1
 new_argv [5] = fn2
 --------------------------------------------------
-------- args: -di test_program arg1 arg2
-new_argv [0] = test_program
+------- args: -di _test_program arg1 arg2
+new_argv [0] = _test_program
 new_argv [1] = -f
-new_argv [2] = /home/cheusov/prjs/runawk/tests/test_program
+new_argv [2] = /home/cheusov/prjs/runawk/tests/_test_program
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
@@ -54,7 +54,7 @@ runawk - wrapper for an AWK interpreter
 ------- args: -e BEGIN {print "Hello World"}
 Hello World
 --------------------------------------------------
-------- args: test.tmp
+------- args: _test.tmp
 Hello World1.2
 Hello World1.3
 Hello World1.1
