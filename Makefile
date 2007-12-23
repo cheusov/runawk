@@ -3,7 +3,7 @@
 PREFIX?=/usr/local
 BINDIR?=${PREFIX}/bin
 MANDIR?=${PREFIX}/man
-DATADIR?=${PREFIX}/share/runawk
+MODULESDIR?=${PREFIX}/share/runawk
 
 AWK_PROG?=		/usr/bin/awk
 STDIN_FILENAME?=	/dev/stdin
@@ -22,6 +22,7 @@ SRCS=			runawk.c
 
 CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
+CPPFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
 
 MODULES=		alt_assert.awk
 
@@ -40,9 +41,9 @@ clean-my:
 .PHONY: install-modules
 install: install-modules
 install-modules:
-	${INSTALL_DIR} ${DESTDIR}${DATADIR}; \
+	${INSTALL_DIR} ${DESTDIR}${MODULESDIR}; \
 	for m in ${MODULES}; do \
-	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${DATADIR}; \
+	   ${INSTALL_MODULE} modules/$${m} ${DESTDIR}${MODULESDIR}; \
 	done
 
 .PHONY : cvsdist
