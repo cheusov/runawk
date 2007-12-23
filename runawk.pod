@@ -129,6 +129,14 @@ Display help information.
 Turn on a debugging mode in which B<runawk> prints argument list
 with which real B<awk> interpreter will be run.
 
+=item B<-i>
+
+Always add stdin file name to a list of awk arguments
+
+=item B<-I>
+
+Do not add stdin file name to a list of awk arguments
+
 =item B<-e> I<program>
 
 Specify program. If I<-e> is not specified program is read from
