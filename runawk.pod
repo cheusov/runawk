@@ -139,7 +139,7 @@ I<program_file>.
 B<NOTE:> all options must be specified as a single token, i.e. I<-Vh>,
 not I<-V -h>
 
-=head1 DETAILS
+=head1 DETAILS/INTERNALS
 
 =head2 Standalone script
 
@@ -229,16 +229,17 @@ You can check this by running
 
 =head2 Module search strategy
 
-Modules (and submodules) are first searched in a directory were main
-program (module) is placed and then AWKPATH environment variable is
+Modules are first searched in a directory were main
+program (module) is placed, then AWKPATH environment variable is
 checked.  AWKPATH variable specifies a colon separated
 list of search directories where modules are searched if the path
 in I<#use> directive is relative.
+Absolute path to the module is also allowed.
 
 =head2 AWK interpreter and its arguments
 
 In order to pass arguments to AWK script correctly, B<runawk>
-treats their arguments beginning with `-' sign especially.
+treats their arguments beginning with `-' sign (minus) especially.
 The following command
 
   runawk prog2 -h -f=file -o=output file1 file2
@@ -251,9 +252,10 @@ will actually run
 
   awk -f prog2 -- -x -f=file -o=output file1 file2
 
-and therefore -s, -f, -o option will be passed to ARGV/ARGC variables
-together with file1 and file2. When all arguments begin with `-',
-stdin stream is added to the end of argument list, that is running
+therefore -s, -f, -o options will be passed to ARGV/ARGC awk's variables
+together with file1 and file2. If all arguments begin with `-' (minus),
+B<runawk> will add stdin filename to the end of argument list,
+(unless -I option is specified) i.e. running
 
   runawk prog3 --value=value
 
@@ -261,26 +263,29 @@ stdin stream is added to the end of argument list, that is running
 
   /path/to/prog3 --value=value
 
-the following 
+will actually run the following
 
-  awk -f prog3 -- --value=value -
-
-will be run.
+  awk -f prog3 -- --value=value /dev/stdin
 
 =head2 Program as an argument
 
-B<Runawk> can obtain the script from a command line like this
+Like some other interpreters
+B<runawk> can obtain the script from a command line like this
 
  /path/to/runawk -e '
- #use "assert.awk"
+ #use "alt_assert.awk"
 
  {
    assert($1 >= 0 && $1 <= 10, "Bad value: " $1)
+
+   # your code below
+   ...
  }'
 
 =head2 Selecting a preferred AWK interpreter
 
-For some reason you may prefer one AWK interpreter or another like this.
+For some reason you may prefer one AWK interpreter or another with a help of
+I<#interp> command like this
 
   file prog:
      #!/usr/local/bin/runawk
@@ -290,13 +295,13 @@ For some reason you may prefer one AWK interpreter or another like this.
 
      #interp "/usr/pkg/bin/nbawk"
 
-     PROG code
+     ... your code here
 
-The reason may be efficiency for a particular task, useful
-and non-standard extension or enything else.
+The reason may be efficiency for a particular task, useful but
+not standard extensions or enything else.
 
 Note that I<#interp> directive should also begin with column 0,
-no spaces are allowed before it.
+no spaces are allowed before it and between I<#> and I<interp>.
 
 =head1 ENVIRONMENT
 
@@ -304,7 +309,7 @@ no spaces are allowed before it.
 
 =item I<AWKPATH>
 
-Directories where B<awk> modules are searched
+Colon separated list of directories where B<awk> modules are searched.
 
 =back
 
