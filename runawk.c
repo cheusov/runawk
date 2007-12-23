@@ -56,6 +56,7 @@ OPTIONS:\n\
                       awk interpreter is not run\n\
   -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
   -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
+  -e|--execute <program>  program to run\n\
 ");
 }
 
@@ -349,7 +350,7 @@ int main (int argc, char **argv)
 		}
 
 		/* -e */
-		if (!strcmp (argv [0], "-e")){
+		if (!strcmp (argv [0], "-e") || !strcmp (argv [0], "--execute")){
 			if (argc == 1){
 				fprintf (stderr, "missing argument for -e option");
 				clean_and_exit (39);
