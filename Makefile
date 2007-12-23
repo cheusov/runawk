@@ -21,8 +21,6 @@ MODULES!=		echo modules/*.awk
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
 
-##################################################
-
 CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CPPFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
@@ -38,6 +36,8 @@ clean: clean-my
 clean-my:
 	rm -f *~ core* runawk.1 runawk.cat1 ktrace* ChangeLog *.tmp
 	rm -f runawk.html tests/_*
+
+##################################################
 
 .PHONY : cvsdist
 cvsdist:
@@ -74,10 +74,14 @@ ChangeLog:
               -e 's,\(.*\)<\([^@<>]\+\)@\([^@<>]\+\)>\(.*\),\1<\2 at \3}\4,g' \
 	> ChangeLog;)
 
+##################################################
+
 .PHONY : test
 test : runawk
 	set -e; cd tests; \
 	./test.sh > _test.res; \
 	diff -u test.out _test.res
+
+##################################################
 
 .include <bsd.prog.mk>
