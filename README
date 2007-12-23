@@ -1,7 +1,7 @@
 ======================================================================
 
 runawk: small wrapper for AWK interpreter that impements module
-system and helps much in writing standalone AWK programs.
+system and helps to write the standalone AWK programs.
 
 author:                                  Aleksey Cheusov <vle@gmx.net>
 
@@ -139,5 +139,35 @@ All these probles are solved by runawk and this is why I wrote it.
 
 5) make install
 
-Note that no documentation is installed (yet?).
-Documentation is in this file (README), read below.
+There are many Makefile variables that can be changed during installation.
+Runawk's own variables (All they are at the begining of Makefile):
+
+ PREFIX         - where runawk is installed to
+ MODULESDIR     - directory where modules are installed to
+ AWK_PROG       - path awk interpreter
+ STDIN_FILENAME - path to stdin device file
+ INSTALL_MODULE - program for installing modules
+
+BSD make's variables (most commonly used,
+for all others - see make's documentation)
+
+ BINDIR - where runawk executable itself is installed to
+ MANDIR - where manual pages are installed to
+
+ BINOWN - runawk executable owner
+ BINGRP - runawk executable group
+
+ MANOWN - man page owner
+ MANGRP - man page group
+
+Example:
+   make -s CC=gcc \
+       LDADD=-lextralib \
+       CFLAGS='-Werror -Wall' \
+       CPPFLAGS=-I/home/cheusov/local/include \
+       PREFIX=/home/cheusov/local \
+       BINOWN=cheusov \
+       BINGRP=users \
+       MANOWN=cheusov \
+       MANGRP=users \
+       install
