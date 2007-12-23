@@ -24,7 +24,7 @@ CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CPPFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
 
-MODULES=		alt_assert.awk
+MODULES=		alt_assert.awk abs.awk
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
