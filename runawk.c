@@ -48,6 +48,7 @@ static void usage (void)
 	puts ("\
 runawk - wrapper for the AWK interpreter\n\
 usage: runawk [OPTIONS] program_file [arguments...]\n\
+       runawk [OPTIONS] -e program [arguments...]\n\
 OPTIONS:\n\
   -h    display this screen\n\
   -V    display version information\n\
