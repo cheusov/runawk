@@ -46,7 +46,7 @@
 static void usage (void)
 {
 	puts ("\
-runawk - wrapper for the AWK interpreter\n\
+runawk - wrapper for an AWK interpreter\n\
 usage: runawk [OPTIONS] program_file [arguments...]\n\
        runawk [OPTIONS] -e program [arguments...]\n\
 OPTIONS:\n\
@@ -55,8 +55,6 @@ OPTIONS:\n\
   -d    debugging mode, just list new argv array, do not run interpreter\n\
   -i    always add \"stdin\" file name to a list of awk arguments\n\
   -I    do not add \"stdin\" file name to a list of awk arguments\n\
-\n\
-README file in a distribution contains the documentation\n\
 ");
 }
 
