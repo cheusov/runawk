@@ -78,4 +78,10 @@ ChangeLog:
               -e 's,\(.*\)<\([^@<>]\+\)@\([^@<>]\+\)>\(.*\),\1<\2 at \3}\4,g' \
 	> ChangeLog;)
 
+.PHONY : test
+test : runawk
+	set -e; cd tests; \
+	./test.sh > test.res; \
+	diff -u test.out test.res
+
 .include <bsd.prog.mk>
