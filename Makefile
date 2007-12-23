@@ -11,7 +11,7 @@ STDIN_FILENAME?=	/dev/stdin
 POD2MAN?=		pod2man
 POD2HTML?=		pod2html
 
-INSTALL_MODULE?=	${INSTALL_FILE} -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
+INSTALL_MODULE?=	${INSTALL} -r -o ${BINOWN} -g ${BINGRP} -m ${NONBINMODE}
 
 ##################################################
 
