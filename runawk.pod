@@ -76,7 +76,7 @@ It is possible using B<runawk>.
 
 When C<#!/usr/bin/awk -f> script handles arguments (options) and wants
 to read from stdin, it is necessary to add
-/dev/stdin (or `-') as a last argument explicitely.
+/dev/stdin (or `-') as a last argument explicitly.
 
 Example:
 
@@ -234,7 +234,7 @@ You can check this by running
 
 =head2 Module search strategy
 
-Modules are first searched in a directory were main
+Modules are first searched in a directory where main
 program (or module in which #use directive is specified) is placed.
 If it is not found there, then
 AWKPATH environment variable is
