@@ -329,7 +329,7 @@ Note that #interp directive overrides this.
 
 =back
 
-=head1 AUTHOR
+=head1 AUTHOR/LICENSE
 
 Copyright (c) 2007, Aleksey Cheusov <vle@gmx.net>
 
@@ -344,10 +344,9 @@ warranty.
 
 =head1 BUGS/FEEDBACK
 
-Please send any comments, questions, bug reports etc. to me
-by e-mail Aleksey Cheusov <vle@gmx.net>
-or (even better) register them at sourceforge project home.
-Feature requests are also welcomed.
+Please send any comments, questions, bug reports etc. to me by e-mail
+or (even better) register them at sourceforge project home.  Feature
+requests are also welcomed.
 
 =head1 HOME
 
