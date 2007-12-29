@@ -321,6 +321,12 @@ no spaces are allowed before it and between I<#> and I<interp>.
 
 Colon separated list of directories where B<awk> modules are searched.
 
+=item I<RUNAWK_AWKPROG>
+
+Sets the path to the AWK interpreter, used by default by B<runawk>,
+i.e. this variable overrides the compile-time default.
+Note that #interp directive overrides this.
+
 =back
 
 =head1 AUTHOR

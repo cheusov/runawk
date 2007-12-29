@@ -304,7 +304,14 @@ int main (int argc, char **argv)
 	int all_with_dash      = 1;
 	add_stdin_t add_stdin  = stdin_default;
 	const char *p          = NULL;
+	const char *env_interp = getenv ("RUNAWK_AWKPROG");
+
 	int i;
+
+	/* environment RUNAWK_AWKPROG overrides compile-time option */
+	if (env_interp){
+		interp = env_interp;
+	}
 
 	--argc, ++argv;
 
