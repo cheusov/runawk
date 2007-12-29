@@ -105,6 +105,17 @@ static const char *sys_awkdir = MODULESDIR;
 
 static int line_num = 0;
 
+static char *xstrdup (char *s)
+{
+	char *ret = strdup (s);
+	if (!ret){
+		perror ("strdup(3) failed");
+		clean_and_exit (33);
+	}
+
+	return ret;
+}
+
 static const char *search_file (const char *dir, const char *name)
 {
 	/* search in AWKPATH env. */
@@ -115,7 +126,7 @@ static const char *search_file (const char *dir, const char *name)
 	/* dir argument */
 	snprintf (buf, sizeof (buf), "%s/%s", dir, name);
 	if (!access (buf, R_OK)){
-		return strdup (buf);
+		return xstrdup (buf);
 	}
 
 	/* AWKPATH env. */
@@ -124,7 +135,7 @@ static const char *search_file (const char *dir, const char *name)
 			curr_dir = awkpath + i;
 			snprintf (buf, sizeof (buf), "%s/%s", curr_dir, name);
 			if (!access (buf, R_OK)){
-				return strdup (buf);
+				return xstrdup (buf);
 			}
 		}
 	}
@@ -132,7 +143,7 @@ static const char *search_file (const char *dir, const char *name)
 	/* system directory for modules */
 	snprintf (buf, sizeof (buf), "%s/%s", sys_awkdir, name);
 	if (!access (buf, R_OK)){
-		return strdup (buf);
+		return xstrdup (buf);
 	}
 
 	return NULL;
@@ -162,7 +173,7 @@ static const char *extract_qstring (char *line, const char *fn, char *s)
 	}
 
 	*n = 0;
-	return strdup (p+1);
+	return xstrdup (p+1);
 }
 
 static void scan_for_use (const char *name)
@@ -271,11 +282,7 @@ static const char *get_tmp_name ()
 
 	++intern_count;
 
-	dup = strdup (tmp_name);
-	if (!dup){
-		perror ("strdup(3) failed");
-		clean_and_exit (38);
-	}
+	dup = xstrdup (tmp_name);
 
 	ll_push (dup, temp_files, &temp_files_count);
 
@@ -309,11 +316,7 @@ int main (int argc, char **argv)
 	/* AWKPATH env. */
 	awkpath = getenv ("AWKPATH");
 	if (awkpath){
-		awkpath = strdup (awkpath);
-		if (!awkpath){
-			perror ("strdup failed");
-			clean_and_exit (33);
-		}
+		awkpath = xstrdup (awkpath);
 
 		awkpath_len = strlen (awkpath);
 		for (i=0; i < awkpath_len; ++i){
