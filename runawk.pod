@@ -218,7 +218,7 @@ If you run
 
   runawk prog file1 file2
 
-  or
+or
 
   /path/to/prog file1 file2
 
@@ -253,7 +253,7 @@ The following command
 
   runawk prog2 -h -f=file -o=output file1 file2
 
-  or
+or
 
   /path/to/prog2 -h -f=file -o=output file1 file2
 
@@ -268,7 +268,7 @@ B<runawk> will add stdin filename to the end of argument list,
 
   runawk prog3 --value=value
 
-  or
+or
 
   /path/to/prog3 --value=value
 
