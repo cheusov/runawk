@@ -7,27 +7,27 @@ cvsdist:
 	VERSION_CVS=`echo ${VERSION} | tr . -` && \
 	export VERSION_CVS && \
 	$(MAKE) ChangeLog && \
-	cp ChangeLog /tmp/runawk.ChangeLog.${VERSION} && \
-	echo "***** Exporting files for runawk-${VERSION}..." && \
+	cp ChangeLog /tmp/${TARBALL}.ChangeLog.${VERSION} && \
+	echo "***** Exporting files for ${TARBALL}-${VERSION}..." && \
 	cd /tmp && \
-	rm -rf /tmp/runawk-${VERSION} && \
-	cvs export -fd runawk-${VERSION} -r runawk-$${VERSION_CVS} runawk && \
-	cd runawk-${VERSION} && \
-	mv /tmp/runawk.ChangeLog.${VERSION} ChangeLog && \
-	$(MAKE) runawk.1 && \
+	rm -rf /tmp/${TARBALL}-${VERSION} && \
+	cvs export -fd ${TARBALL}-${VERSION} -r ${TARBALL}-$${VERSION_CVS} ${TARBALL} && \
+	cd ${TARBALL}-${VERSION} && \
+	mv /tmp/${TARBALL}.ChangeLog.${VERSION} ChangeLog && \
+	$(MAKE) ${TARBALL}.1 && \
 	chmod -R a+rX,g-w . && \
 	cd .. && \
-	echo "***** Taring and zipping runawk-${VERSION}.tar.gz..." && \
-	tar cvvf runawk-${VERSION}.tar runawk-${VERSION} && \
-	gzip -9f runawk-${VERSION}.tar && \
-	echo "***** Done making /tmp/runawk-${VERSION}.tar.gz")
+	echo "***** Taring and zipping ${TARBALL}-${VERSION}.tar.gz..." && \
+	tar cvvf ${TARBALL}-${VERSION}.tar ${TARBALL}-${VERSION} && \
+	gzip -9f ${TARBALL}-${VERSION}.tar && \
+	echo "***** Done making /tmp/${TARBALL}-${VERSION}.tar.gz")
 
 .PHONY: ChangeLog
 ChangeLog:
 	@(echo "***** Making new ChangeLog..."; \
 	rm -f ChangeLog; \
 	AWK=gawk rcs2log -i 2 -r -d'2007-09-24<' . \
-	| sed -e 's,/cvsroot/runawk/,,g' \
+	| sed -e 's,/cvsroot/[^/]*/,,g' \
 	      -e 's,cheusov@[^>]*,vle@gmx.net,g' \
 	      -e 's,author  <[^>]*,Aleksey Cheusov <vle@gmx.net,g' \
               -e 's,\(.*\)<\([^@<>]\+\)@\([^@<>]\+\)>\(.*\),\1<\2 at \3}\4,g' \

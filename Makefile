@@ -15,7 +15,8 @@ INST_DIR?=		${INSTALL} -d
 
 ##################################################
 
-VERSION=		0.9.1
+VERSION=		0.9.0
+TARBALL?=		${PROG}
 
 PROG=			runawk
 SRCS=			runawk.c
