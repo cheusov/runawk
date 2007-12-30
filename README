@@ -118,6 +118,8 @@ Ideally awk_program should work like this
 
 
 All these probles are solved by runawk and this is why I wrote it.
+I also include a few modules to runawk distribution which are
+useful for me and I hope will be helpful for you too.
 
 ======================================================================
 
