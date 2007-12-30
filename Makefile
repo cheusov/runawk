@@ -46,9 +46,9 @@ install-dirs:
 	$(INST_DIR) ${DESTDIR}${MODULESDIR}
 .if "$(MKMAN)" != "no"
 	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
-.endif
 .if "$(MKCATPAGES)" != "no"
 	$(INST_DIR) ${MANDIR}/cat1
+.endif
 .endif
 
 ##################################################
