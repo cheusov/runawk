@@ -162,12 +162,14 @@ for all others - see make's documentation and .mk files)
 
 Example:
    make -s CC=gcc \
+       PREFIX=/home/cheusov/local \
+       LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
        LDADD=-lextralib \
        CFLAGS='-Werror -Wall' \
-       CPPFLAGS=-I/home/cheusov/local/include \
-       PREFIX=/home/cheusov/local \
+       CPPFLAGS=-I/usr/pkg/include \
        BINOWN=cheusov \
        BINGRP=users \
        MANOWN=cheusov \
        MANGRP=users \
-       install
+       MKCATPAGES=no \
+       install-dirs install
