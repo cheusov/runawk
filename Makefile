@@ -51,13 +51,6 @@ install-dirs:
 	$(INST_DIR) ${MANDIR}/cat1
 .endif
 
-#.if (${MKCATPAGES} != "no")
-#PROG_PAX.${PROG}?= ${PROG_PAX}
-#.endif
-
-#.if (${MKCATPAGES} != "no")
-#.endif
-
 ##################################################
 
 .PHONY : cvsdist
