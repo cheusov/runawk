@@ -47,7 +47,7 @@ install-dirs:
 .if "$(MKMAN)" != "no"
 	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
 .if "$(MKCATPAGES)" != "no"
-	$(INST_DIR) ${MANDIR}/cat1
+	$(INST_DIR) ${DESTDIR}${MANDIR}/cat1
 .endif
 .endif
 
