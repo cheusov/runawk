@@ -43,9 +43,20 @@ clean-my:
 .PHONY: install-dirs
 install-dirs:
 	$(INST_DIR) ${DESTDIR}${BINDIR}
-	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
 	$(INST_DIR) ${DESTDIR}${MODULESDIR}
-#	$(INST_DIR) ${MANDIR}/cat1 ???
+.if "$(MKMAN)" != "no"
+	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
+.endif
+.if "$(MKCATPAGES)" != "no"
+	$(INST_DIR) ${MANDIR}/cat1
+.endif
+
+#.if (${MKCATPAGES} != "no")
+#PROG_PAX.${PROG}?= ${PROG_PAX}
+#.endif
+
+#.if (${MKCATPAGES} != "no")
+#.endif
 
 ##################################################
 
