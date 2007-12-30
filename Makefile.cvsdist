@@ -14,7 +14,7 @@ cvsdist:
 	cvs export -fd ${TARBALL}-${VERSION} -r ${TARBALL}-$${VERSION_CVS} ${TARBALL} && \
 	cd ${TARBALL}-${VERSION} && \
 	mv /tmp/${TARBALL}.ChangeLog.${VERSION} ChangeLog && \
-	$(MAKE) ${TARBALL}.1 && \
+	if test "${MKMAN}" != "no"; then $(MAKE) ${PROG}.1; fi; && \
 	chmod -R a+rX,g-w . && \
 	cd .. && \
 	echo "***** Taring and zipping ${TARBALL}-${VERSION}.tar.gz..." && \
