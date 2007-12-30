@@ -37,6 +37,10 @@
 #define ARRAY_SZ 1000
 #endif
 
+#ifndef RUNAWK_VERSION
+#define RUNAWK_VERSION "x.y.z"
+#endif
+
 #ifndef MODULESDIR
 #define MODULESDIR "/usr/local/share/runawk"
 #endif
@@ -64,7 +68,7 @@ OPTIONS:\n\
 ");
 }
 
-static const char *runawk_version = "0.9.0";
+static const char *runawk_version = RUNAWK_VERSION;
 
 static void version (void)
 {

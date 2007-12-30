@@ -15,6 +15,8 @@ INST_DIR?=		${INSTALL} -d
 
 ##################################################
 
+VERSION=		0.9.1
+
 PROG=			runawk
 SRCS=			runawk.c
 
@@ -26,6 +28,7 @@ FILESDIR=		${MODULESDIR}
 CPPFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CPPFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CPPFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
+CPPFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \

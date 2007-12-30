@@ -4,25 +4,23 @@
 cvsdist:
 	@( CVSROOT=`cat CVS/Root` && \
 	export CVSROOT && \
-	VERSION="`grep 'runawk_version = ' runawk.c | \
-	   sed 's/^.*\"\\(.*\\)\".*/\\1/'`" && \
-	VERSION_CVS=`echo $${VERSION} | tr . -` && \
-	export VERSION VERSION_CVS && \
+	VERSION_CVS=`echo ${VERSION} | tr . -` && \
+	export VERSION_CVS && \
 	$(MAKE) ChangeLog && \
-	cp ChangeLog /tmp/runawk.ChangeLog.$${VERSION} && \
-	echo "***** Exporting files for runawk-$${VERSION}..." && \
+	cp ChangeLog /tmp/runawk.ChangeLog.${VERSION} && \
+	echo "***** Exporting files for runawk-${VERSION}..." && \
 	cd /tmp && \
-	rm -rf /tmp/runawk-$${VERSION} && \
-	cvs export -fd runawk-$${VERSION} -r runawk-$${VERSION_CVS} runawk && \
-	cd runawk-$${VERSION} && \
-	mv /tmp/runawk.ChangeLog.$${VERSION} ChangeLog && \
+	rm -rf /tmp/runawk-${VERSION} && \
+	cvs export -fd runawk-${VERSION} -r runawk-$${VERSION_CVS} runawk && \
+	cd runawk-${VERSION} && \
+	mv /tmp/runawk.ChangeLog.${VERSION} ChangeLog && \
 	$(MAKE) runawk.1 && \
 	chmod -R a+rX,g-w . && \
 	cd .. && \
-	echo "***** Taring and zipping runawk-$${VERSION}.tar.gz..." && \
-	tar cvvf runawk-$${VERSION}.tar runawk-$${VERSION} && \
-	gzip -9f runawk-$${VERSION}.tar && \
-	echo "***** Done making /tmp/runawk-$${VERSION}.tar.gz")
+	echo "***** Taring and zipping runawk-${VERSION}.tar.gz..." && \
+	tar cvvf runawk-${VERSION}.tar runawk-${VERSION} && \
+	gzip -9f runawk-${VERSION}.tar && \
+	echo "***** Done making /tmp/runawk-${VERSION}.tar.gz")
 
 .PHONY: ChangeLog
 ChangeLog:
