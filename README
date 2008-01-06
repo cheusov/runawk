@@ -174,4 +174,4 @@ Example:
        MANOWN=cheusov \
        MANGRP=users \
        MKCATPAGES=no \
-          make -s install-dirs install
+          make -s all install-dirs install
