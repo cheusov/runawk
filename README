@@ -163,7 +163,7 @@ for all others - see make's documentation and .mk files)
  MANGRP - man page group
 
 Example:
-   make -s CC=gcc \
+   env CC=gcc \
        PREFIX=/home/cheusov/local \
        LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
        LDADD=-lextralib \
@@ -174,4 +174,4 @@ Example:
        MANOWN=cheusov \
        MANGRP=users \
        MKCATPAGES=no \
-       install-dirs install
+          make -s install-dirs install
