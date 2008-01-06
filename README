@@ -127,7 +127,7 @@ useful for me and I hope will be helpful for you too.
 
                              INSTALLATION
 
-0) BSD make is required. I name it just 'make' but ist real name may
+0) BSD make is required. I name it just 'make' but its real name may
    vary.  bmake and pmake are possible names.
 
    If you need to change the default building options,
