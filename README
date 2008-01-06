@@ -130,12 +130,19 @@ useful for me and I hope will be helpful for you too.
 0) BSD make is required. I name it just 'make' but ist real name may
    vary.  bmake and pmake are possible names.
 
+   If you need to change the default building options,
+   run make like this
+
+     env [YOUR_ASSIGNMENTS] make <target>
+
+   See example section below
+
 1) Uncompress tarball you've downloaded like this
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
 2) cd runawk-X-Y-Z
 
-3) make [YOUR_SETTINGS]
+3) make
 
 4) (optional!) make install-dirs
 
