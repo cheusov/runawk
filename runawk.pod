@@ -251,11 +251,11 @@ In order to pass arguments to AWK script correctly, B<runawk>
 treats their arguments beginning with `-' sign (minus) especially.
 The following command
 
-  runawk prog2 -h -f=file -o=output file1 file2
+  runawk prog2 -x -f=file -o=output file1 file2
 
 or
 
-  /path/to/prog2 -h -f=file -o=output file1 file2
+  /path/to/prog2 -x -f=file -o=output file1 file2
 
 will actually run
 
