@@ -24,7 +24,7 @@ TARBALL?=		${PROG}
 PROG=			runawk
 SRCS=			runawk.c
 
-MODULES!=		echo modules/*.awk
+MODULES!=		echo ${SRCROOT}/modules/*.awk
 
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
