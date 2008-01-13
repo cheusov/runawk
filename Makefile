@@ -13,6 +13,9 @@ POD2HTML?=		pod2html
 
 INST_DIR?=		${INSTALL} -d
 
+# directory with runawk sources
+SRCROOT?=		${.PARSEDIR}
+
 ##################################################
 
 VERSION=		0.9.0
@@ -66,6 +69,8 @@ test : runawk
 	fi
 
 ##################################################
+.PATH : ${SRCROOT}
+
 .include "Makefile.cvsdist"
 
 .include <bsd.prog.mk>
