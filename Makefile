@@ -36,9 +36,9 @@ CPPFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
-	   -c 'RUNAWK manual page' runawk.pod > $@
+	   -c 'RUNAWK manual page' ${.ALLSRC} > ${.TARGET}
 runawk.html : runawk.pod
-	$(POD2HTML) --infile=runawk.pod --outfile=$@
+	$(POD2HTML) --infile=${.ALLSRC} --outfile=${.TARGET}
 
 .PHONY: clean-my
 clean: clean-my
