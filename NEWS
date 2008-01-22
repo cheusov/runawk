@@ -1,4 +1,31 @@
 ======================================================================
+Version 0.10.0, by Aleksey Cheusov, Wed, 23 Jan 2008 00:38:31 +0200
+
+    ADDED: The environment variable RUNAWK_AWKPROG overrides
+    the default awk interpreter which is set at compile time.
+    Documentation updated accordingly.
+
+    FIXED: unsafe use of strdup(3)
+
+    I've copied MIT License text to code from www.opensource.org.
+    Do you see any difference?
+
+    ADDED: new trivial module pow.awk that implements function "pow"
+
+    fix: MKMAN and MKCATPAGES make's standard variables are checked
+    during installation
+
+    In order to build runawk not in a directory you can either build
+    it like this (standard way)
+        cd /src/dir; make all install MAKEOBJDIR=/obj/dir
+    or like this
+        cd /obj/dir; make -f /src/dir/Makefile all install
+
+    optional config.h is #included if you need it
+
+    other minor fixes and improvements both in code and documentation
+
+======================================================================
 Version 0.9.0, by Aleksey Cheusov, Sun, 23 Dec 2007 22:20:23 +0200
 
     I switched to BSD make. I really hate automake and its approach in
