@@ -504,7 +504,12 @@ int main (int argc, char **argv)
 
 			default:
 				waitpid (-1, &child_status, 0);
-				clean_and_exit (WEXITSTATUS (child_status));
+				if (WIFSIGNALED (child_status))
+					clean_and_exit(128 + WTERMSIG (child_status));
+				else if (WIFEXITED (child_status))
+					clean_and_exit (WEXITSTATUS (child_status));
+				else
+					clean_and_exit (200);
 		}
 	}
 
