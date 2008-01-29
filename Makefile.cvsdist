@@ -2,25 +2,26 @@
 
 .PHONY : cvsdist
 cvsdist:
-	@( CVSROOT=`cat CVS/Root` && \
-	export CVSROOT && \
-	VERSION_CVS=`echo ${VERSION} | tr . -` && \
-	export VERSION_CVS && \
-	$(MAKE) ChangeLog && \
-	cp ChangeLog /tmp/${TARBALL}.ChangeLog.${VERSION} && \
-	echo "***** Exporting files for ${TARBALL}-${VERSION}..." && \
-	cd /tmp && \
-	rm -rf /tmp/${TARBALL}-${VERSION} && \
-	cvs export -fd ${TARBALL}-${VERSION} -r ${TARBALL}-$${VERSION_CVS} ${TARBALL} && \
-	cd ${TARBALL}-${VERSION} && \
-	mv /tmp/${TARBALL}.ChangeLog.${VERSION} ChangeLog && \
-	if test "${MKMAN}" != "no"; then $(MAKE) ${PROG}.1; fi; && \
-	chmod -R a+rX,g-w . && \
-	cd .. && \
-	echo "***** Taring and zipping ${TARBALL}-${VERSION}.tar.gz..." && \
-	tar cvvf ${TARBALL}-${VERSION}.tar ${TARBALL}-${VERSION} && \
-	gzip -9f ${TARBALL}-${VERSION}.tar && \
-	echo "***** Done making /tmp/${TARBALL}-${VERSION}.tar.gz")
+	set -e; \
+	CVSROOT=`cat CVS/Root`; \
+	export CVSROOT; \
+	VERSION_CVS=`echo ${VERSION} | tr . -`; \
+	export VERSION_CVS; \
+	$(MAKE) ChangeLog; \
+	cp ChangeLog /tmp/${TARBALL}.ChangeLog.${VERSION}; \
+	echo "***** Exporting files for ${TARBALL}-${VERSION}..."; \
+	cd /tmp; \
+	rm -rf /tmp/${TARBALL}-${VERSION}; \
+	cvs export -fd ${TARBALL}-${VERSION} -r ${TARBALL}-$${VERSION_CVS} ${TARBALL}; \
+	cd ${TARBALL}-${VERSION}; \
+	mv /tmp/${TARBALL}.ChangeLog.${VERSION} ChangeLog; \
+	if test "${MKMAN}" != "no"; then $(MAKE) ${PROG}.1; fi; \
+	chmod -R a+rX,g-w .; \
+	cd ..; \
+	echo "***** Taring and zipping ${TARBALL}-${VERSION}.tar.gz..."; \
+	tar cvvf ${TARBALL}-${VERSION}.tar ${TARBALL}-${VERSION}; \
+	gzip -9f ${TARBALL}-${VERSION}.tar; \
+	echo "***** Done making /tmp/${TARBALL}-${VERSION}.tar.gz"
 
 .PHONY: ChangeLog
 ChangeLog:

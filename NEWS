@@ -6,10 +6,6 @@ Version 0.10.1, by Aleksey Cheusov, Tue, 29 Jan 2008 13:23:23 +0200
     Now this is fixed and runawk exits with exit status 128+SIGNAL
     just like shell does. Affected versions: all.
 
-    execvp is replaced with execv. An absolute path to
-    the AWK interpreter should be specified in RUNAWK_AWKPROG variable
-    and at compile time. /usr/bin/awk is the default.
-
 ======================================================================
 Version 0.10.0, by Aleksey Cheusov, Wed, 23 Jan 2008 00:38:31 +0200
 
