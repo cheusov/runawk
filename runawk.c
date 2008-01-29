@@ -497,8 +497,8 @@ int main (int argc, char **argv)
 				break;
 
 			case 0:
-				execvp (interp, (char *const *) new_argv);
-				perror ("execvp(2) failed");
+				execv (interp, (char *const *) new_argv);
+				perror ("execv(2) failed");
 				exit (1);
 				break;
 
