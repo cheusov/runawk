@@ -313,6 +313,12 @@ not standard extensions or enything else.
 Note that I<#interp> directive should also begin with column 0,
 no spaces are allowed before it and between I<#> and I<interp>.
 
+=head1 EXIT STATUS
+
+If AWK interpreter exits normally, B<runawk> exits with its exit
+status. If AWK interpreter was killed by signal, B<runawk>
+exits with exit status 128+signal.
+
 =head1 ENVIRONMENT
 
 =over 6
