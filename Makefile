@@ -19,7 +19,6 @@ SRCROOT?=		${.PARSEDIR}
 ##################################################
 
 VERSION=		0.10.1
-TARBALL?=		${PROG}
 
 PROG=			runawk
 SRCS=			runawk.c
@@ -71,6 +70,6 @@ test : runawk
 ##################################################
 .PATH : ${SRCROOT}
 
-.include "Makefile.cvsdist"
+.sinclude "Makefile.cvsdist"
 
 .include <bsd.prog.mk>
