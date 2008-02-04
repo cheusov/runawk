@@ -18,7 +18,7 @@ SRCROOT?=		${.PARSEDIR}
 
 ##################################################
 
-VERSION=		0.10.1
+VERSION=		0.10.test
 
 PROG=			runawk
 SRCS=			runawk.c
