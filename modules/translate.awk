@@ -3,19 +3,20 @@
 #
 
 BEGIN {
-	__runawk_tr_num = -1
+	__runawk_translate_num     = -1
+	__runawk_translate_dequote = 0
 }
 
 function __runawk_tr_prepare (rules,
 
 					arr, i, repl_left, repl_right, re)
 {
-	if (rules in rules2num){
-		return rules2num [rules]
+	if (rules in __runawk_translate){
+		return __runawk_translate [rules]
 	}else{
-		++__runawk_tr_num
+		++__runawk_translate_num
 
-		rules2num [rules] = __runawk_tr_num
+		__runawk_translate [rules] = __runawk_translate_num
 		split(rules, arr, /   /)
 
 		for (i in arr){
@@ -25,7 +26,7 @@ function __runawk_tr_prepare (rules,
 			sub(/^.*:/, "", repl_right)
 
 			# substr to repl
-			__runawk_tr_repl [__runawk_tr_num, repl_left] = repl_right
+			__runawk_tr_repl [__runawk_translate_num, repl_left] = repl_right
 
 			print "zzz:", repl_left, repl_right
 			# whole regexp
@@ -42,16 +43,19 @@ function __runawk_tr_prepare (rules,
 			gsub(/[)]/, "[)]", repl_left)
 			gsub(/[*]/, "[*]", repl_left)
 			gsub(/[.]/, "[.]", repl_left)
-			gsub(/\\/, "\\\\", repl_left)
+
+			if (__runawk_translate_dequote){
+				gsub("\\\\", "\\\\", repl_left)
+			}
 
 			re = re "(" repl_left ")"
 		}
 
-		__runawk_tr_regexp [__runawk_tr_num] = re
+		__runawk_tr_regexp [__runawk_translate_num] = re
 
 		print "re=" re
 
-		return __runawk_tr_num
+		return __runawk_translate_num
 	}
 }
 
@@ -70,12 +74,19 @@ function translate (str, rules,
 		print substr(str, RSTART+RLENGTH)
 		print ""
 
-		return substr(str, 1, RSTART-1) \
+		return substr(str, 1, RSTART-1)									\
 		       __runawk_tr_repl [n, substr(str, RSTART, RLENGTH)]		\
 		       translate(substr(str, RSTART+RLENGTH), rules)
 	}
 }
 
-{
-	print "trtrtr=" translate($0, "..:<TREEDOTS>   \\t:<TAB>   \\r:<CR>   \\\\:<BACKSLASH>   .:<DOT>")
+function test_it (){
+	print "trtrtr=" translate("abbab\\t....\\t\\r\\\\", "..:<TWODOTS>   \\t:<TAB>   \\r:<CR>   \\\\:<BACKSLASH>   .:<DOT>")
+}
+
+BEGIN {
+#	__runawk_translate_dequote = 0
+#	test_it()
+	__runawk_translate_dequote = 1
+	test_it()
 }
