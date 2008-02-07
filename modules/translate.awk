@@ -1,11 +1,11 @@
 # written by Aleksey Cheusov <vle@gmx.net>
 # public domain
 
-# translate(STRING, SUBST_REPL)
+# translate(STRING, SUBST_REPLS)
 #   `translate' is a substitution function. It searches for
-#   a list of substrings, specified in SUBST_REPL in a left-most
-#   longest order and (if found) replaces found fragments with
-#   appropriate replacement.
+#   a list of substrings, specified in SUBST_REPL
+#   in a left-most longest order and (if found) replaces
+#   found fragments with appropriate replacement.
 #   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2..."
 #  
 # For example:
