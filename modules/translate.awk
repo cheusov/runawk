@@ -1,10 +1,22 @@
+# written by Aleksey Cheusov <vle@gmx.net>
+# public domain
+
+# translate(STRING, SUBST_REPL)
+#   `translate' is a substitution function. It searches for
+#   a list of substrings, specified in SUBST_REPL in a left-most
+#   longest order and (if found) replaces found fragments with
+#   appropriate replacement.
+#   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2..."
+#  
+# For example:
+#      print translate("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
+#      |- ccBBde
 #
-# $0 = translate($0, "\\t:\t   \\r:\r   \\\\:\\")
-#
+
+#use "alt_assert.awk"
 
 BEGIN {
 	__runawk_translate_num     = -1
-	__runawk_translate_dequote = 0
 }
 
 function __runawk_tr_prepare (rules,
@@ -28,7 +40,7 @@ function __runawk_tr_prepare (rules,
 			# substr to repl
 			__runawk_tr_repl [__runawk_translate_num, repl_left] = repl_right
 
-			print "zzz:", repl_left, repl_right
+#			print "zzz:", repl_left, repl_right
 			# whole regexp
 			if (re != "")
 				re = re "|"
@@ -43,17 +55,14 @@ function __runawk_tr_prepare (rules,
 			gsub(/[)]/, "[)]", repl_left)
 			gsub(/[*]/, "[*]", repl_left)
 			gsub(/[.]/, "[.]", repl_left)
-
-			if (__runawk_translate_dequote){
-				gsub("\\\\", "\\\\", repl_left)
-			}
+			gsub("\\\\", "\\\\", repl_left)
 
 			re = re "(" repl_left ")"
 		}
 
 		__runawk_tr_regexp [__runawk_translate_num] = re
 
-		print "re=" re
+#		print "re=" re
 
 		return __runawk_translate_num
 	}
@@ -61,32 +70,18 @@ function __runawk_tr_prepare (rules,
 
 function translate (str, rules,
 
-					n) #local vars
+					n, middle) #local vars
 {
 	n = __runawk_tr_prepare(rules)
 	if (!match(str, __runawk_tr_regexp [n])){
 		return str
 	}else{
-		print "RSTART=" RSTART
-		print "RLENGTH=" RLENGTH
-		print substr(str, 1, RSTART-1)
-		print substr(str, RSTART, RLENGTH)
-		print substr(str, RSTART+RLENGTH)
-		print ""
+		middle = substr(str, RSTART, RLENGTH)
+
+		assert((n SUBSEP middle) in __runawk_tr_repl, "E-mail bug to the author")
 
 		return substr(str, 1, RSTART-1)									\
-		       __runawk_tr_repl [n, substr(str, RSTART, RLENGTH)]		\
+		       __runawk_tr_repl [n, middle]		\
 		       translate(substr(str, RSTART+RLENGTH), rules)
 	}
-}
-
-function test_it (){
-	print "trtrtr=" translate("abbab\\t....\\t\\r\\\\", "..:<TWODOTS>   \\t:<TAB>   \\r:<CR>   \\\\:<BACKSLASH>   .:<DOT>")
-}
-
-BEGIN {
-#	__runawk_translate_dequote = 0
-#	test_it()
-	__runawk_translate_dequote = 1
-	test_it()
 }
