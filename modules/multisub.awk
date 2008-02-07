@@ -48,15 +48,15 @@ function __runawk_multisub_prepare (repls,
 			# substr to repl
 			__runawk_tr_repl [__runawk_multisub_num, repl_left] = repl_right
 
-#			print "zzz:", repl_left, repl_right
 			# whole regexp
 			if (re != ""){
 				re = re "|"
 			}
 
+			gsub(/\[/, "---runawk-open-sq-bracket---", repl_left)
+			gsub(/\]/, "---runawk-close-sq-bracket---", repl_left)
+
 			gsub(/[?]/, "[?]", repl_left)
-			gsub(/\[/, "[[]", repl_left)
-			gsub(/\]/, "\\]", repl_left)
 			gsub(/[{]/, "[{]", repl_left)
 			gsub(/[}]/, "[}]", repl_left)
 			gsub(/[|]/, "[|]", repl_left)
@@ -72,6 +72,9 @@ function __runawk_multisub_prepare (repls,
 				__runawk_mawk_bug_test()
 				gsub(/\\/, "\\\\", repl_left)
 			}
+
+			gsub(/---runawk-open-sq-bracket---/, "[[]", repl_left)
+			gsub(/---runawk-close-sq-bracket---/, "\\]", repl_left)
 
 			re = re "(" repl_left ")"
 		}
