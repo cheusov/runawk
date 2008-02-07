@@ -29,7 +29,9 @@ function __runawk_multisub_prepare (repls,
 
 					arr, i, repl_left, repl_right, re)
 {
-	if (repls in __runawk_multisub){
+	if (!repls){
+		return -1
+	}else if (repls in __runawk_multisub){
 		return __runawk_multisub [repls]
 	}else{
 		++__runawk_multisub_num
@@ -48,8 +50,9 @@ function __runawk_multisub_prepare (repls,
 
 #			print "zzz:", repl_left, repl_right
 			# whole regexp
-			if (re != "")
+			if (re != ""){
 				re = re "|"
+			}
 
 			gsub(/[?]/, "[?]", repl_left)
 			gsub(/\[/, "\\[", repl_left)
@@ -60,7 +63,10 @@ function __runawk_multisub_prepare (repls,
 			gsub(/[(]/, "[(]", repl_left)
 			gsub(/[)]/, "[)]", repl_left)
 			gsub(/[*]/, "[*]", repl_left)
+			gsub(/[+]/, "[+]", repl_left)
 			gsub(/[.]/, "[.]", repl_left)
+			gsub(/\^/, "[^]", repl_left)
+			gsub(/[$]/, "[$]", repl_left)
 
 			if (repl_left ~ /\\/){
 				mawk_bug_test()
@@ -83,12 +89,12 @@ function multisub (str, repls,
 					n, middle) #local vars
 {
 	n = __runawk_multisub_prepare(repls)
-	if (!match(str, __runawk_tr_regexp [n])){
+	if (n < 0 || !match(str, __runawk_tr_regexp [n])){
 		return str
 	}else{
 		middle = substr(str, RSTART, RLENGTH)
 
-		assert((n SUBSEP middle) in __runawk_tr_repl, "E-mail bug to the author")
+		assert((n SUBSEP middle) in __runawk_tr_repl, "E-mail bug to the author!")
 
 		return substr(str, 1, RSTART-1)									\
 		       __runawk_tr_repl [n, middle]		\
@@ -97,5 +103,6 @@ function multisub (str, repls,
 }
 
 BEGIN {
-	assert("ccBBde" == multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e"), "Email bug to the author")
+	assert("ccBBde" == multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e"),
+		   "Email bug to the author")
 }
