@@ -1,34 +1,34 @@
 # written by Aleksey Cheusov <vle@gmx.net>
 # public domain
 
-# translate(STRING, SUBST_REPLS)
-#   `translate' is a substitution function. It searches for
+# multisub(STRING, SUBST_REPLS)
+#   `multisub' is a substitution function. It searches for
 #   a list of substrings, specified in SUBST_REPL
 #   in a left-most longest order and (if found) replaces
 #   found fragments with appropriate replacement.
 #   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2..."
 #  
 # For example:
-#      print translate("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
+#      print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
 #      |- ccBBde
 #
 
 #use "alt_assert.awk"
 
 BEGIN {
-	__runawk_translate_num     = -1
+	__runawk_multisub_num     = -1
 }
 
-function __runawk_tr_prepare (rules,
+function __runawk_multisub_prepare (rules,
 
 					arr, i, repl_left, repl_right, re)
 {
-	if (rules in __runawk_translate){
-		return __runawk_translate [rules]
+	if (rules in __runawk_multisub){
+		return __runawk_multisub [rules]
 	}else{
-		++__runawk_translate_num
+		++__runawk_multisub_num
 
-		__runawk_translate [rules] = __runawk_translate_num
+		__runawk_multisub [rules] = __runawk_multisub_num
 		split(rules, arr, /   /)
 
 		for (i in arr){
@@ -38,7 +38,7 @@ function __runawk_tr_prepare (rules,
 			sub(/^.*:/, "", repl_right)
 
 			# substr to repl
-			__runawk_tr_repl [__runawk_translate_num, repl_left] = repl_right
+			__runawk_tr_repl [__runawk_multisub_num, repl_left] = repl_right
 
 #			print "zzz:", repl_left, repl_right
 			# whole regexp
@@ -60,19 +60,19 @@ function __runawk_tr_prepare (rules,
 			re = re "(" repl_left ")"
 		}
 
-		__runawk_tr_regexp [__runawk_translate_num] = re
+		__runawk_tr_regexp [__runawk_multisub_num] = re
 
 #		print "re=" re
 
-		return __runawk_translate_num
+		return __runawk_multisub_num
 	}
 }
 
-function translate (str, rules,
+function multisub (str, rules,
 
 					n, middle) #local vars
 {
-	n = __runawk_tr_prepare(rules)
+	n = __runawk_multisub_prepare(rules)
 	if (!match(str, __runawk_tr_regexp [n])){
 		return str
 	}else{
@@ -82,6 +82,6 @@ function translate (str, rules,
 
 		return substr(str, 1, RSTART-1)									\
 		       __runawk_tr_repl [n, middle]		\
-		       translate(substr(str, RSTART+RLENGTH), rules)
+		       multisub(substr(str, RSTART+RLENGTH), rules)
 	}
 }
