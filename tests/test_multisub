@@ -8,10 +8,12 @@ function test (ideal, input, repls, num,                 res){
 	res = multisub(input, repls)
 #	print "res=" res > "/dev/stderr"
 	assert(ideal == res, "test " num " failed")
+#	print "test " num " succeeded"
 }
 
 BEGIN {
-	test("osb", "[", "[:osb", 1)
+	test("osb", "[", "[:osb", -1)
+	test("csb", "]", "]:csb", -2)
 	test("", "", "", 1)
 	test("aaa", "aaa", "", 2)
 	test("aaa", "aaa", "b:c", 3)
@@ -19,7 +21,7 @@ BEGIN {
 	test("e", "bbb", "b:c   bbb:e   bb:d", 5)
 	test("ccBBde", "ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e", 6)
 	test("aaa\nbbb\nccc\tddd\reee\r", "aaa\\nbbb\\nccc\\tddd\\reee\\r", "\\t:\t   \\r:\r   \\n:\n", 6)
-	test("question_question_osb_osb_csb_csb_ocb_ocb_ccb_ccb_or_or_orb_orb_crb_crb_star_star_plus_plus_dot_power_power_dollar_", "??[[]]{{}}||(())**++.^^$", "$:dollar_   ^:power_   .:dot_   +:plus_   *:star_   ):crb_   (:orb_   |:or_   }:ccb_   {:ocb_   [:osb_   ]:csb_   ?:question_", 6)
+	test("question_question_osb_osb_csb_csb_ocb_ocb_ccb_ccb_or_or_orb_orb_crb_crb_star_star_plus_plus_dot_power_power_dollar_backslash_", "??[[]]{{}}||(())**++.^^$\\", "$:dollar_   ^:power_   .:dot_   +:plus_   *:star_   ):crb_   (:orb_   |:or_   }:ccb_   {:ocb_   [:osb_   ]:csb_   ?:question_   \\:backslash_", 7)
 
 	exit 0
 }

@@ -14,15 +14,10 @@
 #
 
 #use "alt_assert.awk"
+#use "str2regexp.awk"
 
 BEGIN {
 	__runawk_multisub_num     = -1
-}
-
-function __runawk_mawk_bug_test (tmp){
-	tmp = "\\\\"
-	gsub(/\\/, "\\\\", tmp)
-	assert(tmp == "\\\\\\\\", "Do not use buggy mawk! ;-)")
 }
 
 function __runawk_multisub_prepare (repls,
@@ -53,30 +48,9 @@ function __runawk_multisub_prepare (repls,
 				re = re "|"
 			}
 
-			gsub(/\[/, "---runawk-open-sq-bracket---", repl_left)
-			gsub(/\]/, "---runawk-close-sq-bracket---", repl_left)
+			repl_left = str2regexp(repl_left)
 
-			gsub(/[?]/, "[?]", repl_left)
-			gsub(/[{]/, "[{]", repl_left)
-			gsub(/[}]/, "[}]", repl_left)
-			gsub(/[|]/, "[|]", repl_left)
-			gsub(/[(]/, "[(]", repl_left)
-			gsub(/[)]/, "[)]", repl_left)
-			gsub(/[*]/, "[*]", repl_left)
-			gsub(/[+]/, "[+]", repl_left)
-			gsub(/[.]/, "[.]", repl_left)
-			gsub(/\^/, "[^]", repl_left)
-			gsub(/[$]/, "[$]", repl_left)
-
-			if (repl_left ~ /\\/){
-				__runawk_mawk_bug_test()
-				gsub(/\\/, "\\\\", repl_left)
-			}
-
-			gsub(/---runawk-open-sq-bracket---/, "[[]", repl_left)
-			gsub(/---runawk-close-sq-bracket---/, "\\]", repl_left)
-
-			re = re "(" repl_left ")"
+			re = re repl_left
 		}
 
 		__runawk_tr_regexp [__runawk_multisub_num] = re
