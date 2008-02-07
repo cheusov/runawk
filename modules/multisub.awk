@@ -55,7 +55,7 @@ function __runawk_multisub_prepare (repls,
 			}
 
 			gsub(/[?]/, "[?]", repl_left)
-			gsub(/\[/, "\\[", repl_left)
+			gsub(/\[/, "[[]", repl_left)
 			gsub(/\]/, "\\]", repl_left)
 			gsub(/[{]/, "[{]", repl_left)
 			gsub(/[}]/, "[}]", repl_left)
@@ -96,7 +96,7 @@ function multisub (str, repls,
 
 		assert((n SUBSEP middle) in __runawk_tr_repl, "E-mail bug to the author!")
 
-		return substr(str, 1, RSTART-1)									\
+		return substr(str, 1, RSTART-1)			\
 		       __runawk_tr_repl [n, middle]		\
 		       multisub(substr(str, RSTART+RLENGTH), repls)
 	}
