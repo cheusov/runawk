@@ -33,3 +33,6 @@ EOF
 
 export AWKPATH=`pwd`/mods2
 runtest _test.tmp
+
+export AWKPATH=`pwd`/../modules
+runtest test_multisub

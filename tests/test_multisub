@@ -1,0 +1,20 @@
+#!/usr/bin/env runawk
+
+#use "multisub.awk"
+#use "alt_assert.awk"
+
+function test (ideal, input, repls, num){
+	assert(ideal == multisub(input, repls), "test " num " failed")
+}
+
+BEGIN {
+	test("", "", "", 1)
+	test("aaa", "aaa", "", 2)
+	test("aaa", "aaa", "b:c", 3)
+	test("dc", "bbb", "b:c   bb:d", 4)
+	test("e", "bbb", "b:c   bbb:e   bb:d", 5)
+	test("ccBBde", "ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e", 6)
+	test("aaa\nbbb\nccc\tddd\reee\r", "aaa\\nbbb\\nccc\\tddd\\reee\\r", "\\t:\t   \\r:\r   \\n:\n", 6)
+
+	exit 0
+}
