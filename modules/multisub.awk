@@ -19,7 +19,7 @@ BEGIN {
 	__runawk_multisub_num     = -1
 }
 
-function mawk_bug_test (tmp){
+function __runawk_mawk_bug_test (tmp){
 	tmp = "\\\\"
 	gsub(/\\/, "\\\\", tmp)
 	assert(tmp == "\\\\\\\\", "Do not use buggy mawk! ;-)")
@@ -69,7 +69,7 @@ function __runawk_multisub_prepare (repls,
 			gsub(/[$]/, "[$]", repl_left)
 
 			if (repl_left ~ /\\/){
-				mawk_bug_test()
+				__runawk_mawk_bug_test()
 				gsub(/\\/, "\\\\", repl_left)
 			}
 
