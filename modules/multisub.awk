@@ -19,17 +19,23 @@ BEGIN {
 	__runawk_multisub_num     = -1
 }
 
-function __runawk_multisub_prepare (rules,
+function mawk_bug_test (tmp){
+	tmp = "\\\\"
+	gsub(/\\/, "\\\\", tmp)
+	assert(tmp == "\\\\\\\\", "Do not use buggy mawk! ;-)")
+}
+
+function __runawk_multisub_prepare (repls,
 
 					arr, i, repl_left, repl_right, re)
 {
-	if (rules in __runawk_multisub){
-		return __runawk_multisub [rules]
+	if (repls in __runawk_multisub){
+		return __runawk_multisub [repls]
 	}else{
 		++__runawk_multisub_num
 
-		__runawk_multisub [rules] = __runawk_multisub_num
-		split(rules, arr, /   /)
+		__runawk_multisub [repls] = __runawk_multisub_num
+		split(repls, arr, /   /)
 
 		for (i in arr){
 			# split into 'repl_left' and 'repl_right'
@@ -55,7 +61,11 @@ function __runawk_multisub_prepare (rules,
 			gsub(/[)]/, "[)]", repl_left)
 			gsub(/[*]/, "[*]", repl_left)
 			gsub(/[.]/, "[.]", repl_left)
-			gsub("\\\\", "\\\\", repl_left)
+
+			if (repl_left ~ /\\/){
+				mawk_bug_test()
+				gsub(/\\/, "\\\\", repl_left)
+			}
 
 			re = re "(" repl_left ")"
 		}
@@ -68,11 +78,11 @@ function __runawk_multisub_prepare (rules,
 	}
 }
 
-function multisub (str, rules,
+function multisub (str, repls,
 
 					n, middle) #local vars
 {
-	n = __runawk_multisub_prepare(rules)
+	n = __runawk_multisub_prepare(repls)
 	if (!match(str, __runawk_tr_regexp [n])){
 		return str
 	}else{
@@ -82,6 +92,10 @@ function multisub (str, rules,
 
 		return substr(str, 1, RSTART-1)									\
 		       __runawk_tr_repl [n, middle]		\
-		       multisub(substr(str, RSTART+RLENGTH), rules)
+		       multisub(substr(str, RSTART+RLENGTH), repls)
 	}
+}
+
+BEGIN {
+	assert("ccBBde" == multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e"), "Email bug to the author")
 }
