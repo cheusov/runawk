@@ -6,8 +6,9 @@
 #   a list of substrings, specified in SUBST_REPL
 #   in a left-most longest order and (if found) replaces
 #   found fragments with appropriate replacement.
-#   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2..."
-#  
+#   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
+#   Three spaces separate substring:replacement pairs from each other.
+#
 # For example:
 #      print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
 #      |- ccBBde
