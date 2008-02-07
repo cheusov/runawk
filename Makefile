@@ -63,7 +63,7 @@ install-dirs:
 
 .PHONY : test
 test : runawk
-	echo 'running tests...'; \
+	@echo 'running tests...'; \
 	if cd tests && ./test.sh > _test.res && diff -u test.out _test.res; \
 	then echo '   succeeded'; \
 	else echo '   failed'; \
