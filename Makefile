@@ -18,7 +18,7 @@ SRCROOT?=		${.PARSEDIR}
 
 ##################################################
 
-VERSION=		0.10.test
+VERSION=		0.11.0
 
 BIRTHDATE=		2007-09-24
 

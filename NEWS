@@ -1,4 +1,59 @@
 ======================================================================
+Version 0.11.0, by Aleksey Cheusov, Sat,  9 Feb 2008 17:35:59 +0200
+
+    New modules
+
+      tokenre.awk:
+
+	 By default AWK splits input strings into tokens according to regular
+	 expression that defines "space" between tokens using special
+	 variable FS. In many situations it is more useful to define regular
+	 expressions for tokens themselves. This is what this module does.
+
+	 tokenre(STRING, REGEXP)
+	 `tokenre' extracts substrings from STRING
+	 according to REGEXP from the left to the right and assigns $1, $2
+	 etc. and NF variable.
+
+	 tokenre0(REGEXP)
+	 Does the the same as `tokenre' but splits $0 instead
+
+	 TRE - variable. If it is set to not empty string, splitting is
+	 made by default for all input strings.
+
+	 For example:
+	 tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
+	 | NF == 2
+	 | $1 == print
+	 | $2 == "Hello world!"
+
+      str2regexp.awk
+
+	 str2regex(STRING)
+	 returns a regular expression that matches given STRING
+
+	 For example:
+	 print str2regexp("all special symbols: ^$(){}[].*+?|\\")
+	 -| all special symbols: [^][$][(][)][{][}][[]\][.][*][+][?][|]\\
+
+      multisub.awk
+
+	 multisub(STRING, SUBST_REPLS)
+	 `multisub' is a substitution function. It searches for
+	 a list of substrings, specified in SUBST_REPL
+	 in a left-most longest order and (if found) replaces
+	 found fragments with appropriate replacement.
+	 SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
+	 Three spaces separate substring:replacement pairs from each other.
+
+	 For example:
+	 print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
+	 |- ccBBde
+
+    new target 'test_all' runs tests for all available
+    awk interpreters
+
+======================================================================
 Version 0.10.1, by Aleksey Cheusov, Fri,  1 Feb 2008 21:25:48 +0200
 
     FIXED: If AWK interpreter segfaults or killed by any other signal,
