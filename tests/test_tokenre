@@ -1,0 +1,14 @@
+#!/usr/bin/env runawk
+
+#use "tokenre.awk"
+#use "alt_assert.awk"
+
+BEGIN {
+	tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
+
+	assert(NF == 2, "bad NF")
+	assert($1 == "print", "bad $1")
+	assert($2 == "\"Hello world!\"", "bad $2")
+
+	exit 0
+}

@@ -34,5 +34,9 @@ EOF
 export AWKPATH=`pwd`/mods2
 runtest _test.tmp
 
+# multisub
 export AWKPATH=`pwd`/../modules
 runtest test_multisub
+
+# tokenre
+runtest test_tokenre
