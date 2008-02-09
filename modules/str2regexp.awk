@@ -21,17 +21,8 @@ function str2regexp (s){
 	gsub(/\[/, "---runawk-open-sq-bracket---", s)
 	gsub(/\]/, "---runawk-close-sq-bracket---", s)
 
-	gsub(/[?]/, "[?]", s)
-	gsub(/[{]/, "[{]", s)
-	gsub(/[}]/, "[}]", s)
-	gsub(/[|]/, "[|]", s)
-	gsub(/[(]/, "[(]", s)
-	gsub(/[)]/, "[)]", s)
-	gsub(/[*]/, "[*]", s)
-	gsub(/[+]/, "[+]", s)
-	gsub(/[.]/, "[.]", s)
+	gsub(/[?{}|()*+.$]/, "[&]", s)
 	gsub(/\^/, "[\\^]", s)
-	gsub(/[$]/, "[$]", s)
 
 	if (s ~ /\\/){
 		__runawk_mawk_bug_test()
