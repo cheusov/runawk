@@ -313,6 +313,27 @@ not standard extensions or enything else.
 Note that I<#interp> directive should also begin with column 0,
 no spaces are allowed before it and between I<#> and I<interp>.
 
+=head2 Setting environment
+
+In some cases you may want to run AWK interpreter with a
+specific environment. For example, your script may be oriented to
+process ASCII text only. In this case you can run AWK with LC_CTYPE=C
+environment and use regexp ranges.
+
+B<runawk> provides I<#env> directive for this. String inside double quotes
+is passed to L<putenv(3)> libc function.
+
+Example:
+
+  file prog:
+     #!/usr/local/bin/runawk
+
+     #env "LC_ALL=C"
+
+     $1 ~ /^[A-Z]+$/ { # A-Z is valid if LC_CTYPE=C
+         print $1
+     }
+
 =head1 EXIT STATUS
 
 If AWK interpreter exits normally, B<runawk> exits with its exit

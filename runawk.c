@@ -89,10 +89,10 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
-static const char *includes [ARRAY_SZ];
+static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
-static const char *temp_files [ARRAY_SZ];
+static char *temp_files [ARRAY_SZ];
 static int temp_files_count = 0;
 
 static char *awkpath      = NULL;
@@ -123,7 +123,7 @@ static const char *sys_awkdir = MODULESDIR;
 
 static int line_num = 0;
 
-static char *xstrdup (char *s)
+static char *xstrdup (const char *s)
 {
 	char *ret = strdup (s);
 	if (!ret){
@@ -132,6 +132,14 @@ static char *xstrdup (char *s)
 	}
 
 	return ret;
+}
+
+static void xputenv (const char *s)
+{
+	if (putenv (s)){
+		perror ("putenv(3) failed");
+		clean_and_exit (43);
+	}
 }
 
 static const char *search_file (const char *dir, const char *name)
@@ -176,7 +184,7 @@ static void invalid_use_directive (int num, const char *line, const char *fn)
 
 static void push_uniq (const char *dir, const char *name);
 
-static const char *extract_qstring (char *line, const char *fn, char *s)
+static char *extract_qstring (char *line, const char *fn, char *s)
 {
 	char *p = NULL;
 	char *n = NULL;
@@ -197,9 +205,10 @@ static const char *extract_qstring (char *line, const char *fn, char *s)
 static void scan_for_use (const char *name)
 {
 	char dir [PATH_MAX];
-	char *line = NULL;
-	size_t len = 0;
-	FILE *fd = NULL;
+	char *line    = NULL;
+	FILE *fd      = NULL;
+	char *env_str = NULL;
+	size_t len    = 0;
 
 	len = strlen (name);
 	strncpy (dir, name, sizeof (dir));
@@ -229,6 +238,11 @@ static void scan_for_use (const char *name)
 		if (!strncmp (line, "#interp ", 8)){
 			interp = extract_qstring (line, name, line + 8);
 		}
+		if (!strncmp (line, "#env ", 5)){
+			env_str = (char *) extract_qstring (line, name, line + 5);
+			xputenv (env_str);
+			free (env_str);
+		}
 	}
 	if (ferror (fd)){
 		perror ("fgetln(3) failed");
@@ -238,7 +252,7 @@ static void scan_for_use (const char *name)
 
 static void ll_push (
 	const char *item,
-	const char **array,
+	char **array,
 	int *array_size)
 {
 	if (*array_size == ARRAY_SZ){
@@ -246,7 +260,7 @@ static void ll_push (
 		clean_and_exit (31);
 	}
 
-	array [*array_size] = item;
+	array [*array_size] = (item ? xstrdup (item) : NULL);
 	++*array_size;
 }
 
@@ -311,7 +325,7 @@ typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
 
 int main (int argc, char **argv)
 {
-	const char *new_argv [ARRAY_SZ];
+	char *new_argv [ARRAY_SZ];
 	const char *tmp_name   = NULL;
 	const char *progname   = NULL;
 	int new_argc           = 0;
