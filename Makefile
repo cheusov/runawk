@@ -20,6 +20,8 @@ SRCROOT?=		${.PARSEDIR}
 
 VERSION=		0.11.0
 
+WARNS=			4
+
 BIRTHDATE=		2007-09-24
 
 PROG=			runawk

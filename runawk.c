@@ -98,7 +98,7 @@ static int temp_files_count = 0;
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
 
-void remove_tmp_files ()
+static void remove_tmp_files (void)
 {
 	int i;
 	for (i=0; i < temp_files_count; ++i){
@@ -106,7 +106,7 @@ void remove_tmp_files ()
 	}
 }
 
-void clean_and_exit (int status)
+static void clean_and_exit (int status)
 {
 	remove_tmp_files ();
 
@@ -288,11 +288,11 @@ static void push_uniq (const char *dir, const char *name)
 	push (dir, name);
 }
 
-static const char *get_tmp_name ()
+static const char *get_tmp_name (void)
 {
 	char tmp_name [PATH_MAX];
 	static int intern_count = 0;
-	char *dup = NULL;
+	char *copy = NULL;
 
 	snprintf (tmp_name, sizeof (tmp_name),
 			  "/tmp/runawk.%d.%d",
@@ -300,11 +300,11 @@ static const char *get_tmp_name ()
 
 	++intern_count;
 
-	dup = xstrdup (tmp_name);
+	copy = xstrdup (tmp_name);
 
-	ll_push (dup, temp_files, &temp_files_count);
+	ll_push (copy, temp_files, &temp_files_count);
 
-	return dup;
+	return copy;
 }
 
 typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
