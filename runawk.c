@@ -226,7 +226,7 @@ static void scan_for_use (const char *name)
 		if (!strncmp (line, "#use ", 5)){
 			push_uniq (dir, extract_qstring (line, name, line + 5));
 		}
-		if (!strncmp (line, "#interp ", 5)){
+		if (!strncmp (line, "#interp ", 8)){
 			interp = extract_qstring (line, name, line + 8);
 		}
 	}
