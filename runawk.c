@@ -134,7 +134,7 @@ static char *xstrdup (const char *s)
 	return ret;
 }
 
-static void xputenv (const char *s)
+static void xputenv (char *s)
 {
 	if (putenv (s)){
 		perror ("putenv(3) failed");
