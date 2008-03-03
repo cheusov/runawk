@@ -2,7 +2,7 @@
 # public domain
 
 # match_br(STRING, BR_OPEN, BR_CLOSE)
-#   return start position (of zero if failure) of the substring
+#   return start position (or zero if failure) of the substring
 #        surrounded by balanced (), [], {} or similar characters
 #   Also sets RSTART and RLENGTH variables just like
 #   the standard 'match' function does
