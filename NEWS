@@ -1,54 +1,142 @@
 ======================================================================
+Version 0.12.0, by Aleksey Cheusov, Mon,  3 Mar 2008 23:04:10 +0200
+
+    new directive '#env' is implemented.
+    It sets environment for running awk subprocess using setenv(3)
+
+          Example:
+
+             #!/usr/local/bin/runawk
+
+             #env "LC_ALL=C"
+
+             $1 ~ /^[A-Z]+$/ { # A-Z is valid if LC_CTYPE=C
+                 print $1
+             }
+
+    New modules
+
+      match_br.awk
+
+	 match_br(STRING, BR_OPEN, BR_CLOSE)
+	 return start position (or zero if failure) of the substring
+	 surrounded by balanced (), [], {} or similar characters
+	 Also sets RSTART and RLENGTH variables just like
+	 the standard 'match' function does
+
+	 For example:
+	 print match_br("A (B (), C(D,C,F (), 123))", "(", ")")
+	 print RSTART, RLENGTH
+	 -| 3
+	 -| 3
+	 -| 24
+
+      braceexpand.awk
+
+         braceexp(STRING)
+           implement shell-like brace expansion
+
+         For example:
+             print braceexpand("ab{,22{,7,8}}z{8,9}")
+             -| abz8 abz9 ab22z8 ab22z9 ab227z8 ab227z9 ab228z8 ab228z9
+
+
+      exitnow.awk
+
+         see the code. exitnow.awk is used by alt_assert.awk and
+         abort.awk
+
+      abort.awk
+
+         abort(MSG, EXIT_STATUS) -- print MSG to stderr and exits
+         program with EXIT_STATUS.  if EXIT_STATUS is zero of is not
+         specified, 1 is assigned.
+
+      dirname.awk
+
+         similar to UNIX's dirname(1)
+
+      basename.awk
+
+         similar to UNIX's basename(1)
+
+      xgetline.awk
+
+         xgetline0([FILE])
+
+           Safe analog to 'getline < FILE' or 'getline' (if no FILE
+           is specified).  0 at the end means that input line is
+           assigned to $0.
+
+         xgetline([FILE])
+           Safe analog to 'getline __input < FILE' and 'getline __input'
+           (if no FILE is specified)
+
+         In both cases "safe" means that returned value is analysed
+         and if it is less than zero (file reading error happens)
+         program will be terminated emmidiately with appropriate error
+         message printed to stderr.  Both functions return zero if end
+         of file is reached or non-zero if reading was sucessfull.
+
+         Example:
+         while (xgetline("/etc/passwd")){
+             print "user: " __input
+         }
+
+      xclose.awk
+      xsystem.awk -- safe wrappers over 'close' and 'system' functions
+
+======================================================================
 Version 0.11.0, by Aleksey Cheusov, Sat,  9 Feb 2008 17:35:59 +0200
 
     New modules
 
       tokenre.awk:
 
-	 By default AWK splits input strings into tokens according to regular
-	 expression that defines "space" between tokens using special
-	 variable FS. In many situations it is more useful to define regular
-	 expressions for tokens themselves. This is what this module does.
+         By default AWK splits input strings into tokens according to regular
+         expression that defines "space" between tokens using special
+         variable FS. In many situations it is more useful to define regular
+         expressions for tokens themselves. This is what this module does.
 
-	 tokenre(STRING, REGEXP)
-	 `tokenre' extracts substrings from STRING
-	 according to REGEXP from the left to the right and assigns $1, $2
-	 etc. and NF variable.
+         tokenre(STRING, REGEXP)
+         `tokenre' extracts substrings from STRING
+         according to REGEXP from the left to the right and assigns $1, $2
+         etc. and NF variable.
 
-	 tokenre0(REGEXP)
-	 Does the the same as `tokenre' but splits $0 instead
+         tokenre0(REGEXP)
+         Does the the same as `tokenre' but splits $0 instead
 
-	 TRE - variable. If it is set to not empty string, splitting is
-	 made by default for all input strings.
+         TRE - variable. If it is set to not empty string, splitting is
+         made by default for all input strings.
 
-	 For example:
-	 tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
-	 | NF == 2
-	 | $1 == print
-	 | $2 == "Hello world!"
+         For example:
+         tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
+         | NF == 2
+         | $1 == print
+         | $2 == "Hello world!"
 
       str2regexp.awk
 
-	 str2regex(STRING)
-	 returns a regular expression that matches given STRING
+         str2regex(STRING)
+         returns a regular expression that matches given STRING
 
-	 For example:
-	 print str2regexp("all special symbols: ^$(){}[].*+?|\\")
-	 -| all special symbols: [^][$][(][)][{][}][[]\][.][*][+][?][|]\\
+         For example:
+         print str2regexp("all special symbols: ^$(){}[].*+?|\\")
+         -| all special symbols: [^][$][(][)][{][}][[]\][.][*][+][?][|]\\
 
       multisub.awk
 
-	 multisub(STRING, SUBST_REPLS)
-	 `multisub' is a substitution function. It searches for
-	 a list of substrings, specified in SUBST_REPL
-	 in a left-most longest order and (if found) replaces
-	 found fragments with appropriate replacement.
-	 SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
-	 Three spaces separate substring:replacement pairs from each other.
+         multisub(STRING, SUBST_REPLS)
+         `multisub' is a substitution function. It searches for
+         a list of substrings, specified in SUBST_REPL
+         in a left-most longest order and (if found) replaces
+         found fragments with appropriate replacement.
+         SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
+         Three spaces separate substring:replacement pairs from each other.
 
-	 For example:
-	 print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
-	 |- ccBBde
+         For example:
+         print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
+         |- ccBBde
 
     new target 'test_all' runs tests for all available
     awk interpreters
