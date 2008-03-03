@@ -1,4 +1,9 @@
 ======================================================================
+Version 0.12.a, by Aleksey Cheusov, Mon,  Tue,  4 Mar
+
+    fix in alt_assert.awk
+
+======================================================================
 Version 0.12.0, by Aleksey Cheusov, Mon,  3 Mar 2008 23:04:10 +0200
 
     new directive '#env' is implemented.
@@ -39,7 +44,6 @@ Version 0.12.0, by Aleksey Cheusov, Mon,  3 Mar 2008 23:04:10 +0200
          For example:
              print braceexpand("ab{,22{,7,8}}z{8,9}")
              -| abz8 abz9 ab22z8 ab22z9 ab227z8 ab227z9 ab228z8 ab228z9
-
 
       exitnow.awk
 
