@@ -54,9 +54,9 @@ clean-my:
 install-dirs:
 	$(INST_DIR) ${DESTDIR}${BINDIR}
 	$(INST_DIR) ${DESTDIR}${MODULESDIR}
-.if "$(MKMAN)" != "no"
+.if !defined(MKMAN) || empty(MKMAN:M[Nn][Oo])
 	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
-.if "$(MKCATPAGES)" != "no"
+.if !defined(MKCATPAGES) || empty(MKCATPAGES:M[Nn][Oo])
 	$(INST_DIR) ${DESTDIR}${MANDIR}/cat1
 .endif
 .endif
