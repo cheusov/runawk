@@ -5,7 +5,7 @@ set -e
 runtest (){
     echo '--------------------------------------------------'
     echo "------- args: $@"
-    ../runawk "$@"
+    ../runawk "$@" | awk '!/\/_test_program/'
 }
 
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
