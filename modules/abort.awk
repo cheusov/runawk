@@ -10,6 +10,7 @@ function abort (msg, status){
 	printf "error: %s\n", msg > "/dev/stderr"
 	printf "       ARGV[0]=%s\n", ARGV[0] > "/dev/stderr"
 	printf "       $0=`%s`\n", $0 > "/dev/stderr"
+	printf "       NF=%d\n", NF > "/dev/stderr"
 	printf "       FNR=%d\n", FNR > "/dev/stderr"
 	printf "       FILENAME=%s\n", FILENAME > "/dev/stderr"
 
