@@ -123,6 +123,11 @@ static const char *sys_awkdir = MODULESDIR;
 
 static int line_num = 0;
 
+static int debug = 0;
+
+typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
+static add_stdin_t add_stdin  = stdin_default;
+
 static char *xstrdup (const char *s)
 {
 	char *ret = strdup (s);
@@ -321,7 +326,28 @@ static const char *get_tmp_name (void)
 	return copy;
 }
 
-typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
+static void process_opt (char opt)
+{
+	switch (opt){
+		case 'h':
+			usage ();
+			clean_and_exit (0);
+		case 'V':
+			version ();
+			clean_and_exit (0);
+		case 'd':
+			debug = 1;
+			break;
+		case 'i':
+			add_stdin = stdin_yes;
+			break;
+		case 'I':
+			add_stdin = stdin_no;
+			break;
+		default:
+			abort ();
+	}
+}
 
 int main (int argc, char **argv)
 {
@@ -329,12 +355,10 @@ int main (int argc, char **argv)
 	const char *tmp_name   = NULL;
 	const char *progname   = NULL;
 	int new_argc           = 0;
-	int debug              = 0;
 	FILE *fd               = NULL;
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
-	add_stdin_t add_stdin  = stdin_default;
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
 
@@ -375,31 +399,31 @@ int main (int argc, char **argv)
 	for (; argc && argv [0][0] == '-'; --argc, ++argv){
 		/* --help */
 		if (!strcmp (argv [0], "--help")){
-			usage ();
-			clean_and_exit (0);
+			process_opt ('h');
+			abort ();
 		}
 
 		/* --version */
 		if (!strcmp (argv [0], "--version")){
-			version ();
-			clean_and_exit (0);
+			process_opt ('V');
+			abort ();
 		}
 
 		/* --debug */
 		if (!strcmp (argv [0], "--debug")){
-			debug = 1;
+			process_opt ('d');
 			continue;
 		}
 
 		/* --with-stdin */
 		if (!strcmp (argv [0], "--with-stdin")){
-			add_stdin = stdin_yes;
+			process_opt ('i');
 			continue;
 		}
 
 		/* --without-stdin */
 		if (!strcmp (argv [0], "--without-stdin")){
-			add_stdin = stdin_no;
+			process_opt ('I');
 			continue;
 		}
 
@@ -434,19 +458,11 @@ int main (int argc, char **argv)
 		for (p = argv [0]+1; *p; ++p){
 			switch (*p){
 				case 'h':
-					usage ();
-					clean_and_exit (0);
 				case 'V':
-					version ();
-					clean_and_exit (0);
 				case 'd':
-					debug = 1;
-					break;
 				case 'i':
-					add_stdin = stdin_yes;
-					break;
 				case 'I':
-					add_stdin = stdin_no;
+					process_opt (*p);
 					break;
 				default:
 					fprintf (stderr, "unknown option -%c\n", *p);
