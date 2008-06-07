@@ -22,23 +22,25 @@
 #use "alt_assert.awk"
 
 function xgetline0 (fn,                 ret){
-	if (fn == "")
+	if (fn == ""){
 		ret = getline
-	else
+		assert(ret >= 0, "getline failed")
+	}else{
 		ret = (getline < fn)
-
-	assert(ret >= 0, "function getline failed")
+		assert(ret >= 0, "getline < " fn " failed")
+	}
 
 	return (ret > 0)
 }
 
 function xgetline (fn,                 ret){
-	if (fn == "")
+	if (fn == ""){
 		ret = getline __input
-	else
+		assert(ret >= 0, "getline failed")
+	}else{
 		ret = (getline __input < fn)
-
-	assert(ret >= 0, "function getline failed")
+		assert(ret >= 0, "getline < " fn " failed")
+	}
 
 	return (ret > 0)
 }
