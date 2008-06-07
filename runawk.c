@@ -79,6 +79,7 @@ OPTIONS:\n\
   -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
   -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
   -e|--execute <program>  program to run\n\
+  -v|--assign <var=val>   assign the value val to the variable var\n\
 ");
 }
 
@@ -106,16 +107,6 @@ static void remove_tmp_files (void)
 	}
 }
 
-static void clean_and_exit (int status)
-{
-	remove_tmp_files ();
-
-	if (awkpath)
-		free (awkpath);
-
-	exit (status);
-}
-
 static char cwd [PATH_MAX];
 
 static const char *interp     = AWK_PROG;
@@ -127,6 +118,28 @@ static int debug = 0;
 
 typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
 static add_stdin_t add_stdin  = stdin_default;
+
+static char *new_argv [ARRAY_SZ];
+static int new_argc = 0;
+
+static char *vopt_argv [ARRAY_SZ];
+static int vopt_argc = 0;
+
+static void clean_and_exit (int status)
+{
+	int i;
+
+	remove_tmp_files ();
+
+	if (awkpath)
+		free (awkpath);
+
+	for (i=0; i < vopt_argc; ++i){
+		free (vopt_argv [i]);
+	}
+
+	exit (status);
+}
 
 static char *xstrdup (const char *s)
 {
@@ -351,10 +364,8 @@ static void process_opt (char opt)
 
 int main (int argc, char **argv)
 {
-	char *new_argv [ARRAY_SZ];
 	const char *tmp_name   = NULL;
 	const char *progname   = NULL;
-	int new_argc           = 0;
 	FILE *fd               = NULL;
 	pid_t pid              = 0;
 	int child_status       = 0;
@@ -427,10 +438,24 @@ int main (int argc, char **argv)
 			continue;
 		}
 
+		/* -v|--assign */
+		if (!strcmp (argv [0], "--assign") || !strcmp (argv [0], "-v")){
+			if (argc == 1){
+				fprintf (stderr, "missing argument for -v option\n");
+				clean_and_exit (39);
+			}
+
+			ll_push (argv [1], vopt_argv, &vopt_argc);
+
+			--argc;
+			++argv;
+			continue;
+		}
+
 		/* -e */
 		if (!strcmp (argv [0], "-e") || !strcmp (argv [0], "--execute")){
 			if (argc == 1){
-				fprintf (stderr, "missing argument for -e option");
+				fprintf (stderr, "missing argument for -e option\n");
 				clean_and_exit (39);
 			}
 
@@ -491,6 +516,10 @@ int main (int argc, char **argv)
 
 	/* exec */
 	ll_push (progname, new_argv, &new_argc);
+	for (i=0; i < vopt_argc; ++i){
+		ll_push ("-v",          new_argv, &new_argc);
+		ll_push (vopt_argv [i], new_argv, &new_argc);
+	}
 	for (i=0; i < includes_count; ++i){
 		ll_push ("-f",         new_argv, &new_argc);
 		ll_push (includes [i], new_argv, &new_argc);
@@ -543,5 +572,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-	exit (0);
+	clean_and_exit (0);
+	return 0; /* this should not happen but fixes gcc warning */
 }
