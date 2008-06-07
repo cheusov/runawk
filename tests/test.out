@@ -65,6 +65,9 @@ Hello World
 ------- args: --execute BEGIN {print "Hello World"}
 Hello World
 --------------------------------------------------
+------- args: --assign var1=123 -v var2=321 -e BEGIN {print var1, var2}
+123 321
+--------------------------------------------------
 ------- args: _test.tmp
 Hello World1.2
 Hello World1.3

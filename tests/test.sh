@@ -23,6 +23,7 @@ runtest -V | awk 'NR <= 2 {print $0} NR == 3 {print "xxx"}'
 runtest -h | awk 'NR <= 3'
 runtest -e 'BEGIN {print "Hello World"}'
 runtest --execute 'BEGIN {print "Hello World"}'
+runtest --assign var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
 
 cat > _test.tmp <<EOF
 #use "`pwd`/mods1/module1.1.awk"
