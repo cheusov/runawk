@@ -21,7 +21,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-char *
+static char *
 my_fgetln(FILE *fp, size_t *len)
 {
 	static char buf [4096];
