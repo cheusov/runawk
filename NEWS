@@ -1,4 +1,25 @@
 ======================================================================
+Version 0.13.0, by Aleksey Cheusov, Sun, 15 Jun 2008 11:30:06 +0300
+
+    ADDED: option -v|--assign that works like AWK's -v option.
+    This is to pass some variables to AWK interpreter.
+    Example: runawk -v var=123 -e 'BEGIN {print var }'
+
+    modules/xgetline.awk: better error message/clean-ups
+
+    modules/abort.awk: NR is also printed to stderr
+
+    minor fixes in *.c
+
+    clean-ups and fixes in 'make test'. Now it doesn't depend on my
+    own system and runawk directory
+
+    'make test' exits with non-zero exit status if regression tests
+    fail
+
+    Makefile: ported to ancient pmake-1.45 found in some Linux distros
+
+======================================================================
 Version 0.12.a, by Aleksey Cheusov, Mon,  Tue,  4 Mar
 
     fix in alt_assert.awk
