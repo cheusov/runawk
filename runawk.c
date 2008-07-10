@@ -175,31 +175,41 @@ static const char *search_file (const char *dir, const char *name)
 	return NULL;
 }
 
-static void invalid_use_directive (int num, const char *line, const char *fn)
+static void invalid_use_directive (int num, char *line, const char *fn)
 {
+	char * nl = strchr (line, '\n');
+	if (nl)
+		*nl = 0;
+
 	fprintf (stderr,
 			 "error: invalid directive at line #%d,\n line=`%s`\n file=`%s`\n",
 			 num, line, fn);
 }
 
-static void push_uniq (const char *dir, const char *name);
+static void add_file_uniq (const char *dir, const char *name);
 
-static char *extract_qstring (char *line, const char *fn, char *s)
+static char *extract_qstring (
+	char *line, int line_num, const char *fn, char *s)
 {
 	char *p = NULL;
 	char *n = NULL;
 
-	p = strchr (s, '"');
-	if (p)
-		n = strchr (p + 1, '"');
+	p = s + strspn (s, " \t");
+	if (*p != '"'){
+		invalid_use_directive (line_num, line, fn);
+		clean_and_exit (37);
+	}
 
-	if (!p || !n){
-		invalid_use_directive (0, line, fn);
+	++p;
+
+	n = strpbrk (p, "\"\n");
+	if (!n || *n == '\n'){
+		invalid_use_directive (line_num, line, fn);
 		clean_and_exit (37);
 	}
 
 	*n = 0;
-	return xstrdup (p+1);
+	return xstrdup (p);
 }
 
 static void scan_buffer (
@@ -208,19 +218,22 @@ static void scan_buffer (
 {
 	char *env_str = NULL;
 	char *p = buffer;
+	int line_num = 0;
 
 	for (; sz--; ++p){
 		if (p != buffer && p [-1] != '\n')
 			continue;
 
+		++line_num;
+
 		if (!strncmp (p, "#use ", 5)){
-			push_uniq (dir, extract_qstring (p, name, p + 5));
+			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5));
 		}
 		if (!strncmp (p, "#interp ", 8)){
-			interp = extract_qstring (p, name, p + 8);
+			interp = extract_qstring (p, line_num, name, p + 8);
 		}
 		if (!strncmp (p, "#env ", 5)){
-			env_str = (char *) extract_qstring (p, name, p + 5);
+			env_str = (char *) extract_qstring (p, line_num, name, p + 5);
 			xputenv (env_str);
 			free (env_str);
 		}
@@ -293,7 +306,7 @@ static void ll_push (
 	++*array_size;
 }
 
-static void push_buffer (char *buffer)
+static void add_buffer (char *buffer)
 {
 	/* recursive snanning for #xxx directives */
 	scan_buffer ("", "-", buffer, strlen (buffer));
@@ -302,7 +315,7 @@ static void push_buffer (char *buffer)
 	ll_push (buffer, new_argv, &new_argc);
 }
 
-static void push (const char *dir, const char *name)
+static void add_file (const char *dir, const char *name)
 {
 	const char *new_name = NULL;
 
@@ -325,7 +338,7 @@ static void push (const char *dir, const char *name)
 	ll_push (name, includes, &includes_count);
 }
 
-static void push_uniq (const char *dir, const char *name)
+static void add_file_uniq (const char *dir, const char *name)
 {
 	int i;
 	const char *p;
@@ -340,7 +353,7 @@ static void push_uniq (const char *dir, const char *name)
 		}
 	}
 
-	push (dir, name);
+	add_file (dir, name);
 }
 
 static void process_opt (char opt)
@@ -465,7 +478,7 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			push_buffer (argv [1]);
+			add_buffer (argv [1]);
 
 			prog_specified = 1;
 
@@ -500,7 +513,7 @@ int main (int argc, char **argv)
 		}
 
 		--argc;
-		push (cwd, *argv);
+		add_file (cwd, *argv);
 		progname = *argv;
 #if 0
 		setprogname (*argv);
