@@ -88,19 +88,8 @@ static void version (void)
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
-static char *temp_files [ARRAY_SZ];
-static int temp_files_count = 0;
-
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
-
-static void remove_tmp_files (void)
-{
-	int i;
-	for (i=0; i < temp_files_count; ++i){
-		unlink (temp_files [i]);
-	}
-}
 
 static char cwd [PATH_MAX];
 
@@ -121,8 +110,6 @@ static int vopt_argc = 0;
 static void clean_and_exit (int status)
 {
 	int i;
-
-	remove_tmp_files ();
 
 	if (awkpath)
 		free (awkpath);
@@ -315,6 +302,15 @@ static void ll_push (
 	++*array_size;
 }
 
+static void push_buffer (char *buffer)
+{
+	/* recursive snanning for #xxx directives */
+	scan_buffer ("", "-", buffer, strlen (buffer));
+
+	/* add to queue */
+	ll_push (buffer, includes, &includes_count);
+}
+
 static void push (const char *dir, const char *name)
 {
 	const char *new_name = NULL;
@@ -329,7 +325,7 @@ static void push (const char *dir, const char *name)
 		name = new_name;
 	}
 
-	/* recursive snanning for #use directive */
+	/* recursive snanning for #xxx directives */
 	scan_file (name);
 
 	/* add to queue */
@@ -351,25 +347,6 @@ static void push_uniq (const char *dir, const char *name)
 		}
 	}
 	push (dir, name);
-}
-
-static const char *get_tmp_name (void)
-{
-	char tmp_name [PATH_MAX];
-	static int intern_count = 0;
-	char *copy = NULL;
-
-	snprintf (tmp_name, sizeof (tmp_name),
-			  "/tmp/runawk.%d.%d",
-			  (int) getpid (), intern_count);
-
-	++intern_count;
-
-	copy = xstrdup (tmp_name);
-
-	ll_push (copy, temp_files, &temp_files_count);
-
-	return copy;
 }
 
 static void process_opt (char opt)
@@ -397,9 +374,7 @@ static void process_opt (char opt)
 
 int main (int argc, char **argv)
 {
-	const char *tmp_name   = NULL;
 	const char *progname   = NULL;
-	FILE *fd               = NULL;
 	pid_t pid              = 0;
 	int child_status       = 0;
 	int all_with_dash      = 1;
@@ -492,20 +467,7 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			tmp_name = get_tmp_name ();
-			fd = fopen (tmp_name, "w");
-			if (!fd){
-				perror ("fopen(3) failed");
-				clean_and_exit (40);
-			}
-			fputs (argv [1], fd);
-			fputs ("\n", fd);
-			if (fclose (fd)){
-				perror ("fclose(3) failed");
-				clean_and_exit (41);
-			}
-
-			push ("", tmp_name);
+			push_buffer (argv [1]);
 
 			--argc;
 			++argv;
