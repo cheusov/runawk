@@ -22,6 +22,7 @@
  */
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -57,12 +58,6 @@
 
 #ifndef MODULESDIR
 #define MODULESDIR "/usr/local/share/runawk"
-#endif
-
-#ifndef HAVE_WGETLN
-#if !defined(__NetBSD__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__DragonFlyBSD__) && !defined(__INTERIX)
-#include "fgetln.c"
-#endif
 #endif
 
 static void usage (void)
@@ -112,8 +107,6 @@ static char cwd [PATH_MAX];
 static const char *interp     = AWK_PROG;
 static const char *sys_awkdir = MODULESDIR;
 
-static int line_num = 0;
-
 static int debug = 0;
 
 typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
@@ -146,6 +139,17 @@ static char *xstrdup (const char *s)
 	char *ret = strdup (s);
 	if (!ret){
 		perror ("strdup(3) failed");
+		clean_and_exit (33);
+	}
+
+	return ret;
+}
+
+static void *xmalloc (size_t size)
+{
+	char *ret = malloc (size);
+	if (!ret){
+		perror ("malloc(3) failed");
 		clean_and_exit (33);
 	}
 
@@ -220,14 +224,42 @@ static char *extract_qstring (char *line, const char *fn, char *s)
 	return xstrdup (p+1);
 }
 
-static void scan_for_use (const char *name)
+static void scan_buffer (
+	const char *name, const char *dir,
+	char *buffer, off_t sz)
+{
+	char *env_str = NULL;
+	char *p = buffer;
+
+	for (; sz--; ++p){
+		if (p != buffer && p [-1] != '\n')
+			continue;
+
+		if (!strncmp (p, "#use ", 5)){
+			push_uniq (dir, extract_qstring (p, name, p + 5));
+		}
+		if (!strncmp (p, "#interp ", 8)){
+			interp = extract_qstring (p, name, p + 8);
+		}
+		if (!strncmp (p, "#env ", 5)){
+			env_str = (char *) extract_qstring (p, name, p + 5);
+			xputenv (env_str);
+			free (env_str);
+		}
+	}
+}
+
+static void scan_file (const char *name)
 {
 	char dir [PATH_MAX];
-	char *line    = NULL;
 	FILE *fd      = NULL;
-	char *env_str = NULL;
 	size_t len    = 0;
+	struct stat stat_buf;
+	char *buffer = NULL;
+	off_t file_size = 0;
+	size_t n = 0;
 
+	/**/
 	len = strlen (name);
 	strncpy (dir, name, sizeof (dir));
 	while (len--){
@@ -237,33 +269,34 @@ static void scan_for_use (const char *name)
 		}
 	}
 
+	/**/
+	if (stat (name, &stat_buf)){
+		perror ("stat(2) failed");
+		clean_and_exit (35);
+	}
+	file_size = stat_buf.st_size;
+
 	fd = fopen (name, "r");
 	if (!fd){
 		fprintf (stderr, "fopen(%s) failed: %s\n", name, strerror (errno));
 		clean_and_exit (35);
 	}
 
-	line_num = 0;
-	while (line = fgetln (fd, &len), line != NULL){
-		++line_num;
+	buffer = xmalloc (file_size + 1);
 
-		if (line [len-1] == '\n')
-			line [len-1] = 0;
-
-		if (!strncmp (line, "#use ", 5)){
-			push_uniq (dir, extract_qstring (line, name, line + 5));
-		}
-		if (!strncmp (line, "#interp ", 8)){
-			interp = extract_qstring (line, name, line + 8);
-		}
-		if (!strncmp (line, "#env ", 5)){
-			env_str = (char *) extract_qstring (line, name, line + 5);
-			xputenv (env_str);
-			free (env_str);
-		}
+	n = fread (buffer, 1, file_size, fd);
+	if (n < file_size){
+		perror ("fread(3) failed");
+		clean_and_exit (35);
 	}
-	if (ferror (fd)){
-		perror ("fgetln(3) failed");
+	buffer [file_size] = 0;
+
+	scan_buffer (name, dir, buffer, file_size);
+
+	free (buffer);
+
+	if (fclose (fd)){
+		perror ("fclose(3) failed");
 		clean_and_exit (36);
 	}
 }
@@ -297,7 +330,7 @@ static void push (const char *dir, const char *name)
 	}
 
 	/* recursive snanning for #use directive */
-	scan_for_use (name);
+	scan_file (name);
 
 	/* add to queue */
 	ll_push (name, includes, &includes_count);
