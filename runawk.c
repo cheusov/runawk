@@ -85,6 +85,7 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
+static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
 static char *awkpath      = NULL;
@@ -299,7 +300,7 @@ static void push_buffer (char *buffer)
 
 	/* add to queue */
 	ll_push (buffer, new_argv, &new_argc);
-	++includes_count;
+	ll_push (buffer, includes, &includes_count);
 }
 
 static void push (const char *dir, const char *name)
@@ -322,7 +323,7 @@ static void push (const char *dir, const char *name)
 	/* add to queue */
 	ll_push ("-f", new_argv, &new_argc);
 	ll_push (name, new_argv, &new_argc);
-	++includes_count;
+	ll_push (name, includes, &includes_count);
 }
 
 static void push_uniq (const char *dir, const char *name)
@@ -331,12 +332,8 @@ static void push_uniq (const char *dir, const char *name)
 	const char *p;
 	const char *inc;
 
-	for (i=2; i < new_argc; i += 2){
-		inc = new_argv [i];
-
-		if (strcmp (new_argv [i-1], "-f"))
-			continue;
-
+	for (i=0; i < includes_count; ++i){
+		inc = includes [i];
 		p = strstr (inc, name);
 
 		if (p && (p == inc || (p [-1] == '/' && p [strlen (p)] == 0))){
