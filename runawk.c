@@ -85,7 +85,6 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
-static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
 static char *awkpath      = NULL;
@@ -104,19 +103,10 @@ static add_stdin_t add_stdin  = stdin_default;
 static char *new_argv [ARRAY_SZ];
 static int new_argc = 0;
 
-static char *vopt_argv [ARRAY_SZ];
-static int vopt_argc = 0;
-
 static void clean_and_exit (int status)
 {
-	int i;
-
 	if (awkpath)
 		free (awkpath);
-
-	for (i=0; i < vopt_argc; ++i){
-		free (vopt_argv [i]);
-	}
 
 	exit (status);
 }
@@ -308,7 +298,8 @@ static void push_buffer (char *buffer)
 	scan_buffer ("", "-", buffer, strlen (buffer));
 
 	/* add to queue */
-	ll_push (buffer, includes, &includes_count);
+	ll_push (buffer, new_argv, &new_argc);
+	++includes_count;
 }
 
 static void push (const char *dir, const char *name)
@@ -329,7 +320,9 @@ static void push (const char *dir, const char *name)
 	scan_file (name);
 
 	/* add to queue */
-	ll_push (name, includes, &includes_count);
+	ll_push ("-f", new_argv, &new_argc);
+	ll_push (name, new_argv, &new_argc);
+	++includes_count;
 }
 
 static void push_uniq (const char *dir, const char *name)
@@ -338,14 +331,19 @@ static void push_uniq (const char *dir, const char *name)
 	const char *p;
 	const char *inc;
 
-	for (i=0; i < includes_count; ++i){
-		inc = includes [i];
+	for (i=2; i < new_argc; i += 2){
+		inc = new_argv [i];
+
+		if (strcmp (new_argv [i-1], "-f"))
+			continue;
+
 		p = strstr (inc, name);
 
 		if (p && (p == inc || (p [-1] == '/' && p [strlen (p)] == 0))){
 			return;
 		}
 	}
+
 	push (dir, name);
 }
 
@@ -414,6 +412,8 @@ int main (int argc, char **argv)
 		clean_and_exit (32);
 	}
 
+	ll_push (NULL, new_argv, &new_argc); /* progname */
+
 	/* options, no getopt(3) here */
 	for (; argc && argv [0][0] == '-'; --argc, ++argv){
 		/* --help */
@@ -453,7 +453,8 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			ll_push (argv [1], vopt_argv, &vopt_argc);
+			ll_push ("-v",     new_argv, &new_argc);
+			ll_push (argv [1], new_argv, &new_argc);
 
 			--argc;
 			++argv;
@@ -510,15 +511,7 @@ int main (int argc, char **argv)
 	}
 
 	/* exec */
-	ll_push (progname, new_argv, &new_argc);
-	for (i=0; i < vopt_argc; ++i){
-		ll_push ("-v",          new_argv, &new_argc);
-		ll_push (vopt_argv [i], new_argv, &new_argc);
-	}
-	for (i=0; i < includes_count; ++i){
-		ll_push ("-f",         new_argv, &new_argc);
-		ll_push (includes [i], new_argv, &new_argc);
-	}
+	new_argv [0] = xstrdup (progname);
 
 	ll_push ("--", new_argv, &new_argc);
 
