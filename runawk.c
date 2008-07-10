@@ -300,7 +300,6 @@ static void push_buffer (char *buffer)
 
 	/* add to queue */
 	ll_push (buffer, new_argv, &new_argc);
-	ll_push (buffer, includes, &includes_count);
 }
 
 static void push (const char *dir, const char *name)
@@ -375,6 +374,7 @@ int main (int argc, char **argv)
 	int all_with_dash      = 1;
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
+	int prog_specified     = 0;
 
 	int i;
 
@@ -467,6 +467,8 @@ int main (int argc, char **argv)
 
 			push_buffer (argv [1]);
 
+			prog_specified = 1;
+
 			--argc;
 			++argv;
 			continue;
@@ -490,7 +492,7 @@ int main (int argc, char **argv)
 	}
 
 	progname = interp;
-	if (!includes_count){
+	if (!prog_specified){
 		/* program_file */
 		if (argc < 1){
 			usage ();
