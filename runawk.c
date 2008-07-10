@@ -323,7 +323,7 @@ static void add_file (const char *dir, const char *name)
 		/* name -> path */
 		new_name = search_file (dir, name);
 		if (!new_name){
-			fprintf (stderr, "Cannot find file `%s`, check AWKPATH environment variable\n", name);
+			fprintf (stderr, "Cannot find module `%s`, check AWKPATH environment variable\n", name);
 			clean_and_exit (34);
 		}
 		name = new_name;
