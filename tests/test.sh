@@ -5,7 +5,7 @@ set -e
 runtest (){
     echo '--------------------------------------------------'
     echo "------- args: $@"
-    ../runawk "$@" | awk '!/\/_test_program/'
+    ../runawk "$@" 2>&1 | awk '!/\/_test_program/'
 }
 
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
@@ -34,6 +34,20 @@ EOF
 
 export AWKPATH=`pwd`/mods2
 runtest _test.tmp
+
+unset AWKPATH
+runtest _test.tmp
+
+export AWKPATH=`pwd`/mods3
+runtest `pwd`/mods3/failed1.awk
+runtest `pwd`/mods3/failed2.awk
+runtest `pwd`/mods3/failed3.awk
+runtest `pwd`/mods3/failed4.awk
+#runtest -e '
+##interp "/invalid/path"
+#
+#BEGIN {print "Hello World!"}
+#'
 
 # multisub
 export AWKPATH=`pwd`/../modules

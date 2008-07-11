@@ -76,6 +76,27 @@ Hello World 2.2
 Hello World 2.1
 Hello World 2.3
 --------------------------------------------------
+------- args: _test.tmp
+Cannot find module `module2.1.awk`, check AWKPATH environment variable
+--------------------------------------------------
+------- args: /home/cheusov/prjs/runawk/tests/mods3/failed1.awk
+error: invalid directive at line #1,
+ line=`#use `
+ file=`/home/cheusov/prjs/runawk/tests/mods3/failed1.awk`
+--------------------------------------------------
+------- args: /home/cheusov/prjs/runawk/tests/mods3/failed2.awk
+error: invalid directive at line #2,
+ line=`#interp      "trtrtr`
+ file=`/home/cheusov/prjs/runawk/tests/mods3/failed2.awk`
+--------------------------------------------------
+------- args: /home/cheusov/prjs/runawk/tests/mods3/failed3.awk
+error: invalid directive at line #3,
+ line=`#env 'LC_ALL=C'                   `
+ file=`/home/cheusov/prjs/runawk/tests/mods3/failed3.awk`
+--------------------------------------------------
+------- args: /home/cheusov/prjs/runawk/tests/mods3/failed4.awk
+running '/invalid/path' failed: No such file or directory
+--------------------------------------------------
 ------- args: test_multisub
 --------------------------------------------------
 ------- args: test_tokenre

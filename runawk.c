@@ -194,7 +194,7 @@ static char *extract_qstring (
 	char *p = NULL;
 	char *n = NULL;
 
-	p = s + strspn (s, " \t");
+	p = s + strspn (s, " ");
 	if (*p != '"'){
 		invalid_use_directive (line_num, line, fn);
 		clean_and_exit (37);
@@ -228,11 +228,9 @@ static void scan_buffer (
 
 		if (!strncmp (p, "#use ", 5)){
 			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5));
-		}
-		if (!strncmp (p, "#interp ", 8)){
+		}else if (!strncmp (p, "#interp ", 8)){
 			interp = extract_qstring (p, line_num, name, p + 8);
-		}
-		if (!strncmp (p, "#env ", 5)){
+		}else if (!strncmp (p, "#env ", 5)){
 			env_str = (char *) extract_qstring (p, line_num, name, p + 5);
 			xputenv (env_str);
 			free (env_str);
@@ -557,7 +555,7 @@ int main (int argc, char **argv)
 
 			case 0:
 				execvp (interp, (char *const *) new_argv);
-				perror ("execvp(2) failed");
+				fprintf (stderr, "running '%s' failed: %s", interp, strerror (errno));
 				exit (1);
 				break;
 
