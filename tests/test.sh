@@ -43,11 +43,28 @@ runtest `pwd`/mods3/failed1.awk
 runtest `pwd`/mods3/failed2.awk
 runtest `pwd`/mods3/failed3.awk
 runtest `pwd`/mods3/failed4.awk
+#runtest `pwd`/mods3/failed5.awk
+
 runtest -e '
 #interp "/invalid/path"
 
 BEGIN {print "Hello World!"}
 '
+
+runtest -e '
+#use "/invalid/path/file.awk"
+'
+
+#runtest -e '
+##env "LC_ALL=de_DE"
+#
+#BEGIN {
+#   print ("y" ~ /^[A-Z]$/)
+#   print ("Y" ~ /^[A-Z]$/)
+#   print ("z" ~ /^[a-z]$/)
+#   print ("Z" ~ /^[a-z]$/)
+#}
+#'
 
 # multisub
 export AWKPATH=`pwd`/../modules
