@@ -117,6 +117,25 @@ running '/invalid/path' failed: No such file or directory
 
 stat(2) failed: No such file or directory
 --------------------------------------------------
+------- args: -e 
+#env "LC_ALL=C"
+#env "FOO2=bar2"
+
+BEGIN {
+   print ("y" ~ /^[a-z]$/)
+   print ("Y" ~ /^[a-z]$/)
+   print ("z" ~ /^[a-z]$/)
+   print ("Z" ~ /^[a-z]$/)
+
+   print ("env FOO2=" ENVIRON ["FOO2"])
+}
+
+1
+0
+1
+0
+env FOO2=bar2
+--------------------------------------------------
 ------- args: test_multisub
 --------------------------------------------------
 ------- args: test_tokenre

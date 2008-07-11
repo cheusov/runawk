@@ -306,11 +306,11 @@ static void ll_push (
 
 static void add_buffer (char *buffer)
 {
-	/* recursive snanning for #xxx directives */
-	scan_buffer ("", "-", buffer, strlen (buffer));
-
 	/* add to queue */
 	ll_push (buffer, new_argv, &new_argc);
+
+	/* recursive snanning for #xxx directives */
+	scan_buffer ("", "-", buffer, strlen (buffer));
 }
 
 static void add_file (const char *dir, const char *name)

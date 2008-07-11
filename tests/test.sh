@@ -57,6 +57,20 @@ runtest -e '
 #use "/invalid/path/file.awk"
 '
 
+runtest -e '
+#env "LC_ALL=C"
+#env "FOO2=bar2"
+
+BEGIN {
+   print ("y" ~ /^[a-z]$/)
+   print ("Y" ~ /^[a-z]$/)
+   print ("z" ~ /^[a-z]$/)
+   print ("Z" ~ /^[a-z]$/)
+
+   print ("env FOO2=" ENVIRON ["FOO2"])
+}
+'
+
 # multisub
 export AWKPATH=`pwd`/../modules
 runtest test_multisub
