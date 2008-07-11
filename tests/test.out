@@ -97,6 +97,14 @@ error: invalid directive at line #3,
 ------- args: /home/cheusov/prjs/runawk/tests/mods3/failed4.awk
 running '/invalid/path' failed: No such file or directory
 --------------------------------------------------
+------- args: /home/cheusov/prjs/runawk/tests/mods3/test5.awk
+1
+0
+1
+0
+env FOO=BAR
+env TESTVAR=testval
+--------------------------------------------------
 ------- args: -e 
 #interp "/invalid/path"
 
