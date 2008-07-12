@@ -2,10 +2,14 @@
 
 set -e
 
+unify_paths (){
+    sed "s,`pwd`,ROOT,"
+}
+
 runtest (){
     echo '--------------------------------------------------'
-    echo "------- args: $@"
-    ../runawk "$@" 2>&1 | awk '!/\/_test_program/' | sed "s,`pwd`,ROOT,"
+    echo "------- args: $@" | unify_paths
+    ../runawk "$@" 2>&1 | awk '!/\/_test_program/' | unify_paths
 }
 
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
