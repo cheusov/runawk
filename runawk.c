@@ -387,6 +387,7 @@ int main (int argc, char **argv)
 	int prog_specified     = 0;
 
 	int i;
+	size_t j;
 
 	/* environment RUNAWK_AWKPROG overrides compile-time option */
 	if (env_interp){
@@ -406,9 +407,9 @@ int main (int argc, char **argv)
 		awkpath = xstrdup (awkpath);
 
 		awkpath_len = strlen (awkpath);
-		for (i=0; i < awkpath_len; ++i){
-			if (awkpath [i] == ':'){
-				awkpath [i] = 0;
+		for (j=0; j < awkpath_len; ++j){
+			if (awkpath [j] == ':'){
+				awkpath [j] = 0;
 			}
 		}
 	}
