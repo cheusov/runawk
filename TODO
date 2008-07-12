@@ -1,7 +1,3 @@
-no temporary file for -e
-
-no fgetln(3)
-
 function 'readfile' for reading whole file content
 
 nogetopt ;-) - functions for  handling options
