@@ -233,7 +233,6 @@ static void scan_buffer (
 		}else if (!strncmp (p, "#env ", 5)){
 			env_str = (char *) extract_qstring (p, line_num, name, p + 5);
 			xputenv (env_str);
-			free (env_str);
 		}
 	}
 }
