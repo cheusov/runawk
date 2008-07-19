@@ -330,7 +330,7 @@ static void add_buffer (const char *buffer, size_t len)
 		ll_push (buffer, new_argv, &new_argc);
 	}else{
 		fd = mkstemp (temp_fn);
-//		temp_fn_created = 1;
+		temp_fn_created = 1;
 		if (fd == -1){
 			perror ("mkstemp(3) failed");
 			clean_and_exit (40);
