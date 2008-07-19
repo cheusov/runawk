@@ -3,7 +3,8 @@
 set -e
 
 unify_paths (){
-    sed "s,`pwd`,ROOT,"
+    sed -e "s,`pwd`,ROOT," \
+	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,'
 }
 
 runtest (){
@@ -42,25 +43,32 @@ runtest _test.tmp
 unset AWKPATH
 runtest _test.tmp
 
+####################
+
 export AWKPATH=`pwd`/mods3
 runtest `pwd`/mods3/failed1.awk
 runtest `pwd`/mods3/failed2.awk
 runtest `pwd`/mods3/failed3.awk
 runtest `pwd`/mods3/failed4.awk
 
+####################
+
 export TESTVAR=testval
 runtest `pwd`/mods3/test5.awk
 
+####################
 runtest -e '
 #interp "/invalid/path"
 
 BEGIN {print "Hello World!"}
 '
 
+####################
 runtest -e '
 #use "/invalid/path/file.awk"
 '
 
+####################
 runtest -e '
 #env "LC_ALL=C"
 #env "FOO2=bar2"
@@ -75,9 +83,20 @@ BEGIN {
 }
 '
 
-# multisub
+####################
+export AWKPATH=`pwd`/../modules
+runtest -d -e '
+#use "alt_assert.awk"
+
+BEGIN {
+   print "Hello world!"
+   abort("just a test", 7)
+}
+'
+
+####################    multisub
 export AWKPATH=`pwd`/../modules
 runtest test_multisub
 
-# tokenre
+####################    tokenre
 runtest test_tokenre

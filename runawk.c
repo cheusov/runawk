@@ -88,6 +88,9 @@ static void version (void)
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
+static char temp_fn [PATH_MAX] = "/tmp/runawk.XXXXXX";
+static int temp_fn_created = 0;
+
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
 
@@ -106,6 +109,9 @@ static int new_argc = 0;
 
 static void clean_and_exit (int status)
 {
+	if (temp_fn_created)
+		unlink (temp_fn);
+
 	if (awkpath)
 		free (awkpath);
 
@@ -175,24 +181,30 @@ static const char *search_file (const char *dir, const char *name)
 	return NULL;
 }
 
-static void invalid_use_directive (int num, char *line, const char *fn)
+static void invalid_use_directive (int num, const char *line, const char *fn)
 {
-	char * nl = strchr (line, '\n');
+	char *copy = xstrdup (line);
+	char * nl = strchr (copy, '\n');
+
 	if (nl)
 		*nl = 0;
 
 	fprintf (stderr,
 			 "error: invalid directive at line #%d,\n line=`%s`\n file=`%s`\n",
-			 num, line, fn);
+			 num, copy, fn);
+
+	free (copy);
 }
 
 static void add_file_uniq (const char *dir, const char *name);
 
 static char *extract_qstring (
-	char *line, int line_num, const char *fn, char *s)
+	const char *line, int line_num, const char *fn, const char *s)
 {
-	char *p = NULL;
-	char *n = NULL;
+	const char *p = NULL;
+	const char *n = NULL;
+	char *ret = NULL;
+	size_t len = 0;
 
 	p = s + strspn (s, " ");
 	if (*p != '"'){
@@ -208,16 +220,20 @@ static char *extract_qstring (
 		clean_and_exit (37);
 	}
 
-	*n = 0;
-	return xstrdup (p);
+	len = n - p;
+	ret = xmalloc (len+1);
+	memcpy ((void *) ret, (const void *) p, len);
+	ret [len] = 0;
+	
+	return ret;
 }
 
 static void scan_buffer (
 	const char *name, const char *dir,
-	char *buffer, off_t sz)
+	const char *buffer, off_t sz)
 {
 	char *env_str = NULL;
-	char *p = buffer;
+	const char *p = buffer;
 	int line_num = 0;
 
 	for (; sz--; ++p){
@@ -303,13 +319,36 @@ static void ll_push (
 	++*array_size;
 }
 
-static void add_buffer (char *buffer)
+static void add_buffer (const char *buffer, size_t len)
 {
-	/* add to queue */
-	ll_push (buffer, new_argv, &new_argc);
+	int fd = -1;
 
 	/* recursive snanning for #xxx directives */
-	scan_buffer ("", "-", buffer, strlen (buffer));
+	scan_buffer ("", "-", buffer, len);
+
+	if (includes_count == 0){
+		ll_push (buffer, new_argv, &new_argc);
+	}else{
+		fd = mkstemp (temp_fn);
+//		temp_fn_created = 1;
+		if (fd == -1){
+			perror ("mkstemp(3) failed");
+			clean_and_exit (40);
+		}
+		if (write (fd, buffer, len) != len){
+			perror ("write(2) failed");
+			clean_and_exit (40);
+		}
+		if (close (fd)){
+			perror ("close(2) failed");
+			clean_and_exit (40);
+		}
+
+		/* add to queue */
+		ll_push ("-f", new_argv, &new_argc);
+		ll_push (temp_fn, new_argv, &new_argc);
+		ll_push (temp_fn, includes, &includes_count);
+	}
 }
 
 static void add_file (const char *dir, const char *name)
@@ -476,7 +515,7 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			add_buffer (argv [1]);
+			add_buffer (argv [1], strlen (argv [1]));
 
 			prog_specified = 1;
 

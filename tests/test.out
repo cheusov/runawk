@@ -136,6 +136,25 @@ BEGIN {
 0
 env FOO2=bar2
 --------------------------------------------------
+------- args: -d -e 
+#use "alt_assert.awk"
+
+BEGIN {
+   print "Hello world!"
+   abort("just a test", 7)
+}
+
+new_argv [0] = /usr/bin/awk
+new_argv [1] = -f
+new_argv [2] = ROOT/../modules/exitnow.awk
+new_argv [3] = -f
+new_argv [4] = ROOT/../modules/abort.awk
+new_argv [5] = -f
+new_argv [6] = ROOT/../modules/alt_assert.awk
+new_argv [7] = -f
+new_argv [8] = /tmp/runawk.NNNNNN
+new_argv [9] = --
+--------------------------------------------------
 ------- args: test_multisub
 --------------------------------------------------
 ------- args: test_tokenre
