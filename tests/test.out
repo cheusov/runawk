@@ -125,7 +125,7 @@ BEGIN {
    ...
 }
 
-new_argv [0] = /usr/bin/awk
+new_argv [0] = awk
 new_argv [1] = 
 #env "LC_ALL=C"
 #env "FOO2=bar2"
@@ -163,7 +163,7 @@ BEGIN {
    abort("just a test", 7)
 }
 
-new_argv [0] = /usr/bin/awk
+new_argv [0] = awk
 new_argv [1] = -f
 new_argv [2] = ROOT/../modules/exitnow.awk
 new_argv [3] = -f
