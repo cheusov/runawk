@@ -69,6 +69,15 @@ runtest -e '
 '
 
 ####################
+runtest -d -e '
+#env "LC_ALL=C"
+#env "FOO2=bar2"
+
+BEGIN {
+   ...
+}
+'
+
 runtest -e '
 #env "LC_ALL=C"
 #env "FOO2=bar2"
@@ -90,6 +99,14 @@ runtest -d -e '
 
 BEGIN {
    print "Hello world!"
+   abort("just a test", 7)
+}
+'
+
+runtest -e '
+#use "alt_assert.awk"
+
+BEGIN {
    abort("just a test", 7)
 }
 '

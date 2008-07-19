@@ -117,6 +117,25 @@ running '/invalid/path' failed: No such file or directory
 
 stat(2) failed: No such file or directory
 --------------------------------------------------
+------- args: -d -e 
+#env "LC_ALL=C"
+#env "FOO2=bar2"
+
+BEGIN {
+   ...
+}
+
+new_argv [0] = /usr/bin/awk
+new_argv [1] = 
+#env "LC_ALL=C"
+#env "FOO2=bar2"
+
+BEGIN {
+   ...
+}
+
+new_argv [2] = --
+--------------------------------------------------
 ------- args: -e 
 #env "LC_ALL=C"
 #env "FOO2=bar2"
@@ -154,6 +173,20 @@ new_argv [6] = ROOT/../modules/alt_assert.awk
 new_argv [7] = -f
 new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
+--------------------------------------------------
+------- args: -e 
+#use "alt_assert.awk"
+
+BEGIN {
+   abort("just a test", 7)
+}
+
+error: just a test
+       ARGV[0]=awk
+       $0=``
+       NF=0
+       FNR=0
+       FILENAME=
 --------------------------------------------------
 ------- args: test_multisub
 --------------------------------------------------
