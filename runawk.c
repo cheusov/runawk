@@ -415,6 +415,39 @@ static void process_opt (char opt)
 	}
 }
 
+static void handler (int sig)
+{
+	if (temp_fn_created)
+		unlink (temp_fn);
+
+	struct sigaction sa;
+	sa.sa_handler = SIG_DFL;
+	sigemptyset (&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction (sig, &sa, NULL);
+
+	kill (getpid (), sig);
+}
+
+static void set_sig_handler (void)
+{
+	static const int sigs [] = {
+		SIGINT, SIGQUIT, SIGTERM,
+		SIGHUP, SIGPIPE
+	};
+
+	struct sigaction sa;
+	size_t i;
+
+	sa.sa_handler = handler;
+	sigemptyset (&sa.sa_mask);
+	sa.sa_flags = 0;
+	for (i=0; i < sizeof (sigs)/sizeof (sigs [0]); ++i){
+		int sig = sigs [i];
+		sigaction (sig, &sa, NULL);
+	}
+}
+
 int main (int argc, char **argv)
 {
 	const char *progname   = NULL;
@@ -427,6 +460,8 @@ int main (int argc, char **argv)
 
 	int i;
 	size_t j;
+
+	set_sig_handler ();
 
 	/* environment RUNAWK_AWKPROG overrides compile-time option */
 	if (env_interp){
