@@ -30,6 +30,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include <signal.h>
 
 #ifdef HAVE_CONFIG_H
 /* if you need, add extra includes to config.h */
