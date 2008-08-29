@@ -1,4 +1,11 @@
 ======================================================================
+Version 0.14.2, by Aleksey Cheusov, Fri, 29 Aug 2008 17:28:34 +0300
+
+   Temporary file is removed if runawk is killed by
+   SIGINT, SIGQUIT, SIGTERM, SIGHUP or SIGPIPE signals.
+   (Temporary file is created by 'runawk -e ...')
+
+======================================================================
 Version 0.14.1, by Aleksey Cheusov, Sat, 19 Jul 2008 22:53:45 +0300
 
     FIXED: The following code doesn't work with runawk-0.14.0
