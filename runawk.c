@@ -276,7 +276,7 @@ static void scan_file (const char *name)
 
 	/**/
 	if (stat (name, &stat_buf)){
-		perror ("stat(2) failed");
+		fprintf (stderr, "stat(\"%s\") failed: %s\n", name, strerror (errno));
 		clean_and_exit (35);
 	}
 	file_size = stat_buf.st_size;
