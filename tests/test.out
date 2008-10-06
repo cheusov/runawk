@@ -115,7 +115,7 @@ running '/invalid/path' failed: No such file or directory
 ------- args: -e 
 #use "/invalid/path/file.awk"
 
-stat(2) failed: No such file or directory
+stat("/invalid/path/file.awk") failed: No such file or directory
 --------------------------------------------------
 ------- args: -d -e 
 #env "LC_ALL=C"
