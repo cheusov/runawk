@@ -336,7 +336,7 @@ static void add_buffer (const char *buffer, size_t len)
 			perror ("mkstemp(3) failed");
 			clean_and_exit (40);
 		}
-		if (write (fd, buffer, len) != len){
+		if (write (fd, buffer, len) != (ssize_t) len){
 			perror ("write(2) failed");
 			clean_and_exit (40);
 		}
