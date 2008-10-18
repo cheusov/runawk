@@ -6,7 +6,7 @@
 BEGIN {
 	tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
 
-	assert(NF == 2, "bad NF")
+	assert(NF == 2, "bad NF=" NF)
 	assert($1 == "print", "bad $1")
 	assert($2 == "\"Hello world!\"", "bad $2")
 
