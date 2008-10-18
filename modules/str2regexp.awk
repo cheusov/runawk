@@ -12,9 +12,14 @@
 #use "alt_assert.awk"
 
 function __runawk_mawk_bug_test (tmp){
+	# returns true if buggy MAWK
 	tmp = "\\\\"
 	gsub(/\\/, "\\\\", tmp)
-	assert(tmp == "\\\\\\\\", "Do not use buggy mawk! ;-)")
+	return (tmp != "\\\\\\\\")
+}
+
+BEGIN {
+	__buggy_mawk = __runawk_mawk_bug_test()
 }
 
 function str2regexp (s){
@@ -25,8 +30,13 @@ function str2regexp (s){
 	gsub(/\^/, "[\\^]", s)
 
 	if (s ~ /\\/){
-		__runawk_mawk_bug_test()
-		gsub(/\\/, "\\\\", s)
+		if (!__buggy_mawk){
+			# normal AWK
+			gsub(/\\/, "\\\\", s)
+		}else{
+			# MAWK /-(
+			gsub(/\\/, "\\\\\\\\\\", s)
+		}
 	}
 
 	gsub(/---runawk-open-sq-bracket---/, "[[]", s)
