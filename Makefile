@@ -76,9 +76,9 @@ test : runawk
 
 AWK_PROGS=/usr/bin/awk /usr/bin/nawk /usr/bin/gawk /usr/bin/original-awk \
    /usr/pkg/bin/nawk /usr/pkg/bin/gawk /usr/pkg/bin/nbawk \
-   /usr/pkg/heirloom/bin/nawk \
-   /usr/pkg/heirloom/bin/posix/awk /usr/pkg/heirloom/bin/posix2001/awk \
-   /usr/pkg/bin/mawk-uxre
+   /usr/pkg/heirloom/bin/posix/awk /usr/pkg/heirloom/bin/posix2001/awk
+#   /usr/pkg/heirloom/bin/nawk
+#   /usr/bin/mawk /usr/pkg/bin/mawk /usr/pkg/bin/mawk-uxre
 
 .PHOMY: test_all
 test_all:
