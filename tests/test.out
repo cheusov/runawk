@@ -65,7 +65,10 @@ Hello World
 ------- args: -v one=1 -e BEGIN {print one} {print "unbelievably"} /dev/null
 1
 --------------------------------------------------
-------- args: --execute BEGIN {print "Hello World"}
+------- args: -v two=2 -e BEGIN {print two}
+2
+--------------------------------------------------
+------- args: --execute BEGIN {print "Hello World"} /dev/null
 Hello World
 --------------------------------------------------
 ------- args: --assign var1=123 -v var2=321 -e BEGIN {print var1, var2}
@@ -164,7 +167,7 @@ BEGIN {
    print "Hello world!"
    abort("just a test", 7)
 }
-
+ /dev/null
 new_argv [0] = awk
 new_argv [1] = -f
 new_argv [2] = ROOT/../modules/exitnow.awk
@@ -175,6 +178,7 @@ new_argv [6] = ROOT/../modules/alt_assert.awk
 new_argv [7] = -f
 new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
+new_argv [10] = /dev/null
 --------------------------------------------------
 ------- args: -e 
 #use "alt_assert.awk"

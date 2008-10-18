@@ -31,7 +31,8 @@ runtest -V | awk 'NR <= 2 {print $0} NR == 3 {print "xxx"}'
 runtest -h | awk 'NR <= 3'
 runtest -e 'BEGIN {print "Hello World"}'
 runtest -v one=1 -e 'BEGIN {print one} {print "unbelievably"}' /dev/null
-runtest --execute 'BEGIN {print "Hello World"}'
+runtest -v two=2 -e 'BEGIN {print two}'
+runtest --execute 'BEGIN {print "Hello World"}' /dev/null
 runtest --assign var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
 
 cat > _test.tmp <<EOF
@@ -105,7 +106,7 @@ BEGIN {
    print "Hello world!"
    abort("just a test", 7)
 }
-'
+' /dev/null
 
 runtest -e '
 #use "alt_assert.awk"
