@@ -598,7 +598,8 @@ int main (int argc, char **argv)
 	/* exec */
 	new_argv [0] = xstrdup (progname);
 
-	ll_push ("--", new_argv, &new_argc);
+	if (includes_count)
+		ll_push ("--", new_argv, &new_argc);
 
 	for (i=0; i < argc; ++i){
 		if (argv [i][0] != '-'){

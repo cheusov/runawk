@@ -62,6 +62,9 @@ runawk - wrapper for an AWK interpreter
 ------- args: -e BEGIN {print "Hello World"}
 Hello World
 --------------------------------------------------
+------- args: -v one=1 -e BEGIN {print one} {print "unbelievably"} /dev/null
+1
+--------------------------------------------------
 ------- args: --execute BEGIN {print "Hello World"}
 Hello World
 --------------------------------------------------
@@ -134,7 +137,6 @@ BEGIN {
    ...
 }
 
-new_argv [2] = --
 --------------------------------------------------
 ------- args: -e 
 #env "LC_ALL=C"
