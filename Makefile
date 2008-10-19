@@ -93,6 +93,4 @@ test_all:
 ##################################################
 .PATH : ${SRCROOT}
 
-.sinclude "Makefile.cvsdist"
-
 .include <bsd.prog.mk>
