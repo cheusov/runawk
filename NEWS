@@ -1,15 +1,11 @@
 ======================================================================
 Version 0.14.3, by Aleksey Cheusov, Sat, 18 Oct 2008 19:39:47 +0300
 
-   The following code fails with nawk (seen on NetBSD)
-                  runawk -e ' { print "123" } ' /dev/null
-     It says
-                  /usr/bin/awk: can't open file --
-                   source line number 7
-     This happens because nawk treats `--' after program as a generic file.
+   The following code no longer fails with NAWK under NetBSD
+          runawk -e ' { print "123" } ' /dev/null
 
    fixed: compilation bug under FreeBSD (WARNS=4 -> warning -> error)
-   caused by comparison of signed with unsigned
+   caused by comparison of signed and unsigned values
 
    More verbose output when stat(filename) failed
 
