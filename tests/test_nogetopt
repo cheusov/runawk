@@ -1,0 +1,32 @@
+#!/usr/bin/env runawk
+
+#use "nogetopt.awk"
+
+BEGIN {
+	long_opts ["verbose"] = "v"
+	long_opts ["help"]    = "h"
+	long_opts ["fake"]    = ""
+	long_opts ["len"]     = takes_arg
+
+	while (nogetopt("hVvo:n:")){
+		if (optopt == "h"){
+			print "option `h'"
+		}else if (optopt == "V"){
+			print "option `V'"
+		}else if (optopt == "v"){
+			print "option `v'"
+		}else if (optopt == "o"){
+			print "option `o':", optarg
+		}else if (optopt == "n"){
+			print "option `n':", optarg
+		}else if (optopt == "fake"){
+			print "option `fake'"
+		}else if (optopt == "len"){
+			print "option `len':", optarg
+		}else{
+			print "brbrbr:" optopt
+		}
+	}
+
+	exit 0
+}
