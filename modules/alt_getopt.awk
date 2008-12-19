@@ -1,7 +1,6 @@
 # written by Aleksey Cheusov <vle@gmx.net>
 # public domain
 
-#use "abort.awk"
 #use "alt_assert.awk"
 
 function __getopt_errexit (msg, status)
