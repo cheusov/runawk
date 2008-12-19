@@ -273,3 +273,9 @@ Bad usage of option `-o'
 --------------------------------------------------
 ------- args: test_getopt --unknown
 Unknown option `--unknown'
+--------------------------------------------------
+------- args: test_getopt --output=file.out -nNNN --len=LENGTH
+option `o': file.out
+option `n': NNN
+option `len': LENGTH
+ARGV [4] = -
