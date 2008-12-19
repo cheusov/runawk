@@ -124,7 +124,7 @@ runtest test_multisub
 runtest test_tokenre
 
 ####################    tokenre
-runtest test_getopt -h
+runtest test_getopt -h -
 runtest test_getopt --help
 runtest test_getopt -h --help -v --verbose -V -o 123 -o234
 runtest test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake

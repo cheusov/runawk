@@ -9,14 +9,14 @@ new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = --long-option
-new_argv [5] = /dev/stdin
+new_argv [5] = -
 --------------------------------------------------
 ------- args: --debug _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = -o=file
-new_argv [5] = /dev/stdin
+new_argv [5] = -
 --------------------------------------------------
 ------- args: -d --without-stdin _test_program -o=file
 new_argv [0] = _test_program
@@ -43,7 +43,7 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
-new_argv [6] = /dev/stdin
+new_argv [6] = -
 --------------------------------------------------
 ------- args: --debug --with-stdin _test_program arg1 arg2
 new_argv [0] = _test_program
@@ -51,7 +51,7 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
-new_argv [6] = /dev/stdin
+new_argv [6] = -
 --------------------------------------------------
 ------- args: -V
 xxx
@@ -198,11 +198,13 @@ error: just a test
 --------------------------------------------------
 ------- args: test_tokenre
 --------------------------------------------------
-------- args: test_getopt -h
+------- args: test_getopt -h -
 option `h'
+ARGV [2] = -
 --------------------------------------------------
 ------- args: test_getopt --help
 option `h'
+ARGV [2] = -
 --------------------------------------------------
 ------- args: test_getopt -h --help -v --verbose -V -o 123 -o234
 option `h'

@@ -29,5 +29,10 @@ BEGIN {
 		}
 	}
 
+	for (i=1; i <= ARGC; ++i){
+		if (ARGV [i] != "")
+			printf "ARGV [%s] = %s\n", i, ARGV [i]
+	}
+
 	exit 0
 }
