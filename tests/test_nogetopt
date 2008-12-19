@@ -7,6 +7,7 @@ BEGIN {
 	long_opts ["help"]    = "h"
 	long_opts ["fake"]    = ""
 	long_opts ["len"]     = takes_arg
+	long_opts ["output"]  = "o"
 
 	while (nogetopt("hVvo:n:")){
 		if (optopt == "h"){

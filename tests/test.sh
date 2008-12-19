@@ -122,3 +122,9 @@ runtest test_multisub
 
 ####################    tokenre
 runtest test_tokenre
+
+####################    tokenre
+runtest test_nogetopt -h
+runtest test_nogetopt --help
+runtest test_nogetopt -h --help -v --verbose -V -o 123 -o234
+runtest test_nogetopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake
