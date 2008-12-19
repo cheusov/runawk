@@ -1,6 +1,14 @@
 # written by Aleksey Cheusov <vle@gmx.net>
 # public domain
 
+# getopt(SHORT_OPTS) -- like standard getopt(3) function (NOT EQUIVALENT!)
+#   This function processes ARGV array and
+#   returns TRUE value if option is recieved, 
+#   recieved option is saved in 'optopt' variable, option argument (if any)
+#   is saved in 'optarg' variable. Long options (like --help or
+#   --long-option) present in GNU libc and BSD systems are also supported.
+#   See tests/test_getopt script for usage.
+
 #use "alt_assert.awk"
 
 function __getopt_errexit (msg, status)
