@@ -222,3 +222,15 @@ option `n': 999
 option `n': 9999
 option `len': 5
 option `fake'
+--------------------------------------------------
+------- args: test_getopt -- -1 -2 -3
+ARGV [2] = -1
+ARGV [3] = -2
+ARGV [4] = -3
+--------------------------------------------------
+------- args: test_getopt --fake -v -- -1 -2 -3
+option `fake'
+option `v'
+ARGV [4] = -1
+ARGV [5] = -2
+ARGV [6] = -3
