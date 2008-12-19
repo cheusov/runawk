@@ -6,7 +6,7 @@ MANDIR?=${PREFIX}/man
 MODULESDIR?=${PREFIX}/share/runawk
 
 AWK_PROG?=		/usr/bin/awk
-STDIN_FILENAME?=	/dev/stdin
+STDIN_FILENAME?=	- #/dev/stdin
 
 POD2MAN?=		pod2man
 POD2HTML?=		pod2html
