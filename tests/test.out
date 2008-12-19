@@ -214,19 +214,24 @@ option `v'
 option `V'
 option `o': 123
 option `o': 234
+ARGV [1] = -
 --------------------------------------------------
-------- args: test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake
+------- args: test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
 option `o': 123
 option `o': 234
 option `n': 999
 option `n': 9999
 option `len': 5
 option `fake'
+ARGV [11] = /dev/null
 --------------------------------------------------
-------- args: test_getopt -- -1 -2 -3
-ARGV [2] = -1
-ARGV [3] = -2
-ARGV [4] = -3
+------- args: test_getopt -hVv -- -1 -2 -3
+option `h'
+option `V'
+option `v'
+ARGV [3] = -1
+ARGV [4] = -2
+ARGV [5] = -3
 --------------------------------------------------
 ------- args: test_getopt --fake -v -- -1 -2 -3
 option `fake'
@@ -265,3 +270,6 @@ Bad usage of option `-o'
 ------- args: test_getopt -hoV 123
 option `h'
 Bad usage of option `-o'
+--------------------------------------------------
+------- args: test_getopt --unknown
+Unknown option `--unknown'

@@ -127,8 +127,8 @@ runtest test_tokenre
 runtest test_getopt -h -
 runtest test_getopt --help
 runtest test_getopt -h --help -v --verbose -V -o 123 -o234
-runtest test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake
-runtest test_getopt -- -1 -2 -3
+runtest test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
+runtest test_getopt -hVv -- -1 -2 -3
 runtest test_getopt --fake -v -- -1 -2 -3
 runtest test_getopt - -1 -2 -3
 runtest test_getopt --fake -v - -1 -2 -3
@@ -136,3 +136,4 @@ runtest test_getopt -1 -2 -3
 runtest test_getopt -hvV
 runtest test_getopt -ho 123
 runtest test_getopt -hoV 123
+runtest test_getopt --unknown

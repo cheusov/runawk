@@ -11,6 +11,17 @@ function __getopt_errexit (msg, status)
 	exitnow(status)
 }
 
+function __getopt_addstdin (                  i)
+{
+	for (i=1; i <= ARGC; ++i){
+		if (ARGV [i] != ""){
+			return
+		}
+	}
+
+	ARGV [1] = "-"
+}
+
 BEGIN {
 	opterr = ""
 
@@ -114,7 +125,7 @@ function __getopt_process_long_opts (\
 		}
 	}
 
-	abort("Unknown option `" prefix opt "'")
+	__getopt_errexit("Unknown option `" prefix opt "'", 2)
 }
 
 function getopt (\
@@ -132,6 +143,7 @@ function getopt (\
 
 		if (ARGV [i] == "--"){
 			ARGV [i] = ""
+			__getopt_addstdin()
 			return 0
 		}
 
@@ -147,4 +159,7 @@ function getopt (\
 
 		return __getopt_process_short_opts(i)
 	}
+
+	__getopt_addstdin()
+	return 0
 }
