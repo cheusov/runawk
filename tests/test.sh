@@ -135,3 +135,4 @@ runtest test_getopt --fake -v - -1 -2 -3
 runtest test_getopt -1 -2 -3
 runtest test_getopt -hvV
 runtest test_getopt -ho 123
+runtest test_getopt -hoV 123

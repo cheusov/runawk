@@ -261,3 +261,7 @@ ARGV [2] = -
 ------- args: test_getopt -ho 123
 option `h'
 Bad usage of option `-o'
+--------------------------------------------------
+------- args: test_getopt -hoV 123
+option `h'
+Bad usage of option `-o'
