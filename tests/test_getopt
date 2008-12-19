@@ -1,6 +1,6 @@
 #!/usr/bin/env runawk
 
-#use "nogetopt.awk"
+#use "alt_getopt.awk"
 
 BEGIN {
 	long_opts ["verbose"] = "v"
@@ -9,7 +9,7 @@ BEGIN {
 	long_opts ["len"]     = takes_arg
 	long_opts ["output"]  = "o"
 
-	while (nogetopt("hVvo:n:")){
+	while (getopt("hVvo:n:")){
 		if (optopt == "h"){
 			print "option `h'"
 		}else if (optopt == "V"){

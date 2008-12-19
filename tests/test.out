@@ -198,13 +198,13 @@ error: just a test
 --------------------------------------------------
 ------- args: test_tokenre
 --------------------------------------------------
-------- args: test_nogetopt -h
+------- args: test_getopt -h
 option `h'
 --------------------------------------------------
-------- args: test_nogetopt --help
+------- args: test_getopt --help
 option `h'
 --------------------------------------------------
-------- args: test_nogetopt -h --help -v --verbose -V -o 123 -o234
+------- args: test_getopt -h --help -v --verbose -V -o 123 -o234
 option `h'
 option `h'
 option `v'
@@ -213,7 +213,7 @@ option `V'
 option `o': 123
 option `o': 234
 --------------------------------------------------
-------- args: test_nogetopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake
+------- args: test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake
 option `o': 123
 option `o': 234
 option `n': 999
