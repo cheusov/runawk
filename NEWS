@@ -14,7 +14,9 @@ Version 0.15.0, by Aleksey Cheusov, Fri, 19 Dec 2008 21:41:00 +0200
    Makefile: STDIN_FILENAME defaults to `-', not `/dev/stdin'
    Interix has no /dev/stdin file
 
-   Makefile: WARNS?= 4
+   Makefile: WARNS=4 ====> WARNS?= 4
+   Makefile: CPPFLAGS -> CFLAGS, FreeBSD make mk scripts
+       don't support CPPFLAGS
 
    Lots of regression tests for 'getopt' function
 
