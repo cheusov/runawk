@@ -8,6 +8,8 @@
 #   is saved in 'optarg' variable. Long options (like --help or
 #   --long-option) present in GNU libc and BSD systems are also supported.
 #   See tests/test_getopt script for usage.
+# NOTE: 'getopt' function from alt_getopt.awk is not compatible
+#       to the function from GNU awk (getopt.awk)
 
 #use "alt_assert.awk"
 
@@ -100,7 +102,8 @@ function __getopt_process_long_opts (\
 	opt,val,prefix,eq)
 {
 	opt = substr(ARGV [i], 3)
-	eq = sub(/=.*$/, "", opt)
+	eq = (opt ~ /[=]/)
+	sub(/[=].*$/, "", opt)
 	prefix = "--"
 
 	if ((opt in __getopt_opts) &&
