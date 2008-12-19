@@ -8,6 +8,16 @@ Version 0.15.0, by Aleksey Cheusov, Fri, 19 Dec 2008 21:41:00 +0200
    "getopt" function from this module is similar to C function getopt(3)
    (Idiotic GNU getopt must die!)
 
+   Better heuristics for adding `-' to the list awk's arguments,
+   now it better conforms to "Utility Syntax Guidelines".
+
+   Makefile: STDIN_FILENAME defaults to `-', not `/dev/stdin'
+   Interix has no /dev/stdin file
+
+   Makefile: WARNS?= 4
+
+   Lots of regression tests for 'getopt' function
+
 ======================================================================
 Version 0.14.3, by Aleksey Cheusov, Sat, 18 Oct 2008 19:39:47 +0300
 
