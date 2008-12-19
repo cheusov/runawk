@@ -123,7 +123,7 @@ runtest test_multisub
 ####################    tokenre
 runtest test_tokenre
 
-####################    tokenre
+####################    getopt
 runtest test_getopt -h -
 runtest test_getopt --help
 runtest test_getopt -h --help -v --verbose -V -o 123 -o234
@@ -132,3 +132,6 @@ runtest test_getopt -- -1 -2 -3
 runtest test_getopt --fake -v -- -1 -2 -3
 runtest test_getopt - -1 -2 -3
 runtest test_getopt --fake -v - -1 -2 -3
+runtest test_getopt -1 -2 -3
+runtest test_getopt -hvV
+runtest test_getopt -ho 123

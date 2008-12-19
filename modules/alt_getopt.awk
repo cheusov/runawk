@@ -4,6 +4,13 @@
 #use "abort.awk"
 #use "alt_assert.awk"
 
+function __getopt_errexit (msg, status)
+{
+	fflush()
+	print msg > "/dev/stderr"
+	exitnow(status)
+}
+
 BEGIN {
 	opterr = ""
 
@@ -42,11 +49,11 @@ function __getopt_process_short_opts (\
 	optopt = substr(opts, 1, 1)
 
 	if (! (optopt in __getopt_opts)){
-		abort("Unknown option `-" optopt "'")
+		__getopt_errexit("Unknown option `-" optopt "'", 2)
 	}
 
 	if (__getopt_opts [optopt] == takes_arg){
-		if (1){
+		if (!__getopt_shortened [i]){
 			if (length(opts) == 1){
 				optarg = ARGV [i+1]
 				ARGV [i] = ARGV [i+1] = ""
@@ -57,10 +64,12 @@ function __getopt_process_short_opts (\
 			return 1
 		}
 
-		abort("Bad usage of option `-" optopt "'")
+		__getopt_errexit("Bad usage of option `-" optopt "'", 2)
 	}
 
-	if (length(opts) > 2)
+	++__getopt_shortened [i]
+
+	if (length(opts) > 1)
 		ARGV [i] = "-" substr(opts, 2)
 	else
 		ARGV [i] = ""
@@ -84,8 +93,6 @@ function __getopt_process_long_opts (\
 		opt = __getopt_opts [opt]
 	}
 
-	#			print "opt: " opt > "/dev/stderr"
-
 	if (opt in __getopt_opts){
 		optopt = opt
 
@@ -93,7 +100,7 @@ function __getopt_process_long_opts (\
 		if (val == ""){
 			assert(!eq, "Unexpected argument for option `" opt "'")
 			ARGV [i] = ""
-			return opt
+			return 1
 		}else if (val == takes_arg){
 			if (eq){
 				optarg = ARGV [i]
@@ -123,15 +130,13 @@ function getopt (\
 			continue
 		}
 
-#		print "zzz: " ARGV [i] > "/dev/stderr"
-
 		if (ARGV [i] == "--"){
 			ARGV [i] = ""
-			return ""
+			return 0
 		}
 
 		if (ARGV [i] !~ /^-/ || ARGV [i] == "-"){
-			return ""
+			return 0
 		}
 
 		if (ARGV [i] ~ /^--/){
