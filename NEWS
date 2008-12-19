@@ -1,4 +1,14 @@
 ======================================================================
+Version 0.15.0, by Aleksey Cheusov, Fri, 19 Dec 2008 21:41:00 +0200
+
+   new module alt_getopt.awk that implements 'getopt' function
+   compatible with "Utility Syntax Guidelines" described in
+   "Single UNIX Specification"
+       http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html#tag_12_02
+   "getopt" function from this module is similar to C function getopt(3)
+   (Idiotic GNU getopt must die!)
+
+======================================================================
 Version 0.14.3, by Aleksey Cheusov, Sat, 18 Oct 2008 19:39:47 +0300
 
    The following code no longer fails with NAWK under NetBSD
