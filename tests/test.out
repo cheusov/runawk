@@ -279,3 +279,7 @@ option `o': file.out
 option `n': NNN
 option `len': LENGTH
 ARGV [4] = -
+--------------------------------------------------
+------- args: test_getopt --output --file--
+option `o': --file--
+ARGV [3] = -

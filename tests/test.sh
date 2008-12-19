@@ -138,3 +138,4 @@ runtest test_getopt -ho 123
 runtest test_getopt -hoV 123
 runtest test_getopt --unknown
 runtest test_getopt --output='file.out' -nNNN --len=LENGTH
+runtest test_getopt --output --file--
