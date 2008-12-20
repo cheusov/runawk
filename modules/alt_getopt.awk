@@ -7,9 +7,51 @@
 #   recieved option is saved in 'optopt' variable, option argument (if any)
 #   is saved in 'optarg' variable. Long options (like --help or
 #   --long-option) present in GNU libc and BSD systems are also supported.
-#   See tests/test_getopt script for usage.
 # NOTE: 'getopt' function from alt_getopt.awk is not compatible
 #       to the function from GNU awk (getopt.awk)
+
+###############################################################
+# #                       EXAMPLE
+
+# #!/usr/bin/env runawk
+#
+# #use "alt_getopt.awk"
+#
+# BEGIN {
+#     long_opts ["verbose"] = "v"
+#     long_opts ["help"]    = "h"
+#     long_opts ["fake"]    = ""
+#     long_opts ["len"]     = takes_arg
+#     long_opts ["output"]  = "o"
+#
+#     while (getopt("hVvo:n:")){
+#         if (optopt == "h"){
+#             print "option `h'"
+#         }else if (optopt == "V"){
+#             print "option `V'"
+#         }else if (optopt == "v"){
+#             print "option `v'"
+#         }else if (optopt == "o"){
+#             print "option `o':", optarg
+#         }else if (optopt == "n"){
+#             print "option `n':", optarg
+#         }else if (optopt == "fake"){
+#             print "option `fake'"
+#         }else if (optopt == "len"){
+#             print "option `len':", optarg
+#         }else{
+#             print "brbrbr:" optopt
+#         }
+#     }
+#
+#     for (i=1; i <= ARGC; ++i){
+#         if (ARGV [i] != "")
+#             printf "ARGV [%s] = %s\n", i, ARGV [i]
+#     }
+#
+#     exit 0
+# }
+###############################################################
 
 #use "alt_assert.awk"
 
