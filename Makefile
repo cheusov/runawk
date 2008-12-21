@@ -66,9 +66,8 @@ install-dirs:
 .PHONY : test
 test : runawk
 	@echo 'running tests...'; \
-	cd $(.CURDIR); \
 	export OBJDIR=${.OBJDIR}; \
-	if cd tests && ./test.sh > ${.OBJDIR}/_test.res && \
+	if cd ${.CURDIR}/tests && ./test.sh > ${.OBJDIR}/_test.res && \
 	    diff -u test.out ${.OBJDIR}/_test.res; \
 	then echo '   succeeded'; \
 	else echo '   failed'; false; \
