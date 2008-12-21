@@ -13,7 +13,7 @@ unify_paths (){
 runtest (){
     echo '--------------------------------------------------'
     echo "------- args: $@" | unify_paths
-    ../runawk "$@" 2>&1 | awk '!/\/_test_program/' | unify_paths
+    $OBJDIR/runawk "$@" 2>&1 | awk '!/\/_test_program/' | unify_paths
 }
 
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
