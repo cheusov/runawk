@@ -44,7 +44,7 @@
 #         }
 #     }
 #
-#     for (i=1; i <= ARGC; ++i){
+#     for (i=1; i < ARGC; ++i){
 #         if (ARGV [i] != "")
 #             printf "ARGV [%s] = %s\n", i, ARGV [i]
 #     }
@@ -64,7 +64,7 @@ function __getopt_errexit (msg, status)
 
 function __getopt_addstdin (                  i)
 {
-	for (i=1; i <= ARGC; ++i){
+	for (i=1; i < ARGC; ++i){
 		if (ARGV [i] != ""){
 			return
 		}
@@ -186,7 +186,7 @@ function getopt (\
 {
 	__getopt_prepare(short_opts)
 
-	for (i = 1; i <= ARGC; ++i){
+	for (i = 1; i < ARGC; ++i){
 		optarg = ""
 
 		if (ARGV [i] == ""){
