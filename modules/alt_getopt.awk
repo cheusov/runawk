@@ -40,7 +40,7 @@
 #         }else if (optopt == "len"){
 #             print "option `len':", optarg
 #         }else{
-#             print "brbrbr:" optopt
+#             abort()
 #         }
 #     }
 #
