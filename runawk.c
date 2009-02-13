@@ -620,6 +620,7 @@ int main (int argc, char **argv)
 	if (add_stdin == stdin_yes ||
 		(argc && all_with_dash && add_stdin != stdin_no))
 	{
+		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
 		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
