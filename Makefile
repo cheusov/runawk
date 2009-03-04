@@ -40,11 +40,8 @@ runawk.1 : runawk.pod
 runawk.html : runawk.pod
 	$(POD2HTML) --infile=${.ALLSRC} --outfile=${.TARGET}
 
-.PHONY: clean-my
-clean: clean-my
-clean-my:
-	rm -f *~ core* runawk.1 runawk.cat1 ktrace* ChangeLog *.tmp
-	rm -f runawk.html tests/_*
+CLEANFILES=   *~ core* *.core ktrace* *.tmp tests/_*
+CLEANFILES+=  runawk.1 runawk.cat1 ChangeLog runawk.html 
 
 ##################################################
 .PHONY: install-dirs
