@@ -13,9 +13,6 @@ POD2HTML?=		pod2html
 
 INST_DIR?=		${INSTALL} -d
 
-# directory with runawk sources
-SRCROOT?=		${.PARSEDIR}
-
 ##################################################
 
 VERSION=		0.15.0
@@ -27,7 +24,7 @@ BIRTHDATE=		2007-09-24
 PROG=			runawk
 SRCS=			runawk.c
 
-MODULES!=		echo ${SRCROOT}/modules/*.awk
+MODULES!=		echo modules/*.awk
 
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
@@ -93,6 +90,5 @@ test_all:
 .endfor
 
 ##################################################
-.PATH : ${SRCROOT}
 
 .include <bsd.prog.mk>
