@@ -24,7 +24,7 @@ BIRTHDATE=		2007-09-24
 PROG=			runawk
 SRCS=			runawk.c
 
-MODULES!=		echo modules/*.awk
+MODULES!=		echo ${.CURDIR}/modules/*.awk
 
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
