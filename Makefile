@@ -1,9 +1,11 @@
 ##################################################
 
-PREFIX?=/usr/local
-BINDIR?=${PREFIX}/bin
-MANDIR?=${PREFIX}/man
-MODULESDIR?=${PREFIX}/share/runawk
+PREFIX?=		/usr/local
+BINDIR?=		${PREFIX}/bin
+MANDIR?=		${PREFIX}/man
+MODULESDIR?=		${PREFIX}/share/runawk
+
+MKHTML?=		no
 
 AWK_PROG?=		/usr/bin/awk
 STDIN_FILENAME?=	- #/dev/stdin
