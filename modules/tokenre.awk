@@ -1,5 +1,9 @@
-# written by Aleksey Cheusov <vle@gmx.net>
-# public domain
+# Written by Aleksey Cheusov <vle@gmx.net>, public domain
+#
+# This awk module is a part of RUNAWK distribution,
+#        http://sourceforge.net/projects/runawk
+#    
+############################################################
 
 # By default AWK splits input strings into tokens according to regular
 # expression that defines "space" between tokens using special

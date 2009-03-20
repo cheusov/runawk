@@ -1,5 +1,9 @@
-# written by Aleksey Cheusov <vle@gmx.net>
-# public domain
+# Written by Aleksey Cheusov <vle@gmx.net>, public domain
+#
+# This awk module is a part of RUNAWK distribution,
+#        http://sourceforge.net/projects/runawk
+#    
+############################################################
 
 # xgetline0([FILE])
 #  Safe analog to 'getline < FILE' or 'getline' (if no FILE is specified).
