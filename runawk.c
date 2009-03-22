@@ -449,6 +449,22 @@ static void set_sig_handler (void)
 	}
 }
 
+static void putenv_RUNAWK_MODx (void)
+{
+	int i;
+	char buf [30 + PATH_MAX];
+
+	/* RUNAWK_MODC */
+	snprintf (buf, sizeof (buf), "RUNAWK_MODC=%i", includes_count);
+	xputenv (buf);
+
+	/* RUNAWK_MODV */
+	for (i=0; i < includes_count; ++i){
+		snprintf (buf, sizeof (buf), "RUNAWK_MODV_%i=%s", i, includes [i]);
+		xputenv (buf);
+	}
+}
+
 int main (int argc, char **argv)
 {
 	const char *progname   = NULL;
@@ -625,6 +641,8 @@ int main (int argc, char **argv)
 	}
 
 	ll_push (NULL, new_argv, &new_argc);
+
+	putenv_RUNAWK_MODx ();
 
 	if (debug){
 		for (i=0; i < new_argc - 1; ++i){
