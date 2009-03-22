@@ -85,6 +85,24 @@ Hello World 2.3
 ------- args: _test.tmp
 Cannot find module `module2.1.awk`, check AWKPATH environment variable
 --------------------------------------------------
+------- args: ROOT/mods1/test_modinfo
+Hello World1.2
+Hello World1.3
+Hello World1.1
+Hello World 2.2
+Hello World 2.1
+Hello World 2.3
+MODC=8
+MODV [0]=ROOT/mods1/module1.2.awk
+MODV [1]=ROOT/mods1/module1.3.awk
+MODV [2]=ROOT/mods1/module1.1.awk
+MODV [3]=ROOT/mods2/module2.2.awk
+MODV [4]=ROOT/mods2/module2.1.awk
+MODV [5]=ROOT/mods2/module2.3.awk
+MODV [6]=ROOT/../modules/modinfo.awk
+MODV [7]=ROOT/mods1/test_modinfo
+MODMAIN=ROOT/mods1/test_modinfo
+--------------------------------------------------
 ------- args: ROOT/mods3/failed1.awk
 error: invalid directive at line #1,
  line=`#use `

@@ -35,6 +35,7 @@ runtest -v two=2 -e 'BEGIN {print two}'
 runtest --execute 'BEGIN {print "Hello World"}' /dev/null
 runtest --assign var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
 
+################### use
 cat > _test.tmp <<EOF
 #use "`pwd`/mods1/module1.1.awk"
 #use "`pwd`/mods1/module1.3.awk"
@@ -42,11 +43,17 @@ cat > _test.tmp <<EOF
 #use "module2.3.awk"
 EOF
 
+####################
 export AWKPATH=`pwd`/mods2
 runtest _test.tmp
 
 unset AWKPATH
 runtest _test.tmp
+
+################### RUNAWK_MODx
+export AWKPATH=`pwd`/../modules:`pwd`/mods2
+
+runtest `pwd`/mods1/test_modinfo
 
 ####################
 

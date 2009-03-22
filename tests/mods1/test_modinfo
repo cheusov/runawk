@@ -1,0 +1,17 @@
+#!/usr/bin/env runawk
+
+#use "module1.1.awk"
+#use "module2.1.awk"
+#use "module2.3.awk"
+
+#use "modinfo.awk"
+
+BEGIN {
+	print "MODC=" MODC
+
+	for (i=0; i < MODC; ++i){
+		printf "MODV [%d]=%s\n", i, MODV [i]
+	}
+
+	print "MODMAIN=" MODMAIN
+}
