@@ -456,12 +456,12 @@ static void putenv_RUNAWK_MODx (void)
 
 	/* RUNAWK_MODC */
 	snprintf (buf, sizeof (buf), "RUNAWK_MODC=%i", includes_count);
-	xputenv (buf);
+	xputenv (xstrdup (buf));
 
 	/* RUNAWK_MODV */
 	for (i=0; i < includes_count; ++i){
 		snprintf (buf, sizeof (buf), "RUNAWK_MODV_%i=%s", i, includes [i]);
-		xputenv (buf);
+		xputenv (xstrdup (buf));
 	}
 }
 
