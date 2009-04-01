@@ -3,6 +3,5 @@
 - -E for #use in any column of soure text file
 - default AWKPATH containig A LIST OF directories
 - include sample to every module.awk
-- alt_getopt_helpers.awk
 - function 'readfile' for reading whole file content
 - support for Windows
