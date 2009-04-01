@@ -214,7 +214,42 @@ error: just a test
 --------------------------------------------------
 ------- args: ../examples/demo_multisub
 --------------------------------------------------
-------- args: ../examples/demo_tokenre
+------- args: ../examples/demo_tokenre ../examples/demo_tokenre.in
+NF=5
+$1=wn:
+$2=UNIX
+$3="UNIX guru"
+$4="UNIX operating system"
+$5="UNIX system"
+NF=4
+$1=jargon:
+$2=Unix
+$3="Unix brain damage"
+$4="Unix conspiracy"
+NF=1
+$1="Unix weenie"
+NF=4
+$1=foldoc:
+$2="berkeley unix"
+$3="bsd unix"
+$4="call unix"
+NF=3
+$1="united kingdom unix users group"
+$2=unix
+$3="unix box"
+NF=3
+$1="unix brain damage"
+$2="unix conspiracy"
+$3="unix international"
+NF=3
+$1="unix man page"
+$2="unix manual page"
+$3="unix system v"
+NF=4
+$1="unix to unix copy"
+$2="unix weenie"
+$3="unix wizard"
+$4="usg unix"
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -h -
 option `h'
