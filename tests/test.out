@@ -212,19 +212,19 @@ error: just a test
        FNR=0
        FILENAME=
 --------------------------------------------------
-------- args: test_multisub
+------- args: demo_multisub
 --------------------------------------------------
-------- args: test_tokenre
+------- args: demo_tokenre
 --------------------------------------------------
-------- args: test_getopt -h -
+------- args: demo_alt_getopt -h -
 option `h'
 ARGV [2] = -
 --------------------------------------------------
-------- args: test_getopt --help
+------- args: demo_alt_getopt --help
 option `h'
 ARGV [2] = -
 --------------------------------------------------
-------- args: test_getopt -h --help -v --verbose -V -o 123 -o234
+------- args: demo_alt_getopt -h --help -v --verbose -V -o 123 -o234
 option `h'
 option `h'
 option `v'
@@ -234,7 +234,7 @@ option `o': 123
 option `o': 234
 ARGV [1] = -
 --------------------------------------------------
-------- args: test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
+------- args: demo_alt_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
 option `o': 123
 option `o': 234
 option `n': 999
@@ -243,7 +243,7 @@ option `len': 5
 option `fake'
 ARGV [11] = /dev/null
 --------------------------------------------------
-------- args: test_getopt -hVv -- -1 -2 -3
+------- args: demo_alt_getopt -hVv -- -1 -2 -3
 option `h'
 option `V'
 option `v'
@@ -251,20 +251,20 @@ ARGV [3] = -1
 ARGV [4] = -2
 ARGV [5] = -3
 --------------------------------------------------
-------- args: test_getopt --fake -v -- -1 -2 -3
+------- args: demo_alt_getopt --fake -v -- -1 -2 -3
 option `fake'
 option `v'
 ARGV [4] = -1
 ARGV [5] = -2
 ARGV [6] = -3
 --------------------------------------------------
-------- args: test_getopt - -1 -2 -3
+------- args: demo_alt_getopt - -1 -2 -3
 ARGV [1] = -
 ARGV [2] = -1
 ARGV [3] = -2
 ARGV [4] = -3
 --------------------------------------------------
-------- args: test_getopt --fake -v - -1 -2 -3
+------- args: demo_alt_getopt --fake -v - -1 -2 -3
 option `fake'
 option `v'
 ARGV [3] = -
@@ -272,32 +272,32 @@ ARGV [4] = -1
 ARGV [5] = -2
 ARGV [6] = -3
 --------------------------------------------------
-------- args: test_getopt -1 -2 -3
+------- args: demo_alt_getopt -1 -2 -3
 Unknown option `-1'
 --------------------------------------------------
-------- args: test_getopt -hvV
+------- args: demo_alt_getopt -hvV
 option `h'
 option `v'
 option `V'
 ARGV [2] = -
 --------------------------------------------------
-------- args: test_getopt -ho 123
+------- args: demo_alt_getopt -ho 123
 option `h'
 Bad usage of option `-o'
 --------------------------------------------------
-------- args: test_getopt -hoV 123
+------- args: demo_alt_getopt -hoV 123
 option `h'
 Bad usage of option `-o'
 --------------------------------------------------
-------- args: test_getopt --unknown
+------- args: demo_alt_getopt --unknown
 Unknown option `--unknown'
 --------------------------------------------------
-------- args: test_getopt --output=file.out -nNNN --len=LENGTH
+------- args: demo_alt_getopt --output=file.out -nNNN --len=LENGTH
 option `o': file.out
 option `n': NNN
 option `len': LENGTH
 ARGV [4] = -
 --------------------------------------------------
-------- args: test_getopt --output --file--
+------- args: demo_alt_getopt --output --file--
 option `o': --file--
 ARGV [3] = -

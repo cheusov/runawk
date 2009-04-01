@@ -7,14 +7,19 @@ unify_paths (){
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk,ARGV[0]=awk,' \
-	-e 's,FILENAME=-$,FILENAME=,'
+	-e 's,FILENAME=-$,FILENAME=,' \
+	-e 's,[.][.]/examples/,,'
 }
 
 runtest (){
     echo '--------------------------------------------------'
     echo "------- args: $@" | unify_paths
-    $OBJDIR/runawk "$@" 2>&1 | awk '!/\/_test_program/' | unify_paths
+    $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
 }
+
+export PATH=`pwd`/examples:$PATH
+
+####################
 
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
 touch _test_program
@@ -125,24 +130,24 @@ BEGIN {
 
 ####################    multisub
 export AWKPATH=`pwd`/../modules
-runtest test_multisub
+runtest ../examples/demo_multisub
 
 ####################    tokenre
-runtest test_tokenre
+runtest ../examples/demo_tokenre
 
 ####################    getopt
-runtest test_getopt -h -
-runtest test_getopt --help
-runtest test_getopt -h --help -v --verbose -V -o 123 -o234
-runtest test_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
-runtest test_getopt -hVv -- -1 -2 -3
-runtest test_getopt --fake -v -- -1 -2 -3
-runtest test_getopt - -1 -2 -3
-runtest test_getopt --fake -v - -1 -2 -3
-runtest test_getopt -1 -2 -3
-runtest test_getopt -hvV
-runtest test_getopt -ho 123
-runtest test_getopt -hoV 123
-runtest test_getopt --unknown
-runtest test_getopt --output='file.out' -nNNN --len=LENGTH
-runtest test_getopt --output --file--
+runtest ../examples/demo_alt_getopt -h -
+runtest ../examples/demo_alt_getopt --help
+runtest ../examples/demo_alt_getopt -h --help -v --verbose -V -o 123 -o234
+runtest ../examples/demo_alt_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
+runtest ../examples/demo_alt_getopt -hVv -- -1 -2 -3
+runtest ../examples/demo_alt_getopt --fake -v -- -1 -2 -3
+runtest ../examples/demo_alt_getopt - -1 -2 -3
+runtest ../examples/demo_alt_getopt --fake -v - -1 -2 -3
+runtest ../examples/demo_alt_getopt -1 -2 -3
+runtest ../examples/demo_alt_getopt -hvV
+runtest ../examples/demo_alt_getopt -ho 123
+runtest ../examples/demo_alt_getopt -hoV 123
+runtest ../examples/demo_alt_getopt --unknown
+runtest ../examples/demo_alt_getopt --output='file.out' -nNNN --len=LENGTH
+runtest ../examples/demo_alt_getopt --output --file--
