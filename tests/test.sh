@@ -133,7 +133,8 @@ export AWKPATH=`pwd`/../modules
 runtest ../examples/demo_multisub
 
 ####################    tokenre
-runtest ../examples/demo_tokenre ../examples/demo_tokenre.in
+runtest ../examples/demo_tokenre  ../examples/demo_tokenre.in
+runtest ../examples/demo_tokenre2 ../examples/demo_tokenre2.in
 
 ####################    getopt
 runtest ../examples/demo_alt_getopt -h -

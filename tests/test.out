@@ -251,6 +251,47 @@ $2="unix weenie"
 $3="unix wizard"
 $4="usg unix"
 --------------------------------------------------
+------- args: ../examples/demo_tokenre2 ../examples/demo_tokenre2.in
+a
+:=
+1
+<NL>
+b
+:=
+2.3
+<NL>
+<NL>
+while
+a
++
+b
+<
+10
+do
+<NL>
+a
+:=
+a
++
+1
+<NL>
+end
+<NL>
+<NL>
+print
+'Hello world!'
+<NL>
+print
+'a = '
+..
+a
+<NL>
+print
+'b = '
+..
+b
+<NL>
+--------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -h -
 option `h'
 ARGV [2] = -

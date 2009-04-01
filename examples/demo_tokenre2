@@ -1,0 +1,24 @@
+#!/usr/bin/env runawk 
+
+#use "tokenre.awk" 
+
+# This demo splits input line into tokens according to regexp that
+# defines lexem of hypotetic programming language.
+
+# Input files for this demo: examples/demo_tokenre2.in*
+
+BEGIN { 
+	TRE =         "if|then|else|while|do|end" 
+	TRE = TRE "|" "[0-9]+([.][0-9]+)?" 
+	TRE = TRE "|" ":=|=|<|>|!=|[+]|-|[*]|/|[.][.]" 
+	TRE = TRE "|" "[()]" 
+	TRE = TRE "|" "[[:alpha:]_][[:alnum:]_]*" 
+	TRE = TRE "|" "'[^']*'" 
+} 
+
+{ 
+	for (i=1; i <= NF; ++i){ 
+		print $i 
+	} 
+	print "<NL>" 
+}

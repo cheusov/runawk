@@ -1,0 +1,10 @@
+a := 1 
+b := 2.3 
+
+while a+b < 10 do 
+    a := a+1 
+end 
+
+print 'Hello world!' 
+print 'a = ' .. a 
+print 'b = ' .. b
