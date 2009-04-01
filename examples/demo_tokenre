@@ -2,7 +2,7 @@
 
 #use "tokenre.awk"
 
-# This demo splits input line into tokens accoring to regexp that
+# This demo splits input line into tokens according to regexp that
 # defines a token, not <space> between tokens.
 #
 # Suported tokens:
