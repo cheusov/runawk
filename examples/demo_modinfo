@@ -1,0 +1,20 @@
+#!/usr/bin/env runawk
+
+#use "abs.awk"            # useless here, just to demonstrate an idea
+#use "alt_assert.awk"     # useless here, just to demonstrate an idea
+#use "min.awk"            # useless here, just to demonstrate an idea
+#use "max.awk"            # useless here, just to demonstrate an idea
+#use "abort.awk"          # useless here, just to demonstrate an idea
+#use "alt_getopt.awk"     # useless here, just to demonstrate an idea
+
+#use "modinfo.awk"
+
+BEGIN {
+	print "A number of modules:", MODC
+	for (i=0; i < MODC; ++i){
+		printf "MODV [%d]=%s\n", i, MODV [i]
+	}
+	print "program name:", MODMAIN
+
+	exit 0
+}

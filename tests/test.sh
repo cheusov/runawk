@@ -7,8 +7,8 @@ unify_paths (){
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk,ARGV[0]=awk,' \
-	-e 's,FILENAME=-$,FILENAME=,' \
-	-e 's,[.][.]/examples/,,'
+	-e 's,FILENAME=-$,FILENAME=,'
+#	-e 's,[.][.]/examples/,,'
 }
 
 runtest (){
@@ -151,3 +151,6 @@ runtest ../examples/demo_alt_getopt -hoV 123
 runtest ../examples/demo_alt_getopt --unknown
 runtest ../examples/demo_alt_getopt --output='file.out' -nNNN --len=LENGTH
 runtest ../examples/demo_alt_getopt --output --file--
+
+####################    modinfo
+runtest ../examples/demo_modinfo
