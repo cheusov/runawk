@@ -158,3 +158,6 @@ runtest ../examples/demo_modinfo
 
 ####################    has_suffix
 runtest ../examples/demo_has_suffix  ../examples/demo_has_suffix.in
+
+####################    has_prefix
+runtest ../examples/demo_has_prefix  ../examples/demo_has_prefix.in

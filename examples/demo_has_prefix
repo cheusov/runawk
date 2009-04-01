@@ -1,0 +1,14 @@
+#!/usr/bin/env runawk
+
+#use "has_prefix.awk"
+
+# This demo checks if $1 has a prefix $2
+
+# Input files for this demo: examples/demo_has_prefix.in*
+
+{
+	if (has_prefix($1, $2))
+		printf "yes, `%s' begins with `%s'\n", $1, $2
+	else
+		printf "no, `%s' does not begin with `%s'\n", $1, $2
+}
