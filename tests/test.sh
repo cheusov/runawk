@@ -155,3 +155,6 @@ runtest ../examples/demo_alt_getopt --output --file--
 
 ####################    modinfo
 runtest ../examples/demo_modinfo
+
+####################    has_suffix
+runtest ../examples/demo_has_suffix  ../examples/demo_has_suffix.in

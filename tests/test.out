@@ -390,3 +390,15 @@ MODV [6]=ROOT/../modules/alt_getopt.awk
 MODV [7]=ROOT/../modules/modinfo.awk
 MODV [8]=ROOT/../examples/demo_modinfo
 program name: ROOT/../examples/demo_modinfo
+--------------------------------------------------
+------- args: ../examples/demo_has_suffix ../examples/demo_has_suffix.in
+no, `mama' does not end with `mamam'
+yes, `mama' ends with `mama'
+no, `mama' does not end with `mam'
+yes, `mama' ends with `ma'
+yes, `mama' ends with `a'
+yes, `mama' ends with `'
+yes, `file.txt' ends with `.txt'
+no, `file.txt' does not end with `.log'
+no, `file.txt' does not end with `.bmp'
+yes, `file.txt' ends with `file.txt'

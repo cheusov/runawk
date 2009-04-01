@@ -1,0 +1,14 @@
+#!/usr/bin/env runawk
+
+#use "has_suffix.awk"
+
+# This demo checks if $1 has a suffix $2
+
+# Input files for this demo: examples/demo_has_suffix.in*
+
+{
+	if (has_suffix($1, $2))
+		printf "yes, `%s' ends with `%s'\n", $1, $2
+	else
+		printf "no, `%s' does not end with `%s'\n", $1, $2
+}
