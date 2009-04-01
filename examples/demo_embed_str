@@ -1,0 +1,21 @@
+#!/usr/bin/env runawk
+
+#use "embed_str.awk"
+
+#.begin-str example1
+# Something
+# Multilined
+#.end-str
+
+#.begin-str example2
+# Very
+#    Long
+#           Text
+#.end-str
+
+BEGIN {
+	print "EMBED_STR [\"example1\"]:`" EMBED_STR ["example1"] "`"
+	print "EMBED_STR [\"example2\"]:`" EMBED_STR ["example2"] "`"
+
+	exit 0
+}
