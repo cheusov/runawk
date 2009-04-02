@@ -5,8 +5,20 @@
 #    
 ############################################################
 
+#use "has_suffix.awk"
+
 # basename -- return filename portion of pathname
-function basename (pathname){
+# (the same as dirname(1))
+
+function basename (pathname, suffix){
+	sub(/\/$/, "", pathname)
+	if (pathname == "")
+		return "/"
+
 	sub(/^.*\//, "", pathname)
+
+	if (suffix != "" && has_suffix(pathname, suffix))
+		pathname = substr(pathname, 1, length(pathname) - length(suffix))
+
 	return pathname
 }

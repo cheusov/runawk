@@ -168,3 +168,20 @@ runtest ../examples/demo_dirname /path/to/file
 runtest ../examples/demo_dirname file.txt
 runtest ../examples/demo_dirname /
 runtest ../examples/demo_dirname /dir/
+
+####################    basename
+runtest ../examples/demo_basename
+runtest ../examples/demo_basename /path/to/file
+runtest ../examples/demo_basename file.txt
+runtest ../examples/demo_basename /
+runtest ../examples/demo_basename /dir/
+
+runtest ../examples/demo_basename /path/to/file.txt .txt
+runtest ../examples/demo_basename file.txt .txt
+runtest ../examples/demo_basename / .txt
+runtest ../examples/demo_basename /dir/ .txt
+
+runtest ../examples/demo_basename /path/to/file.txt .log
+runtest ../examples/demo_basename file.txt .log
+runtest ../examples/demo_basename / .log
+runtest ../examples/demo_basename /dir/ .log

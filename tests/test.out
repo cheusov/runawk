@@ -430,3 +430,42 @@ Usage: dirname path
 --------------------------------------------------
 ------- args: ../examples/demo_dirname /dir/
 /
+--------------------------------------------------
+------- args: ../examples/demo_basename
+Usage: basename path
+--------------------------------------------------
+------- args: ../examples/demo_basename /path/to/file
+file
+--------------------------------------------------
+------- args: ../examples/demo_basename file.txt
+file.txt
+--------------------------------------------------
+------- args: ../examples/demo_basename /
+/
+--------------------------------------------------
+------- args: ../examples/demo_basename /dir/
+dir
+--------------------------------------------------
+------- args: ../examples/demo_basename /path/to/file.txt .txt
+file
+--------------------------------------------------
+------- args: ../examples/demo_basename file.txt .txt
+file
+--------------------------------------------------
+------- args: ../examples/demo_basename / .txt
+/
+--------------------------------------------------
+------- args: ../examples/demo_basename /dir/ .txt
+dir
+--------------------------------------------------
+------- args: ../examples/demo_basename /path/to/file.txt .log
+file.txt
+--------------------------------------------------
+------- args: ../examples/demo_basename file.txt .log
+file.txt
+--------------------------------------------------
+------- args: ../examples/demo_basename / .log
+/
+--------------------------------------------------
+------- args: ../examples/demo_basename /dir/ .log
+dir

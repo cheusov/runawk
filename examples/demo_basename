@@ -1,0 +1,18 @@
+#!/usr/bin/env runawk
+
+#use "basename.awk"
+
+# replacement for basename(1) written in AWK
+
+BEGIN {
+	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
+
+	if (ARGC != 2 && ARGC != 3){
+		print "Usage: basename path"
+		exit 1
+	}
+
+	print basename(ARGV [1], ARGV [2])
+
+	exit 0
+}
