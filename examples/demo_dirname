@@ -1,0 +1,18 @@
+#!/usr/bin/env runawk
+
+#use "dirname.awk"
+
+# replacement for dirname(1) written in AWK
+
+BEGIN {
+	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
+
+	if (ARGC != 2){
+		print "Usage: dirname path"
+		exit 1
+	}
+
+	print dirname(ARGV [1])
+
+	exit 0
+}

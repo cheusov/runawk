@@ -5,10 +5,14 @@
 #    
 ############################################################
 
-# dirname -- return directory portion of pathname
+# basename -- return filename portion of pathname
+# (the same as dirname(1))
+
 function dirname (pathname){
-	if (sub(/\/[^\/]*$/, "", pathname))
+	if (!sub(/\/[^\/]*\/?$/, "", pathname))
+		return "."
+	else if (pathname != "")
 		return pathname
 	else
-		return "."
+		return "/"
 }

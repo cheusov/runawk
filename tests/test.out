@@ -415,3 +415,18 @@ no, `file.txt' does not begin with `.log'
 yes, `file.txt' begins with `file.'
 yes, `file.txt' begins with `file'
 no, `file.txt' does not begin with `bzzzzzzzzzzzzz'
+--------------------------------------------------
+------- args: ../examples/demo_dirname
+Usage: dirname path
+--------------------------------------------------
+------- args: ../examples/demo_dirname /path/to/file
+/path/to
+--------------------------------------------------
+------- args: ../examples/demo_dirname file.txt
+.
+--------------------------------------------------
+------- args: ../examples/demo_dirname /
+/
+--------------------------------------------------
+------- args: ../examples/demo_dirname /dir/
+/

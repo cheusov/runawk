@@ -161,3 +161,10 @@ runtest ../examples/demo_has_suffix  ../examples/demo_has_suffix.in
 
 ####################    has_prefix
 runtest ../examples/demo_has_prefix  ../examples/demo_has_prefix.in
+
+####################    dirname
+runtest ../examples/demo_dirname
+runtest ../examples/demo_dirname /path/to/file
+runtest ../examples/demo_dirname file.txt
+runtest ../examples/demo_dirname /
+runtest ../examples/demo_dirname /dir/
