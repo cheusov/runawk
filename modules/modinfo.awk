@@ -15,6 +15,8 @@
 # MODMAIN - Path to the main module, i.e. program filename
 #
 
+# See example/demo_modinfo for the sample of usage
+
 BEGIN {
 	MODC = ENVIRON ["RUNAWK_MODC"] + 0 # force to number
 

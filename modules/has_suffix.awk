@@ -8,6 +8,8 @@
 # has_suffix(STRING, SUFFIX)
 #   `has_suffix' returns TRUE if STRING ends with SUFFIX
 
+# See example/demo_has_suffix for the sample of usage
+
 function has_suffix (s, suf,                 suf_len, s_len){
 	suf_len = length(suf)
 	s_len   = length(s)

@@ -12,7 +12,7 @@
 # to AWK application and follows rules from
 # SUS/POSIX "Utility Syntax Guidelines"
 #
-# See example/demo_power_getopt for the same of usage
+# See example/demo_power_getopt for the sample of usage
 
 function print_help (            i){
 	for (i = 1; i <= _help_msg_cnt; ++i){

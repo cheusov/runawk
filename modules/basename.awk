@@ -10,6 +10,8 @@
 # basename -- return filename portion of pathname
 # (the same as dirname(1))
 
+# See example/demo_basename for the sample of usage
+
 function basename (pathname, suffix){
 	sub(/\/$/, "", pathname)
 	if (pathname == "")

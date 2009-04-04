@@ -8,6 +8,11 @@
 #use "xgetline.awk"
 #use "xclose.awk"
 
+# readfile(FILENAME)
+#   read entire file and return its content as a string
+
+# See example/demo_readfile for the sample of usage
+
 function readfile (fn,                      ret){
 	# Unfortunately there is no way portable accross all awk flavours
 	# to read an entire file content by single 'getline' command.

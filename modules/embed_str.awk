@@ -21,6 +21,8 @@
 #EMBED_STR ["mymsg"]="Line1\nLine2"
 #
 
+# See example/demo_embed_str for the sample of usage
+
 #use "xgetline.awk"
 #use "modinfo.awk"
 #use "xclose.awk"

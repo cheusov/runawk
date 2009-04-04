@@ -21,11 +21,8 @@
 # TRE - variable. If it is set to not empty string, splitting is
 #   made by default for all input strings.
 #
-# For example:
-#      tokenre("print \"Hello world!\"", "\"([^\"]|\\\")*\"|[[:alnum:]_]+")
-#      | NF == 2
-#      | $1 == print
-#      | $2 == "Hello world!"
+
+# See example/demo_tokenre for the sample of usage
 
 function tokenre (s, re){
 	NF = 0

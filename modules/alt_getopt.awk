@@ -15,6 +15,7 @@
 #       to the function from GNU awk (getopt.awk)
 # NOTE: alt_getopt.awk module follows rules
 #       from SUS/POSIX "Utility Syntax Guidelines"
+#
 
 ###############################################################
 # #                       EXAMPLE
