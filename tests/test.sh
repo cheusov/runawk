@@ -2,6 +2,9 @@
 
 set -e
 
+LC_ALL=C
+export LC_ALL
+
 unify_paths (){
     sed -e "s,`pwd`,ROOT," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
@@ -189,3 +192,11 @@ runtest ../examples/demo_basename /dir/ .log
 ####################    readfile
 runtest ../examples/demo_readfile
 runtest ../examples/demo_readfile ../examples/demo_readfile.in
+
+####################    power_getopt
+runtest ../examples/demo_power_getopt
+echo //////////////////////////////////////////////////
+runtest ../examples/demo_power_getopt -h 2>&1 | sort
+echo //////////////////////////////////////////////////
+runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 2>&1 | sort
+echo //////////////////////////////////////////////////

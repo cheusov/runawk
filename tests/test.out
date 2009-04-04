@@ -477,3 +477,31 @@ usage: demo_readfile <filename>
 line1
 line2
 line3
+--------------------------------------------------
+------- args: ../examples/demo_power_getopt
+The following option were applied
+//////////////////////////////////////////////////
+      --LONG-FLAG <value>     long flag with value
+      --long-flag             long flag only
+   -F|--FLAG <value>          flag with value
+   -S <value>                 short flag with value
+   -f|--flag                  flag
+   -h|--help                  display this screen
+   -s                         short flag only
+------- args: ../examples/demo_power_getopt -h
+--------------------------------------------------
+OPTIONS:
+power_getopt - program demonstrating a power of power_getopt.awk module
+usage: power_getopt [OPTIONS]
+//////////////////////////////////////////////////
+------- args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456
+--------------------------------------------------
+The following option were applied
+options [FLAG]=234
+options [F]=123
+options [LONG-FLAG]=345
+options [S]=456
+options [f]=
+options [long-flag]=
+options [s]=
+//////////////////////////////////////////////////

@@ -13,6 +13,8 @@
 #   --long-option) present in GNU libc and BSD systems are also supported.
 # NOTE: 'getopt' function from alt_getopt.awk is not compatible
 #       to the function from GNU awk (getopt.awk)
+# NOTE: alt_getopt.awk module follows rules
+#       from SUS/POSIX "Utility Syntax Guidelines"
 
 ###############################################################
 # #                       EXAMPLE

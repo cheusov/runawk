@@ -23,6 +23,7 @@
 
 #use "xgetline.awk"
 #use "modinfo.awk"
+#use "xclose.awk"
 
 BEGIN {
 	_embed_str_id = ""
@@ -40,4 +41,5 @@ BEGIN {
 			EMBED_STR [_embed_str_id] = EMBED_STR [_embed_str_id] _nl substr($0, 3)
 		}
 	}
+	xclose(MODMAIN)
 }

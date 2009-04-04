@@ -1,0 +1,26 @@
+#!/usr/bin/env runawk
+
+#use "power_getopt.awk"
+
+#.begin-str help
+# power_getopt - program demonstrating a power of power_getopt.awk module
+# usage: power_getopt [OPTIONS]
+# OPTIONS:
+#    -h|--help                  display this screen
+#    -f|--flag                  flag
+#       --long-flag             long flag only
+#    -s                         short flag only
+#    =F|--FLAG <value>          flag with value
+#       =-LONG-FLAG <value>     long flag with value
+#    =S <value>                 short flag with value
+#.end-str
+
+# Very powerful easy for use module for handling options
+
+BEGIN {
+	print "The following option were applied"
+	for (i in options){
+		print "options [" i "]=" options [i]
+	}
+	exit 0
+}
