@@ -469,3 +469,11 @@ file.txt
 --------------------------------------------------
 ------- args: ../examples/demo_basename /dir/ .log
 dir
+--------------------------------------------------
+------- args: ../examples/demo_readfile
+usage: demo_readfile <filename>
+--------------------------------------------------
+------- args: ../examples/demo_readfile ../examples/demo_readfile.in
+line1
+line2
+line3

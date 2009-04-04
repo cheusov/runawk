@@ -185,3 +185,7 @@ runtest ../examples/demo_basename /path/to/file.txt .log
 runtest ../examples/demo_basename file.txt .log
 runtest ../examples/demo_basename / .log
 runtest ../examples/demo_basename /dir/ .log
+
+####################    readfile
+runtest ../examples/demo_readfile
+runtest ../examples/demo_readfile ../examples/demo_readfile.in

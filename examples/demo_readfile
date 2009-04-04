@@ -1,0 +1,20 @@
+#!/usr/bin/env runawk
+
+#use "readfile.awk"
+
+# This demo reads an entire file, stores its content in a variable and
+# then print it.
+
+# Input files for this demo: examples/demo_readfile.in*
+
+BEGIN {
+	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
+
+	if (ARGC != 2){
+		print "usage: demo_readfile <filename>"
+		exit 1
+	}
+
+	content = readfile(ARGV [1])
+	print content
+}
