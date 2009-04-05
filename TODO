@@ -1,7 +1,3 @@
-- examples/ex_<modulename>
-- power_getopt.awk
 - -E for #use in any column of soure text file
 - default AWKPATH containig A LIST OF directories
-- include sample to every module.awk
-- function 'readfile' for reading whole file content
 - support for Windows
