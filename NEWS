@@ -1,4 +1,43 @@
 ======================================================================
+Version 0.16.0, by Aleksey Cheusov, Sun,  5 Apr 2009 12:45:44 +0300
+
+  Lots of demo programs for most runawk modules were created and 
+  they are in examples/ subdirectory now.
+
+  New MEGA module ;-) power_getopt.awk
+  See the documentation and demo program examples/demo_power_getopt.
+  It makes options handling REALLY easy.
+
+  New modules:
+      embed_str.awk
+      has_suffix.awk
+      has_prefix.awk
+      readfile.awk
+      modinfo.awk
+
+  Minor fixes and improvements in dirname.awk and basename.awk.
+  Now they are fully compatible with dirname(1) and basename(1)
+
+  RUNAWK sets the following environment variables for the child awk
+      subprocess:
+
+      RUNAWK_MODC - A number of modules (-f filename) passed to AWK
+      RUNAWK_MODV_<n> - Full path to the module #n,
+          where n is in [0..RUNAWK_MODC) range.
+
+  RUNAWK sets RUNAWK_ART_STDIN environment variable for the child awk
+  subprocess to 1 if additional/artificial `-' was added to the list
+  to awk's arguments.
+
+  Makefile:
+     bmake-ism were removed. Now Makefile is fully compatible with
+     FreeBSD make.
+
+     CLEANFILES target is used instead of hand-made rules
+
+     Minor fix in 'test_all' target
+
+======================================================================
 Version 0.15.0, by Aleksey Cheusov, Fri, 19 Dec 2008 21:41:00 +0200
 
    new module alt_getopt.awk that implements 'getopt' function
