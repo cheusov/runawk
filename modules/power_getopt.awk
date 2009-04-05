@@ -22,6 +22,12 @@
 #  =-XXX          long option with argument
 #  =X|--XXX       single letter option and long synonym with argument
 #
+# power_getopt.awk also provides getarg function
+#
+# getarg(OPT, DEFAULT)
+#  returns either 1 or 0 for options without arguments,
+#  and either specified value or DEFAULT for options having value.
+#
 # See example/demo_power_getopt for the sample of usage
 #
 #
