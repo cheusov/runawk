@@ -480,11 +480,23 @@ line3
 --------------------------------------------------
 ------- args: ../examples/demo_power_getopt
 The following option were applied
+f         --- 0
+flag      --- 0
+long-flag --- 0
+s         --- 0
+F         --- default1
+FLAG      --- default2
+LONG-FLAG --- default3
+S         --- default4
+X         --- 0
+Y         --- default5
 //////////////////////////////////////////////////
       --LONG-FLAG <value>     long flag with value
       --long-flag             long flag only
    -F|--FLAG <value>          flag with value
    -S <value>                 short flag with value
+   -X                         short flag
+   -Y <value>                 short flag with value
    -f|--flag                  flag
    -h|--help                  display this screen
    -s                         short flag only
@@ -496,12 +508,21 @@ usage: power_getopt [OPTIONS]
 //////////////////////////////////////////////////
 ------- args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456
 --------------------------------------------------
+F         --- 234
+FLAG      --- 234
+LONG-FLAG --- 345
+S         --- 456
 The following option were applied
-options [FLAG]=234
-options [F]=123
+X         --- 0
+Y         --- default5
+f         --- 1
+flag      --- 1
+long-flag --- 1
+options [F]=234
 options [LONG-FLAG]=345
 options [S]=456
 options [f]=
 options [long-flag]=
 options [s]=
+s         --- 1
 //////////////////////////////////////////////////

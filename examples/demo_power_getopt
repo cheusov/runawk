@@ -13,6 +13,8 @@
 #    =F|--FLAG <value>          flag with value
 #       =-LONG-FLAG <value>     long flag with value
 #    =S <value>                 short flag with value
+#    -X                         short flag
+#    =Y <value>                 short flag with value
 #.end-str
 
 # Very powerful easy for use module for handling options
@@ -22,5 +24,16 @@ BEGIN {
 	for (i in options){
 		print "options [" i "]=" options [i]
 	}
+	print "f         --- " getarg("f")
+	print "flag      --- " getarg("flag")
+	print "long-flag --- " getarg("long-flag")
+	print "s         --- " getarg("s")
+	print "F         --- " getarg("F", "default1")
+	print "FLAG      --- " getarg("FLAG", "default2")
+	print "LONG-FLAG --- " getarg("LONG-FLAG", "default3")
+	print "S         --- " getarg("S", "default4")
+	print "X         --- " getarg("X")
+	print "Y         --- " getarg("Y", "default5")
+
 	exit 0
 }

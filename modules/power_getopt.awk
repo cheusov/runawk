@@ -12,7 +12,19 @@
 # to AWK application and follows rules from
 # SUS/POSIX "Utility Syntax Guidelines"
 #
+# power_getopt.awk analyses '.begin-str help/.end-str' section in
+# AWK program (main module), and processes options specified there.
+# The following strings mean options:
+#  -X             single letter option
+#  --XXX          long option
+#  -X|--XXX       single letter option with long synonym
+#  =X             single letter option with argument
+#  =-XXX          long option with argument
+#  =X|--XXX       single letter option and long synonym with argument
+#
 # See example/demo_power_getopt for the sample of usage
+#
+#
 
 function print_help (            i){
 	for (i = 1; i <= _help_msg_cnt; ++i){
@@ -21,6 +33,27 @@ function print_help (            i){
 		}
 		print _help_msg_arr [i] > "/dev/stderr"
 	}
+}
+
+function getarg (opt, default,              tmp){
+	assert(opt in __getopt_opts, "Bad option `" opt "`")
+
+	if (opt in long_opts){
+		tmp = long_opts [opt]
+		if (tmp != "" && tmp != takes_arg)
+			opt = tmp
+	}
+
+	if (__getopt_opts [opt] == takes_arg)
+		if (opt in options)
+			return options [opt]
+		else
+			return default
+	else
+		if (opt in options)
+			return 1
+		else
+			return 0
 }
 
 BEGIN {
@@ -58,19 +91,28 @@ BEGIN {
 					short_opts = short_opts substr(_sopt, 2, 1) ":"
 				}
 
+				sub(/^[-=]/, "", _sopt)
+
 				if (_lopt ~ /^--.+$/){
 					# --help
-					long_opts [substr(_lopt, 3)] = ""
+					long_opts [substr(_lopt, 3)] = _sopt
 				}else if (_lopt ~ /^=-.+$/){
 					# =-FLAG
-					sub(/^=/, "-", _lopt)
-					long_opts [substr(_lopt, 3)] = takes_arg
+					if (_sopt != "")
+						long_opts [substr(_lopt, 3)] = _sopt
+					else
+						long_opts [substr(_lopt, 3)] = takes_arg
 				}
 			}
 		}
 
 		# options
 		while (getopt(short_opts)){
+			if (optopt in long_opts){
+				_i = long_opts [optopt]
+				if (_i != "" && _i != takes_arg)
+					optopt = _i
+			}
 			options [optopt] = optarg
 		}
 
