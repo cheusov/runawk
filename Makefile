@@ -73,8 +73,8 @@ test : runawk
 # is definitely buggy, oawk is also NOT supported
 
 AWK_PROGS=/usr/bin/awk /usr/bin/nawk /usr/bin/gawk /usr/bin/original-awk \
-   /usr/pkg/bin/nawk /usr/pkg/bin/gawk /usr/pkg/bin/nbawk \
-   /usr/pkg/heirloom/bin/posix/awk /usr/pkg/heirloom/bin/posix2001/awk
+   /usr/pkg/bin/nawk /usr/pkg/bin/gawk /usr/pkg/bin/nbawk #\
+#   /usr/pkg/heirloom/bin/posix/awk /usr/pkg/heirloom/bin/posix2001/awk
 #   /usr/pkg/heirloom/bin/nawk
 #   /usr/bin/mawk /usr/pkg/bin/mawk /usr/pkg/bin/mawk-uxre
 
@@ -83,7 +83,7 @@ test_all:
 .for awk in ${AWK_PROGS}
 	@if test -x ${awk}; then \
 		echo testing ${awk}; \
-		export RUNAWK_AWKPROG=${awk}; ${MAKE} test; \
+		export RUNAWK_AWKPROG=${awk}; cd ${.CURDIR} && ${MAKE} test; \
 		echo ''; \
 	fi
 .endfor
