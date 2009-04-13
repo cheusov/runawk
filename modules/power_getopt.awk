@@ -41,7 +41,7 @@ function print_help (            i){
 	}
 }
 
-function getarg (opt, default,              tmp){
+function getarg (opt, dflt,              tmp){
 	assert(opt in __getopt_opts, "Bad option `" opt "`")
 
 	if (opt in long_opts){
@@ -54,7 +54,7 @@ function getarg (opt, default,              tmp){
 		if (opt in options)
 			return options [opt]
 		else
-			return default
+			return dflt
 	else
 		if (opt in options)
 			return 1
