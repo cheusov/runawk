@@ -182,3 +182,9 @@ Example:
        MANGRP=users \
        MKCATPAGES=no \
           make -s all install-dirs install
+
+======================================================================
+
+                           EXAMPLES
+
+Lots of examples are available in examples/ subdirectory
