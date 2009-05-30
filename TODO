@@ -1,3 +1,4 @@
-- -E for #use in any column of soure text file
+- -e for #use in any column of soure text file
 - default AWKPATH containig A LIST OF directories
 - support for Windows
+- getopt_long written in runawk
