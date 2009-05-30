@@ -20,7 +20,8 @@ runtest (){
     $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
 }
 
-export PATH=`pwd`/examples:$PATH
+PATH=`pwd`/examples:$PATH
+export PATH
 
 ####################
 
@@ -52,20 +53,23 @@ cat > _test.tmp <<EOF
 EOF
 
 ####################
-export AWKPATH=`pwd`/mods2
+AWKPATH=`pwd`/mods2
+export AWKPATH
 runtest _test.tmp
 
 unset AWKPATH
 runtest _test.tmp
 
 ################### RUNAWK_MODx
-export AWKPATH=`pwd`/../modules:`pwd`/mods2
+AWKPATH=`pwd`/../modules:`pwd`/mods2
+export AWKPATH
 
 runtest `pwd`/mods1/test_modinfo
 
 ####################
 
-export AWKPATH=`pwd`/mods3
+AWKPATH=`pwd`/mods3
+export AWKPATH
 runtest `pwd`/mods3/failed1.awk
 runtest `pwd`/mods3/failed2.awk
 runtest `pwd`/mods3/failed3.awk
@@ -73,7 +77,8 @@ runtest `pwd`/mods3/failed4.awk
 
 ####################
 
-export TESTVAR=testval
+TESTVAR=testval
+export TESTVAR
 runtest `pwd`/mods3/test5.awk
 
 ####################
@@ -113,7 +118,8 @@ BEGIN {
 '
 
 ####################
-export AWKPATH=`pwd`/../modules
+AWKPATH=`pwd`/../modules
+export AWKPATH
 runtest -d -e '
 #use "alt_assert.awk"
 
@@ -132,7 +138,8 @@ BEGIN {
 '
 
 ####################    multisub
-export AWKPATH=`pwd`/../modules
+AWKPATH=`pwd`/../modules
+export AWKPATH
 runtest ../examples/demo_multisub
 
 ####################    tokenre
