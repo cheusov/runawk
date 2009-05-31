@@ -7,7 +7,12 @@ MODULESDIR?=		${PREFIX}/share/runawk
 
 MKHTML?=		no
 
+.if exists(/usr/xpg4/bin/awk)
+AWK_PROG?=		/usr/xpg4/bin/awk
+.else
 AWK_PROG?=		/usr/bin/awk
+.endif
+
 STDIN_FILENAME?=	- #/dev/stdin
 
 POD2MAN?=		pod2man
