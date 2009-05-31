@@ -5,6 +5,8 @@ set -e
 LC_ALL=C
 export LC_ALL
 
+OBJDIR=${OBJDIR:=..}
+
 unify_paths (){
     sed -e "s,`pwd`,ROOT," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
