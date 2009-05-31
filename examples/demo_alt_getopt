@@ -27,6 +27,7 @@ BEGIN {
 		}else{
 			abort()
 		}
+		fflush()
 	}
 
 	for (i=1; i < ARGC; ++i){
