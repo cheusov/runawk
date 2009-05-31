@@ -1,4 +1,11 @@
 - -e for #use in any column of soure text file
 - default AWKPATH containig A LIST OF directories
 - support for Windows
+- isnum (x) {return x == x + 0}
+- join (x) {
+     newstring = parts[1]
+     for (i=2; i in parts; i++)
+        newstring = newstring FS newstring[i]
+     return newstring
+  }
 - getopt_long written in runawk
