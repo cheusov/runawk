@@ -9,8 +9,8 @@ function test (ideal, input, repls, num,                 res){
 #	print "res=" res > "/dev/stderr"
 	if (ideal != res){
 		msg = ("test " num " failed")
-		msg = msg ", ideal=\"" ideal "\""
-		msg = msg ", res=\"" res "\""
+		msg = msg "\n ideal=\"" ideal "\""
+		msg = msg "\n res  =\"" res "\""
 		abort(msg)
 	}
 #	print "test " num " succeeded"
@@ -24,12 +24,14 @@ BEGIN {
 	test("aaa", "aaa", "b:c", 3)
 	test("dc", "bbb", "b:c   bb:d", 4)
 	test("e", "bbb", "b:c   bbb:e   bb:d", 5)
-	test("ccBBde", "ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e", 6)
+	test("Bd", "BBBA", "ABB:c   BBA:d", 6)
+	test("ccBBde", "ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e", 7)
 
 	if (!__buggy_mawk)
 		test("aaa\nbbb\nccc\tddd\aeee\a", "aaa\\nbbb\\nccc\\tddd\\aeee\\a", "\\t:\t   \\a:\a   \\n:\n", 7)
 
-	test("question_question_osb_osb_csb_csb_ocb_ocb_ccb_ccb_or_or_orb_orb_crb_crb_star_star_plus_plus_dot_power_power_dollar_backslash_", "??[[]]{{}}||(())**++.^^$\\", "$:dollar_   ^:power_   .:dot_   +:plus_   *:star_   ):crb_   (:orb_   |:or_   }:ccb_   {:ocb_   [:osb_   ]:csb_   ?:question_   \\:backslash_", 8)
+	test("question_question_osb_osb_csb_csb_ocb_ocb_ccb_ccb_or_or_orb_orb_crb_crb_star_star_plus_plus_dot_power_power_dollar_backslash_",
+		"??[[]]{{}}||(())**++.^^$\\", "$:dollar_   ^:power_   .:dot_   +:plus_   *:star_   ):crb_   (:orb_   |:or_   }:ccb_   {:ocb_   [:osb_   ]:csb_   ?:question_   \\:backslash_", 8)
 
 	exit 0
 }
