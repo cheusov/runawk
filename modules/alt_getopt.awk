@@ -64,7 +64,6 @@
 
 function __getopt_errexit (msg, status)
 {
-	fflush()
 	print msg > "/dev/stderr"
 	exitnow(status)
 }
