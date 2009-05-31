@@ -60,27 +60,25 @@ function __runawk_multisub_prepare (repls,
 
 		__runawk_tr_regexp [__runawk_multisub_num] = re
 
-#		print "re=" re
-
 		return __runawk_multisub_num
 	}
 }
 
 function multisub (str, repls,
-
-					n, middle) #local vars
+    n,middle,beg,end,ret) #local vars
 {
 	n = __runawk_multisub_prepare(repls)
 	if (n < 0 || !match(str, __runawk_tr_regexp [n])){
 		return str
 	}else{
 		middle = substr(str, RSTART, RLENGTH)
+		beg    = substr(str, 1, RSTART-1)
+		end    = substr(str, RSTART+RLENGTH)
 
 		assert((n SUBSEP middle) in __runawk_tr_repl, "E-mail bug to the author!")
 
-		return substr(str, 1, RSTART-1)			\
-		       __runawk_tr_repl [n, middle]		\
-		       multisub(substr(str, RSTART+RLENGTH), repls)
+		ret = beg __runawk_tr_repl [n, middle] multisub(end, repls)
+		return ret
 	}
 }
 
