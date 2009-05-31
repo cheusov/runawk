@@ -1,0 +1,11 @@
+#!/usr/bin/env runawk
+
+#use "str2regexp.awk"
+
+# This demo converts string ($0) to regexp that matches this string
+
+# Input files for this demo: examples/demo_str2regexp.in*
+
+{
+   print $0 " --> " str2regexp($0)
+}
