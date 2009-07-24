@@ -8,6 +8,8 @@ MODULESDIR?=		${PREFIX}/share/runawk
 MKHTML?=		no
 
 .if exists(/usr/xpg4/bin/awk)
+# Solaris' /usr/bin/awk sucks so much... :-(
+# /usr/xpg4/bin/awk sucks too but sucks less.
 AWK_PROG?=		/usr/xpg4/bin/awk
 .else
 AWK_PROG?=		/usr/bin/awk
@@ -83,7 +85,7 @@ AWK_PROGS=/usr/bin/awk /usr/bin/nawk /usr/bin/gawk /usr/bin/original-awk \
 #   /usr/pkg/heirloom/bin/nawk
 #   /usr/bin/mawk /usr/pkg/bin/mawk /usr/pkg/bin/mawk-uxre
 
-.PHOMY: test_all
+.PHONY: test_all
 test_all:
 .for awk in ${AWK_PROGS}
 	@if test -x ${awk}; then \
