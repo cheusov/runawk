@@ -2,7 +2,7 @@
 #
 # This awk module is a part of RUNAWK distribution,
 #        http://sourceforge.net/projects/runawk
-#    
+#
 ############################################################
 
 # multisub(STRING, SUBST_REPLS)
