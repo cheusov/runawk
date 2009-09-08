@@ -22,6 +22,12 @@ runtest (){
     $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
 }
 
+runtest_nostderr (){
+    echo '--------------------------------------------------'
+    echo "------- args: $@" | unify_paths
+    $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
+}
+
 PATH=`pwd`/examples:$PATH
 export PATH
 
@@ -200,6 +206,9 @@ runtest ../examples/demo_basename /dir/ .log
 
 ####################    shquote
 runtest ../examples/demo_shquote ../examples/demo_shquote.in
+
+####################    alt_join
+runtest_nostderr ../examples/demo_alt_join
 
 ####################    readfile
 runtest ../examples/demo_readfile

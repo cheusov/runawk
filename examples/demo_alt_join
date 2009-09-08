@@ -1,0 +1,63 @@
+#!/usr/bin/env runawk
+
+#use "alt_join.awk"
+#use "alt_assert.awk"
+
+BEGIN {
+	# simple tests for join_keys and join_values
+	hash ["apple"]     = "red"
+	hash ["bilberry"]  = "dark blue"
+	hash ["raspberry"] = "crimson"
+	hash ["currant"]   = "black"
+
+	keys1 = join_keys(hash, " ")
+	keys2 = join_keys(hash, "")
+	keys3 = join_keys(hash, (SUBSEP SUBSEP))
+
+	values1 = join_values(hash, " ")
+	values2 = join_values(hash, "")
+	values3 = join_values(hash, (SUBSEP SUBSEP))
+
+	print "keys1=" keys1 > "/dev/stderr"
+	print "keys2=" keys2 > "/dev/stderr"
+	print "keys3=" keys3 > "/dev/stderr"
+
+	print "values1=" values1 > "/dev/stderr"
+	print "values2=" values2 > "/dev/stderr"
+	print "values3=" values3 > "/dev/stderr"
+
+	assert(length(keys1) == 32)
+	assert(length(keys2) == 29)
+	assert(length(keys3) == 35)
+
+	assert(length(values1) == 27)
+	assert(length(values2) == 24)
+	assert(length(values3) == 30)
+
+	# tests for empty hashes
+	keys_empty   = join_keys(empty_hash, "qqq")
+	values_empty = join_values(empty_hash, "qqq")
+
+	print "keys_empty=" keys_empty     > "/dev/stderr"
+	print "values_empty=" values_empty > "/dev/stderr"
+
+	assert(keys_empty == "")
+	assert(values_empty == "")
+
+	# test for the case when key == "" or value == ""
+	hash_foo [""] = "good"
+	hash_foo ["bad"] = ""
+
+	keys_foo   = join_keys(hash_foo, " ")
+	values_foo = join_values(hash_foo, " ")
+
+	print "keys_foo=" keys_foo     > "/dev/stderr"
+	print "values_foo=" values_foo > "/dev/stderr"
+
+	assert(4 == length(keys_foo))
+	assert(5 == length(values_foo))
+
+	print "succeeded"
+
+	exit 0
+}
