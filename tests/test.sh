@@ -198,6 +198,9 @@ runtest ../examples/demo_basename file.txt .log
 runtest ../examples/demo_basename / .log
 runtest ../examples/demo_basename /dir/ .log
 
+####################    shquote
+runtest ../examples/demo_shquote ../examples/demo_shquote.in
+
 ####################    readfile
 runtest ../examples/demo_readfile
 runtest ../examples/demo_readfile ../examples/demo_readfile.in

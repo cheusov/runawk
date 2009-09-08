@@ -470,6 +470,32 @@ file.txt
 ------- args: ../examples/demo_basename /dir/ .log
 dir
 --------------------------------------------------
+------- args: ../examples/demo_shquote ../examples/demo_shquote.in
+\'
+echo: '
+\'''\'
+echo: ''
+\'''\'''\'
+echo: '''
+'\'
+echo: \
+'\\'
+echo: \\
+'\\\'
+echo: \\\
+'\\'\'
+echo: \\'
+\''\'\'
+echo: '\'
+'Apple'\''s'
+echo: Apple's
+'apple'
+echo: apple
+'file name.txt'
+echo: file name.txt
+'*&;<>#~^$`!][(){}?'
+echo: *&;<>#~^$`!][(){}?
+--------------------------------------------------
 ------- args: ../examples/demo_readfile
 usage: demo_readfile <filename>
 --------------------------------------------------

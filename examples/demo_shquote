@@ -1,0 +1,13 @@
+#!/usr/bin/env runawk
+
+#use "shquote.awk"
+#use "xsystem.awk"
+
+# This demo runs shquote ($0) for each input line and outputs the result.
+
+# Input files for this demo: examples/demo_shquote.in
+
+{
+	print shquote($0)
+	xsystem("echo echo: " shquote($0))
+}
