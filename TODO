@@ -1,4 +1,3 @@
-- runawk -f module.awk -e 'code here'
 - shquote(1) executable similar to that by Alan Barret
 - -e for #use in any column of soure text file
 - default AWKPATH containing A LIST OF directories
