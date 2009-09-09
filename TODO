@@ -1,5 +1,4 @@
 - shquote(1) executable similar to that by Alan Barret
-- -e for #use in any column of soure text file
 - default AWKPATH containing A LIST OF directories
 - support for Windows
 - getopt_long(1) written in runawk
