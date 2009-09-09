@@ -43,6 +43,10 @@ runtest -d --without-stdin _test_program -o=file
 runtest --debug -I _test_program -o=file
 runtest -d  _test_program fn1 fn2
 runtest -di _test_program arg1 arg2
+AWKPATH=`pwd`/../modules runtest \
+    -d -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
+AWKPATH=`pwd`/../modules runtest \
+    -d -f alt_assert.awk -e 'BEGIN {exit}'
 runtest --debug --with-stdin _test_program arg1 arg2
 runtest -V | awk 'NR <= 2 {print $0} NR == 3 {print "xxx"}'
 runtest -h | awk 'NR <= 3'
@@ -144,6 +148,12 @@ BEGIN {
    abort("just a test", 7)
 }
 '
+
+AWKPATH=`pwd`/../modules runtest \
+    -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
+
+AWKPATH=`pwd`/../modules runtest \
+    -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
 ####################    multisub
 AWKPATH=`pwd`/../modules

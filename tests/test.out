@@ -45,6 +45,26 @@ new_argv [4] = arg1
 new_argv [5] = arg2
 new_argv [6] = -
 --------------------------------------------------
+------- args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = ROOT/../modules/abs.awk
+new_argv [3] = -f
+new_argv [4] = /tmp/runawk.NNNNNN
+new_argv [5] = --
+--------------------------------------------------
+------- args: -d -f alt_assert.awk -e BEGIN {exit}
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = ROOT/../modules/exitnow.awk
+new_argv [3] = -f
+new_argv [4] = ROOT/../modules/abort.awk
+new_argv [5] = -f
+new_argv [6] = ROOT/../modules/alt_assert.awk
+new_argv [7] = -f
+new_argv [8] = /tmp/runawk.NNNNNN
+new_argv [9] = --
+--------------------------------------------------
 ------- args: --debug --with-stdin _test_program arg1 arg2
 new_argv [0] = _test_program
 new_argv [1] = -f
@@ -206,6 +226,17 @@ BEGIN {
 }
 
 error: just a test
+       ARGV[0]=awk
+       $0=``
+       NF=0
+       FNR=0
+       FILENAME=
+--------------------------------------------------
+------- args: -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
+123 234
+--------------------------------------------------
+------- args: -f alt_assert.awk -e BEGIN {assert(0, "Hello assert!")}
+error: assertion failed: Hello assert!
        ARGV[0]=awk
        $0=``
        NF=0

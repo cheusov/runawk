@@ -547,7 +547,7 @@ int main (int argc, char **argv)
 		}
 
 		/* -v|--assign */
-		if (!strcmp (argv [0], "--assign") || !strcmp (argv [0], "-v")){
+		if (!strcmp (argv [0], "-v") || !strcmp (argv [0], "--assign")){
 			if (argc == 1){
 				fprintf (stderr, "missing argument for -v option\n");
 				clean_and_exit (39);
@@ -555,6 +555,20 @@ int main (int argc, char **argv)
 
 			ll_push ("-v",     new_argv, &new_argc);
 			ll_push (argv [1], new_argv, &new_argc);
+
+			--argc;
+			++argv;
+			continue;
+		}
+
+		/* -f|--file */
+		if (!strcmp (argv [0], "-f") || !strcmp (argv [0], "--file")){
+			if (argc == 1){
+				fprintf (stderr, "missing argument for -f option\n");
+				clean_and_exit (39);
+			}
+
+			add_file (cwd, argv [1]);
 
 			--argc;
 			++argv;
