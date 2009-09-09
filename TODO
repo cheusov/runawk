@@ -1,13 +1,6 @@
 - runawk -f module.awk -e 'code here'
-- shquote.awk
-- shquote(1) executable similar to 
+- shquote(1) executable similar to that by Alan Barret
 - -e for #use in any column of soure text file
 - default AWKPATH containing A LIST OF directories
 - support for Windows
-- join (x) {
-     newstring = parts[1]
-     for (i=2; i in parts; i++)
-        newstring = newstring FS newstring[i]
-     return newstring
-  }
 - getopt_long(1) written in runawk
