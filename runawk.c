@@ -231,17 +231,35 @@ static char *extract_qstring (
 
 static void scan_buffer (
 	const char *name, const char *dir,
-	const char *buffer, off_t sz)
+	const char *buffer, off_t sz,
+	int allow_spaces)
 {
 	char *env_str = NULL;
 	const char *p = buffer;
-	int line_num = 0;
+	int line_num = 1;
 
 	for (; sz--; ++p){
-		if (p != buffer && p [-1] != '\n')
+		if (*p == '\n')
+			++line_num;
+
+		if (*p != '#')
 			continue;
 
-		++line_num;
+		if (p != buffer){
+			if (allow_spaces){
+				switch (p[-1]){
+					case '\n':
+					case ' ':
+					case '\t':
+						break;
+					default:
+						continue;
+				}
+			}else{
+				if (p [-1] != '\n')
+					continue;
+			}
+		}
 
 		if (!strncmp (p, "#use ", 5)){
 			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5));
@@ -296,7 +314,7 @@ static void scan_file (const char *name)
 	}
 	buffer [file_size] = 0;
 
-	scan_buffer (name, dir, buffer, file_size);
+	scan_buffer (name, dir, buffer, file_size, 0);
 
 	free (buffer);
 
@@ -325,7 +343,7 @@ static void add_buffer (const char *buffer, size_t len)
 	int fd = -1;
 
 	/* recursive snanning for #xxx directives */
-	scan_buffer ("", "-", buffer, len);
+	scan_buffer ("", "-", buffer, len, 1);
 
 	if (includes_count == 0){
 		ll_push (buffer, new_argv, &new_argc);

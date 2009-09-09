@@ -133,21 +133,21 @@ BEGIN {
 AWKPATH=`pwd`/../modules
 export AWKPATH
 runtest -d -e '
-#use "alt_assert.awk"
+    #use "alt_assert.awk"
 
-BEGIN {
-   print "Hello world!"
-   abort("just a test", 7)
-}
-' /dev/null
+    BEGIN {
+        print "Hello world!"
+        abort("just a test", 7)
+    }
+    ' /dev/null
 
 runtest -e '
-#use "alt_assert.awk"
+    #use "alt_assert.awk"
 
-BEGIN {
-   abort("just a test", 7)
-}
-'
+    BEGIN {
+        abort("just a test", 7)
+    }
+    '
 
 AWKPATH=`pwd`/../modules runtest \
     -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'

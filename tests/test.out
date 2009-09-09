@@ -199,13 +199,13 @@ BEGIN {
 env FOO2=bar2
 --------------------------------------------------
 ------- args: -d -e 
-#use "alt_assert.awk"
+    #use "alt_assert.awk"
 
-BEGIN {
-   print "Hello world!"
-   abort("just a test", 7)
-}
- /dev/null
+    BEGIN {
+        print "Hello world!"
+        abort("just a test", 7)
+    }
+     /dev/null
 new_argv [0] = awk
 new_argv [1] = -f
 new_argv [2] = ROOT/../modules/exitnow.awk
@@ -219,12 +219,12 @@ new_argv [9] = --
 new_argv [10] = /dev/null
 --------------------------------------------------
 ------- args: -e 
-#use "alt_assert.awk"
+    #use "alt_assert.awk"
 
-BEGIN {
-   abort("just a test", 7)
-}
-
+    BEGIN {
+        abort("just a test", 7)
+    }
+    
 error: just a test
        ARGV[0]=awk
        $0=``
