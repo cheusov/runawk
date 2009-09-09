@@ -57,6 +57,43 @@ BEGIN {
 	assert(4 == length(keys_foo))
 	assert(5 == length(values_foo))
 
+	# test for join_by_numkeys
+	arr [0] = "00"
+	arr [1] = "11"
+	arr [2] = "22"
+	arr [4] = "44"
+	arr [5] = "55"
+	arr [6] = ""
+	arr [7] = ""
+
+	values01 = join_by_numkeys(arr, " ", 0, 1)
+	print "values01=" values01 > "/dev/stderr"
+	assert(values01 == "00 11");
+
+	values02 = join_by_numkeys(arr, " ", 0)
+	print "values02=" values02 > "/dev/stderr"
+	assert(values02 == "00 11 22");
+
+	values12 = join_by_numkeys(arr, "+")
+	print "values12=" values12 > "/dev/stderr"
+	assert(values12 == "11+22");
+
+	values9 = join_by_numkeys(arr, "+", 9)
+	print "values9=" values9 > "/dev/stderr"
+	assert(values9 == "");
+
+	values2 = join_by_numkeys(arr, "+", 2)
+	print "values2=" values2 > "/dev/stderr"
+	assert(values2 == "22");
+
+	values46 = join_by_numkeys(arr, "", 4, 7)
+	print "values46=" values46 > "/dev/stderr"
+	assert(values46 == "4455");
+
+	values6 = join_by_numkeys(arr, "!", 6)
+	print "values6=" values6 > "/dev/stderr"
+	assert(values6 == "!");
+
 	print "succeeded"
 
 	exit 0
