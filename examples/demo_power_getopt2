@@ -1,0 +1,15 @@
+#!/usr/bin/env runawk
+
+#use "power_getopt.awk"
+
+#.begin-str help
+# power_getopt - program demonstrating a power of power_getopt.awk module
+# usage: power_getopt [OPTIONS]
+# OPTIONS:
+#    -?|--help                  display this screen
+#.end-str
+
+BEGIN {
+	# the only implemented functionality is -?|--help options
+	exit 0
+}

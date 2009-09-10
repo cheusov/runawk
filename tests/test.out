@@ -586,3 +586,9 @@ options [long-flag]=
 options [s]=
 s         --- 1
 //////////////////////////////////////////////////
+--------------------------------------------------
+------- args: ../examples/demo_power_getopt2 --help
+power_getopt - program demonstrating a power of power_getopt.awk module
+usage: power_getopt [OPTIONS]
+OPTIONS:
+   -?|--help                  display this screen

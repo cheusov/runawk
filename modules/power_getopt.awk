@@ -22,7 +22,11 @@
 #  =-XXX          long option with argument
 #  =X|--XXX       single letter option and long synonym with argument
 #
-# power_getopt.awk also provides getarg function
+# If --help option supplied a usage information is printed
+# (lines between ".begin-str help" and ".end-str"), `=' character
+# is replaced with `-'.
+#
+# power_getopt.awk also provides the function getarg.
 #
 # getarg(OPT, DEFAULT)
 #  returns either 1 or 0 for options without arguments,
@@ -122,7 +126,11 @@ BEGIN {
 			options [optopt] = optarg
 		}
 
-		if ("h" in options){
+		if ("help" in options){
+			print_help()
+			exit 0
+		}
+		if (("help" in long_opts) && (long_opts ["help"] in options)){
 			print_help()
 			exit 0
 		}
