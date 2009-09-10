@@ -233,3 +233,4 @@ runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-
 echo //////////////////////////////////////////////////
 
 runtest ../examples/demo_power_getopt2 --help
+runtest ../examples/demo_power_getopt2 -?

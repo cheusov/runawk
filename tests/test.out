@@ -592,3 +592,9 @@ power_getopt - program demonstrating a power of power_getopt.awk module
 usage: power_getopt [OPTIONS]
 OPTIONS:
    -?|--help                  display this screen
+--------------------------------------------------
+------- args: ../examples/demo_power_getopt2 -?
+power_getopt - program demonstrating a power of power_getopt.awk module
+usage: power_getopt [OPTIONS]
+OPTIONS:
+   -?|--help                  display this screen
