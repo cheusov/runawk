@@ -22,9 +22,9 @@
 #  =-XXX          long option with argument
 #  =X|--XXX       single letter option and long synonym with argument
 #
-# If --help option supplied a usage information is printed
-# (lines between ".begin-str help" and ".end-str"), `=' character
-# is replaced with `-'.
+# If --help option was applied, usage information is printed
+# (lines between ".begin-str help" and ".end-str") replacing leading
+# `=' character with `-'.
 #
 # power_getopt.awk also provides the function getarg.
 #
@@ -85,7 +85,7 @@ BEGIN {
 					_lopt = "=" substr(_opt, 5)
 				}else if (_opt ~ /^[-=].$/){
 					# -h or =h
-					_sopt = _opt
+				_sopt = _opt
 					_lopt = ""
 				}else if (_opt ~ /^[-=]-.+$/){
 					# --help or =-help
