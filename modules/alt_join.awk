@@ -5,6 +5,18 @@
 #
 ############################################################
 
+#
+# join_keys(HASH, SEP):
+#     returns string consisting of all keys from HASH separated by SEP.
+# join_values(HASH, SEP):
+#     returns string consisting of all values from HASH separated by SEP.
+# join_by_numkeys (ARRAY, SEP [, START [, END]]):
+#     returns string consisting of all values from ARRAY
+#     separated by SEP. Indices from START (default: 1) to END
+#     (default: +inf) are analysed. Collecting values is stopped
+#     on index absent in ARRAY.
+#
+
 function join_keys (hash, sep,                   k,ret,flag){
 	ret = ""
 	for (k in hash){
