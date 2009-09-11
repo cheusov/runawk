@@ -1,4 +1,71 @@
 ======================================================================
+Version 0.17.0, by Aleksey Cheusov, Sat, 12 Sep 2009 01:29:31 +0300
+
+ runawk:
+    - ADDED: new option for runawk for #use'ing modules: -f.
+      runawk can also be used for oneliners! ;-)
+
+      runawk -f abs.awk -e 'BEGIN {print abs(-123); exit}'
+
+    - In a multilined code passed to runawk using option -e, spaces
+      are allowed before #directives.
+
+    - After inventing alt_getopt.awk module there is no reason for
+      heuristics that detects whether to add `-' to AWK arguments or
+      not. So I've removed this heuristics. Use alt_getopt.awk module
+      or other "smart" module for handling options correctly!
+
+ alt_getopt.awk and power_getopt.awk:
+    - FIX: for "abc:" short options specifier BSD and GNU getopt(3)
+      accept "-acb" and undarstand it as "-a -cb", they also accept
+      "-ac b" and also translate it to "-a -cb". Now alt_getopt.awk
+      and power_getopt.awk work the same way.
+
+ power_getopt.awk:
+    - -h option doesn't print usage information, --help (and its short
+      synonym) does.
+
+ New modules:
+    - shquote.awk, implementing shquote() function.
+	shquote(str):
+            `shquote' transforms the string `str' by adding shell
+            escape and quoting characters to include it to the
+            system() and popen() functions as an argument, so that
+            the arguments will have the correct values after being
+            evaluated by the shell.
+        Inspired by NetBSD's shquote(3) from libc.
+
+    - runawk.awk, implementing functions runcmd1() and xruncmd1()
+        runcmd1(CMD, OPTS, FILE):
+            wrapper for function system() that runs a command CMD
+            with options OPTS and one filename FILE.  Unlike
+            system(CMD " " OPTS " " FILE) the function runcmd1()
+            handles correctly FILE and CMD containing spaces, single
+            quote, double quote, tilde etc.
+
+        xruncmd1(FILE):
+            safe wrapper for 'runcmd(1)'.
+            awk exits with error if running command failed.
+
+    - isnum.awk, implementing trivial isnum function, see the source
+      code.
+
+    - alt_join.awk, implementing the following functions:
+        join_keys(HASH, SEP):
+            returns string consisting of all keys from HASH separated
+            by SEP.
+
+        join_values(HASH, SEP):
+            returns string consisting of all values from HASH separated
+            by SEP.
+
+        join_by_numkeys (ARRAY, SEP [, START [, END]]):
+            returns string consisting of all values from ARRAY
+            separated by SEP. Indices from START (default: 1) to END
+            (default: +inf) are analysed. Collecting values is stopped
+            on index absent in ARRAY.
+
+======================================================================
 Version 0.16.0, by Aleksey Cheusov, Sun,  5 Apr 2009 12:45:44 +0300
 
   Lots of demo programs for most runawk modules were created and 
