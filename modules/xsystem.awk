@@ -5,7 +5,8 @@
 #    
 ############################################################
 
-# xsystem(FILE) -- safe wrapper for 'system', returned value is analysed
+# xsystem(FILE) -- safe wrapper for 'system'.
+# awk exits with error if system() function failed.
 
 #use "alt_assert.awk"
 

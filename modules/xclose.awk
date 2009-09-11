@@ -5,7 +5,8 @@
 #    
 ############################################################
 
-# xclose(FILE) -- safe wrapper for 'close', returned value is analysed
+# xclose(FILE) -- safe wrapper for 'close'.
+# awk exits with error if close() function failed.
 
 #use "alt_assert.awk"
 
