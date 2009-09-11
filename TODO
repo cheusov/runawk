@@ -2,4 +2,3 @@
 - shquote(1) executable similar to that by Alan Barret
 - LIST OF default paths for awk modules
 - getopt_long(1) written in runawk
-- alt_getopt.awk:  "abc:def" ---> -abcdef == -a -b -c def (getopt(1))
