@@ -29,11 +29,11 @@
 # power_getopt.awk also provides the function getarg.
 #
 # getarg(OPT, DEFAULT)
-#  returns either 1 or 0 for options without arguments,
-#  and either specified value or DEFAULT for options having value.
+#  returns either 1 (option OPT was applied) or 0 (OPT was not
+#  applied) for options not accepting the argument, and either
+#  specified value or DEFAULT for options accepting the argument.
 #
 # See example/demo_power_getopt for the sample of usage
-#
 #
 
 function print_help (            i){
