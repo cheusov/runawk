@@ -488,11 +488,9 @@ int main (int argc, char **argv)
 	const char *progname   = NULL;
 	pid_t pid              = 0;
 	int child_status       = 0;
-	int all_with_dash      = 1;
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
 	int prog_specified     = 0;
-	int args_section       = 0;
 
 	int i;
 	size_t j;
@@ -651,25 +649,7 @@ int main (int argc, char **argv)
 		ll_push ("--", new_argv, &new_argc);
 
 	for (i=0; i < argc; ++i){
-		if (!args_section && argv [i][0] != '-'){
-			all_with_dash = 0;
-		}
-
-		if ((argv [i][0] == '-' && argv [i][1] == '-' && argv [i][2] == 0) ||
-			(argv [i][0] == '-' && argv [i][1] == 0))
-		{
-			all_with_dash = 0;
-			args_section  = 1;
-		}
-
 		ll_push (argv [i], new_argv, &new_argc);
-	}
-
-	if (add_stdin == stdin_yes ||
-		(argc && all_with_dash && add_stdin != stdin_no))
-	{
-		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
-		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
 	ll_push (NULL, new_argv, &new_argc);

@@ -9,14 +9,12 @@ new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = --long-option
-new_argv [5] = -
 --------------------------------------------------
 ------- args: --debug _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = -o=file
-new_argv [5] = -
 --------------------------------------------------
 ------- args: -d --without-stdin _test_program -o=file
 new_argv [0] = _test_program
@@ -43,7 +41,6 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
-new_argv [6] = -
 --------------------------------------------------
 ------- args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
 new_argv [0] = awk
@@ -71,7 +68,6 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
-new_argv [6] = -
 --------------------------------------------------
 ------- args: -V
 xxx
@@ -329,7 +325,7 @@ ARGV [2] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt --help
 option `h'
-ARGV [2] = -
+ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -h --help -v --verbose -V -o 123 -o234
 option `h'
@@ -386,7 +382,7 @@ Unknown option `-1'
 option `h'
 option `v'
 option `V'
-ARGV [2] = -
+ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -ho 123
 option `h'
@@ -403,11 +399,11 @@ Unknown option `--unknown'
 option `o': file.out
 option `n': NNN
 option `len': LENGTH
-ARGV [4] = -
+ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt --output --file--
 option `o': --file--
-ARGV [3] = -
+ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_modinfo
 A number of modules: 9
