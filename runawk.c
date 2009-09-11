@@ -102,8 +102,7 @@ static const char *sys_awkdir = MODULESDIR;
 
 static int debug = 0;
 
-typedef enum {stdin_default, stdin_yes, stdin_no} add_stdin_t;
-static add_stdin_t add_stdin  = stdin_default;
+static int add_stdin = 0;
 
 static char *new_argv [ARRAY_SZ];
 static int new_argc = 0;
@@ -424,10 +423,10 @@ static void process_opt (char opt)
 			debug = 1;
 			break;
 		case 'i':
-			add_stdin = stdin_yes;
+			add_stdin = 1;
 			break;
 		case 'I':
-			add_stdin = stdin_no;
+			add_stdin = 0;
 			break;
 		default:
 			abort ();
@@ -650,6 +649,11 @@ int main (int argc, char **argv)
 
 	for (i=0; i < argc; ++i){
 		ll_push (argv [i], new_argv, &new_argc);
+	}
+
+	if (add_stdin){
+		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
+		ll_push (STDIN_FILENAME, new_argv, &new_argc);
 	}
 
 	ll_push (NULL, new_argv, &new_argc);

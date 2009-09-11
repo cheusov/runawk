@@ -131,11 +131,11 @@ with which real B<awk> interpreter will be run.
 
 =item B<-i>|B<--with-stdin>
 
-Always add stdin file name to a list of awk arguments
+Add stdin file name to a list of awk arguments
 
 =item B<-I>|B<--without-stdin>
 
-Do not add stdin file name to a list of awk arguments
+Do not add stdin file name to a list of awk arguments (the default)
 
 =item B<-e>|B<--execute> I<program>
 

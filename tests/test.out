@@ -41,6 +41,7 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
+new_argv [6] = -
 --------------------------------------------------
 ------- args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
 new_argv [0] = awk
@@ -68,6 +69,7 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = arg1
 new_argv [5] = arg2
+new_argv [6] = -
 --------------------------------------------------
 ------- args: -V
 xxx
