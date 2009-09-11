@@ -234,3 +234,6 @@ echo //////////////////////////////////////////////////
 
 runtest ../examples/demo_power_getopt2 --help
 runtest ../examples/demo_power_getopt2 -?
+
+####################    runcmd
+runtest ../examples/demo_runcmd

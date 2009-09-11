@@ -598,3 +598,8 @@ power_getopt - program demonstrating a power of power_getopt.awk module
 usage: power_getopt [OPTIONS]
 OPTIONS:
    -?|--help                  display this screen
+--------------------------------------------------
+------- args: ../examples/demo_runcmd
+file name.txt
+~file&name'foobar'.txt
+succeeded

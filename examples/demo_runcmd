@@ -1,0 +1,26 @@
+#!/usr/bin/env runawk
+
+#use "runcmd.awk"
+
+# Demo foir runcmd.awk module
+
+BEGIN {
+	fn1 = "file name.txt"
+	fn2 = "~file&name'foobar'.txt"
+
+	xruncmd1("touch", "", fn1)
+	xruncmd1("echo", "foobar >", fn2)
+
+	xruncmd1("ls", "-1", fn1)
+	xruncmd1("ls", "", fn2)
+
+	ret = runcmd1("grep", "baz", fn2)
+	assert(1 == ret, "runcmd failed, exit status: " ret)
+
+	xruncmd1("rm", "-f", fn1)
+	xruncmd1("rm", "", fn2)
+
+	print "succeeded"
+
+	exit 0
+}
