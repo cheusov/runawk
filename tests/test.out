@@ -388,11 +388,13 @@ ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -ho 123
 option `h'
-Bad usage of option `-o'
+option `o': 123
+ARGV [1] = -
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt -hoV 123
 option `h'
-Bad usage of option `-o'
+option `o': V
+ARGV [2] = 123
 --------------------------------------------------
 ------- args: ../examples/demo_alt_getopt --unknown
 Unknown option `--unknown'

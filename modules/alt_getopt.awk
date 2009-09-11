@@ -2,7 +2,7 @@
 #
 # This awk module is a part of RUNAWK distribution,
 #        http://sourceforge.net/projects/runawk
-#    
+#
 ############################################################
 
 # getopt(SHORT_OPTS) -- like standard getopt(3) function (NOT EQUIVALENT!)
@@ -121,21 +121,15 @@ function __getopt_process_short_opts (\
 	}
 
 	if (__getopt_opts [optopt] == takes_arg){
-		if (!__getopt_shortened [i]){
-			if (length(opts) == 1){
-				optarg = ARGV [i+1]
-				ARGV [i] = ARGV [i+1] = ""
-			}else{
-				optarg = substr(opts, 2)
-				ARGV [i] = ""
-			}
-			return 1
+		if (length(opts) == 1){
+			optarg = ARGV [i+1]
+			ARGV [i] = ARGV [i+1] = ""
+		}else{
+			optarg = substr(opts, 2)
+			ARGV [i] = ""
 		}
-
-		__getopt_errexit("Bad usage of option `-" optopt "'", 2)
+		return 1
 	}
-
-	++__getopt_shortened [i]
 
 	if (length(opts) > 1)
 		ARGV [i] = "-" substr(opts, 2)
