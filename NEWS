@@ -17,7 +17,7 @@ Version 0.17.0, by Aleksey Cheusov, Sat, 12 Sep 2009 01:29:31 +0300
 
  alt_getopt.awk and power_getopt.awk:
     - FIX: for "abc:" short options specifier BSD and GNU getopt(3)
-      accept "-acb" and undarstand it as "-a -cb", they also accept
+      accept "-acb" and understand it as "-a -cb", they also accept
       "-ac b" and also translate it to "-a -cb". Now alt_getopt.awk
       and power_getopt.awk work the same way.
 
@@ -35,7 +35,7 @@ Version 0.17.0, by Aleksey Cheusov, Sat, 12 Sep 2009 01:29:31 +0300
             evaluated by the shell.
         Inspired by NetBSD's shquote(3) from libc.
 
-    - runawk.awk, implementing functions runcmd1() and xruncmd1()
+    - runcmd.awk, implementing functions runcmd1() and xruncmd1()
         runcmd1(CMD, OPTS, FILE):
             wrapper for function system() that runs a command CMD
             with options OPTS and one filename FILE.  Unlike
@@ -47,8 +47,8 @@ Version 0.17.0, by Aleksey Cheusov, Sat, 12 Sep 2009 01:29:31 +0300
             safe wrapper for 'runcmd(1)'.
             awk exits with error if running command failed.
 
-    - isnum.awk, implementing trivial isnum function, see the source
-      code.
+    - isnum.awk, implementing trivial isnum() function,
+            see the source code.
 
     - alt_join.awk, implementing the following functions:
         join_keys(HASH, SEP):
