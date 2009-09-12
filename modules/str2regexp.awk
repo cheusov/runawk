@@ -43,7 +43,7 @@ function str2regexp (s){
 		}
 	}
 
-	gsub(/---runawk-open-sq-bracket---/, "[[]", s)
+	gsub(/---runawk-open-sq-bracket---/, "\\[", s)
 	gsub(/---runawk-close-sq-bracket---/, "\\]", s)
 
 	return s
