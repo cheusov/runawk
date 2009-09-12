@@ -10,8 +10,8 @@ OBJDIR=${OBJDIR:=..}
 unify_paths (){
     sed -e "s,`pwd`,ROOT," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
-	-e 's,new_argv \[0\] = .*awk,new_argv [0] = awk,' \
-	-e 's,ARGV\[0\]=.*awk,ARGV[0]=awk,' \
+	-e 's,new_argv \[0\] = .*awk.*,new_argv [0] = awk,' \
+	-e 's,ARGV\[0\]=.*awk.*,ARGV[0]=awk,' \
 	-e 's,FILENAME=-$,FILENAME=,'
 #	-e 's,[.][.]/examples/,,'
 }
