@@ -6,6 +6,7 @@ LC_ALL=C
 export LC_ALL
 
 OBJDIR=${OBJDIR:=..}
+SRCDIR=`pwd`/..
 
 unify_paths (){
     sed -e "s,`pwd`,ROOT," \
@@ -28,7 +29,7 @@ runtest_nostderr (){
     $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
-PATH=`pwd`/examples:$PATH
+PATH=${SRCDIR}/examples:$PATH
 export PATH
 
 ####################
@@ -43,9 +44,9 @@ runtest -d --without-stdin _test_program -o=file
 runtest --debug -I _test_program -o=file
 runtest -d  _test_program fn1 fn2
 runtest -di _test_program arg1 arg2
-AWKPATH=`pwd`/../modules runtest \
+AWKPATH=${SRCDIR}/modules runtest \
     -d -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
-AWKPATH=`pwd`/../modules runtest \
+AWKPATH=${SRCDIR}/modules runtest \
     -d -f alt_assert.awk -e 'BEGIN {exit}'
 runtest --debug --with-stdin _test_program arg1 arg2
 runtest -V | awk 'NR <= 2 {print $0} NR == 3 {print "xxx"}'
@@ -73,7 +74,7 @@ unset AWKPATH
 runtest _test.tmp
 
 ################### RUNAWK_MODx
-AWKPATH=`pwd`/../modules:`pwd`/mods2
+AWKPATH=${SRCDIR}/modules:`pwd`/mods2
 export AWKPATH
 
 runtest `pwd`/mods1/test_modinfo
@@ -130,7 +131,7 @@ BEGIN {
 '
 
 ####################
-AWKPATH=`pwd`/../modules
+AWKPATH=${SRCDIR}/modules
 export AWKPATH
 runtest -d -e '
     #use "alt_assert.awk"
@@ -149,14 +150,14 @@ runtest -e '
     }
     '
 
-AWKPATH=`pwd`/../modules runtest \
+AWKPATH=${SRCDIR}/modules runtest \
     -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
 
-AWKPATH=`pwd`/../modules runtest \
+AWKPATH=${SRCDIR}/modules runtest \
     -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
 ####################    multisub
-AWKPATH=`pwd`/../modules
+AWKPATH=${SRCDIR}/modules
 export AWKPATH
 runtest ../examples/demo_multisub
 
