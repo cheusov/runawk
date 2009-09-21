@@ -2,12 +2,12 @@
 #
 # This awk module is a part of RUNAWK distribution,
 #        http://sourceforge.net/projects/runawk
-#    
+#
 ############################################################
 
 # str2regex(STRING)
 #   returns a regular expression that matches given STRING
-#  
+#
 # For example:
 #   print str2regexp("all special symbols: ^$(){}[].*+?|\\")
 #   -| all special symbols: [^][$][(][)][{][}][[]\][.][*][+][?][|]\\
