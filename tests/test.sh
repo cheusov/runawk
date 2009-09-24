@@ -5,6 +5,8 @@ set -e
 LC_ALL=C
 export LC_ALL
 
+unset AWKPATH || true
+
 OBJDIR=${OBJDIR:=..}
 SRCDIR=`pwd`/..
 
@@ -34,6 +36,9 @@ export PATH
 
 ####################
 
+AWKPATH=${SRCDIR}/modules
+export AWKPATH
+
 trap 'rm -f _test_program _test.tmp' 0 1 2 3 15
 touch _test_program
 
@@ -44,10 +49,8 @@ runtest -d --without-stdin _test_program -o=file
 runtest --debug -I _test_program -o=file
 runtest -d  _test_program fn1 fn2
 runtest -di _test_program arg1 arg2
-AWKPATH=${SRCDIR}/modules runtest \
-    -d -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
-AWKPATH=${SRCDIR}/modules runtest \
-    -d -f alt_assert.awk -e 'BEGIN {exit}'
+runtest -d -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
+runtest -d -f alt_assert.awk -e 'BEGIN {exit}'
 runtest --debug --with-stdin _test_program arg1 arg2
 runtest -V | awk 'NR <= 2 {print $0} NR == 3 {print "xxx"}'
 runtest -h | awk 'NR <= 3'
@@ -57,7 +60,9 @@ runtest -v two=2 -e 'BEGIN {print two}'
 runtest --execute 'BEGIN {print "Hello World"}' /dev/null
 runtest --assign var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
 
-################### use
+unset AWKPATH || true
+
+################## use
 cat > _test.tmp <<EOF
 #use "`pwd`/mods1/module1.1.awk"
 #use "`pwd`/mods1/module1.3.awk"
@@ -70,7 +75,7 @@ AWKPATH=`pwd`/mods2
 export AWKPATH
 runtest _test.tmp
 
-unset AWKPATH
+unset AWKPATH || true
 runtest _test.tmp
 
 ################### RUNAWK_MODx
@@ -150,11 +155,9 @@ runtest -e '
     }
     '
 
-AWKPATH=${SRCDIR}/modules runtest \
-    -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
+runtest -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
 
-AWKPATH=${SRCDIR}/modules runtest \
-    -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
+runtest -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
 ####################    multisub
 AWKPATH=${SRCDIR}/modules
