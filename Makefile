@@ -53,8 +53,8 @@ CLEANFILES=   *~ core* *.core ktrace* *.tmp tests/_*
 CLEANFILES+=  runawk.1 runawk.cat1 ChangeLog runawk.html 
 
 ##################################################
-.PHONY: install-dirs
-install-dirs:
+.PHONY: installdirs
+installdirs:
 	$(INST_DIR) ${DESTDIR}${BINDIR}
 	$(INST_DIR) ${DESTDIR}${MODULESDIR}
 .if !defined(MKMAN) || empty(MKMAN:M[Nn][Oo])
