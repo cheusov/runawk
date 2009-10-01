@@ -53,16 +53,13 @@ function getarg (opt, dflt,              tmp){
 			opt = tmp
 	}
 
-	if (__getopt_opts [opt] == takes_arg)
-		if (opt in options)
-			return options [opt]
-		else
-			return dflt
-	else
-		if (opt in options)
-			return 1
-		else
-			return 0
+	if (opt in options){
+		return options [opt]
+	}else if (__getopt_opts [opt] == takes_arg){
+		return dflt
+	}else{
+		return 0
+	}
 }
 
 BEGIN {
@@ -73,15 +70,15 @@ BEGIN {
 			if (_i != "" && _i != takes_arg)
 				optopt = _i
 		}
-		options [optopt] = optarg
+		if (__getopt_opts [optopt] == takes_arg)
+			options [optopt] = optarg
+		else
+			++options [optopt]
 	}
 
-	if ("help" in options){
-		print_help()
-		exit 0
-	}
-
-	if (("help" in long_opts) && (long_opts ["help"] in options)){
+	if (("help" in options) ||
+		("help" in long_opts) && (long_opts ["help"] in options))
+	{
 		print_help()
 		exit 0
 	}
