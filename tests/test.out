@@ -551,22 +551,22 @@ S         --- default4
 X         --- 0
 Y         --- default5
 //////////////////////////////////////////////////
---------------------------------------------------
 ------- args: ../examples/demo_power_getopt -ffss --flag --long-flag
-The following option were applied
-options [f]=3
-options [long-flag]=1
-options [s]=2
-f         --- 3
-flag      --- 3
-long-flag --- 1
-s         --- 2
+--------------------------------------------------
 F         --- default1
 FLAG      --- default2
 LONG-FLAG --- default3
 S         --- default4
+The following option were applied
 X         --- 0
 Y         --- default5
+f         --- 3
+flag      --- 3
+long-flag --- 1
+options [f]=3
+options [long-flag]=1
+options [s]=2
+s         --- 2
 //////////////////////////////////////////////////
       --LONG-FLAG <value>     long flag with value
       --long-flag             long flag only

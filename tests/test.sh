@@ -231,11 +231,14 @@ runtest ../examples/demo_readfile ../examples/demo_readfile.in
 ####################    power_getopt
 runtest ../examples/demo_power_getopt
 echo //////////////////////////////////////////////////
-runtest ../examples/demo_power_getopt -ffss --flag --long-flag
+runtest ../examples/demo_power_getopt -ffss --flag --long-flag |
+sort
 echo //////////////////////////////////////////////////
-runtest ../examples/demo_power_getopt -h 2>&1 | sort
+runtest ../examples/demo_power_getopt -h 2>&1 |
+sort
 echo //////////////////////////////////////////////////
-runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 2>&1 | sort
+runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 2>&1 |
+sort
 echo //////////////////////////////////////////////////
 
 runtest ../examples/demo_power_getopt2 --help
