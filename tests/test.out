@@ -503,29 +503,29 @@ dir
 --------------------------------------------------
 ------- args: ../examples/demo_shquote ../examples/demo_shquote.in
 \'
-echo: '
+printf: '
 \'''\'
-echo: ''
+printf: ''
 \'''\'''\'
-echo: '''
+printf: '''
 '\'
-echo: \
+printf: \
 '\\'
-echo: \\
+printf: \\
 '\\\'
-echo: \\\
+printf: \\\
 '\\'\'
-echo: \\'
+printf: \\'
 \''\'\'
-echo: '\'
+printf: '\'
 'Apple'\''s'
-echo: Apple's
+printf: Apple's
 'apple'
-echo: apple
+printf: apple
 'file name.txt'
-echo: file name.txt
+printf: file name.txt
 '*&;<>#~^$`!][(){}?'
-echo: *&;<>#~^$`!][(){}?
+printf: *&;<>#~^$`!][(){}?
 --------------------------------------------------
 ------- args: ../examples/demo_alt_join
 succeeded

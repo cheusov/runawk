@@ -9,5 +9,5 @@
 
 {
 	print shquote($0)
-	xsystem("echo echo: " shquote($0))
+	xsystem("printf 'printf: %s\n' " shquote($0))
 }
