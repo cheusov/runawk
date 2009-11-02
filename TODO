@@ -1,3 +1,5 @@
+- sort.awk
+  sort(array_in, [remap_out, [start_ind[, end_ind]]])
 - support for Windows
 - shquote(1) executable similar to that by Alan Barret
 - LIST OF default paths for awk modules
