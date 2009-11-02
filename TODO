@@ -1,3 +1,5 @@
+- hash.awk - functions for working with hashes
+  items_count()
 - sort.awk
   sort(array_in, [remap_out, [start_ind[, end_ind]]])
 - support for Windows
