@@ -161,7 +161,7 @@ static const char *search_file (const char *dir, const char *name)
 		return xstrdup (buf);
 	}
 
-	/* AWKPATH env. */
+	/* AWKPATH env. and system paths */
 	for (i = 0; i < awkpath_len; ++i){
 		if (awkpath [i] && (i == 0 || awkpath [i-1] == 0)){
 			curr_dir = awkpath + i;
@@ -170,12 +170,6 @@ static const char *search_file (const char *dir, const char *name)
 				return xstrdup (buf);
 			}
 		}
-	}
-
-	/* system directory for modules */
-	snprintf (buf, sizeof (buf), "%s/%s", sys_awkdir, name);
-	if (!access (buf, R_OK)){
-		return xstrdup (buf);
 	}
 
 	return NULL;
@@ -490,6 +484,7 @@ int main (int argc, char **argv)
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
 	int prog_specified     = 0;
+	const char *awkpath_env = NULL;
 
 	int i;
 	size_t j;
@@ -509,15 +504,17 @@ int main (int argc, char **argv)
 	}
 
 	/* AWKPATH env. */
-	awkpath = getenv ("AWKPATH");
-	if (awkpath){
-		awkpath = xstrdup (awkpath);
+	awkpath_env = getenv ("AWKPATH");
+	if (!awkpath_env)
+		awkpath_env = "";
 
-		awkpath_len = strlen (awkpath);
-		for (j=0; j < awkpath_len; ++j){
-			if (awkpath [j] == ':'){
-				awkpath [j] = 0;
-			}
+	awkpath_len = strlen (awkpath_env) + 1 + strlen (sys_awkdir);
+	awkpath = xmalloc (awkpath_len + 1);
+	snprintf (awkpath, awkpath_len + 1, "%s:%s", awkpath_env, sys_awkdir);
+
+	for (j=0; j < awkpath_len; ++j){
+		if (awkpath [j] == ':'){
+			awkpath [j] = 0;
 		}
 	}
 
