@@ -19,15 +19,24 @@ unify_paths (){
 #	-e 's,[.][.]/examples/,,'
 }
 
-runtest (){
+runtest_header (){
     echo '--------------------------------------------------'
     echo "------- args: $@" | unify_paths
+}
+
+runtest_main (){
     $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
 }
 
+runtest (){
+    runtest_header "$@"
+    runtest_main "$@"
+#    $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
+}
+
 runtest_nostderr (){
-    echo '--------------------------------------------------'
-    echo "------- args: $@" | unify_paths
+    runtest_header "$@"
+#    runtest_main "$@" '2>/dev/null'
     $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
@@ -246,3 +255,9 @@ runtest ../examples/demo_power_getopt2 -?
 
 ####################    runcmd
 runtest ../examples/demo_runcmd
+
+####################    heapsort
+runtest_header ../examples/demo_heapsort2
+for i in 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0; do
+    runtest_main ../examples/demo_heapsort2
+done

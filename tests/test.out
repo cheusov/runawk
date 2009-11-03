@@ -620,3 +620,5 @@ OPTIONS:
 file name.txt
 ~file&name'foobar'.txt
 succeeded
+--------------------------------------------------
+------- args: ../examples/demo_heapsort2

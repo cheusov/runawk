@@ -1,0 +1,33 @@
+#!/usr/bin/env runawk
+
+#use "heapsort.awk"
+#use "alt_assert.awk"
+
+# This is a regression test for heapsort.awk module
+
+BEGIN {
+	srand()
+
+	cnt = 40
+
+	start = 20
+	end   = start + cnt
+
+	sum = 0
+	for (i=start; i <= end; ++i){
+		arr [i] = int (rand() * 50)
+		sum += arr [i]
+	}
+
+	heapsort(arr, remap, start, end)
+
+	end_sum = 0
+	for (i=start; i <= end; ++i){
+#		printf "arr [%s]=%s\n", i, arr [remap [i]]
+		assert(i == start || arr [remap [i-1]] <= arr [remap [i]], "failed!")
+		end_sum += arr [remap [i]]
+	}
+	assert(sum == end_sum, "sum != end_sum")
+
+	exit 0
+}
