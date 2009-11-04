@@ -671,3 +671,54 @@ csh
 ksh
 rc
 sed
+--------------------------------------------------
+------- args: ../examples/demo_quicksort2
+--------------------------------------------------
+------- args: ../examples/demo_quicksort
+AWK
+Ada
+BCPL
+C
+C#
+C++
+Caml
+Clean
+Cobol
+D
+ECMAScript
+Eiffel
+Emacs Lisp
+Erlang
+F#
+Forth
+Fortran
+Haskell
+Java
+Lisp
+Lua
+Miranda
+Modula-3
+Oberon-2
+Objective-C
+Oz
+PHP
+PL/1
+Pascal
+Perl
+Pike
+Prolog
+REFAL
+Rebol
+Rexx
+Ruby
+SML
+Scheme
+Simula-67
+Smalltalk
+Snobol
+TCL
+UNIX shell
+csh
+ksh
+rc
+sed
