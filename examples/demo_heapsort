@@ -1,0 +1,19 @@
+#!/usr/bin/env runawk
+
+#use "heapsort.awk"
+
+# This demo sorts the input lines as strings and outputs them to stdout
+
+# Input files for this demo: examples/demo_heapsort.in
+
+{
+	array [++count] = $0
+}
+
+END {
+	heapsort(array, remap, 1, count)
+
+	for (i=1; i <= count; ++i){
+		print array [remap [i]]
+	}
+}
