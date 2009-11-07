@@ -1,4 +1,41 @@
 ======================================================================
+Version 0.18.0, by Aleksey Cheusov, Sat,  7 Nov 2009 17:08:16 +0200
+
+ Makefile:
+    !!! "install-dirs" target has been renamed to "installdirs" !!!
+
+    - At compile time MODULESDIR can contain a *list* of
+      colon-separated directories,
+      e.g. /usr/local/share/runawk:/usr/local/share/awk
+
+ - power_getopt.awk, alt_getopt.awk and init_getopt.awk:
+    - Support for multiply applied options, e.g. -vvv for increasing
+      verbosity level. If option without arguments is multiply
+      applied, getarg() function returns a number of times it was
+      applied, not just 0 or 1.
+
+ New modules:
+
+    - init_getopt.awk using alt_getopt.awk and used by power_getopt.awk.
+      Its goal is to initialize `long_opts' and `long_opts' variables
+      but not run `getopt' function.
+
+    - heapsort.awk  -  heapsort :-)
+    - quicksort.awk - quicksort :-)
+    - sort.awk      - either heapsort or quicksort,
+                      the default is heapsort.
+      Unfortunately GAWK's asort() and asorti() functions
+      do *not* satisfy my needs. Another (and more important) reason
+      is a portability.
+
+ Improvements, clean-ups and fixes in regression tests.
+
+ runawk-0-18-0 was successfully tested on the following platforms:
+    NetBSD-5.0/x86, NetBSD-2.0/alpha, OpenBSD-4.5/x86,
+    FreeBSD-7.1/x86, FreeBSD-7.1/spark, Linux/x86 and
+    Darwin/ppc.
+
+======================================================================
 Version 0.17.0, by Aleksey Cheusov, Sat, 12 Sep 2009 01:29:31 +0300
 
  runawk:
