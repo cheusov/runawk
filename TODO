@@ -1,5 +1,5 @@
-- hash.awk - functions for working with hashes
-  items_count()
+- hash.awk - functions for working with hashes.
+  items_count() ?
 - support for Windows
 - shquote(1) executable similar to that by Alan Barret?
 - LIST OF default paths for awk modules
