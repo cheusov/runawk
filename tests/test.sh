@@ -11,7 +11,7 @@ OBJDIR=${OBJDIR:=..}
 SRCDIR=`pwd`/..
 
 unify_paths (){
-    sed -e "s,`pwd`,ROOT," \
+    sed -e "s,/.*/tests,ROOT," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk.*,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk.*,ARGV[0]=awk,' \
