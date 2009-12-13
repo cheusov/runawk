@@ -671,7 +671,7 @@ int main (int argc, char **argv)
 
 			case 0:
 				execvp (interp, (char *const *) new_argv);
-				fprintf (stderr, "running '%s' failed: %s", interp, strerror (errno));
+				fprintf (stderr, "running '%s' failed: %s\n", interp, strerror (errno));
 				exit (1);
 				break;
 
