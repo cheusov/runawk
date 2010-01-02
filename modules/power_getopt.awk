@@ -80,6 +80,6 @@ BEGIN {
 		("help" in long_opts) && (long_opts ["help"] in options))
 	{
 		print_help()
-		exit 0
+		exitnow(0)
 	}
 }
