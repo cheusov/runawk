@@ -22,11 +22,22 @@ BEGIN {
 		__sort_type = "heapsort"
 }
 
-function sort (array, index_remap, start, end){
+function sort (array, index_remap, start, end)
+{
 	if (__sort_type == "heapsort")
 		heapsort(array, index_remap, start, end);
 	else if (__sort_type == "quicksort")
 		quicksort(array, index_remap, start, end);
+	else
+		abort("Bad __sort_type in sort.awk")
+}
+
+function sort_values (src_hash, index_remap)
+{
+	if (__sort_type == "heapsort")
+		return heapsort_values(src_hash, index_remap);
+	else if (__sort_type == "quicksort")
+		return quicksort_values(src_hash, index_remap);
 	else
 		abort("Bad __sort_type in sort.awk")
 }
