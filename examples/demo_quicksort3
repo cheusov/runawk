@@ -1,6 +1,6 @@
 #!/usr/bin/env runawk
 
-#use "heapsort.awk"
+#use "quicksort.awk"
 
 # This demo sorts the input lines as (key, value) pair
 # and outputs sorted pairs.
@@ -12,7 +12,7 @@
 }
 
 END {
-	count = heapsort_values(hash, remap)
+	count = quicksort_values(hash, remap)
 
 	for (i=1; i <= count; ++i){
 		print remap [i], hash [remap [i]]

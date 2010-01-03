@@ -31,7 +31,7 @@
 #
 #     `count', a number of elements in `src_hash', is a return value.
 #
-# Examples: see demo_heapsort3 and demo_heapsort4 executables.
+# Examples: see demo_heapsort3 executable.
 
 function __sift (array, root, start, end, index_remap,               n0, v){
 	while (1){
