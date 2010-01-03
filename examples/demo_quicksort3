@@ -8,7 +8,9 @@
 # Input file for this demo: examples/demo_heapsort3.in
 
 {
-	hash [$1] = $2
+	val = $2
+	val += NR * 0.00001 # for regression tests
+	hash [$1] = val
 }
 
 END {
