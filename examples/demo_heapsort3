@@ -1,0 +1,20 @@
+#!/usr/bin/env runawk
+
+#use "heapsort.awk"
+
+# This demo sorts the input lines as (key, value) pair
+# and outputs sorted pairs.
+
+# Input files for this demo: examples/demo_heapsort.in
+
+{
+	hash [$1] = $2
+}
+
+END {
+	count = heapsort_values(hash, remap)
+
+	for (i=1; i <= count; ++i){
+		print remap [i], hash [remap [i]]
+	}
+}

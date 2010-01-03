@@ -263,6 +263,7 @@ for i in 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0; do
 done
 
 runtest ../examples/demo_heapsort < ../examples/demo_heapsort.in
+runtest ../examples/demo_heapsort3 < ../examples/demo_heapsort3.in
 
 ####################    quicksort
 runtest_header ../examples/demo_quicksort2
