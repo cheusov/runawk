@@ -16,11 +16,11 @@ range of different tasks. AWK is not as poweful as their bigger
 counterparts like Perl, Ruby, TCL and others but it has their own
 advantages like compactness, simplicity and availability on almost all
 UNIX-like systems. I personally also like its data-driven nature and
-token orientation, very useful technique for simple text processing
+token orientation, very useful techniques for text processing
 utilities.
 
-But! Unfortunately awk interpreters lacks some important features and
-sometimes work not as good as it whould be.
+Unfortunately awk interpreters lacks some important features and
+sometimes do not work as good as they could do.
 
 Problems I see (some of them, of course)
 
@@ -29,8 +29,8 @@ Problems I see (some of them, of course)
 =item 1
 
 AWK lacks support for modules. Even if I create small programs, I
-often want to use the functions created earlier and already used in
-other scripts. That is, it whould great to orginise functions into
+often want to use functions created earlier and already used in
+other scripts. That is, it whould great to organise functions into
 so called libraries (modules).
 
 =item 2
@@ -38,6 +38,7 @@ so called libraries (modules).
 In order to pass arguments to C<#!/usr/bin/awk -f> script (not to awk
 interpreter), it is necessary to prepand a list of
 arguments with -- (two minus signes). In my view, this looks badly.
+Also such behaviour violates POSIX/SUS "Utility Syntax Guidelines".
 
 Example:
 
@@ -69,8 +70,6 @@ In my opinion I<awk_program> script should work like this
     ARGV [1]=--opt1
     ARGV [2]=--opt2
     %
-
-It is possible using B<runawk>.
 
 =item 3
 
@@ -108,6 +107,15 @@ Ideally I<awk_program> should work like this
     flag=1 $0=test
     %
 
+=item 4
+
+igawk(1) which is shipped with GNU awk can not be used in shebang.
+On most (all?) UNIXes scripts beginning with
+
+    #!/usr/local/bin/igawk -f
+
+will not work.
+
 =back
 
 B<runawk> was created to solve all these problems
@@ -142,6 +150,14 @@ Do not add stdin file name to a list of awk arguments (the default)
 Specify program. If I<-e> is not specified program is read from
 I<program_file>.
 
+=item B<-f>|B<--file> I<awk_module>
+
+Specify an AWK module to use. It works the same way as
+
+    #use "awk_module.awk"
+
+directive in the program. Multiple B<-f> options are allowed.
+
 =back
 
 =head1 DETAILS/INTERNALS
@@ -169,9 +185,9 @@ In order to activate modules you should add them into awk script like this
 that is the line that specifies module name is treated as a comment line
 by normal AWK interpreter but is processed by B<runawk> especially.
 
-Note that I<#use> should begin with column 0,
-no spaces are allowed before it and no spaces are allowed between
-I<#> and I<use>.
+Unless you run B<runawk> with option B<-e>, I<#use> must begin with
+column 0, that is no spaces or tabs symbols are allowed before it and
+no symbols are allowed between I<#> and I<use>.
 
 Also note that AWK modules can also "use" another modules and so forth.
 All them are collected in a depth-first order
@@ -241,40 +257,9 @@ AWKPATH environment variable is
 checked. AWKPATH keeps a colon separated
 list of search directories.
 Finally, module is searched in system runawk modules directory,
-by default PREFIX/share/runawk but this can be changed at build time.
+by default PREFIX/share/runawk but this can be changed at compile time.
 
-An absolute path of the module can also be specified.
-
-=head2 AWK interpreter and its arguments
-
-In order to pass arguments to AWK script correctly, B<runawk>
-treats their arguments beginning with `-' sign (minus) especially.
-The following command
-
-  runawk prog2 -x -f=file -o=output file1 file2
-
-or
-
-  /path/to/prog2 -x -f=file -o=output file1 file2
-
-will actually run
-
-  awk -f prog2 -- -x -f=file -o=output file1 file2
-
-therefore -s, -f, -o options will be passed to ARGV/ARGC awk's variables
-together with file1 and file2. If all arguments begin with `-' (minus),
-B<runawk> will add stdin filename to the end of argument list,
-(unless -I option is specified) i.e. running
-
-  runawk prog3 --value=value
-
-or
-
-  /path/to/prog3 --value=value
-
-will actually run the following
-
-  awk -f prog3 -- --value=value /dev/stdin
+An absolute path to the module can also be specified.
 
 =head2 Program as an argument
 
@@ -291,10 +276,16 @@ B<runawk> can obtain the script from a command line like this
    ...
  }'
 
+B<runawk> can also be used for writing oneliners
+
+ runawk -f abs.awk -e 'BEGIN {print abs(-1)}'
+
 =head2 Selecting a preferred AWK interpreter
 
-For some reason you may prefer one AWK interpreter or another with a help of
-I<#interp> command like this
+For some reason you may prefer one AWK interpreter or another.  The
+reason may be efficiency for a particular task, useful but not
+standard extensions or enything else.  To tell B<runawk> what AWK
+interpreter to use, one can use I<#interp> directive
 
   file prog:
      #!/usr/local/bin/runawk
@@ -306,9 +297,6 @@ I<#interp> command like this
 
      # your code here
      ...
-
-The reason may be efficiency for a particular task, useful but
-not standard extensions or enything else.
 
 Note that I<#interp> directive should also begin with column 0,
 no spaces are allowed before it and between I<#> and I<interp>.
