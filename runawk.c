@@ -72,10 +72,11 @@ OPTIONS:\n\
   -V|--version        display version information\n\
   -d|--debug          debugging mode, just list argv array for awk,\n\
                       awk interpreter is not run\n\
-  -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
-  -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
   -e|--execute <program>  program to run\n\
   -v|--assign <var=val>   assign the value val to the variable var\n\
+  -f|--file <awk_module>  add awk_module to a program\n\
+  -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
+  -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
 ");
 }
 
