@@ -1,8 +1,10 @@
+- {string,hash,io,math}.awk -- accumulative modules
+- msub() - cleverer replacement for multisub
 - power_getopt.awk: not empty values -> ARGV[1], ARGV[2]
 - grep(1) in runawk?
-- bre2ere.awk
+- bre2ere.awk Basic RE to Extended RE convertor
 - libconfig/libconfuse analog written in AWK
-- #safe-use
+- #safe-use -- for using module if it exists
 - runawk -t -- for creating a temporary directory under $TMPDIR or /tmp
   which is removed automatically (including killing by signals)
   unless RUNAWK_KEEPTMPDIR
