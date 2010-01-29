@@ -1,7 +1,7 @@
 - runawk -F ?
 - #interp-env
 - heapsort.awk: sift_down, sift_up
-- fixedwidth.awk
+- fixedwidth.awk -> FW variable
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
 - power_getopt.awk: not empty values -> ARGV[1], ARGV[2]
