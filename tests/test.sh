@@ -273,3 +273,6 @@ done
 
 runtest ../examples/demo_quicksort < ../examples/demo_heapsort.in
 runtest ../examples/demo_quicksort3 < ../examples/demo_heapsort3.in
+
+####################    fieldwidths
+runtest ../examples/demo_fieldwidths < ../examples/demo_fieldwidths.in

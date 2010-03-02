@@ -1,0 +1,19 @@
+#!/usr/bin/env runawk
+
+#use "fieldwidths.awk"
+
+# This demo splits input lines into tokens according to FW variable
+# that specifies the field widths.
+
+# Input files for this demo: examples/demo_fieldwidths.in*
+
+BEGIN {
+	FW = "4 5 6 2 1"
+}
+
+{
+	print "NF=" NF
+	for (i=1; i <= NF; ++i){
+		printf "$%d=%s\n", i, $i
+	}
+}
