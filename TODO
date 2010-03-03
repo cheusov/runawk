@@ -2,13 +2,14 @@
 - runawk -F ?
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
-- grep(1) in runawk?
 - bre2ere.awk Basic RE to Extended RE convertor
+  - grep(1) in runawk?
 - winini.awk - support for configuration files in Windows .ini format
-- libconfig/libconfuse analog written in AWK
+- libconfig/libconfuse analog written in/for AWK
 - csv.awk -- module for "comma separated values" format described in RFC4180
 - hash.awk - functions for working with hashes.
   items_count() ?
 - support for Windows
 - shquote(1) executable similar to that by Alan Barret?
 - getopt_long(1) written in runawk
+- remove fflush() ?
