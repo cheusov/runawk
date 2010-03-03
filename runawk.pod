@@ -304,8 +304,8 @@ no spaces are allowed before it and between I<#> and I<interp>.
 Sometimes it also makes sense to give users ability to select their
 preferred AWK interpreter without changing the source code. In
 B<runawk> it is possible using special directive I<#interp-var> which
-sets a variable name assignable by user that specifies an AWK
-interpreter.  For example, the following script
+sets an environment variable name assignable by user that specifies an
+AWK interpreter.  For example, the following script
 
   file foobar:
      #!/usr/bin/env runawk
@@ -324,7 +324,8 @@ or just
 
      foobar
 
-In the latter case the default AWK interpreter is used.
+In the former case B<mawk> will be used as AWK interpreter, in the
+latter -- the default AWK interpreter.
 
 =head2 Setting environment
 
