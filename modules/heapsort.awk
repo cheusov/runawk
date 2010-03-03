@@ -1,6 +1,6 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
-# This awk module is a part of RUNAWK distribution,
+# This awk module is a part of RunAWK distribution,
 #        http://sourceforge.net/projects/runawk
 #
 ############################################################
