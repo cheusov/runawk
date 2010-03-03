@@ -1,7 +1,7 @@
 ======================================================================
 
-runawk: small wrapper for AWK interpreter that impements module
-system and helps to write the standalone AWK programs.
+runawk: small wrapper for AWK interpreter that impements modules
+system and helps one to write the standalone AWK programs.
 
 author:                                  Aleksey Cheusov <vle@gmx.net>
 
@@ -15,111 +15,7 @@ licence:                                                   MIT license
 
                               MOTIVATION
 
-
-
-After years of using AWK for programming I've found that despite of
-its simplicity and limitations AWK is good enough for scripting a wide
-range of different tasks. AWK is not as poweful as their bigger
-counterparts like Perl, Ruby, TCL and others but it has their own
-advantages like compactness, simplicity and availability on almost all
-UNIX-like systems. I personally also like its data-driven nature and
-token orientation, very useful technique for simple text processing
-utilities.
-
-
-But! Unfortunately awk interpreters lacks some important features and
-sometimes work not as good as it whould be.
-
-Some problems I see (some of them, of course).
-
-1)
-
-AWK lacks support for modules. Even if I create small programs, I
-often want to use the functions created earlier and already used in
-other scripts. That is, it whould great to orginise functions into
-so called libraries (modules).
-
-2)
-
-In order to pass arguments to #!/usr/bin/awk -f script (not to awk
-interpreter), it is necessary to prepand a list of
-arguments with -- (two minus signes). In my view, this looks badly.
-
-Example:
-
-awk_program:
-
-    #!/usr/bin/awk -f
-
-    BEGIN {
-       for (i=1; i < ARGC; ++i){
-          printf "ARGV [%d]=%s\n", i, ARGV [i]
-       }
-    }
-
-Shell session:
-
-    % awk_program --opt1 --opt2
-    /usr/bin/awk: unknown option --opt1 ignored
-
-    /usr/bin/awk: unknown option --opt2 ignored
-
-    % awk_program -- --opt1 --opt2
-    ARGV [1]=--opt1
-    ARGV [2]=--opt2
-    %
-
-In my opinion awk_program script should work like this (just like
-normal programs do)
-
-    % awk_program --opt1 --opt2
-    ARGV [1]=--opt1
-    ARGV [2]=--opt2
-    %
-
-It is possible using runawk.
-
-3)
-
-When #!/usr/bin/awk -f script handles arguments (options) and wants
-to read from stdin, it is necessary to add
-/dev/stdin (or `-') as a last argument explicitely.
-
-Example:
-
-awk_program:
-
-    #!/usr/bin/awk -f
-
-    BEGIN {
-       if (ARGV [1] == "--flag"){
-          flag = 1
-          ARGV [1] = "" # to not read file named "--flag"
-       }
-    }
-
-    {
-       print "flag=" flag " $0=" $0
-    }
-
-Shell session:
-
-    % echo test | awk_program -- --flag
-    % echo test | awk_program -- --flag /dev/stdin
-    flag=1 $0=test
-    %
-
-Ideally awk_program should work like this
-
-    % echo test | awk_program --flag
-    flag=1 $0=test
-    %
-
-
-
-All these probles are solved by runawk and this is why I wrote it.
-I also include a few modules to runawk distribution which are
-useful for me and I hope will be helpful for you too.
+See section MOTIVATION of runawk.1 or runawk.pod.
 
 ======================================================================
 
@@ -133,32 +29,32 @@ useful for me and I hope will be helpful for you too.
    If you need to change the default building options,
    run make like this
 
-     env [YOUR_ASSIGNMENTS] make <target>
+     env [YOUR_ASSIGNMENTS] make <target> [YOUR_ASSIGNMENTS]
 
-   See example section below
+   See examples section below
 
 1) Uncompress tarball you've downloaded like this
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
-2) cd runawk-X-Y-Z
+2) cd runawk-X.Y.Z
 
 3) make
 
-4) (optional!) make install-dirs
+4) (optional!) make installdirs
 
 5) make install
 
 There are a lot of Makefile variables that can be changed during
-installation.  Runawk's own variables (All they are at the begining of
+installation.  RunAWK's own variables (All they are at the begining of
 Makefile):
 
- PREFIX         - where runawk is installed to
+ PREFIX         - where runawk is installed to            [/usr/local])
  MODULESDIR     - directory where modules are installed to
  AWK_PROG       - path to awk interpreter
- STDIN_FILENAME - path to stdin device file
+ STDIN_FILENAME - path to stdin device file               [-]
 
 BSD make's variables (most commonly used,
-for all others - see make's documentation and .mk files)
+for all others - see make's documentation and appropriate .mk files)
 
  BINDIR - where runawk executable itself is installed to
  MANDIR - where manual pages are installed to
@@ -181,10 +77,17 @@ Example:
        MANOWN=cheusov \
        MANGRP=users \
        MKCATPAGES=no \
-          make -s all install-dirs install
+          make -s all installdirs install
+
+======================================================================
+
+                           MODULES
+
+RunAWK provides lots of AWK modules ready for use. All of them are
+under modules/ subdirectory. They are installed by default.
 
 ======================================================================
 
                            EXAMPLES
 
-Lots of examples are available in examples/ subdirectory
+Lots of examples are available in examples/ subdirectory.
