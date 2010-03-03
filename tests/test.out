@@ -154,6 +154,10 @@ BEGIN {print "Hello World!"}
 
 running '/invalid/path' failed: No such file or directory
 --------------------------------------------------
+------- args: #interp-var directive
+123
+running '/invalid/path' failed
+--------------------------------------------------
 ------- args: -e 
 #use "/invalid/path/file.awk"
 

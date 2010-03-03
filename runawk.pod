@@ -301,6 +301,31 @@ interpreter to use, one can use I<#interp> directive
 Note that I<#interp> directive should also begin with column 0,
 no spaces are allowed before it and between I<#> and I<interp>.
 
+Sometimes it also makes sense to give users ability to select their
+preferred AWK interpreter without changing the source code. In
+B<runawk> it is possible using special directive I<#interp-var> which
+sets a variable name assignable by user that specifies an AWK
+interpreter.  For example, the following script
+
+  file foobar:
+     #!/usr/bin/env runawk
+
+     #interp-var "FOOBAR_AWK"
+
+     BEGIN {
+        print "This is a FooBar application"
+     }
+
+can be run as
+
+     env FOOBAR_AWK=mawk foobar
+
+or just
+
+     foobar
+
+In the latter case the default AWK interpreter is used.
+
 =head2 Setting environment
 
 In some cases you may want to run AWK interpreter with a

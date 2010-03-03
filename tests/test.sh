@@ -116,6 +116,28 @@ BEGIN {print "Hello World!"}
 '
 
 ####################
+runtest_header '#interp-var directive'
+interp_var_test (){
+    $OBJDIR/runawk -e '
+#interp-var "INTERP_VAR_TEST"
+
+BEGIN {
+   print 123
+   exit 0
+}
+' 2>&1 | sed 's/failed:.*/failed/'
+}
+
+# success
+interp_var_test
+
+# failure
+INTERP_VAR_TEST=/invalid/path
+export INTERP_VAR_TEST
+interp_var_test
+unset INTERP_VAR_TEST
+
+####################
 runtest -e '
 #use "/invalid/path/file.awk"
 '

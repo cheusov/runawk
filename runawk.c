@@ -101,6 +101,8 @@ static char cwd [PATH_MAX];
 static const char *interp     = AWK_PROG;
 static const char *sys_awkdir = MODULESDIR;
 
+static char *interp_var = NULL;
+
 static int debug = 0;
 
 static int add_stdin = 0;
@@ -259,6 +261,8 @@ static void scan_buffer (
 			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5));
 		}else if (!strncmp (p, "#interp ", 8)){
 			interp = extract_qstring (p, line_num, name, p + 8);
+		}else if (!strncmp (p, "#interp-var ", 12)){
+			interp_var = extract_qstring (p, line_num, name, p + 12);
 		}else if (!strncmp (p, "#env ", 5)){
 			env_str = (char *) extract_qstring (p, line_num, name, p + 5);
 			xputenv (env_str);
@@ -622,6 +626,8 @@ int main (int argc, char **argv)
 	}
 
 	progname = interp;
+
+	/* */
 	if (!prog_specified){
 		/* program_file */
 		if (argc < 1){
@@ -638,6 +644,13 @@ int main (int argc, char **argv)
 #endif
 		++argv;
 	}
+
+	/* AWK interpreter name */
+	if (interp_var)
+		interp_var = getenv (interp_var);
+
+	if (interp_var && interp_var [0])
+		interp = interp_var;
 
 	/* exec */
 	new_argv [0] = xstrdup (progname);
