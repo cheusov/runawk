@@ -178,7 +178,7 @@ static const char *search_file (const char *dir, const char *name)
 	return NULL;
 }
 
-static void invalid_use_directive (int num, const char *line, const char *fn)
+static void invalid_directive (int num, const char *line, const char *fn)
 {
 	char *copy = xstrdup (line);
 	char * nl = strchr (copy, '\n');
@@ -193,7 +193,7 @@ static void invalid_use_directive (int num, const char *line, const char *fn)
 	free (copy);
 }
 
-static void add_file_uniq (const char *dir, const char *name);
+static int add_file_uniq (const char *dir, const char *name, int safe_use);
 
 static char *extract_qstring (
 	const char *line, int line_num, const char *fn, const char *s)
@@ -205,7 +205,7 @@ static char *extract_qstring (
 
 	p = s + strspn (s, " ");
 	if (*p != '"'){
-		invalid_use_directive (line_num, line, fn);
+		invalid_directive (line_num, line, fn);
 		clean_and_exit (37);
 	}
 
@@ -213,7 +213,7 @@ static char *extract_qstring (
 
 	n = strpbrk (p, "\"\n");
 	if (!n || *n == '\n'){
-		invalid_use_directive (line_num, line, fn);
+		invalid_directive (line_num, line, fn);
 		clean_and_exit (37);
 	}
 
@@ -223,6 +223,87 @@ static char *extract_qstring (
 	ret [len] = 0;
 	
 	return ret;
+}
+
+static int add_file_uniq_safe (const char *dir, const char *name)
+{
+	char buffer [4000];
+	const char *fn;
+
+	if (name [0] == '~'){
+		snprintf (buffer, sizeof (buffer), "%s%s", getenv ("HOME"), name+1);
+		fn = buffer;
+	}else{
+		fn = name;
+	}
+
+	return add_file_uniq (dir, fn, 1);
+}
+
+typedef enum {
+	qstr_spaces,
+	qstr_str,
+} qstr_state_t;
+
+static void list_of_qstrings (
+	const char *dir,
+	int line_num,
+	const char *fn,
+	const char *line,
+	const char *s,
+	int (*fun) (const char *dir, const char *name))
+{
+	char buffer [2000];
+	const char *p;
+	const char *start = NULL;
+	size_t len;
+	int state = qstr_spaces;
+	int success = 0;
+
+	for (p=s; *p; ++p){
+		switch (state){
+			case qstr_spaces:
+				switch (*p){
+					case ' ':
+					case '\t':
+					case '\r':
+						break;
+					case '\n':
+						goto eol;
+					case '"':
+						state = qstr_str;
+						start = p+1;
+						break;
+					default:
+						invalid_directive (line_num, line, fn);
+						clean_and_exit (51);
+				}
+				break;
+			case qstr_str:
+				switch (*p){
+					case '"':
+						len = p-start;
+						if (len+1 > sizeof (buffer))
+							len = sizeof (buffer) - 1;
+
+						memcpy (buffer, start, len);
+						buffer [len] = 0;
+						state = qstr_spaces;
+
+						success = (success || fun (dir, buffer));
+						break;
+					default:
+						break;
+				}
+				break;
+		}
+	}
+
+ eol:
+	if (state == qstr_str){
+		invalid_directive (line_num, line, fn);
+		clean_and_exit (52);
+	}
 }
 
 static void scan_buffer (
@@ -258,7 +339,9 @@ static void scan_buffer (
 		}
 
 		if (!strncmp (p, "#use ", 5)){
-			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5));
+			add_file_uniq (dir, extract_qstring (p, line_num, name, p + 5), 0);
+		}else if (!strncmp (p, "#safe-use ", 10)){
+			list_of_qstrings (dir, line_num, name, p, p+10, add_file_uniq_safe);
 		}else if (!strncmp (p, "#interp ", 8)){
 			interp = extract_qstring (p, line_num, name, p + 8);
 		}else if (!strncmp (p, "#interp-var ", 12)){
@@ -270,7 +353,7 @@ static void scan_buffer (
 	}
 }
 
-static void scan_file (const char *name)
+static int scan_file (const char *name, int safe_use)
 {
 	char dir [PATH_MAX];
 	FILE *fd      = NULL;
@@ -292,6 +375,9 @@ static void scan_file (const char *name)
 
 	/**/
 	if (stat (name, &stat_buf)){
+		if (safe_use)
+			return 0;
+
 		fprintf (stderr, "stat(\"%s\") failed: %s\n", name, strerror (errno));
 		clean_and_exit (35);
 	}
@@ -320,6 +406,8 @@ static void scan_file (const char *name)
 		perror ("fclose(3) failed");
 		clean_and_exit (36);
 	}
+
+	return 1;
 }
 
 static void ll_push (
@@ -368,7 +456,7 @@ static void add_buffer (const char *buffer, size_t len)
 	}
 }
 
-static void add_file (const char *dir, const char *name)
+static int add_file (const char *dir, const char *name, int safe_use)
 {
 	const char *new_name = NULL;
 
@@ -376,6 +464,9 @@ static void add_file (const char *dir, const char *name)
 		/* name -> path */
 		new_name = search_file (dir, name);
 		if (!new_name){
+			if (safe_use)
+				return 0;
+
 			fprintf (stderr, "Cannot find module `%s`, check AWKPATH environment variable\n", name);
 			clean_and_exit (34);
 		}
@@ -383,15 +474,19 @@ static void add_file (const char *dir, const char *name)
 	}
 
 	/* recursive snanning for #xxx directives */
-	scan_file (name);
-
-	/* add to queue */
-	ll_push ("-f", new_argv, &new_argc);
-	ll_push (name, new_argv, &new_argc);
-	ll_push (name, includes, &includes_count);
+	if (scan_file (name, safe_use)){
+		/* add to queue */
+		ll_push ("-f", new_argv, &new_argc);
+		ll_push (name, new_argv, &new_argc);
+		ll_push (name, includes, &includes_count);
+		return 1;
+	}else{
+		return 0;
+	}
 }
 
-static void add_file_uniq (const char *dir, const char *name)
+static int add_file_uniq (
+	const char *dir, const char *name, int safe_use)
 {
 	int i;
 	const char *p;
@@ -402,11 +497,11 @@ static void add_file_uniq (const char *dir, const char *name)
 		p = strstr (inc, name);
 
 		if (p && (p == inc || (p [-1] == '/' && p [strlen (p)] == 0))){
-			return;
+			return 1;
 		}
 	}
 
-	add_file (dir, name);
+	return add_file (dir, name, safe_use);
 }
 
 static void process_opt (char opt)
@@ -585,7 +680,7 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			add_file (cwd, argv [1]);
+			add_file (cwd, argv [1], 0);
 
 			--argc;
 			++argv;
@@ -636,7 +731,7 @@ int main (int argc, char **argv)
 		}
 
 		--argc;
-		add_file (cwd, *argv);
+		add_file (cwd, *argv, 0);
 		progname = *argv;
 #if 0
 		setprogname (*argv);
