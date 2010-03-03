@@ -64,6 +64,8 @@ function getarg (opt, dflt,              tmp){
 
 BEGIN {
 	# options
+	__getopt_fill = "\001getopt_fake\002"
+
 	while (getopt(short_opts)){
 		if (optopt in long_opts){
 			_i = long_opts [optopt]
@@ -75,6 +77,14 @@ BEGIN {
 		else
 			++options [optopt]
 	}
+
+	__getopt_to = 1
+	for (__getopt_from = 1; __getopt_from < ARGC; ++__getopt_from){
+		if (ARGV [__getopt_from] != __getopt_fill){
+			ARGV [__getopt_to++] = ARGV [__getopt_from]
+		}
+	}
+	ARGC = __getopt_to
 
 	if (("help" in options) ||
 		("help" in long_opts) && (long_opts ["help"] in options))

@@ -71,7 +71,7 @@ function __getopt_errexit (msg, status)
 function __getopt_addstdin (                  i)
 {
 	for (i=1; i < ARGC; ++i){
-		if (ARGV [i] != ""){
+		if (ARGV [i] != __getopt_fill){
 			return
 		}
 	}
@@ -123,10 +123,10 @@ function __getopt_process_short_opts (\
 	if (__getopt_opts [optopt] == takes_arg){
 		if (length(opts) == 1){
 			optarg = ARGV [i+1]
-			ARGV [i] = ARGV [i+1] = ""
+			ARGV [i] = ARGV [i+1] = __getopt_fill
 		}else{
 			optarg = substr(opts, 2)
-			ARGV [i] = ""
+			ARGV [i] = __getopt_fill
 		}
 		return 1
 	}
@@ -134,7 +134,7 @@ function __getopt_process_short_opts (\
 	if (length(opts) > 1)
 		ARGV [i] = "-" substr(opts, 2)
 	else
-		ARGV [i] = ""
+		ARGV [i] = __getopt_fill
 
 	return 1
 }
@@ -162,7 +162,7 @@ function __getopt_process_long_opts (\
 		val = __getopt_opts [opt]
 		if (val == ""){
 			assert(!eq, "Unexpected argument for option `" opt "'")
-			ARGV [i] = ""
+			ARGV [i] = __getopt_fill
 			return 1
 		}else if (val == takes_arg){
 			if (eq){
@@ -170,9 +170,9 @@ function __getopt_process_long_opts (\
 				sub(/^[^=]*=/, "", optarg)
 			}else{
 				optarg = ARGV [i+1]
-				ARGV [i+1] = ""
+				ARGV [i+1] = __getopt_fill
 			}
-			ARGV [i] = ""
+			ARGV [i] = __getopt_fill
 			return 1
 		}
 	}
@@ -189,12 +189,12 @@ function getopt (\
 	for (i = 1; i < ARGC; ++i){
 		optarg = ""
 
-		if (ARGV [i] == ""){
+		if (ARGV [i] == __getopt_fill){
 			continue
 		}
 
 		if (ARGV [i] == "--"){
-			ARGV [i] = ""
+			ARGV [i] = __getopt_fill
 			__getopt_addstdin()
 			return 0
 		}
