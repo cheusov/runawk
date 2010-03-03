@@ -33,7 +33,7 @@
 #
 # Examples: see demo_heapsort3 executable.
 
-function __sift (array, root, start, end, index_remap,               n0, v){
+function sift_down (array, root, start, end, index_remap,               n0, v){
 	while (1){
 		n0 = root - start + 1 + root
 
@@ -54,19 +54,37 @@ function __sift (array, root, start, end, index_remap,               n0, v){
 	}
 }
 
+function sift_up (array, root, start, end, index_remap,               n0, v){
+	while (1){
+		n0 = int((root - start + 1)/2) - 1 + start
+
+		if (n0 < start)
+			return
+
+		if (array [index_remap [root]] >= array [index_remap [n0]])
+			return
+
+		v = index_remap [root]
+		index_remap [root] = index_remap [n0]
+		index_remap [n0] = v
+
+		root = n0
+	}
+}
+
 function heapsort (array, index_remap, start, end,               i,v){
 	for (i=start; i <= end; ++i){
 		index_remap [i] = i
 	}
 	for (i=int((start+end)/2); i >= start; --i){
-		__sift(array, i, start, end, index_remap)
+		sift_down(array, i, start, end, index_remap)
 	}
 	for (; end > start; --end){
 		v = index_remap [start]
 		index_remap [start] = index_remap [end]
 		index_remap [end] = v
 
-		__sift(array, start, start, end-1, index_remap)
+		sift_down(array, start, start, end-1, index_remap)
 	}
 }
 
