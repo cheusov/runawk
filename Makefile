@@ -5,6 +5,9 @@ BINDIR?=		${PREFIX}/bin
 MANDIR?=		${PREFIX}/man
 MODULESDIR?=		${PREFIX}/share/runawk
 
+# default directory for creating temp files and dirs
+TEMPDIR=		/tmp
+
 MKHTML?=		no
 
 .if exists(/usr/xpg4/bin/awk)
@@ -28,7 +31,7 @@ INST_DIR?=		${INSTALL} -d
 
 VERSION=		0.19.0
 
-WARNS?=			4
+#WARNS?=			4
 
 BIRTHDATE=		2007-09-24
 
@@ -44,6 +47,7 @@ CFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
 CFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
+CFLAGS+=		-DTEMPDIR='"${TEMPDIR}"'
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \

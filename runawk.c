@@ -57,6 +57,10 @@
 #define RUNAWK_VERSION "x.y.z"
 #endif
 
+#ifndef TEMPDIR
+#define TEMPDIR "/tmp"
+#endif
+
 #ifndef MODULESDIR
 #define MODULESDIR "/usr/local/share/runawk"
 #endif
@@ -75,6 +79,8 @@ OPTIONS:\n\
   -e|--execute <program>  program to run\n\
   -v|--assign <var=val>   assign the value val to the variable var\n\
   -f|--file <awk_module>  add awk_module to a program\n\
+  -t                  create a temporary directory and pass it to\n\
+                      AWK interpreter subprocess\n\
   -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
   -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
 ");
@@ -89,11 +95,15 @@ static void version (void)
 
 static pid_t awk_pid = -1;
 
+static int killing_sig = 0;
+
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
 static char temp_fn [PATH_MAX] = "/tmp/runawk.XXXXXX";
 static int temp_fn_created = 0;
+
+static char *temp_dir = NULL;
 
 static char *awkpath      = NULL;
 static size_t awkpath_len = 0;
@@ -114,13 +124,45 @@ static int new_argc = 0;
 
 static void clean_and_exit (int status)
 {
+	char buffer [4000];
+
 	if (temp_fn_created)
 		unlink (temp_fn);
+
+	if (temp_dir){
+		snprintf (buffer, sizeof (buffer), "rm -rf %s", temp_dir);
+		system (buffer);
+		if (temp_dir)
+			free (temp_dir);
+	}
 
 	if (awkpath)
 		free (awkpath);
 
-	exit (status);
+	if (killing_sig)
+		exit (128 + killing_sig);
+	else
+		exit (status);
+}
+
+static void mktempdir (void)
+{
+	char *dir = getenv ("RUNAWK_TMPDIR");
+	if (!dir)
+		dir = getenv ("TMPDIR");
+	if (!dir)
+		dir = TEMPDIR;
+
+	temp_dir = tempnam (dir, "awk.");
+	if (!temp_dir){
+		perror ("tempnam(3) failed");
+		clean_and_exit (52);
+	}
+
+	if (mkdir (temp_dir, 0700)){
+		perror ("mkdir(3) failed");
+		clean_and_exit (53);
+	}
 }
 
 static char *xstrdup (const char *s)
@@ -508,6 +550,8 @@ static int add_file_uniq (
 
 static void process_opt (char opt)
 {
+	char buffer [4000];
+
 	switch (opt){
 		case 'h':
 			usage ();
@@ -524,6 +568,11 @@ static void process_opt (char opt)
 		case 'I':
 			add_stdin = 0;
 			break;
+		case 't':
+			mktempdir ();
+			snprintf (buffer, sizeof (buffer), "_RUNAWK_TMPDIR=%s\n", temp_dir);
+			xputenv (buffer);
+			break;
 		default:
 			abort ();
 	}
@@ -534,10 +583,12 @@ static void handler (int sig)
 //	if (temp_fn_created)
 //		unlink (temp_fn);
 
-	fprintf (stderr, "sig=%li\n", (long) sig);
-	fprintf (stderr, "pid=%li\n", (long) awk_pid);
-	if (awk_pid != -1)
+//	fprintf (stderr, "sig=%li\n", (long) sig);
+//	fprintf (stderr, "pid=%li\n", (long) awk_pid);
+	killing_sig = sig;
+	if (awk_pid != -1){
 		kill (awk_pid, sig);
+	}
 
 //	struct sigaction sa;
 //	sa.sa_handler = SIG_DFL;
@@ -717,6 +768,7 @@ int main (int argc, char **argv)
 				case 'd':
 				case 'i':
 				case 'I':
+				case 't':
 					process_opt (*p);
 					break;
 				default:
@@ -794,14 +846,13 @@ int main (int argc, char **argv)
 			default:
 				/* parent */
 				waitpid (-1, &child_status, 0);
-				if (WIFSIGNALED (child_status)){
-					puts ("1");
-					clean_and_exit(128 + WTERMSIG (child_status));
+				if (killing_sig){
+					clean_and_exit (0);
+				}else if (WIFSIGNALED (child_status)){
+					clean_and_exit (128 + WTERMSIG (child_status));
 				}else if (WIFEXITED (child_status)){
-					puts ("2");
 					clean_and_exit (WEXITSTATUS (child_status));
 				}else{
-					puts ("3");
 					clean_and_exit (200);
 				}
 		}
