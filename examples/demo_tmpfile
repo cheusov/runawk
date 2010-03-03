@@ -1,0 +1,18 @@
+#!/usr/bin/env runawk
+
+#use "tmpfile.awk"
+#use "exitnow.awk"
+
+# This demo generates temporary file names and outputs them to stdout
+
+BEGIN {
+	tmpfile1 = tmpfile()
+	tmpfile2 = tmpfile()
+	tmpfile3 = tmpfile()
+
+	print tmpfile1
+	print tmpfile2
+	print tmpfile3
+
+	exitnow(0)
+}
