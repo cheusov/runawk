@@ -87,6 +87,8 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
+static pid_t awk_pid = -1;
+
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
@@ -529,16 +531,21 @@ static void process_opt (char opt)
 
 static void handler (int sig)
 {
-	if (temp_fn_created)
-		unlink (temp_fn);
+//	if (temp_fn_created)
+//		unlink (temp_fn);
 
-	struct sigaction sa;
-	sa.sa_handler = SIG_DFL;
-	sigemptyset (&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction (sig, &sa, NULL);
+	fprintf (stderr, "sig=%li\n", (long) sig);
+	fprintf (stderr, "pid=%li\n", (long) awk_pid);
+	if (awk_pid != -1)
+		kill (awk_pid, sig);
 
-	kill (getpid (), sig);
+//	struct sigaction sa;
+//	sa.sa_handler = SIG_DFL;
+//	sigemptyset (&sa.sa_mask);
+//	sa.sa_flags = 0;
+//	sigaction (sig, &sa, NULL);
+
+//	kill (getpid (), sig);
 }
 
 static void set_sig_handler (void)
@@ -579,7 +586,6 @@ static void putenv_RUNAWK_MODx (void)
 int main (int argc, char **argv)
 {
 	const char *progname   = NULL;
-	pid_t pid              = 0;
 	int child_status       = 0;
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
@@ -771,27 +777,33 @@ int main (int argc, char **argv)
 			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
 		}
 	}else{
-		pid = fork ();
-		switch (pid){
+		awk_pid = fork ();
+		switch (awk_pid){
 			case -1:
 				perror ("fork(2) failed");
 				clean_and_exit (42);
 				break;
 
 			case 0:
+				/* child */
 				execvp (interp, (char *const *) new_argv);
 				fprintf (stderr, "running '%s' failed: %s\n", interp, strerror (errno));
 				exit (1);
 				break;
 
 			default:
+				/* parent */
 				waitpid (-1, &child_status, 0);
-				if (WIFSIGNALED (child_status))
+				if (WIFSIGNALED (child_status)){
+					puts ("1");
 					clean_and_exit(128 + WTERMSIG (child_status));
-				else if (WIFEXITED (child_status))
+				}else if (WIFEXITED (child_status)){
+					puts ("2");
 					clean_and_exit (WEXITSTATUS (child_status));
-				else
+				}else{
+					puts ("3");
 					clean_and_exit (200);
+				}
 		}
 	}
 
