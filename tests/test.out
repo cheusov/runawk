@@ -891,3 +891,8 @@ $3=12
 NF=1
 $1=12
 NF=0
+--------------------------------------------------
+------- args: ../examples/demo_tmpfile
+/tmp/awk.XXXX/0
+/tmp/awk.XXXX/1
+/tmp/awk.XXXX/2

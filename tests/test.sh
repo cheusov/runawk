@@ -15,8 +15,8 @@ unify_paths (){
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk.*,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk.*,ARGV[0]=awk,' \
-	-e 's,FILENAME=-$,FILENAME=,'
-#	-e 's,[.][.]/examples/,,'
+	-e 's,FILENAME=-$,FILENAME=,' \
+	-e 's,/tmp/awk[.][^/]*/,/tmp/awk.XXXX/,'
 }
 
 runtest_header (){
@@ -328,3 +328,6 @@ runtest ../examples/demo_quicksort3 < ../examples/demo_heapsort3.in
 
 ####################    fieldwidths
 runtest ../examples/demo_fieldwidths < ../examples/demo_fieldwidths.in
+
+####################    tmpfile
+runtest ../examples/demo_tmpfile
