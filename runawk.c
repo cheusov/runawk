@@ -93,6 +93,8 @@ static void version (void)
 	printf ("runawk %s written by Aleksey Cheusov\n", runawk_version);
 }
 
+static int create_tmpdir = 0;
+
 static pid_t awk_pid = -1;
 
 static int killing_sig = 0;
@@ -503,6 +505,7 @@ static void add_buffer (const char *buffer, size_t len)
 static int add_file (const char *dir, const char *name, int safe_use)
 {
 	const char *new_name = NULL;
+	size_t len;
 
 	if (name [0] != '/'){
 		/* name -> path */
@@ -520,6 +523,11 @@ static int add_file (const char *dir, const char *name, int safe_use)
 	/* recursive snanning for #xxx directives */
 	if (scan_file (name, safe_use)){
 		/* add to queue */
+		len = strlen (name);
+		if (len > 11 && !strcmp (name+len-12, "/tmpfile.awk")){
+			create_tmpdir = 1;
+		}
+
 		ll_push ("-f", new_argv, &new_argc);
 		ll_push (name, new_argv, &new_argc);
 		ll_push (name, includes, &includes_count);
@@ -550,8 +558,6 @@ static int add_file_uniq (
 
 static void process_opt (char opt)
 {
-	char buffer [4000];
-
 	switch (opt){
 		case 'h':
 			usage ();
@@ -569,9 +575,7 @@ static void process_opt (char opt)
 			add_stdin = 0;
 			break;
 		case 't':
-			mktempdir ();
-			snprintf (buffer, sizeof (buffer), "_RUNAWK_TMPDIR=%s\n", temp_dir);
-			xputenv (buffer);
+			create_tmpdir = 1;
 			break;
 		default:
 			abort ();
@@ -636,6 +640,7 @@ static void putenv_RUNAWK_MODx (void)
 
 int main (int argc, char **argv)
 {
+	char buffer [4000];
 	const char *progname   = NULL;
 	int child_status       = 0;
 	const char *p          = NULL;
@@ -824,6 +829,14 @@ int main (int argc, char **argv)
 
 	putenv_RUNAWK_MODx ();
 
+	/* create temporary directory */
+	if (create_tmpdir){
+		mktempdir ();
+		snprintf (buffer, sizeof (buffer), "_RUNAWK_TMPDIR=%s", temp_dir);
+		xputenv (buffer);
+	}
+
+	/**/
 	if (debug){
 		for (i=0; i < new_argc - 1; ++i){
 			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
