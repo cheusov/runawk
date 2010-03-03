@@ -1,6 +1,5 @@
 - reference to EGDIR from mk-configure.7
 - runawk -F ?
-- #interp-env
 - heapsort.awk: sift_down, sift_up
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
