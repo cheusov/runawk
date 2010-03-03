@@ -10,6 +10,8 @@ MKHTML?=		no
 .if exists(/usr/xpg4/bin/awk)
 # Solaris' /usr/bin/awk sucks so much... :-(
 # /usr/xpg4/bin/awk sucks too but sucks less.
+# I'd recommend you use GNU awk, nawk from NetBSD cvs tree
+# or mawk-1.3.4 or later.
 AWK_PROG?=		/usr/xpg4/bin/awk
 .else
 AWK_PROG?=		/usr/bin/awk
