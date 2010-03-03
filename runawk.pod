@@ -327,6 +327,41 @@ or just
 In the former case B<mawk> will be used as AWK interpreter, in the
 latter -- the default AWK interpreter.
 
+=head2 Using existing modules only
+
+In UNIX world it is common practise to write configuration files in a
+programming language on which an application was written. That is, if
+application is written in Bourne shell, configuration files for such
+application are often written in Bourne as well. Using RunAWK one can
+do the same for application written in AWK. For example, the following
+code will use ~/.foobarrc file if it exists otherwise /etc/foobar.conf
+will be used if it exists.
+
+  file foobar:
+    #!/usr/bin/env runawk
+
+    #safe-use "~/.foobarrc" "/etc/foobar.conf"
+
+    your code is here
+
+Of course, I<#safe-use> directive may be used for other purposes as
+well.  I<#safe-use> directive accepts as much modules as you want, but
+at most one can be used (awk -f), others are silently skipped, modules
+are analysed from left to right. Leading tilde in the module name is
+replaced with user's home directory.
+Another example:
+
+  file foobar:
+    #!/usr/bin/env runawk
+
+    #use "/usr/share/foobar/default.conf"
+    #safe-use "~/.foobarrc" "/etc/foobar.conf"
+
+    your code is here
+
+Here the default settings are set in /usr/share/foobar/default.conf,
+and configuration files are used for overriding them.
+
 =head2 Setting environment
 
 In some cases you may want to run AWK interpreter with a
