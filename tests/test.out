@@ -158,6 +158,39 @@ running '/invalid/path' failed: No such file or directory
 123
 running '/invalid/path' failed
 --------------------------------------------------
+------- args: #safe-use directive
+--- #safe-use test: ---
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = /path/temp1.awk
+new_argv [3] = -f
+new_argv [4] = /tmp/runawk.NNNNNN
+new_argv [5] = --
+--- #safe-use test: ---
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = /path/temp1.awk
+new_argv [3] = -f
+new_argv [4] = /tmp/runawk.NNNNNN
+new_argv [5] = --
+--- #safe-use test: ---
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = /path/temp2.awk
+new_argv [3] = -f
+new_argv [4] = /tmp/runawk.NNNNNN
+new_argv [5] = --
+--- #safe-use test: ---
+new_argv [0] = awk
+new_argv [1] = 
+#safe-use "/bad/path3" "/bad/path2" "/bad/path1"
+
+BEGIN {
+   print 123
+   exit 0
+}
+
+--------------------------------------------------
 ------- args: -e 
 #use "/invalid/path/file.awk"
 

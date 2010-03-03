@@ -117,6 +117,7 @@ BEGIN {print "Hello World!"}
 
 ####################
 runtest_header '#interp-var directive'
+
 interp_var_test (){
     $OBJDIR/runawk -e '
 #interp-var "INTERP_VAR_TEST"
@@ -136,6 +137,32 @@ INTERP_VAR_TEST=/invalid/path
 export INTERP_VAR_TEST
 interp_var_test
 unset INTERP_VAR_TEST
+
+####################
+runtest_header '#safe-use directive'
+
+touch $OBJDIR/temp1.awk
+touch $OBJDIR/temp2.awk
+
+safe_use_test (){
+    echo "--- #safe-use test: ---"
+    $OBJDIR/runawk -d -e "
+#safe-use \"$1\" \"$2\" \"$3\"
+
+BEGIN {
+   print 123
+   exit 0
+}
+" |
+    unify_paths |
+    sed -e 's,/[^ ]*/temp1.awk,/path/temp1.awk,' \
+	-e 's,/[^ ]*/temp2.awk,/path/temp2.awk,'
+}
+
+safe_use_test "/bad/path1" "$OBJDIR/temp1.awk" "/bad/path2"
+safe_use_test "$OBJDIR/temp1.awk" "/bad/path2"  "/bad/path1"
+safe_use_test "/bad/path1" "$OBJDIR/temp3.awk" "$OBJDIR/temp2.awk"
+safe_use_test "/bad/path3" "/bad/path2" "/bad/path1"
 
 ####################
 runtest -e '
