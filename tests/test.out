@@ -571,6 +571,7 @@ s         --- 2
       --LONG-FLAG <value>     long flag with value
       --long-flag             long flag only
    -F|--FLAG <value>          flag with value
+   -P                         print ARGC and ARGV
    -S <value>                 short flag with value
    -X                         short flag
    -Y <value>                 short flag with value
@@ -602,6 +603,15 @@ options [f]=1
 options [long-flag]=1
 options [s]=1
 s         --- 1
+//////////////////////////////////////////////////
+------- args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 -P arg1  arg3 arg4 
+--------------------------------------------------
+ARGC=6
+ARGV [1]=arg1
+ARGV [2]=
+ARGV [3]=arg3
+ARGV [4]=arg4
+ARGV [5]=
 //////////////////////////////////////////////////
 --------------------------------------------------
 ------- args: ../examples/demo_power_getopt2 --help

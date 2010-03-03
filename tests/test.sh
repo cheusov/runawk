@@ -249,6 +249,9 @@ echo //////////////////////////////////////////////////
 runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 2>&1 |
 sort
 echo //////////////////////////////////////////////////
+runtest ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 -P arg1 '' arg3 arg4 '' 2>&1 |
+sort
+echo //////////////////////////////////////////////////
 
 runtest ../examples/demo_power_getopt2 --help
 runtest ../examples/demo_power_getopt2 -?

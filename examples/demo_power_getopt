@@ -15,11 +15,20 @@
 #    =S <value>                 short flag with value
 #    -X                         short flag
 #    =Y <value>                 short flag with value
+#    -P                         print ARGC and ARGV
 #.end-str
 
 # Very powerful easy for use module for handling options
 
 BEGIN {
+	if (getarg("P")){
+		print "ARGC=" ARGC
+		for (i=1; i < ARGC; ++i){
+			printf "ARGV [%d]=%s\n", i, ARGV [i]
+		}
+		exit (0)
+	}
+
 	print "The following option were applied"
 	for (i in options){
 		print "options [" i "]=" options [i]
@@ -34,6 +43,7 @@ BEGIN {
 	print "S         --- " getarg("S", "default4")
 	print "X         --- " getarg("X")
 	print "Y         --- " getarg("Y", "default5")
+
 
 	exit 0
 }
