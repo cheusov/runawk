@@ -4,8 +4,9 @@
 - msub() - cleverer replacement for multisub
 - grep(1) in runawk?
 - bre2ere.awk Basic RE to Extended RE convertor
+- winini.awk - support for configuration files in Windows .ini format
 - libconfig/libconfuse analog written in AWK
-- csv.awk -- module for CSV(comma separated values) input/output
+- csv.awk -- module for "comma separated values" format described in RFC4180
 - runawk -t -- for creating a temporary directory under $TMPDIR or /tmp
   which is removed automatically (including killing by signals)
   unless RUNAWK_KEEPTMPDIR
