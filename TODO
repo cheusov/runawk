@@ -4,7 +4,6 @@
 - heapsort.awk: sift_down, sift_up
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
-- power_getopt.awk: not empty values -> ARGV[1], ARGV[2]
 - grep(1) in runawk?
 - bre2ere.awk Basic RE to Extended RE convertor
 - libconfig/libconfuse analog written in AWK
