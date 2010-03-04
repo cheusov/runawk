@@ -5,8 +5,11 @@
 #
 ############################################################
 
-# Function for generating temporary filenames. All these filenames are
-# under temporary directory created by runawk -t.
+# This module provides a function `tmpfile' for generating temporary
+# filenames. All these filenames are under temporary directory created
+# (if necessary) by runawk(1) which is removed automatically during
+# normal exit or when runawk(1) reveives SIGINT, SIGQUIT, SIGTERM,
+# SIGHUP or SIGPIPE.
 
 # tmpfile()
 #   `tmpfile' returns a temporary file name.

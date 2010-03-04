@@ -5,11 +5,12 @@
 #
 ############################################################
 
-# By default AWK splits input strings into tokens according to regular
-# expression that defines "spaces" between tokens using special
-# variable FS. In some situations it is more useful to define a
-# fixed-size fields for tokens. This is what this module does and what
-# GNU awk implements with a help FIELDWIDTHS special variable.
+# By default AWK interpreter splits input lines into tokens according
+# to regular expression that defines "spaces" between them using
+# special variable FS. Sometimes it is useful to define a fixed-size
+# fields for tokens. This is what this module is for. The
+# functionality of fieldwidths.awk is very close to GNU awk's
+# FIELDWIDTHS variable.
 
 # fieldwidths(STRING, FW)
 #   `fieldwidths' extracts substrings from STRING according to FW
