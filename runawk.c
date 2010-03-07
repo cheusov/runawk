@@ -149,7 +149,7 @@ static void clean_and_exit (int status)
 
 static void mktempdir (void)
 {
-	char *dir = getenv ("RUNAWK_TMPDIR");
+	const char *dir = getenv ("RUNAWK_TMPDIR");
 	if (!dir)
 		dir = getenv ("TMPDIR");
 	if (!dir)
