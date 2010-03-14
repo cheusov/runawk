@@ -1,10 +1,11 @@
+- trim.awk: trim_l, trim_r, trim_c, trim_lr, trim_lcr
+- winini.awk - support for configuration files in Windows .ini format
 - reference to EGDIR from mk-configure.7
 - runawk -F ?
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
 - bre2ere.awk Basic RE to Extended RE convertor
   - grep(1) in runawk?
-- winini.awk - support for configuration files in Windows .ini format
 - libconfig/libconfuse analog written in/for AWK
 - csv.awk -- module for "comma separated values" format described in RFC4180
 - hash.awk - functions for working with hashes.
