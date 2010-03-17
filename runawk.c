@@ -102,6 +102,8 @@ static int killing_sig = 0;
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
+static double_dash = 0;
+
 static char temp_fn [PATH_MAX] = "/tmp/runawk.XXXXXX";
 static int temp_fn_created = 0;
 
@@ -477,7 +479,7 @@ static void add_buffer (const char *buffer, size_t len)
 	/* recursive snanning for #xxx directives */
 	scan_buffer ("", "-", buffer, len, 1);
 
-	if (includes_count == 0){
+	if (includes_count == 0 && !double_dash){
 		ll_push (buffer, new_argv, &new_argc);
 	}else{
 		fd = mkstemp (temp_fn);
@@ -645,7 +647,7 @@ int main (int argc, char **argv)
 	int child_status       = 0;
 	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
-	int prog_specified     = 0;
+	const char *prog_specified = NULL;
 	const char *awkpath_env = NULL;
 
 	int i;
@@ -756,13 +758,19 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			add_buffer (argv [1], strlen (argv [1]));
-
-			prog_specified = 1;
+			prog_specified = argv [1];
 
 			--argc;
 			++argv;
 			continue;
+		}
+
+		/* -- */
+		if (!strcmp (argv [0], "--")){
+			double_dash = 1;
+			--argc;
+			++argv;
+			break;
 		}
 
 		/* -h -V -d -i -I etc. */
@@ -781,18 +789,14 @@ int main (int argc, char **argv)
 					clean_and_exit (1);
 			}
 		}
-
-		if (!strcmp (argv [0], "--")){
-			--argc;
-			++argv;
-			break;
-		}
 	}
 
 	progname = interp;
 
 	/* */
-	if (!prog_specified){
+	if (prog_specified){
+		add_buffer (prog_specified, strlen (prog_specified));
+	}else{
 		/* program_file */
 		if (argc < 1){
 			usage ();

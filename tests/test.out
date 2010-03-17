@@ -197,6 +197,30 @@ BEGIN {
 stat("/invalid/path/file.awk") failed: No such file or directory
 --------------------------------------------------
 ------- args: -d -e 
+BEGIN {
+   for (i=0; i < ARGC; ++i){
+      printf "ARGV [%s]=%s\n", i, ARGV [i]
+   }
+} -- -a -b -c
+new_argv [0] = awk
+new_argv [1] = -f
+new_argv [2] = /tmp/runawk.NNNNNN
+new_argv [3] = --
+new_argv [4] = -a
+new_argv [5] = -b
+new_argv [6] = -c
+--------------------------------------------------
+------- args: -e 
+BEGIN {
+   for (i=1; i < ARGC; ++i){
+      printf "ARGV [%s]=%s\n", i, ARGV [i]
+   }
+} -- file1 file2 file3
+ARGV [1]=file1
+ARGV [2]=file2
+ARGV [3]=file3
+--------------------------------------------------
+------- args: -d -e 
 #env "LC_ALL=C"
 #env "FOO2=bar2"
 

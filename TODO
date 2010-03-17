@@ -1,6 +1,5 @@
 - It seems that quicksort has a quadratic complexity when sorting equal
   values
-- runawk -e 'script-here' -- args for script
 - trim.awk: trim_l, trim_r, trim_c, trim_lr, trim_lcr
 - winini.awk - support for configuration files in Windows .ini format
 - reference to EGDIR from mk-configure.7

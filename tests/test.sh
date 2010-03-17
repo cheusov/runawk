@@ -171,6 +171,22 @@ runtest -e '
 
 ####################
 runtest -d -e '
+BEGIN {
+   for (i=0; i < ARGC; ++i){
+      printf "ARGV [%s]=%s\n", i, ARGV [i]
+   }
+}' -- -a -b -c
+
+####################
+runtest -e '
+BEGIN {
+   for (i=1; i < ARGC; ++i){
+      printf "ARGV [%s]=%s\n", i, ARGV [i]
+   }
+}' -- file1 file2 file3
+
+####################
+runtest -d -e '
 #env "LC_ALL=C"
 #env "FOO2=bar2"
 
