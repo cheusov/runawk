@@ -781,6 +781,12 @@ int main (int argc, char **argv)
 					clean_and_exit (1);
 			}
 		}
+
+		if (!strcmp (argv [0], "--")){
+			--argc;
+			++argv;
+			break;
+		}
 	}
 
 	progname = interp;
