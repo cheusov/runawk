@@ -331,3 +331,6 @@ runtest ../examples/demo_fieldwidths < ../examples/demo_fieldwidths.in
 
 ####################    tmpfile
 runtest ../examples/demo_tmpfile
+
+####################    trim
+runtest ../examples/demo_trim ../examples/demo_trim.in
