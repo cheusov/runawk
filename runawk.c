@@ -135,7 +135,9 @@ static void clean_and_exit (int status)
 
 	if (temp_dir){
 		snprintf (buffer, sizeof (buffer), "rm -rf %s", temp_dir);
-		system (buffer);
+		if (-1 == system (buffer))
+			perror ("system(3) failed:");
+
 		if (temp_dir)
 			free (temp_dir);
 	}
