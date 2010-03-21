@@ -21,7 +21,7 @@ unify_paths (){
 
 runtest_header (){
     echo '--------------------------------------------------'
-    echo "------- args: $@" | unify_paths
+    printf '------- args: %s\n' "$*" | unify_paths
 }
 
 runtest_main (){
