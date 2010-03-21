@@ -102,7 +102,7 @@ static int killing_sig = 0;
 static char *includes [ARRAY_SZ];
 static int includes_count = 0;
 
-static double_dash = 0;
+static int double_dash = 0;
 
 static char temp_fn [PATH_MAX] = "/tmp/runawk.XXXXXX";
 static int temp_fn_created = 0;
