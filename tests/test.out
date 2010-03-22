@@ -1,41 +1,41 @@
 --------------------------------------------------
-------- args: -d _test_program
+ ------ args: -d _test_program
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 --------------------------------------------------
-------- args: -d _test_program --long-option
+ ------ args: -d _test_program --long-option
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = --long-option
 --------------------------------------------------
-------- args: --debug _test_program -o=file
+ ------ args: --debug _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = -o=file
 --------------------------------------------------
-------- args: -d --without-stdin _test_program -o=file
+ ------ args: -d --without-stdin _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = -o=file
 --------------------------------------------------
-------- args: --debug -I _test_program -o=file
+ ------ args: --debug -I _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = -o=file
 --------------------------------------------------
-------- args: -d _test_program fn1 fn2
+ ------ args: -d _test_program fn1 fn2
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = fn1
 new_argv [5] = fn2
 --------------------------------------------------
-------- args: -di _test_program arg1 arg2
+ ------ args: -di _test_program arg1 arg2
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
@@ -43,7 +43,7 @@ new_argv [4] = arg1
 new_argv [5] = arg2
 new_argv [6] = -
 --------------------------------------------------
-------- args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
+ ------ args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
 new_argv [0] = awk
 new_argv [1] = -f
 new_argv [2] = ROOT/../modules/abs.awk
@@ -51,7 +51,7 @@ new_argv [3] = -f
 new_argv [4] = /tmp/runawk.NNNNNN
 new_argv [5] = --
 --------------------------------------------------
-------- args: -d -f alt_assert.awk -e BEGIN {exit}
+ ------ args: -d -f alt_assert.awk -e BEGIN {exit}
 new_argv [0] = awk
 new_argv [1] = -f
 new_argv [2] = ROOT/../modules/exitnow.awk
@@ -63,7 +63,7 @@ new_argv [7] = -f
 new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
 --------------------------------------------------
-------- args: --debug --with-stdin _test_program arg1 arg2
+ ------ args: --debug --with-stdin _test_program arg1 arg2
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
@@ -71,28 +71,28 @@ new_argv [4] = arg1
 new_argv [5] = arg2
 new_argv [6] = -
 --------------------------------------------------
-------- args: -V
+ ------ args: -V
 xxx
 --------------------------------------------------
-------- args: -h
+ ------ args: -h
 runawk - wrapper for an AWK interpreter
 --------------------------------------------------
-------- args: -e BEGIN {print "Hello World"}
+ ------ args: -e BEGIN {print "Hello World"}
 Hello World
 --------------------------------------------------
-------- args: -v one=1 -e BEGIN {print one} {print "unbelievably"} /dev/null
+ ------ args: -v one=1 -e BEGIN {print one} {print "unbelievably"} /dev/null
 1
 --------------------------------------------------
-------- args: -v two=2 -e BEGIN {print two}
+ ------ args: -v two=2 -e BEGIN {print two}
 2
 --------------------------------------------------
-------- args: --execute BEGIN {print "Hello World"} /dev/null
+ ------ args: --execute BEGIN {print "Hello World"} /dev/null
 Hello World
 --------------------------------------------------
-------- args: --assign var1=123 -v var2=321 -e BEGIN {print var1, var2}
+ ------ args: --assign var1=123 -v var2=321 -e BEGIN {print var1, var2}
 123 321
 --------------------------------------------------
-------- args: _test.tmp
+ ------ args: _test.tmp
 Hello World1.2
 Hello World1.3
 Hello World1.1
@@ -100,10 +100,10 @@ Hello World 2.2
 Hello World 2.1
 Hello World 2.3
 --------------------------------------------------
-------- args: _test.tmp
+ ------ args: _test.tmp
 Cannot find module `module2.1.awk`, check AWKPATH environment variable
 --------------------------------------------------
-------- args: ROOT/mods1/test_modinfo
+ ------ args: ROOT/mods1/test_modinfo
 Hello World1.2
 Hello World1.3
 Hello World1.1
@@ -121,25 +121,25 @@ MODV [6]=ROOT/../modules/modinfo.awk
 MODV [7]=ROOT/mods1/test_modinfo
 MODMAIN=ROOT/mods1/test_modinfo
 --------------------------------------------------
-------- args: ROOT/mods3/failed1.awk
+ ------ args: ROOT/mods3/failed1.awk
 error: invalid directive at line #1,
  line=`#use `
  file=`ROOT/mods3/failed1.awk`
 --------------------------------------------------
-------- args: ROOT/mods3/failed2.awk
+ ------ args: ROOT/mods3/failed2.awk
 error: invalid directive at line #2,
  line=`#interp      "trtrtr`
  file=`ROOT/mods3/failed2.awk`
 --------------------------------------------------
-------- args: ROOT/mods3/failed3.awk
+ ------ args: ROOT/mods3/failed3.awk
 error: invalid directive at line #3,
  line=`#env 'LC_ALL=C'                   `
  file=`ROOT/mods3/failed3.awk`
 --------------------------------------------------
-------- args: ROOT/mods3/failed4.awk
+ ------ args: ROOT/mods3/failed4.awk
 running '/invalid/path' failed: No such file or directory
 --------------------------------------------------
-------- args: ROOT/mods3/test5.awk
+ ------ args: ROOT/mods3/test5.awk
 1
 0
 1
@@ -147,18 +147,18 @@ running '/invalid/path' failed: No such file or directory
 env FOO=BAR
 env TESTVAR=testval
 --------------------------------------------------
-------- args: -e 
+ ------ args: -e 
 #interp "/invalid/path"
 
 BEGIN {print "Hello World!"}
 
 running '/invalid/path' failed: No such file or directory
 --------------------------------------------------
-------- args: #interp-var directive
+ ------ args: #interp-var directive
 123
 running '/invalid/path' failed
 --------------------------------------------------
-------- args: #safe-use directive
+ ------ args: #safe-use directive
 --- #safe-use test: ---
 new_argv [0] = awk
 new_argv [1] = -f
@@ -191,12 +191,12 @@ BEGIN {
 }
 
 --------------------------------------------------
-------- args: -e 
+ ------ args: -e 
 #use "/invalid/path/file.awk"
 
 stat("/invalid/path/file.awk") failed: No such file or directory
 --------------------------------------------------
-------- args: -d -e 
+ ------ args: -d -e 
 BEGIN {
    for (i=0; i < ARGC; ++i){
       printf "ARGV [%s]=%s\n", i, ARGV [i]
@@ -210,7 +210,7 @@ new_argv [4] = -a
 new_argv [5] = -b
 new_argv [6] = -c
 --------------------------------------------------
-------- args: -e 
+ ------ args: -e 
 BEGIN {
    for (i=1; i < ARGC; ++i){
       printf "ARGV [%s]=%s\n", i, ARGV [i]
@@ -220,7 +220,7 @@ ARGV [1]=file1
 ARGV [2]=file2
 ARGV [3]=file3
 --------------------------------------------------
-------- args: -d -e 
+ ------ args: -d -e 
 #env "LC_ALL=C"
 #env "FOO2=bar2"
 
@@ -238,7 +238,7 @@ BEGIN {
 }
 
 --------------------------------------------------
-------- args: -e 
+ ------ args: -e 
 #env "LC_ALL=C"
 #env "FOO2=bar2"
 
@@ -257,7 +257,7 @@ BEGIN {
 0
 env FOO2=bar2
 --------------------------------------------------
-------- args: -d -e 
+ ------ args: -d -e 
     #use "alt_assert.awk"
 
     BEGIN {
@@ -277,7 +277,7 @@ new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
 new_argv [10] = /dev/null
 --------------------------------------------------
-------- args: -e 
+ ------ args: -e 
     #use "alt_assert.awk"
 
     BEGIN {
@@ -291,10 +291,10 @@ error: just a test
        FNR=0
        FILENAME=
 --------------------------------------------------
-------- args: -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
+ ------ args: -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
 123 234
 --------------------------------------------------
-------- args: -f alt_assert.awk -e BEGIN {assert(0, "Hello assert!")}
+ ------ args: -f alt_assert.awk -e BEGIN {assert(0, "Hello assert!")}
 error: assertion failed: Hello assert!
        ARGV[0]=awk
        $0=``
@@ -302,9 +302,9 @@ error: assertion failed: Hello assert!
        FNR=0
        FILENAME=
 --------------------------------------------------
-------- args: ../examples/demo_multisub
+ ------ args: ../examples/demo_multisub
 --------------------------------------------------
-------- args: ../examples/demo_tokenre ../examples/demo_tokenre.in
+ ------ args: ../examples/demo_tokenre ../examples/demo_tokenre.in
 NF=5
 $1=wn:
 $2=UNIX
@@ -341,7 +341,7 @@ $2="unix weenie"
 $3="unix wizard"
 $4="usg unix"
 --------------------------------------------------
-------- args: ../examples/demo_tokenre2 ../examples/demo_tokenre2.in
+ ------ args: ../examples/demo_tokenre2 ../examples/demo_tokenre2.in
 a
 :=
 1
@@ -382,15 +382,15 @@ print
 b
 <NL>
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -h -
+ ------ args: ../examples/demo_alt_getopt -h -
 option `h'
 ARGV [2] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --help
+ ------ args: ../examples/demo_alt_getopt --help
 option `h'
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -h --help -v --verbose -V -o 123 -o234
+ ------ args: ../examples/demo_alt_getopt -h --help -v --verbose -V -o 123 -o234
 option `h'
 option `h'
 option `v'
@@ -400,7 +400,7 @@ option `o': 123
 option `o': 234
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
+ ------ args: ../examples/demo_alt_getopt --output 123 --output 234 -n 999 -n9999 --len 5 --fake /dev/null
 option `o': 123
 option `o': 234
 option `n': 999
@@ -409,7 +409,7 @@ option `len': 5
 option `fake'
 ARGV [11] = /dev/null
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -hVv -- -1 -2 -3
+ ------ args: ../examples/demo_alt_getopt -hVv -- -1 -2 -3
 option `h'
 option `V'
 option `v'
@@ -417,20 +417,20 @@ ARGV [3] = -1
 ARGV [4] = -2
 ARGV [5] = -3
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --fake -v -- -1 -2 -3
+ ------ args: ../examples/demo_alt_getopt --fake -v -- -1 -2 -3
 option `fake'
 option `v'
 ARGV [4] = -1
 ARGV [5] = -2
 ARGV [6] = -3
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt - -1 -2 -3
+ ------ args: ../examples/demo_alt_getopt - -1 -2 -3
 ARGV [1] = -
 ARGV [2] = -1
 ARGV [3] = -2
 ARGV [4] = -3
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --fake -v - -1 -2 -3
+ ------ args: ../examples/demo_alt_getopt --fake -v - -1 -2 -3
 option `fake'
 option `v'
 ARGV [3] = -
@@ -438,39 +438,39 @@ ARGV [4] = -1
 ARGV [5] = -2
 ARGV [6] = -3
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -1 -2 -3
+ ------ args: ../examples/demo_alt_getopt -1 -2 -3
 Unknown option `-1'
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -hvV
+ ------ args: ../examples/demo_alt_getopt -hvV
 option `h'
 option `v'
 option `V'
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -ho 123
+ ------ args: ../examples/demo_alt_getopt -ho 123
 option `h'
 option `o': 123
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt -hoV 123
+ ------ args: ../examples/demo_alt_getopt -hoV 123
 option `h'
 option `o': V
 ARGV [2] = 123
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --unknown
+ ------ args: ../examples/demo_alt_getopt --unknown
 Unknown option `--unknown'
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --output=file.out -nNNN --len=LENGTH
+ ------ args: ../examples/demo_alt_getopt --output=file.out -nNNN --len=LENGTH
 option `o': file.out
 option `n': NNN
 option `len': LENGTH
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_alt_getopt --output --file--
+ ------ args: ../examples/demo_alt_getopt --output --file--
 option `o': --file--
 ARGV [1] = -
 --------------------------------------------------
-------- args: ../examples/demo_modinfo
+ ------ args: ../examples/demo_modinfo
 A number of modules: 9
 MODV [0]=ROOT/../modules/abs.awk
 MODV [1]=ROOT/../modules/exitnow.awk
@@ -483,7 +483,7 @@ MODV [7]=ROOT/../modules/modinfo.awk
 MODV [8]=ROOT/../examples/demo_modinfo
 program name: ROOT/../examples/demo_modinfo
 --------------------------------------------------
-------- args: ../examples/demo_has_suffix ../examples/demo_has_suffix.in
+ ------ args: ../examples/demo_has_suffix ../examples/demo_has_suffix.in
 no, `mama' does not end with `mamam'
 yes, `mama' ends with `mama'
 no, `mama' does not end with `mam'
@@ -495,7 +495,7 @@ no, `file.txt' does not end with `.log'
 no, `file.txt' does not end with `.bmp'
 yes, `file.txt' ends with `file.txt'
 --------------------------------------------------
-------- args: ../examples/demo_has_prefix ../examples/demo_has_prefix.in
+ ------ args: ../examples/demo_has_prefix ../examples/demo_has_prefix.in
 no, `mama' does not begin with `mamam'
 yes, `mama' begins with `mama'
 yes, `mama' begins with `mam'
@@ -508,61 +508,61 @@ yes, `file.txt' begins with `file.'
 yes, `file.txt' begins with `file'
 no, `file.txt' does not begin with `bzzzzzzzzzzzzz'
 --------------------------------------------------
-------- args: ../examples/demo_dirname
+ ------ args: ../examples/demo_dirname
 Usage: dirname path
 --------------------------------------------------
-------- args: ../examples/demo_dirname /path/to/file
+ ------ args: ../examples/demo_dirname /path/to/file
 /path/to
 --------------------------------------------------
-------- args: ../examples/demo_dirname file.txt
+ ------ args: ../examples/demo_dirname file.txt
 .
 --------------------------------------------------
-------- args: ../examples/demo_dirname /
+ ------ args: ../examples/demo_dirname /
 /
 --------------------------------------------------
-------- args: ../examples/demo_dirname /dir/
+ ------ args: ../examples/demo_dirname /dir/
 /
 --------------------------------------------------
-------- args: ../examples/demo_basename
+ ------ args: ../examples/demo_basename
 Usage: basename path
 --------------------------------------------------
-------- args: ../examples/demo_basename /path/to/file
+ ------ args: ../examples/demo_basename /path/to/file
 file
 --------------------------------------------------
-------- args: ../examples/demo_basename file.txt
+ ------ args: ../examples/demo_basename file.txt
 file.txt
 --------------------------------------------------
-------- args: ../examples/demo_basename /
+ ------ args: ../examples/demo_basename /
 /
 --------------------------------------------------
-------- args: ../examples/demo_basename /dir/
+ ------ args: ../examples/demo_basename /dir/
 dir
 --------------------------------------------------
-------- args: ../examples/demo_basename /path/to/file.txt .txt
+ ------ args: ../examples/demo_basename /path/to/file.txt .txt
 file
 --------------------------------------------------
-------- args: ../examples/demo_basename file.txt .txt
+ ------ args: ../examples/demo_basename file.txt .txt
 file
 --------------------------------------------------
-------- args: ../examples/demo_basename / .txt
+ ------ args: ../examples/demo_basename / .txt
 /
 --------------------------------------------------
-------- args: ../examples/demo_basename /dir/ .txt
+ ------ args: ../examples/demo_basename /dir/ .txt
 dir
 --------------------------------------------------
-------- args: ../examples/demo_basename /path/to/file.txt .log
+ ------ args: ../examples/demo_basename /path/to/file.txt .log
 file.txt
 --------------------------------------------------
-------- args: ../examples/demo_basename file.txt .log
+ ------ args: ../examples/demo_basename file.txt .log
 file.txt
 --------------------------------------------------
-------- args: ../examples/demo_basename / .log
+ ------ args: ../examples/demo_basename / .log
 /
 --------------------------------------------------
-------- args: ../examples/demo_basename /dir/ .log
+ ------ args: ../examples/demo_basename /dir/ .log
 dir
 --------------------------------------------------
-------- args: ../examples/demo_shquote ../examples/demo_shquote.in
+ ------ args: ../examples/demo_shquote ../examples/demo_shquote.in
 \'
 printf: '
 \'''\'
@@ -588,18 +588,18 @@ printf: file name.txt
 '*&;<>#~^$`!][(){}?'
 printf: *&;<>#~^$`!][(){}?
 --------------------------------------------------
-------- args: ../examples/demo_alt_join
+ ------ args: ../examples/demo_alt_join
 succeeded
 --------------------------------------------------
-------- args: ../examples/demo_readfile
+ ------ args: ../examples/demo_readfile
 usage: demo_readfile <filename>
 --------------------------------------------------
-------- args: ../examples/demo_readfile ../examples/demo_readfile.in
+ ------ args: ../examples/demo_readfile ../examples/demo_readfile.in
 line1
 line2
 line3
 --------------------------------------------------
-------- args: ../examples/demo_power_getopt
+ ------ args: ../examples/demo_power_getopt
 The following option were applied
 f         --- 0
 flag      --- 0
@@ -612,7 +612,7 @@ S         --- default4
 X         --- 0
 Y         --- default5
 //////////////////////////////////////////////////
-------- args: ../examples/demo_power_getopt -ffss --flag --long-flag
+ ------ args: ../examples/demo_power_getopt -ffss --flag --long-flag
 --------------------------------------------------
 F         --- default1
 FLAG      --- default2
@@ -639,13 +639,13 @@ s         --- 2
    -f|--flag                  flag
    -h|--help                  display this screen
    -s                         short flag only
-------- args: ../examples/demo_power_getopt -h
+ ------ args: ../examples/demo_power_getopt -h
 --------------------------------------------------
 OPTIONS:
 power_getopt - program demonstrating a power of power_getopt.awk module
 usage: power_getopt [OPTIONS]
 //////////////////////////////////////////////////
-------- args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456
+ ------ args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456
 --------------------------------------------------
 F         --- 234
 FLAG      --- 234
@@ -665,7 +665,7 @@ options [long-flag]=1
 options [s]=1
 s         --- 1
 //////////////////////////////////////////////////
-------- args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 -P arg1  arg3 arg4 
+ ------ args: ../examples/demo_power_getopt -f --long-flag -s -F123 --FLAG=234 --LONG-FLAG 345 -S 456 -P arg1  arg3 arg4 
 --------------------------------------------------
 ARGC=6
 ARGV [1]=arg1
@@ -675,26 +675,26 @@ ARGV [4]=arg4
 ARGV [5]=
 //////////////////////////////////////////////////
 --------------------------------------------------
-------- args: ../examples/demo_power_getopt2 --help
+ ------ args: ../examples/demo_power_getopt2 --help
 power_getopt - program demonstrating a power of power_getopt.awk module
 usage: power_getopt [OPTIONS]
 OPTIONS:
    -?|--help                  display this screen
 --------------------------------------------------
-------- args: ../examples/demo_power_getopt2 -?
+ ------ args: ../examples/demo_power_getopt2 -?
 power_getopt - program demonstrating a power of power_getopt.awk module
 usage: power_getopt [OPTIONS]
 OPTIONS:
    -?|--help                  display this screen
 --------------------------------------------------
-------- args: ../examples/demo_runcmd
+ ------ args: ../examples/demo_runcmd
 file name.txt
 ~file&name'foobar'.txt
 succeeded
 --------------------------------------------------
-------- args: ../examples/demo_heapsort2
+ ------ args: ../examples/demo_heapsort2
 --------------------------------------------------
-------- args: ../examples/demo_heapsort
+ ------ args: ../examples/demo_heapsort
 AWK
 Ada
 BCPL
@@ -743,7 +743,7 @@ ksh
 rc
 sed
 --------------------------------------------------
-------- args: ../examples/demo_heapsort3
+ ------ args: ../examples/demo_heapsort3
 Fortran 1957
 Lisp 1958
 Cobol 1959
@@ -791,9 +791,9 @@ D 1999
 C# 2001
 F# 2002
 --------------------------------------------------
-------- args: ../examples/demo_quicksort2
+ ------ args: ../examples/demo_quicksort2
 --------------------------------------------------
-------- args: ../examples/demo_quicksort
+ ------ args: ../examples/demo_quicksort
 AWK
 Ada
 BCPL
@@ -842,7 +842,7 @@ ksh
 rc
 sed
 --------------------------------------------------
-------- args: ../examples/demo_quicksort3
+ ------ args: ../examples/demo_quicksort3
 Fortran 1957
 Lisp 1958
 Cobol 1959
@@ -890,7 +890,7 @@ D 1999
 C# 2001
 F# 2002
 --------------------------------------------------
-------- args: ../examples/demo_fieldwidths
+ ------ args: ../examples/demo_fieldwidths
 NF=5
 $1=1234
 $2=12345
@@ -916,12 +916,12 @@ NF=1
 $1=12
 NF=0
 --------------------------------------------------
-------- args: ../examples/demo_tmpfile
+ ------ args: ../examples/demo_tmpfile
 /tmp/awk.XXXX/0
 /tmp/awk.XXXX/1
 /tmp/awk.XXXX/2
 --------------------------------------------------
-------- args: ../examples/demo_trim ../examples/demo_trim.in
+ ------ args: ../examples/demo_trim ../examples/demo_trim.in
 trim_l("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator  "
 trim_r("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator"
 trim_c("Van Der   Graaf   Generator  ")="Van Der Graaf Generator "
