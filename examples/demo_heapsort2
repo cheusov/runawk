@@ -8,7 +8,7 @@
 BEGIN {
 	srand()
 
-	cnt = 40
+	cnt = 400
 
 	start = 20
 	end   = start + cnt
