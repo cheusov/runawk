@@ -354,6 +354,7 @@ runtest ../examples/demo_trim ../examples/demo_trim.in
 ####################    trim_in
 runtest ../examples/demo_trim_in ../examples/demo_trim.in
 runtest -v TRIM=' ' ../examples/demo_trim_in ../examples/demo_trim.in
+runtest -v TRIM='c' ../examples/demo_trim_in ../examples/demo_trim.in
 
 ####################    backslash_in
 runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in

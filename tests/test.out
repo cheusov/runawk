@@ -969,6 +969,14 @@ Robert    Fripp
    Jethro   Tull
 Jan Anderson
 --------------------------------------------------
+ ------ args: -v TRIM=c ../examples/demo_trim_in ../examples/demo_trim.in
+Van Der Graaf Generator 
+ Peter Hammill
+ King Crimson
+Robert Fripp
+ Jethro Tull
+Jan Anderson
+--------------------------------------------------
  ------ args: ../examples/demo_backslash_in ../examples/demo_backslash_in.in
 Some text here and here too. This is still the first line.
 This is the second.
