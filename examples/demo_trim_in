@@ -1,0 +1,10 @@
+#!/usr/bin/env runawk
+
+#use "trim_in.awk"
+
+# This is a demo for trim_in.awk module
+# Input files for this demo: examples/demo_trim_in.in
+
+{
+	print $0
+}
