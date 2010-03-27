@@ -1,4 +1,4 @@
-- quicksort has a quadratic complexity when sorting equal values
+- quicksort has quadratic complexity when sorting equal values
 - winini.awk - support for configuration files in Windows .ini format
 - reference to EGDIR from mk-configure.7
 - runawk -F ?
