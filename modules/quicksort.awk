@@ -31,7 +31,7 @@
 #
 #     `count', a number of elements in `src_hash', is a return value.
 #
-# Examples: see demo_heapsort4 executable.
+# Examples: see demo_quicksort* executables.
 
 function __quicksort (array, index_remap, start, end,
        MedIdx,Med,v,i,storeIdx)
