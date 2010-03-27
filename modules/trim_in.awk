@@ -29,7 +29,7 @@ BEGIN {
 
 {
 	if (index(TRIM, "c") > 0)
-		gsub(/[ \t][ \t]+/, " ", s)
+		gsub(/[ \t][ \t]+/, " ")
 	if (index(TRIM, "l") > 0)
 		sub(/^[ \t]+/, "")
 	if (index(TRIM, "r") > 0)
