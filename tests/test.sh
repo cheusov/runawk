@@ -350,3 +350,6 @@ runtest ../examples/demo_tmpfile
 
 ####################    trim
 runtest ../examples/demo_trim ../examples/demo_trim.in
+
+####################    backslash_in
+runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in

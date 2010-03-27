@@ -1,0 +1,10 @@
+#!/usr/bin/env runawk
+
+#use "backslash_in.awk"
+
+# This is a demo for backslash_in.awk module
+# Input files for this demo: examples/demo_backslash_in.in
+
+{
+	print $0
+}

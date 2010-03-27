@@ -1,4 +1,15 @@
-- quicksort has quadratic complexity when sorting equal values
+- backslash_in.awk:
+  line0
+  line1 line1 \
+     line1 line1 line1
+  line2
+  line3\
+  line3
+  line4
+  ...
+- CR_in.awk: module removing CR symbols from input
+- trim_in.awk: module trimming leading and ending space characters
+- tokenre_in.awk: synonym for tokenre.awk
 - winini.awk - support for configuration files in Windows .ini format
 - reference to EGDIR from mk-configure.7
 - runawk -F ?
@@ -14,3 +25,4 @@
 - shquote(1) executable similar to that by Alan Barret?
 - getopt_long(1) written in runawk
 - remove fflush() ?
+- quicksort has quadratic complexity when sorting equal values

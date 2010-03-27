@@ -952,3 +952,9 @@ trim_r("Jan Anderson")="Jan Anderson"
 trim_c("Jan Anderson")="Jan Anderson"
 trim_lr("Jan Anderson")="Jan Anderson"
 trim_lrc("Jan Anderson")="Jan Anderson"
+--------------------------------------------------
+ ------ args: ../examples/demo_backslash_in ../examples/demo_backslash_in.in
+Some text here and here too. This is still the first line.
+This is the second.
+And this is third one that continues on the next line and the next line too.
+Ok, we finally have four lines of text.
