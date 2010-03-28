@@ -1,4 +1,48 @@
 ======================================================================
+Version 0.21.0, by Aleksey Cheusov, Sun, 28 Mar 2010 13:43:48 +0300
+
+  fixed: compilation failure on recent Linux-es (warn_unused_result
+  attribute of system(3) function in recent glibc).
+
+  fixed: compilation failures on FreeBSD ("assignment discards
+  qualifiers from pointer target type" warning which is critical with
+  -Werror).
+
+  fixed: compilation failure with Intel C Compiler
+
+  Now one can pass arguments to awk program specified with -e option after --,
+  that is like the following
+     runawk -e '<awk program>' -- <extra options for your program>
+
+  New simple modules:
+
+    - trim.awk: this modules provides a set of simple functions for
+      trimming spaces from the string.
+
+    - backslash_in.awk treats backslash symbol at the end of input line
+      as "this line will continue on the next line".
+
+	 $ cat ~/tmp/9.txt
+	 Some text here \
+	 and here too. \
+	 This is still the first line.
+	 This is the second.
+	 And this is third one that\
+	  continues on the next line \
+	 and the next line too.
+	 Ok, we finally have four lines of text.
+	 $ runawk -f backslash_in.awk -e '{print}' ~/tmp/9.txt
+	 Some text here and here too. This is still the first line.
+	 This is the second.
+	 And this is third one that continues on the next line and the next line too.
+	 Ok, we finally have four lines of text.
+	 $
+
+    - trim_in.awk trims spaces from input lines.
+
+    - CR_in.awk removes CR symbols from input lines.
+
+======================================================================
 Version 0.20.0, by Aleksey Cheusov, Thu,  4 Mar 2010 18:33:03 +0200
 
   New module: fieldwidths.awk:
