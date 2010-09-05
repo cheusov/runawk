@@ -54,7 +54,7 @@ function read_inifile (inifile, result, sep) {
 		idx = match(__input, /=/)
 		assert(idx > 0, "`=' cannot be found")
 
-		name  = trim_lr(substr(__input, 1, idx-1))
+		name  = trim_lrc(substr(__input, 1, idx-1))
 		value = trim_lr(substr(__input, idx+1))
 
 		# name = "value"
