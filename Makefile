@@ -38,6 +38,8 @@ BIRTHDATE=		2007-09-24
 PROG=			runawk
 SRCS=			runawk.c
 
+MKCATPAGES?=		no
+
 MODULES!=		echo ${.CURDIR}/modules/*.awk
 
 FILES=			${MODULES}
