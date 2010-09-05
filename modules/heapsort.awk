@@ -33,6 +33,19 @@
 #
 # Examples: see demo_heapsort3 executable.
 
+# heapsort_indices (src_hash, dest_remap)
+#     The same as `heapsort' described above, but hash indices are sorted.
+#
+#     Result: 
+#     dest_remap [1] <=
+#        <= dest_remap [2] <=
+#        <= dest_remap [3] <= ... <=
+#        <= dest_remap [count]
+#
+#     `count', a number of elements in `src_hash', is a return value.
+#
+# Examples: demo_ini
+
 function sift_down (array, root, start, end, index_remap,               n0, v){
 	while (1){
 		n0 = root - start + 1 + root
@@ -89,7 +102,7 @@ function heapsort (array, index_remap, start, end,               i,v){
 }
 
 function heapsort_values (hash, remap_idx,
-   array, remap, i, j, cnt)
+   array, remap, i, cnt)
 {
 	cnt = 0
 	for (i in hash) {
@@ -102,6 +115,24 @@ function heapsort_values (hash, remap_idx,
 
 	for (i=1; i <= cnt; ++i) {
 		remap_idx [i] = remap [remap_idx [i]]
+	}
+
+	return cnt
+}
+
+function heapsort_indices (hash, remap_idx,
+   array, i, cnt)
+{
+	cnt = 0
+	for (i in hash) {
+		++cnt
+		array [cnt] = i
+	}
+
+	heapsort(array, remap_idx, 1, cnt)
+
+	for (i=1; i <= cnt; ++i) {
+		remap_idx [i] = array [remap_idx [i]]
 	}
 
 	return cnt

@@ -24,14 +24,27 @@
 #     The same as `quicksort' described above, but hash values are sorted.
 #
 #     Result: 
-#     src_array [dest_remap [1]] <=
-#        <= src_array [dest_remap [2]] <=
-#        <= src_array [dest_remap [3]] <= ... <=
-#        <= src_array [dest_remap [count]]
+#     src_hash [dest_remap [1]] <=
+#        <= src_hash [dest_remap [2]] <=
+#        <= src_hash [dest_remap [3]] <= ... <=
+#        <= src_hash [dest_remap [count]]
 #
 #     `count', a number of elements in `src_hash', is a return value.
 #
 # Examples: see demo_quicksort* executables.
+
+# quicksort_indices (src_hash, dest_remap)
+#     The same as `quicksort' described above, but hash indices are sorted.
+#
+#     Result:
+#     dest_remap [1] <=
+#        <= dest_remap [2] <=
+#        <= dest_remap [3] <= ... <=
+#        <= dest_remap [count]
+#
+#     `count', a number of elements in `src_hash', is a return value.
+#
+# Examples: demo_ini
 
 function __quicksort (array, index_remap, start, end,
        MedIdx,Med,v,i,storeIdx)
@@ -87,6 +100,24 @@ function quicksort_values (hash, remap_idx,
 
 	for (i=1; i <= cnt; ++i) {
 		remap_idx [i] = remap [remap_idx [i]]
+	}
+
+	return cnt
+}
+
+function quicksort_indices (hash, remap_idx,
+   array, i, cnt)
+{
+	cnt = 0
+	for (i in hash) {
+		++cnt
+		array [cnt] = i
+	}
+
+	quicksort(array, remap_idx, 1, cnt)
+
+	for (i=1; i <= cnt; ++i) {
+		remap_idx [i] = array [remap_idx [i]]
 	}
 
 	return cnt
