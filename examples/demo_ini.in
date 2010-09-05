@@ -1,0 +1,26 @@
+; comment1
+[me]
+  full name   = "Aleksey Cheusov" ; bebebe
+  citizenship = Belarus
+  e-mail      = vle@gmx.net,  cheusov@tut.by
+  jabber      = cheusov@mova.org
+  home  page  = "http://mova.org/~cheusov/" # zzzz
+  sex         = male  
+  nationality = Russian
+  hobby       = programming, UNIX-like OSes,  open source software, music
+
+[tests]
+val1 = "  123  45  "
+val2 = '  123  45  '
+val3 = "  '123  45'  "
+val4 = '  "123  45"  '
+val5 = '  "123  ;"  '
+val6 = "  '###123  ;'  "
+val7 = 1  2  3  4  5  6  7  
+
+# comment line
+[system]
+   OS        = NetBSD
+   OSVER     = 5.1_RC3
+   host      = localhost
+   network interface = nfe0

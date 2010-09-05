@@ -1,0 +1,19 @@
+#!/usr/bin/env runawk
+
+#use "exitnow.awk"
+#use "ini.awk"
+#use "sort.awk"
+
+BEGIN {
+	sep = ARGV [1]
+
+	for (i=2; i < ARGC; ++i){
+		read_inifile(ARGV [i], array, sep)
+		cnt = sort_indices(array, remap)
+		for (j = 1; j <= cnt; ++j){
+			printf "value [%s]=%s\n", remap [j], array [remap [j]]
+		}
+	}
+
+	exitnow(0)
+}

@@ -982,3 +982,45 @@ Some text here and here too. This is still the first line.
 This is the second.
 And this is third one that continues on the next line and the next line too.
 Ok, we finally have four lines of text.
+--------------------------------------------------
+ ------ args: ../examples/demo_ini : ../examples/demo_ini.in
+value [me:citizenship]=Belarus
+value [me:e-mail]=vle@gmx.net, cheusov@tut.by
+value [me:full name]=Aleksey Cheusov
+value [me:hobby]=programming, UNIX-like OSes, open source software, music
+value [me:home  page]=http://mova.org/~cheusov/
+value [me:jabber]=cheusov@mova.org
+value [me:nationality]=Russian
+value [me:sex]=male
+value [system:OS]=NetBSD
+value [system:OSVER]=5.1_RC3
+value [system:host]=localhost
+value [system:network interface]=nfe0
+value [tests:val1]=  123  45  
+value [tests:val2]=  123  45  
+value [tests:val3]=  '123  45'  
+value [tests:val4]=  "123  45"  
+value [tests:val5]=  "123  ;"  
+value [tests:val6]=  '###123  ;'  
+value [tests:val7]=1 2 3 4 5 6 7
+--------------------------------------------------
+ ------ args: ../examples/demo_ini  ../examples/demo_ini.in
+value [me.citizenship]=Belarus
+value [me.e-mail]=vle@gmx.net, cheusov@tut.by
+value [me.full name]=Aleksey Cheusov
+value [me.hobby]=programming, UNIX-like OSes, open source software, music
+value [me.home  page]=http://mova.org/~cheusov/
+value [me.jabber]=cheusov@mova.org
+value [me.nationality]=Russian
+value [me.sex]=male
+value [system.OS]=NetBSD
+value [system.OSVER]=5.1_RC3
+value [system.host]=localhost
+value [system.network interface]=nfe0
+value [tests.val1]=  123  45  
+value [tests.val2]=  123  45  
+value [tests.val3]=  '123  45'  
+value [tests.val4]=  "123  45"  
+value [tests.val5]=  "123  ;"  
+value [tests.val6]=  '###123  ;'  
+value [tests.val7]=1 2 3 4 5 6 7

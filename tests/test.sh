@@ -358,3 +358,7 @@ runtest -v TRIM='c' ../examples/demo_trim_in ../examples/demo_trim.in
 
 ####################    backslash_in
 runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in
+
+####################    ini
+runtest ../examples/demo_ini : ../examples/demo_ini.in
+runtest ../examples/demo_ini '' ../examples/demo_ini.in
