@@ -1,4 +1,14 @@
 ======================================================================
+Version 1.0.0, by Aleksey Cheusov, Sun,  5 Sep 2010 16:39:47 +0300
+
+  New functions for sorting indices in hash
+     heapsort.awk:  heapsort_indices
+     quicksort.awk: quicksort_indices
+     sort.awk:      sort_indices
+
+  New module ini.awk for reading .ini files.
+
+======================================================================
 Version 0.21.0, by Aleksey Cheusov, Sun, 28 Mar 2010 13:43:48 +0300
 
   fixed: compilation failure on recent Linux-es (warn_unused_result
