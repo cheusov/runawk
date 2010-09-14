@@ -1,3 +1,7 @@
+- add some modules from gawk, e.g. org.awk and some others
+- min2, min3, ...
+- Link to my own Debian/lenny repository
+- More examples for tokenre.awk: searcher for emails and URLs.
 - CR_in.awk: module removing CR symbols from input
 - tokenre_in.awk: synonym for tokenre.awk
 - reference to EGDIR from mk-configure.7
