@@ -24,7 +24,6 @@ process_args (){
 }
 
 a=`process_args "$@"`
-
 eval "$a"
 
 echo "verbose=$verbose"
