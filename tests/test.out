@@ -1110,8 +1110,8 @@ flag=1
 blablabla help
 verbose=
 fake_flag=
-len=
-output=
+len=100
+output=/path/to/file.out
 msg=
 n=123
 flag=

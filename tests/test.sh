@@ -400,4 +400,5 @@ runtest_header 'demo_alt_getopt.sh #4'
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #5'
-../examples/demo_alt_getopt.sh -n123 -fhF 2>&1
+../examples/demo_alt_getopt.sh -n123 --o file.txt -fhF --len=100 \
+    -o/path/to/file.out 2>&1
