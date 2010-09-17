@@ -24,7 +24,11 @@ See section MOTIVATION of runawk.1 or runawk.pod.
                              INSTALLATION
 
 0) BSD make is required. I name it just 'make' but its real name may
-   vary.  bmake and pmake are possible names.
+   vary on different systems.  bmake and pmake are possible names.
+   NOTE: GNU make IS NOT GOOD!
+   Latest sources of bmake, portable version of NetBSD make,
+   is available here:
+   http://freshmeat.net/projects/bmake/
 
    If you need to change the default building options,
    run make like this
@@ -65,18 +69,20 @@ for all others - see make's documentation and appropriate .mk files)
  MANOWN - man page owner
  MANGRP - man page group
 
-Example:
+Examples:
+   make installdirs install
+
    env CC=gcc \
        PREFIX=/home/cheusov/local \
        LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
        LDADD=-lextralib \
-       CFLAGS='-Werror -Wall' \
+       CFLAGS='-Werror -Wall -O2 -fomit-frame-pointers' \
        CPPFLAGS=-I/usr/pkg/include \
        BINOWN=cheusov \
        BINGRP=users \
        MANOWN=cheusov \
        MANGRP=users \
-       MKCATPAGES=no \
+       MKCATPAGES=yes \
           make -s all installdirs install
 
 ======================================================================
