@@ -1069,3 +1069,49 @@ shift
 shift
 shift
 shift
+--------------------------------------------------
+ ------ args: demo_alt_getopt.sh #1
+verbose=
+fake_flag=
+len=
+output=
+msg=
+n=
+flag=
+--------------------------------------------------
+ ------ args: demo_alt_getopt.sh #2
+verbose=
+fake_flag=
+len=
+output=
+msg=Aleksey's can is female
+n=123
+flag=
+--------------------------------------------------
+ ------ args: demo_alt_getopt.sh #3
+verbose=
+fake_flag=
+len=
+output=
+msg=Aleksey's can is female
+n=123
+flag=
+--------------------------------------------------
+ ------ args: demo_alt_getopt.sh #4
+verbose=
+fake_flag=
+len=
+output=
+msg=Aleksey's can is female
+n=123
+flag=1
+--------------------------------------------------
+ ------ args: demo_alt_getopt.sh #5
+blablabla help
+verbose=
+fake_flag=
+len=
+output=
+msg=
+n=123
+flag=

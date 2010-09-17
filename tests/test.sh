@@ -33,19 +33,13 @@ runtest (){
     runtest_main "$@"
 }
 
-runtest_altgetopt (){
-    runtest_header "altgetopt $1"
-    shift
-    ../scripts/alt_getopt "$@"
-}
-
 runtest_nostderr (){
     runtest_header "$@"
 #    runtest_main "$@" '2>/dev/null'
     $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
-PATH=${SRCDIR}/examples:$PATH
+PATH=${SRCDIR}/examples:${SRCDIR}/scripts:$PATH
 export PATH
 
 ####################
@@ -387,3 +381,23 @@ test_process_args \
    -h --help -v --verbose -V -o 123 -o234 --output 'file with spaces' -n 999 -n9999 --len 5 --fake \
    -hVv --len 10 --len=100 -m "Aleksey's cat is female" \
    --msg="backslashes (\) is not a problem too" -- -1 -2 -3
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #1'
+../examples/demo_alt_getopt.sh
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #2'
+../examples/demo_alt_getopt.sh -n123 -m "Aleksey's can is female"
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #3'
+../examples/demo_alt_getopt.sh -n123 -m "Aleksey's can is female"
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #4'
+../examples/demo_alt_getopt.sh -n123 -f -m "Aleksey's can is female"
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #5'
+../examples/demo_alt_getopt.sh -n123 -fhF 2>&1
