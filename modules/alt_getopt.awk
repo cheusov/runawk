@@ -181,7 +181,7 @@ function __getopt_process_long_opts (\
 }
 
 function getopt (\
-	short_opts,
+	short_opts, no_stdin,
 	i) # local vars
 {
 	__getopt_prepare(short_opts)
@@ -212,6 +212,8 @@ function getopt (\
 		return __getopt_process_short_opts(i)
 	}
 
-	__getopt_addstdin()
+	if (!no_stdin)
+		__getopt_addstdin()
+
 	return 0
 }

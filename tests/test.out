@@ -1024,3 +1024,48 @@ value [tests.val4]=  "123  45"
 value [tests.val5]=  "123  ;"  
 value [tests.val6]=  '###123  ;'  
 value [tests.val7]=1 2 3 4 5 6 7
+--------------------------------------------------
+ ------ args: alt_getopt #1
+help
+help
+verbose=1
+verbose=1
+echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'
+output='123'
+output='234'
+output='file with spaces'
+number='999'
+number='9999'
+len='5'
+fake_flag=1
+help
+echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'
+verbose=1
+len='10'
+len='100'
+msg='Aleksey'\''s cat is female'
+msg='backslashes (\) is not a problem too'
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift
+shift

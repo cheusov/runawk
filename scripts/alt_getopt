@@ -1,0 +1,75 @@
+#!/usr/bin/env runawk
+
+#use "alt_assert.awk"
+#use "alt_getopt.awk"
+#use "shquote.awk"
+
+#env "LC_ALL=C"
+
+function __takes_arg (opt){
+	if (!opt in __getopt_opts)
+		return 0
+	if (__getopt_opts [opt] == takes_arg)
+		return 1
+	if (__getopt_opts [opt] == "")
+		return 0
+	return __getopt_opts [__getopt_opts [opt]] == takes_arg
+}
+
+BEGIN {
+	for (i=1; i < ARGC; i += 2){
+		if (ARGV [i] == "--"){
+			delete ARGV [i]
+			++i
+			break
+		}
+
+		assert(ARGV [i] != "" && ARGV [i+1] != "",
+			   "A number of non-dash arguments must be a power of 2")
+
+		if (ARGV [i] ~ /^[A-Za-z0-9!@%^=+\/,.]$/){
+			shopts = shopts ARGV [i]
+			action [ARGV [i]] = ARGV [i+1]
+		}else if (ARGV [i] ~ /^=[A-Za-z0-9!@%^=+\/,.]$/){
+			opt = substr(ARGV [i], 2)
+			shopts = shopts opt ":"
+			action [opt] = ARGV [i+1]
+		}else if (ARGV [i] ~ /^[A-Za-z0-9!@%^=+\/,.][ |][^ |]+$/){
+			split(ARGV [i], arr, /[ |]/)
+			shopts = shopts arr [1]
+			long_opts [arr [2]] = arr [1]
+			action [arr [1]] = ARGV [i+1]
+		}else if (ARGV [i] ~ /^=[A-Za-z0-9!@%^=+\/,.][ |][^ |]+$/){
+			split(substr(ARGV [i], 2), arr, /[ |]/)
+			shopts = shopts arr [1] ":"
+			long_opts [arr [2]] = arr [1]
+			action [arr [1]] = ARGV [i+1]
+		}else if (ARGV [i] ~ /^[^=][^ |]*$/){
+			long_opts [ARGV [i]] = ""
+			action [ARGV [i]] = ARGV [i+1]
+		}else if (ARGV [i] ~ /^=[^ |]+$/){
+			opt = substr(ARGV [i], 2)
+			long_opts [opt] = takes_arg
+			action [opt] = ARGV [i+1]
+		}
+
+		delete ARGV [i]
+		delete ARGV [i+1]
+	}
+
+	first = i
+
+	while (getopt(shopts, 1)){
+		if (__takes_arg(optopt))
+			print action [optopt] shquote(optarg)
+		else
+			print action [optopt]
+	}
+
+	for (i=first; i < ARGC; ++i){
+		if (ARGV [i] == "")
+			print "shift"
+	}
+
+	exitnow(0)
+}

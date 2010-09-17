@@ -31,7 +31,12 @@ runtest_main (){
 runtest (){
     runtest_header "$@"
     runtest_main "$@"
-#    $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
+}
+
+runtest_altgetopt (){
+    runtest_header "altgetopt $1"
+    shift
+    ../scripts/alt_getopt "$@"
 }
 
 runtest_nostderr (){
@@ -362,3 +367,23 @@ runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in
 ####################    ini
 runtest ../examples/demo_ini : ../examples/demo_ini.in
 runtest ../examples/demo_ini '' ../examples/demo_ini.in
+
+####################    alt_getopt(1)
+test_process_args (){
+    ../scripts/alt_getopt \
+	'v|verbose' 'verbose=1' \
+	'h help'    help \
+	'fake'      fake_flag=1 \
+	'=len'      len= \
+	'=o output' output= \
+	'=m msg'    "msg=" \
+	'V version' "echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'" \
+	=n          number= \
+	-- "$@"
+}
+
+runtest_header 'alt_getopt #1'
+test_process_args \
+   -h --help -v --verbose -V -o 123 -o234 --output 'file with spaces' -n 999 -n9999 --len 5 --fake \
+   -hVv --len 10 --len=100 -m "Aleksey's cat is female" \
+   --msg="backslashes (\) is not a problem too" -- -1 -2 -3
