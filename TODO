@@ -1,3 +1,5 @@
+- random numbers generator from /dev/[u]random
+- blob to regexp convertor
 - add some modules from gawk, e.g. org.awk and some others
 - min2, min3, ...
 - Link to my own Debian/lenny repository
