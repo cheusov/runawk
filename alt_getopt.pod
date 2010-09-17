@@ -15,7 +15,7 @@ getopt_long(3) found in *BSD and GNU libc.
 
 =head1 EXAMPLES
 
-The following shell script accepts the following options: -v (or
+The following shell script accepts the options: -v (or
 --verbose), -h (or --help), long option --fake without short synonym,
 --len accepting argument, -o (or --output) accepting argument,
 short options -f and -F without long synonyms etc. If option is

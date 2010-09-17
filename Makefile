@@ -63,15 +63,15 @@ runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
 	   -c 'RUNAWK manual page' ${.ALLSRC} > ${.TARGET}
 alt_getopt.1 : alt_getopt.pod
-	$(POD2MAN) -s 1 -r '' -n runawk \
+	$(POD2MAN) -s 1 -r '' -n alt_getopt \
 	   -c 'ALT_GETOPT manual page' ${.ALLSRC} > ${.TARGET}
 
 pod2html_rule: .USE
 	$(POD2HTML) --infile=${.ALLSRC} --outfile=${.TARGET}
 runawk.html alt_getopt.html : runawk.pod
 
-CLEANFILES=   *~ core* *.core ktrace* *.tmp tests/_*
-CLEANFILES+=  runawk.1 runawk.cat1 ChangeLog runawk.html 
+CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
+CLEANFILES+=  ChangeLog runawk.html 
 
 # NetBSD make is smarter :-/ Unfortunately Free and OpenBSD makes do
 # not support the following
