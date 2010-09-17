@@ -51,6 +51,8 @@ CFLAGS+=		-DMODULESDIR='"${MODULESDIR}"'
 CFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
 CFLAGS+=		-DTEMPDIR='"${TEMPDIR}"'
 
+SCRIPTS=		scripts/alt_getopt
+
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
 	   -c 'RUNAWK manual page' ${.ALLSRC} > ${.TARGET}
@@ -59,6 +61,18 @@ runawk.html : runawk.pod
 
 CLEANFILES=   *~ core* *.core ktrace* *.tmp tests/_*
 CLEANFILES+=  runawk.1 runawk.cat1 ChangeLog runawk.html 
+
+# NetBSD make is smarter :-/ Unfortunately Free and OpenBSD makes do
+# not support the following
+# BINOWN ?= ${:!id -un!}
+.ifndef BINOWN
+BINOWN!=	id -un
+.endif
+.ifndef BINGRP
+BINGRP!=	id -gn
+.endif
+MANOWN?=	${BINOWN}
+MANGRP?=	${BINGRP}
 
 ##################################################
 .PHONY: installdirs
