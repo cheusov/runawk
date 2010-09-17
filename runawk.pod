@@ -449,8 +449,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 =head1 BUGS/FEEDBACK
 
 Please send any comments, questions, bug reports etc. to me by e-mail
-or (even better) register them at sourceforge project home.  Feature
-requests are also welcomed.
+or register them at sourceforge project home.  Feature requests are
+also welcomed.
 
 =head1 HOME
 
