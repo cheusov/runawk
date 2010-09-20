@@ -1,22 +1,25 @@
-- random numbers generator from /dev/[u]random
-- blob to regexp convertor
+plan 0:
+- min2, min3, ..., max2, max3, ...
 - add some modules from gawk, e.g. org.awk and some others
-- min2, min3, ...
-- Link to my own Debian/lenny repository
+- glob to regexp convertor
 - More examples for tokenre.awk: searcher for emails and URLs.
+- Link to my own Debian/lenny repository
+- runawk -F ?
+- grep(1) in runawk? -E is mandatory.
+- alt_getopt(1) written in runawk
+
+plan 1:
+- random numbers generator from /dev/[u]random
 - tokenre_in.awk: synonym for tokenre.awk
 - reference to EGDIR from mk-configure.7
-- runawk -F ?
 - {string,hash,io,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
 - bre2ere.awk Basic RE to Extended RE convertor
-  - grep(1) in runawk?
 - libconfig/libconfuse analog written in/for AWK
 - csv.awk -- module for "comma separated values" format described in RFC4180
 - hash.awk - functions for working with hashes.
   items_count() ?
 - support for Windows
 - shquote(1) executable similar to that by Alan Barret?
-- getopt_long(1) written in runawk
 - remove fflush() ?
 - quicksort has quadratic complexity when sorting equal values
