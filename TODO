@@ -4,7 +4,6 @@ plan 0:
 - More examples for tokenre.awk: searcher for emails and URLs.
 - runawk -F ?
 - grep(1) in runawk? -E is mandatory.
-- alt_getopt(1) written in runawk
 
 plan 1:
 - random numbers generator from /dev/[u]random
