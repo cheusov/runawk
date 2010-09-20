@@ -371,7 +371,7 @@ test_process_args (){
 	'=len'      len= \
 	'=o output' output= \
 	'=m msg'    "msg=" \
-	'V version' "echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'" \
+	'V version' "echo 'alt_getopt-0-1-0 written by Aleksey Cheusov <vle@gmx.net>'" \
 	=n          number= \
 	-- "$@"
 }
@@ -392,15 +392,15 @@ runtest_header 'demo_alt_getopt.sh #1.5'
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #2'
-../examples/demo_alt_getopt.sh -n123 -m "Aleksey's can is female" arg1
+../examples/demo_alt_getopt.sh -n123 -m "Aleksey's cat is female" arg1
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #3'
-../examples/demo_alt_getopt.sh --len=123 -m "Aleksey's can is female" arg1 arg2
+../examples/demo_alt_getopt.sh --len=123 -m "Aleksey's cat is female" arg1 arg2
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #4'
-../examples/demo_alt_getopt.sh --len 123 -f -m "Aleksey's can is female" -- -a1 -a2
+../examples/demo_alt_getopt.sh --len 123 -f -m "Aleksey's cat is female" -- -a1 -a2
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #5'
@@ -411,3 +411,11 @@ runtest_header 'demo_alt_getopt.sh #5'
 runtest_header 'demo_alt_getopt.sh #5'
 ../examples/demo_alt_getopt.sh -n 123 --o file.txt -fhFvq --len=100 \
     -o/path/to/file.out 2>&1
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #1'
+../examples/demo_alt_getopt2.sh -h 2>&1
+
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #2'
+../examples/demo_alt_getopt2.sh --version 2>&1

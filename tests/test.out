@@ -1030,7 +1030,7 @@ help
 help
 verbose=1
 verbose=1
-echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'
+echo 'alt_getopt-0-1-0 written by Aleksey Cheusov <vle@gmx.net>'
 output='123'
 output='234'
 output='file with spaces'
@@ -1039,7 +1039,7 @@ number='9999'
 len='5'
 fake_flag=1
 help
-echo 'alt_getopt-0-1-0, written by Aleksey Cheusov <vle@gmx.net>'
+echo 'alt_getopt-0-1-0 written by Aleksey Cheusov <vle@gmx.net>'
 verbose=1
 len='10'
 len='100'
@@ -1098,7 +1098,7 @@ verbose=0
 fake_flag=
 len=
 output=
-msg=Aleksey's can is female
+msg=Aleksey's cat is female
 n=123
 flag=
 quiet=
@@ -1109,7 +1109,7 @@ verbose=0
 fake_flag=
 len=123
 output=
-msg=Aleksey's can is female
+msg=Aleksey's cat is female
 n=
 flag=
 quiet=
@@ -1121,7 +1121,7 @@ verbose=0
 fake_flag=
 len=123
 output=
-msg=Aleksey's can is female
+msg=Aleksey's cat is female
 n=
 flag=1
 quiet=
@@ -1149,3 +1149,13 @@ msg=
 n=123
 flag=
 quiet=1
+--------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #1
+demo_alt_getopt2.sh is a demo program for alt_getopt(1)
+OPTIONS:
+  -h|--help        display this help
+  -v|--version     display version
+
+--------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #2
+demo_alt_getopt2.sh 0.1.0

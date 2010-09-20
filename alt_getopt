@@ -1,10 +1,47 @@
 #!/usr/bin/env runawk
 
+# Copyright (c) 2010 Aleksey Cheusov <vle@gmx.net>
+#
+# Permission is hereby granted, free of charge, to any person obtaining
+# a copy of this software and associated documentation files (the
+# "Software"), to deal in the Software without restriction, including
+# without limitation the rights to use, copy, modify, merge, publish,
+# distribute, sublicense, and/or sell copies of the Software, and to
+# permit persons to whom the Software is furnished to do so, subject to
+# the following conditions:
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+# LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+# OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+# WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 #use "alt_assert.awk"
 #use "alt_getopt.awk"
 #use "shquote.awk"
+#use "embed_str.awk"
 
 #env "LC_ALL=C"
+
+#.begin-str help
+# alt_getopt is a command options parser, it gets options
+# specification and application's options as arguments and outputs
+# shell commands to be executed.
+# Usage:
+#   alt_getopt -h
+#   alt_getopt opt1 sh_cmd1 [opt2 sh_cmd2...] -- [args]
+#   alt_getopt -m opt1 sh_cmd1 help1 [opt2 sh_cmd2 help2...] -- [args]
+# OPTIONS:
+#    -h|--help        display this screen
+#    -m               options specification includes per-option help messages,
+#                     shell code will assign all them separated by <NL> character
+#                     to variable "help_msgs"
+#.end-str
 
 function __takes_arg (opt){
 	if (!opt in __getopt_opts)
@@ -17,15 +54,32 @@ function __takes_arg (opt){
 }
 
 BEGIN {
-	for (i=1; i < ARGC; i += 2){
+	start = 1
+	if (ARGV [1] == "-h" || ARGV [1] == "--help"){
+		start = 2
+		print EMBED_STR ["help"] > "/dev/stderr"
+		exitnow(0)
+	}
+	if (ARGV [1] == "-m"){
+		with_help_msg = 1
+		start = 2
+		ARGV [1] = ""
+	}
+
+	step = 2 + with_help_msg
+	for (i=start; i < ARGC; i += step){
 		if (ARGV [i] == "--"){
 			delete ARGV [i]
 			++i
 			break
 		}
 
-		assert(ARGV [i] != "" && ARGV [i+1] != "",
-			   "A number of non-dash arguments must be a power of 2")
+		if (ARGV [i] == "" || ARGV [i+1] == "" ||
+			(with_help_msg && ARGV [i+2] == ""))
+		{
+			print "bad arguments, see alt_getopt -h for more information" \
+				> "/dev/stderr"
+		}
 
 		if (ARGV [i] ~ /^[A-Za-z0-9!@%^=+\/,.]$/){
 			shopts = shopts ARGV [i]
@@ -51,13 +105,23 @@ BEGIN {
 			opt = substr(ARGV [i], 2)
 			long_opts [opt] = takes_arg
 			action [opt] = ARGV [i+1]
+		}else{
+			abort("unknown format of'" ARGV [i] "'")
 		}
 
 		delete ARGV [i]
 		delete ARGV [i+1]
+
+		if (with_help_msg){
+			help_lines = help_lines ARGV [i+2] "\n"
+			delete ARGV [i+2]
+		}
 	}
 
 	first = i
+
+	if (with_help_msg)
+		printf "help_msg=%s\n", shquote(help_lines)
 
 	while (getopt(shopts, 1)){
 		if (__takes_arg(optopt))
