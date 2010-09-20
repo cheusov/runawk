@@ -1093,20 +1093,20 @@ quiet=
  ------ args: demo_alt_getopt.sh #3
 verbose=0
 fake_flag=
-len=
+len=123
 output=
 msg=Aleksey's can is female
-n=123
+n=
 flag=
 quiet=
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #4
 verbose=0
 fake_flag=
-len=
+len=123
 output=
 msg=Aleksey's can is female
-n=123
+n=
 flag=1
 quiet=
 --------------------------------------------------
@@ -1123,11 +1123,11 @@ quiet=
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #5
 blablabla help
-verbose=3
+verbose=0
 fake_flag=
 len=100
 output=/path/to/file.out
 msg=
 n=123
 flag=
-quiet=
+quiet=1
