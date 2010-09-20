@@ -20,5 +20,4 @@ process_args (){
 }
 
 cmds=`process_args "$@"`
-#printf '%s' "$cmds"
 eval "$cmds"
