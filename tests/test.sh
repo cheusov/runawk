@@ -387,16 +387,20 @@ runtest_header 'demo_alt_getopt.sh #1'
 ../examples/demo_alt_getopt.sh
 
 ####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt.sh #1.5'
+../examples/demo_alt_getopt.sh arg1 arg2 arg3
+
+####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #2'
-../examples/demo_alt_getopt.sh -n123 -m "Aleksey's can is female"
+../examples/demo_alt_getopt.sh -n123 -m "Aleksey's can is female" arg1
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #3'
-../examples/demo_alt_getopt.sh --len=123 -m "Aleksey's can is female"
+../examples/demo_alt_getopt.sh --len=123 -m "Aleksey's can is female" arg1 arg2
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #4'
-../examples/demo_alt_getopt.sh --len 123 -f -m "Aleksey's can is female"
+../examples/demo_alt_getopt.sh --len 123 -f -m "Aleksey's can is female" -- -a1 -a2
 
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt.sh #5'

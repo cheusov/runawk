@@ -1080,6 +1080,19 @@ n=
 flag=
 quiet=
 --------------------------------------------------
+ ------ args: demo_alt_getopt.sh #1.5
+verbose=0
+fake_flag=
+len=
+output=
+msg=
+n=
+flag=
+quiet=
+arg [1]=arg1
+arg [2]=arg2
+arg [3]=arg3
+--------------------------------------------------
  ------ args: demo_alt_getopt.sh #2
 verbose=0
 fake_flag=
@@ -1089,6 +1102,7 @@ msg=Aleksey's can is female
 n=123
 flag=
 quiet=
+arg [1]=arg1
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #3
 verbose=0
@@ -1099,6 +1113,8 @@ msg=Aleksey's can is female
 n=
 flag=
 quiet=
+arg [1]=arg1
+arg [2]=arg2
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #4
 verbose=0
@@ -1109,6 +1125,8 @@ msg=Aleksey's can is female
 n=
 flag=1
 quiet=
+arg [1]=-a1
+arg [2]=-a2
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #5
 blablabla help
