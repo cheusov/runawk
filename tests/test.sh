@@ -419,3 +419,7 @@ runtest_header 'demo_alt_getopt2.sh #1'
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt2.sh #2'
 ../examples/demo_alt_getopt2.sh --version 2>&1
+
+####################    minmax
+runtest_header 'demo_minmax #1'
+../examples/demo_minmax 1>&2
