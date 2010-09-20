@@ -97,3 +97,26 @@ under modules/ subdirectory. They are installed by default.
                            EXAMPLES
 
 Lots of examples are available in examples/ subdirectory.
+
+======================================================================
+
+                           PACKAGES
+
+  1) pkgsrc (NetBSD, DragonFlyBSD, Linux, Solaris, ...)
+
+    RunAWK is packages in pkgsrc as wip/runawk.
+
+  2) Debian/lenny/x86
+
+    Add the following lines
+
+        deb     http://mova.org/~cheusov/pub/debian       lenny    main
+        deb-src http://mova.org/~cheusov/pub/debian       lenny    main
+
+    to /etc/apt/sources.list and then using apt or aptitude commands.
+    Binary packages are available only for Debian/Lenny/i386.
+    Ubuntu users need to recompile the package for their system.
+
+  3) FreeBSD
+
+    RunAWK is packages in FreeBSD ports as lang/runawk

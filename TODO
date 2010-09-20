@@ -2,7 +2,6 @@ plan 0:
 - add some modules from gawk, e.g. org.awk and some others
 - glob to regexp convertor
 - More examples for tokenre.awk: searcher for emails and URLs.
-- Link to my own Debian/lenny repository
 - runawk -F ?
 - grep(1) in runawk? -E is mandatory.
 - alt_getopt(1) written in runawk
