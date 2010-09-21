@@ -1,5 +1,4 @@
 plan 0:
-- add some modules from gawk, e.g. org.awk and some others
 - glob to regexp convertor
 - More examples for tokenre.awk: searcher for emails and URLs.
 - runawk -F ?

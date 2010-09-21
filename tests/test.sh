@@ -232,9 +232,10 @@ runtest -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
 
 runtest -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
-####################    multisub
-AWKPATH=${SRCDIR}/modules
+############################################################
+AWKPATH=${SRCDIR}/modules:${SRCDIR}/modules/gawk
 export AWKPATH
+####################    multisub
 runtest ../examples/demo_multisub
 
 ####################    tokenre
@@ -423,3 +424,16 @@ runtest_header 'demo_alt_getopt2.sh #2'
 ####################    minmax
 runtest_header 'demo_minmax #1'
 ../examples/demo_minmax 1>&2
+
+####################    ftrans
+runtest ../examples/demo_ftrans /dev/null
+runtest ../examples/demo_ftrans \
+    ../examples/demo_readfile.in
+runtest ../examples/demo_ftrans \
+    ../examples/demo_readfile.in ../examples/demo_shquote.in \
+    ../examples/demo_fieldwidths.in
+runtest ../examples/demo_ftrans <<'EOF'
+foo
+bar
+baz
+EOF

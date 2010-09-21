@@ -1161,3 +1161,48 @@ OPTIONS:
 demo_alt_getopt2.sh 0.1.0
 --------------------------------------------------
  ------ args: demo_minmax #1
+--------------------------------------------------
+ ------ args: ../examples/demo_ftrans /dev/null
+--------------------------------------------------
+ ------ args: ../examples/demo_ftrans ../examples/demo_readfile.in
+#### beginning of ../examples/demo_readfile.in ####
+line1
+line2
+line3
+#### end of ../examples/demo_readfile.in ####
+--------------------------------------------------
+ ------ args: ../examples/demo_ftrans ../examples/demo_readfile.in ../examples/demo_shquote.in ../examples/demo_fieldwidths.in
+#### beginning of ../examples/demo_readfile.in ####
+line1
+line2
+line3
+#### end of ../examples/demo_readfile.in ####
+#### beginning of ../examples/demo_shquote.in ####
+'
+''
+'''
+\
+\\
+\\\
+\\'
+'\'
+Apple's
+apple
+file name.txt
+*&;<>#~^$`!][(){}?
+#### end of ../examples/demo_shquote.in ####
+#### beginning of ../examples/demo_fieldwidths.in ####
+12341234512345612100000
+   4    5     6 21
+   4    5     6 2
+12341234512
+12
+
+#### end of ../examples/demo_fieldwidths.in ####
+--------------------------------------------------
+ ------ args: ../examples/demo_ftrans
+#### beginning of - ####
+foo
+bar
+baz
+#### end of - ####
