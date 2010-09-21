@@ -42,5 +42,40 @@ BEGIN {
 	assert(max5(3, 4, 5, 1, 2) == 5)
 	assert(max5(4, 5, 1, 2, 3) == 5)
 
+	#
+	assert(min_key(hash) == "")
+	assert(max_key(hash) == "")
+	assert(min_key(hash, "Sonya") == "Sonya")
+	assert(max_key(hash, "Sonya") == "Sonya")
+
+	assert(min_value(hash) == "")
+	assert(max_value(hash) == "")
+	assert(min_value(hash, -1) == -1)
+	assert(max_value(hash, -1) == -1)
+
+	assert(key_of_min_value(hash) == "")
+	assert(key_of_max_value(hash) == "")
+	assert(key_of_min_value(hash, -1) == -1)
+	assert(key_of_max_value(hash, -1) == -1)
+
+	hash ["Irina"] = 20
+	assert(min_key(hash) == "Irina")
+	assert(max_key(hash) == "Irina")
+	assert(min_value(hash) == 20)
+	assert(max_value(hash) == 20)
+	assert(key_of_min_value(hash) == "Irina")
+	assert(key_of_max_value(hash) == "Irina")
+
+	hash ["Aleksey"] = 19
+	hash ["Anastasia"] = 111
+	hash ["Ivan"] = 2
+	assert(min_key(hash) == "Aleksey")
+	assert(max_key(hash) == "Ivan")
+	assert(min_value(hash) == 2)
+	assert(max_value(hash) == 111)
+	assert(key_of_min_value(hash) == "Ivan")
+	assert(key_of_max_value(hash) == "Anastasia")
+
+	#
 	exitnow(0)
 }
