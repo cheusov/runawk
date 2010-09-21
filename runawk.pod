@@ -132,6 +132,10 @@ Display help information.
 
 Display version information.
 
+=item B<-F> I<fs>
+
+Set the input field separator FS to the regular expression fs.
+
 =item B<-d>|B<--debug>
 
 Turn on a debugging mode in which B<runawk> prints argument list

@@ -692,7 +692,7 @@ int main (int argc, char **argv)
 
 	ll_push (NULL, new_argv, &new_argc); /* progname */
 
-	/* options, no getopt(3) here */
+	/* options, no getopt(3) or getopt_long(3) here */
 	for (; argc && argv [0][0] == '-'; --argc, ++argv){
 		/* --help */
 		if (!strcmp (argv [0], "--help")){
@@ -736,6 +736,28 @@ int main (int argc, char **argv)
 
 			--argc;
 			++argv;
+			continue;
+		}
+
+		/* -F <FS>*/
+		if (!strcmp (argv [0], "-F")){
+			if (argc == 1){
+				fprintf (stderr, "missing argument for -F option\n");
+				clean_and_exit (39);
+			}
+
+			ll_push ("-F",     new_argv, &new_argc);
+			ll_push (argv [1], new_argv, &new_argc);
+
+			--argc;
+			++argv;
+			continue;
+		}
+
+		/* -F<FS>*/
+		if (!strncmp (argv [0], "-F", 2)){
+			ll_push ("-F",     new_argv, &new_argc);
+			ll_push (argv [0]+2, new_argv, &new_argc);
 			continue;
 		}
 

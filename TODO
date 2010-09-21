@@ -1,7 +1,6 @@
 plan 0:
 - glob to regexp convertor
 - More examples for tokenre.awk: searcher for emails and URLs.
-- runawk -F ?
 - grep(1) in runawk? -E is mandatory.
 - list all modules in single place. README?
 
