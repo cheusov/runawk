@@ -68,12 +68,12 @@ alt_getopt.1 : alt_getopt.pod
 
 pod2html_rule: .USE
 	$(POD2HTML) --infile=${.ALLSRC} --outfile=${.TARGET}
-runawk.html alt_getopt.html : runawk.pod
+runawk.html alt_getopt.html : pod2html_rule
 
 CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
 CLEANFILES+=  ChangeLog runawk.html 
 
-# NetBSD make is smarter :-/ Unfortunately Free and OpenBSD makes do
+# NetBSD make is smarter :-/ Unfortunately Free and OpenBSD make(1)s do
 # not support the following
 # BINOWN ?= ${:!id -un!}
 .ifndef BINOWN
