@@ -37,9 +37,6 @@
 #   alt_getopt opt1 sh_cmd1 [opt2 sh_cmd2...] -- [args]
 # OPTIONS:
 #    -h|--help        display this screen
-#    -m               options specification includes per-option help messages,
-#                     shell code will assign all them separated by <NL> character
-#                     to variable "help_msgs"
 #.end-str
 
 function __takes_arg (opt){
