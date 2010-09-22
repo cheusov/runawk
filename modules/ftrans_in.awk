@@ -4,7 +4,7 @@
 #
 # Arnold Robbins, arnold@skeeve.com, Public Domain, November 1992
 # Aleksey Cheusov, vle@gmx.net, Public Domain, September 2010
-#   (fix and adaptation for nawk by B.Kernigan)
+#   (fix and adaptation for nawk by B.Kernighan)
 
 # beginfile() function provided by user is called before file reading
 # endfile()   function provided by user is called after file reading
