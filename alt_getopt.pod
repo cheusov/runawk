@@ -23,26 +23,28 @@ applied, appropriate shell command is executed.
 
  #!/bin/sh
  help () { echo 'help here'; }
- alt_getopt \
-    v|verbose' 'verbose=1' \
-    'h help'    help \
-    'fake'      fake_flag=1 \
-    '=len'      len= \
-    '=o output' output= \
-    '=m msg'    "msg=" \
-    'V version' "echo 'alt_getopt-0-1-0'" \
-    f           'flag=1' \
-    F           'flag=' \
-    =n          number= \
-    -- "$@"
+
+ process_args (){
+   alt_getopt \
+     'v|verbose' 'verbose=1' \
+     'h help'    help \
+     'fake'      fake_flag=1 \
+     '=len'      len= \
+     '=o output' output= \
+     '=m msg'    "msg=" \
+     'V version' "echo 'alt_getopt-0-1-0'" \
+     f           'flag=1' \
+     F           'flag=' \
+     =n          number= \
+     -- "$@"
+ }
+
+ cmds=`process_args "$@"`
+ eval "$cmds"
+
  echo "flag=$flag"
  echo "msg=$msg"
-
-=head1 BUGS/FEEDBACK
-
-Please send any comments, questions, bug reports etc. to me by e-mail
-or register them at sourceforge project home.  Feature requests are
-also welcomed.
+ ...
 
 =head1 HOME
 
