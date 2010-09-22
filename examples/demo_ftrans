@@ -1,0 +1,17 @@
+#!/usr/bin/env runawk
+
+# This is a demo for min.awk and max.awk
+
+#use "ftrans_in.awk"
+
+function beginfile (fn){
+	print "#### beginning of " fn " ####"
+}
+
+function endfile (fn){
+	print "#### end of " fn " ####"
+}
+
+{
+	print
+}
