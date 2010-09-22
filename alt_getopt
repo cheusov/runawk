@@ -35,7 +35,6 @@
 # Usage:
 #   alt_getopt -h
 #   alt_getopt opt1 sh_cmd1 [opt2 sh_cmd2...] -- [args]
-#   alt_getopt -m opt1 sh_cmd1 help1 [opt2 sh_cmd2 help2...] -- [args]
 # OPTIONS:
 #    -h|--help        display this screen
 #    -m               options specification includes per-option help messages,
@@ -60,23 +59,15 @@ BEGIN {
 		print EMBED_STR ["help"] > "/dev/stderr"
 		exitnow(0)
 	}
-	if (ARGV [1] == "-m"){
-		with_help_msg = 1
-		start = 2
-		ARGV [1] = ""
-	}
 
-	step = 2 + with_help_msg
-	for (i=start; i < ARGC; i += step){
+	for (i=start; i < ARGC; i += 2){
 		if (ARGV [i] == "--"){
 			delete ARGV [i]
 			++i
 			break
 		}
 
-		if (ARGV [i] == "" || ARGV [i+1] == "" ||
-			(with_help_msg && ARGV [i+2] == ""))
-		{
+		if (ARGV [i] == "" || ARGV [i+1] == ""){
 			print "bad arguments, see alt_getopt -h for more information" \
 				> "/dev/stderr"
 		}
@@ -111,17 +102,9 @@ BEGIN {
 
 		delete ARGV [i]
 		delete ARGV [i+1]
-
-		if (with_help_msg){
-			help_lines = help_lines ARGV [i+2] "\n"
-			delete ARGV [i+2]
-		}
 	}
 
 	first = i
-
-	if (with_help_msg)
-		printf "help_msg=%s\n", shquote(help_lines)
 
 	while (getopt(shopts, 1)){
 		if (__takes_arg(optopt))
