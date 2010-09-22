@@ -1,0 +1,7 @@
+RunAWK is hosted here: http://sourceforge.net/projects/runawk/ and
+here http://freshmeat.net/projects/runawk/
+
+dictd.xdsl.by serves dictionary protocol (RFC2229) server dict://dictd.xdsl.by/
+
+runawk's author and dictd's current maintainer is me <vle@gmx.net>,
+dictd's original author is Rick Faith <faith@dict.org>

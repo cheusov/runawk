@@ -382,6 +382,13 @@ print
 b
 <NL>
 --------------------------------------------------
+ ------ args: ../examples/demo_tokenre3 ../examples/demo_tokenre3.in
+http://sourceforge.net/projects
+http://freshmeat.net/projects
+dict://dictd.xdsl.by/
+vle@gmx.net
+faith@dict.org
+--------------------------------------------------
  ------ args: ../examples/demo_alt_getopt -h -
 option `h'
 ARGV [2] = -
