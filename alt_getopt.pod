@@ -46,6 +46,30 @@ applied, appropriate shell command is executed.
  echo "msg=$msg"
  ...
 
+Another way to handle options using alt_getopt.sh
+
+  #!/bin/sh
+  . alt_getopt.sh
+
+  help () {
+    cat 1>&2 <<EOF
+  demo_alt_getopt2.sh is a demo program for alt_getopt.sh
+  OPTIONS:
+  $help_msg
+  EOF
+  }
+
+  add_arg 'h help'    'help; exit 0' \
+    '  -h|--help        display this help'
+  add_arg 'v|version' "echo 'demo_alt_getopt2.sh 0.1.0'" \
+    '  -v|--version     display version'
+  add_arg '=o|output' "output=" \
+    '  -o|--output      output file'
+
+  process_args "$@"
+
+  echo "output=$output"
+
 =head1 HOME
 
 L<http://sourceforge.net/projects/runawk>

@@ -140,6 +140,9 @@ RunAWK also provides a few scripts:
 
    alt_getopt     - program arguments parser aware of long options,
                     alternative to POSIX getopts and getopt(1).
+                    In addition to alt_getopt(1) utility alt_getopt.sh
+                    shell library is also provided that provides
+                    an alternative way for handling options.
 
 ======================================================================
 
