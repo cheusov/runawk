@@ -33,7 +33,9 @@ process_args (){
 	__args="$__args $__i"
 	shift
     done
-#    echo __args="$__args"
-    __cmds=`eval alt_getopt $__args "$@"`
-    eval "$__cmds"
+    eval alt_getopt $__args
+#    cmds=`eval alt_getopt -c $__args`
+#    eval "$cmds"
+#    echo "__shifts_cnt=$__shifts_cnt" 1>&2
+#    echo "$__shifts_cnt"
 }

@@ -1052,30 +1052,7 @@ len='10'
 len='100'
 msg='Aleksey'\''s cat is female'
 msg='backslashes (\) is not a problem too'
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
-shift
+shift 24
 --------------------------------------------------
  ------ args: demo_alt_getopt.sh #1
 verbose=0
