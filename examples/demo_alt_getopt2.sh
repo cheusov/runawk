@@ -23,6 +23,5 @@ add_arg '=o|output' "output=" \
 
 cmds=`process_args "$@"`
 eval "$cmds"
-#shift `process_args "$@"`
 
 echo "output=$output"
