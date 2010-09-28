@@ -34,9 +34,11 @@
 # shell commands to be executed.
 # Usage:
 #   alt_getopt -h
-#   alt_getopt opt1 sh_cmd1 [opt2 sh_cmd2...] -- [args]
+#   alt_getopt [OPTIONS] opt1 sh_cmd1 [opt2 sh_cmd2...] -- [args]
 # OPTIONS:
 #    -h|--help        display this screen
+#    -c               do not output 'shift' command, variable
+#                     __shifts_cnt is assigned instead
 #.end-str
 
 function __takes_arg (opt){
@@ -52,9 +54,13 @@ function __takes_arg (opt){
 BEGIN {
 	start = 1
 	if (ARGV [1] == "-h" || ARGV [1] == "--help"){
-		start = 2
 		print EMBED_STR ["help"] > "/dev/stderr"
 		exitnow(0)
+	}
+	if (ARGV [1] == "-c"){
+		delete ARGV [1]
+		++start
+		output_shift_cnt = 1
 	}
 
 	for (i=start; i < ARGC; i += 2){
@@ -110,10 +116,15 @@ BEGIN {
 			print action [optopt]
 	}
 
+	shifts_cnt = 0
 	for (i=first; i < ARGC; ++i){
 		if (ARGV [i] == "")
-			print "shift"
+			++shifts_cnt
 	}
+	if (output_shift_cnt)
+		print "__shifts_cnt=" shifts_cnt
+	else
+		print "shift", shifts_cnt
 
 	exitnow(0)
 }
