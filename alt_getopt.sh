@@ -28,7 +28,7 @@ __run_alt_getopt (){
 
 process_args (){
     __args="$__args --"
-    for i in $@; do
+    for i in "$@"; do
 	__i=`__shq "$1"`
 	__args="$__args $__i"
 	shift
