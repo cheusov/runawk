@@ -3,9 +3,11 @@
 #use "multisub.awk"
 #use "alt_assert.awk"
 
-function test (ideal, input, repls, num,                 res){
+function test (ideal, input, repls, num, keep,
+       res)
+{
 #	print "ideal=" ideal > "/dev/stderr"
-	res = multisub(input, repls)
+	res = multisub(input, repls, keep)
 #	print "res=" res > "/dev/stderr"
 	if (ideal != res){
 		msg = ("test " num " failed")
@@ -26,6 +28,7 @@ BEGIN {
 	test("e", "bbb", "b:c   bbb:e   bb:d", 5)
 	test("Bd", "BBBA", "ABB:c   BBA:d", 6)
 	test("ccBBde", "ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e", 7)
+	test("kABBA(acca)BC(saab)", "kabba(acca)bc(saab)", "a:A   b:B   c:C   [(][^()]*[)]:&", 7, "&")
 
 	if (!__buggy_mawk)
 		test("aaa\nbbb\nccc\tddd\aeee\a", "aaa\\nbbb\\nccc\\tddd\\aeee\\a", "\\t:\t   \\a:\a   \\n:\n", 7)
