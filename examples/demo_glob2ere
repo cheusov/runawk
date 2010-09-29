@@ -1,0 +1,27 @@
+#!/usr/bin/env runawk
+
+#use "glob.awk"
+#use "alt_assert.awk"
+
+function test (input, ideal,
+			   res)
+{
+	res = glob2ere(input)
+	if (ideal != res){
+		msg = ("test " num " failed")
+		msg = msg "\n ideal=\"" ideal "\""
+		msg = msg "\n res  =\"" res "\""
+		abort(msg)
+	}
+}
+
+BEGIN {
+	test("osb", "osb")
+	test("*.t[^.*]z", ".*[.]t[^.*]z")
+	test("^$(){}.+|", "\\^[$][(][)][{][}][.][+][|]")
+	test("\\^\\$\\(\\)\\{\\}\\.\\+\\|\\*\\[\\]\\?\\a\\b\\0\\9",
+		 "\\^[$][(][)][{][}][.][+][|][*]\\[\\][?]ab09")
+	test("*-[0-9]*\\\\", ".*-[0-9].*\\\\")
+	test("?*[\\]*?\\[]?*[*\\[\\]?]*?", "..*[\\]*?\\[]..*[*\\[\\]?].*.")
+	exit 0
+}

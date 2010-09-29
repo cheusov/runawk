@@ -357,6 +357,9 @@ runtest ../examples/demo_trim_in ../examples/demo_trim.in
 runtest -v TRIM=' ' ../examples/demo_trim_in ../examples/demo_trim.in
 runtest -v TRIM='c' ../examples/demo_trim_in ../examples/demo_trim.in
 
+####################    glob.awk
+runtest ../examples/demo_glob2ere
+
 ####################    backslash_in
 runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in
 
