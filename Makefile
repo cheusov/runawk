@@ -55,8 +55,10 @@ CFLAGS+=		-DTEMPDIR='"${TEMPDIR}"'
 
 WITH_ALT_GETOPT?=	yes
 .if ${WITH_ALT_GETOPT} == "yes"
-SCRIPTS+=		alt_getopt
-MAN+=			alt_getopt.1
+SCRIPTS+=			alt_getopt
+MAN+=				alt_getopt.1
+#FILES+=				alt_getopt.sh
+#FILESDIR_alt_getopt.sh=		${BINDIR}
 .endif
 
 runawk.1 : runawk.pod
