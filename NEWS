@@ -1,4 +1,38 @@
 ======================================================================
+Version 1.1.0, by Aleksey Cheusov, Thu, 30 Sep 2010 23:38:08 +0300
+
+  Option -F is added to runawk. It passes field separator to AWK
+  interpreter.
+
+  New tool alt_getopt(1), an alternative to getopt(1) and POSIX
+  getopts.  It is a command options parser that undestands long
+  options.  It is implemented in runawk and uses its modules.
+  Also alt_getopt.sh shell include file is implemented and installed.
+  Examples: examples/demo_alt_getopt*.sh
+
+  multisub.awk: add ability to skip a matched text, see the
+  documentation at the top of multisub.awk and examples/demo_multisub
+  for the sample.  Function multisub now has optional third argument.
+
+  New module glob.awk for working with glob patterns.
+
+  min.awk: new functions min3, min4, min5, min_key, min_value and
+           key_of_min_value
+  max.awk: new functions max3, max4, max5, max_key, max_value and
+           key_of_max_value
+
+  New module ord.awk from GNU awk.
+
+  New module ftrans_in.awk from GNU awk (fixed and modified by me).
+  Example: examples/demo_ftrans.
+
+  Makefile:
+    - initialize {BIN,MAN}{OWN,GRP} to `id -{u,g}n`. You don't need
+    to set these variables manually for unprivileged installation.
+
+  New example: examples/demo_tokenre3
+
+======================================================================
 Version 1.0.0, by Aleksey Cheusov, Sun,  5 Sep 2010 16:39:47 +0300
 
   New functions for sorting indices in hash
