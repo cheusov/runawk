@@ -25,3 +25,12 @@ BEGIN {
 function glob2ere (p){
 	return multisub(p, __g2e, "&")
 }
+
+function glob (s, p,                 re){
+	if (p in __runawk_glob2ere)
+		re = __runawk_glob2ere [p]
+	else
+		re = __runawk_glob2ere [p] = ("^" glob2ere(p) "$")
+
+	return s ~ re
+}

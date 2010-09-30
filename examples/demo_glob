@@ -1,0 +1,22 @@
+#!/usr/bin/env runawk
+
+#use "glob.awk"
+#use "alt_assert.awk"
+
+function test (input, ideal,
+			   res)
+{
+	res = glob2ere(input)
+	if (ideal != res){
+		msg = ("test " num " failed")
+		msg = msg "\n ideal=\"" ideal "\""
+		msg = msg "\n res  =\"" res "\""
+		abort(msg)
+	}
+}
+
+BEGIN {
+	print glob("file.txt", "*.txt")
+	print glob("file.tgz", "*.txt")
+	exit 0
+}
