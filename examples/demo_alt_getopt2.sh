@@ -22,12 +22,13 @@ add_arg '=o|output' "output=" \
     '  -o|--output      output file'
 
 process_args "$@"
+shift "$shifts"
 
 echo "output=$output"
 
 i=1
 while test $# -ne 0; do
     printf '$%d=%s\n' "$i" "$1"
-    shift
     i=`expr $i + 1`
+    shift
 done

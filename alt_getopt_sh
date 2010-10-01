@@ -26,14 +26,13 @@ __run_alt_getopt (){
     eval "alt_getopt $__args" "$@"
 }
 
-__process_args (){
+process_args (){
     __args="$__args --"
     for i in "$@"; do
 	__i=`__shq "$1"`
 	__args="$__args $__i"
 	shift
     done
-    eval alt_getopt $__args
+    __cmds=`eval alt_getopt -c $__args`
+    eval "$__cmds"
 }
-
-alias process_args='__cmds=`__process_args "$@"`; eval "$__cmds"'
