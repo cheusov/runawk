@@ -24,3 +24,10 @@ add_arg '=o|output' "output=" \
 process_args "$@"
 
 echo "output=$output"
+
+i=1
+while test $# -ne 0; do
+    printf '$%d=%s\n' "$i" "$1"
+    shift
+    i=`expr $i + 1`
+done

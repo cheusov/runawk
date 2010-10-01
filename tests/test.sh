@@ -426,6 +426,18 @@ runtest_header 'demo_alt_getopt2.sh #2'
 ####################    demo_alt_getopt.sh
 runtest_header 'demo_alt_getopt2.sh #3'
 ../examples/demo_alt_getopt2.sh -o '/path/to/file with spaces.txt' 2>&1
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #4'
+../examples/demo_alt_getopt2.sh -ofile.txt arg1 arg2 arg3 2>&1
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #5'
+../examples/demo_alt_getopt2.sh -- -ofile.txt arg1 2>&1
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #6'
+../examples/demo_alt_getopt2.sh -- -o file.txt arg1 2>&1
+####################    demo_alt_getopt.sh
+runtest_header 'demo_alt_getopt2.sh #7'
+../examples/demo_alt_getopt2.sh -o file.txt arg1 2>&1
 
 ####################    minmax
 runtest_header 'demo_minmax #1'

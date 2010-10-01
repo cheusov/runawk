@@ -1151,6 +1151,27 @@ output=
  ------ args: demo_alt_getopt2.sh #3
 output=/path/to/file with spaces.txt
 --------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #4
+output=file.txt
+$1=arg1
+$2=arg2
+$3=arg3
+--------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #5
+output=
+$1=-ofile.txt
+$2=arg1
+--------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #6
+output=
+$1=-o
+$2=file.txt
+$3=arg1
+--------------------------------------------------
+ ------ args: demo_alt_getopt2.sh #7
+output=file.txt
+$1=arg1
+--------------------------------------------------
  ------ args: demo_minmax #1
 --------------------------------------------------
  ------ args: ../examples/demo_ftrans /dev/null
