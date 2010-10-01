@@ -82,15 +82,10 @@ runawk.html alt_getopt.html : pod2html_rule
 CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
 CLEANFILES+=  ChangeLog runawk.html 
 
-# NetBSD make is smarter :-/ Unfortunately Free and OpenBSD make(1)s do
-# not support the following
-# BINOWN ?= ${:!id -un!}
-.ifndef BINOWN
-BINOWN!=	id -un
-.endif
-.ifndef BINGRP
-BINGRP!=	id -gn
-.endif
+REALOWN!=	id -un
+REALGRP!=	id -gn
+BINOWN?=	${REALOWN}
+BINGRP?=	${REALGRP}
 MANOWN?=	${BINOWN}
 MANGRP?=	${BINGRP}
 
