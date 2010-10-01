@@ -42,10 +42,11 @@ MAN=			runawk.1
 
 MKCATPAGES?=		no
 
-MODULES!=		echo ${.CURDIR}/modules/*.awk
+MODULES!=		echo modules/*.awk modules/gawk/*.awk
 
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
+FILESNAME_modules/gawk/ord.awk=	gawk/ord.awk
 
 CFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
@@ -97,7 +98,7 @@ MANGRP?=	${BINGRP}
 .PHONY: installdirs
 installdirs:
 	$(INST_DIR) ${DESTDIR}${BINDIR}
-	$(INST_DIR) ${DESTDIR}${MODULESDIR}
+	$(INST_DIR) ${DESTDIR}${MODULESDIR} ${DESTDIR}${MODULESDIR}/gawk
 .if !defined(MKMAN) || empty(MKMAN:M[Nn][Oo])
 	$(INST_DIR) ${DESTDIR}${MANDIR}/man1
 .if !defined(MKCATPAGES) || empty(MKCATPAGES:M[Nn][Oo])
