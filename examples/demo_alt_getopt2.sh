@@ -21,7 +21,6 @@ add_arg 'v|version' "echo 'demo_alt_getopt2.sh 0.1.0'" \
 add_arg '=o|output' "output=" \
     '  -o|--output      output file'
 
-cmds=`process_args "$@"`
-eval "$cmds"
+process_args "$@"
 
 echo "output=$output"
