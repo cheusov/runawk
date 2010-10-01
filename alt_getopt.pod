@@ -72,7 +72,7 @@ Another way to handle options using alt_getopt.sh
 
 =head1 HOME
 
-L<http://sourceforge.net/projects/runawk>
+L<http://sourceforge.net/projects/runawk/>
 
 =head1 SEE ALSO
 L<getopt(3)>
