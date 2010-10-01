@@ -57,9 +57,15 @@ WITH_ALT_GETOPT?=	yes
 .if ${WITH_ALT_GETOPT} == "yes"
 SCRIPTS+=			alt_getopt
 MAN+=				alt_getopt.1
-#FILES+=				alt_getopt.sh
-#FILESDIR_alt_getopt.sh=		${BINDIR}
+FILES+=				alt_getopt_sh
+FILESDIR_alt_getopt_sh=		${BINDIR}
+FILESNAME_alt_getopt_sh=	alt_getopt.sh
+CLEANFILES+=			alt_getopt.sh
 .endif
+
+all: alt_getopt.sh
+alt_getopt.sh: alt_getopt_sh
+	ln -f alt_getopt_sh alt_getopt.sh
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
