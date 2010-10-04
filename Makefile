@@ -66,7 +66,7 @@ CLEANFILES+=			alt_getopt.sh
 
 all: alt_getopt.sh
 alt_getopt.sh: alt_getopt_sh
-	ln -f alt_getopt_sh alt_getopt.sh
+	ln -f ${.CURDIR}/alt_getopt_sh ${.TARGET}
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
