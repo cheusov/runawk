@@ -48,6 +48,7 @@ MODULES!=		cd ${.CURDIR}; echo modules/*.awk modules/gawk/*.awk
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
 FILESNAME_modules/gawk/ord.awk=	gawk/ord.awk
+FILESNAME_ord.awk=	gawk/ord.awk # for FreeBSD mk files
 
 CFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
@@ -60,7 +61,8 @@ WITH_ALT_GETOPT?=	yes
 SCRIPTS+=			alt_getopt
 MAN+=				alt_getopt.1
 FILES+=				sh/alt_getopt.sh
-FILESDIR_sh/alt_getopt.sh=		${BINDIR}
+FILESDIR_sh/alt_getopt.sh=	${BINDIR}
+FILESDIR_alt_getopt.sh=		${BINDIR}
 .endif
 
 runawk.1 : runawk.pod
@@ -83,6 +85,8 @@ BINOWN?=	${REALOWN}
 BINGRP?=	${REALGRP}
 MANOWN?=	${BINOWN}
 MANGRP?=	${BINGRP}
+SHAREOWN?=	${BINOWN}
+SHAREGRP?=	${BINGRP}
 
 ##################################################
 .PHONY: installdirs
