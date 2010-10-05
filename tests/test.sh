@@ -39,7 +39,7 @@ runtest_nostderr (){
     $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
-PATH=${SRCDIR}/examples:${SRCDIR}:${SRCDIR}/sh:$PATH
+PATH=${SRCDIR}/examples:${SRCDIR}:${SRCDIR}/sh:${OBJDIR}:$PATH
 export PATH
 
 ####################
