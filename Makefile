@@ -42,7 +42,7 @@ MAN=			runawk.1
 
 MKCATPAGES?=		no
 
-MODULES!=		echo modules/*.awk modules/gawk/*.awk
+MODULES!=		cd ${.CURDIR}; echo modules/*.awk modules/gawk/*.awk
 
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
@@ -58,15 +58,9 @@ WITH_ALT_GETOPT?=	yes
 .if ${WITH_ALT_GETOPT} == "yes"
 SCRIPTS+=			alt_getopt
 MAN+=				alt_getopt.1
-FILES+=				alt_getopt_sh
-FILESDIR_alt_getopt_sh=		${BINDIR}
-FILESNAME_alt_getopt_sh=	alt_getopt.sh
-CLEANFILES+=			alt_getopt.sh
+FILES+=				sh/alt_getopt.sh
+FILESDIR_sh/alt_getopt.sh=		${BINDIR}
 .endif
-
-all: alt_getopt.sh
-alt_getopt.sh: alt_getopt_sh
-	ln -f ${.CURDIR}/alt_getopt_sh ${.TARGET}
 
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
