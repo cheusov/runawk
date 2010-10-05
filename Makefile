@@ -77,7 +77,7 @@ pod2html_rule: .USE
 runawk.html alt_getopt.html : pod2html_rule
 
 CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
-CLEANFILES+=  ChangeLog runawk.html
+CLEANFILES+=  ChangeLog runawk.html _test.res
 
 REALOWN!=	id -un
 REALGRP!=	id -gn
