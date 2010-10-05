@@ -40,6 +40,7 @@ SRCS=			runawk.c
 
 MAN=			runawk.1
 
+MKMAN?=			yes
 MKCATPAGES?=		no
 
 MODULES!=		cd ${.CURDIR}; echo modules/*.awk modules/gawk/*.awk
