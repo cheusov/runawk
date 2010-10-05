@@ -1,5 +1,4 @@
 plan 0:
-- glob to regexp convertor
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 
 plan 1:
