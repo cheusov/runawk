@@ -65,6 +65,8 @@ FILESDIR_sh/alt_getopt.sh=	${BINDIR}
 FILESDIR_alt_getopt.sh=		${BINDIR}
 .endif
 
+all : runawk.1
+
 runawk.1 : runawk.pod
 	$(POD2MAN) -s 1 -r 'AWK Wrapper' -n runawk \
 	   -c 'RUNAWK manual page' ${.ALLSRC} > ${.TARGET}
