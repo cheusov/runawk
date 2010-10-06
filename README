@@ -52,10 +52,10 @@ There are a lot of Makefile variables that can be changed during
 installation.  RunAWK's own variables (All they are at the begining of
 Makefile):
 
- PREFIX         - where runawk is installed to            [/usr/local])
- MODULESDIR     - directory where modules are installed to
+ PREFIX         - where runawk is installed to             [/usr/local])
+ MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
  AWK_PROG       - path to awk interpreter
- STDIN_FILENAME - path to stdin device file               [-]
+ STDIN_FILENAME - path to stdin device file                [-]
 
 BSD make's variables (most commonly used,
 for all others - see make's documentation and appropriate .mk files)
