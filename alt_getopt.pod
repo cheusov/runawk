@@ -59,6 +59,7 @@ Another way to handle options using alt_getopt.sh
   EOF
   }
 
+  # the third argument in add_arg function envocation is optional
   add_arg 'h help'    'help; exit 0' \
     '  -h|--help        display this help'
   add_arg 'v|version' "echo 'demo_alt_getopt2.sh 0.1.0'" \
@@ -67,6 +68,7 @@ Another way to handle options using alt_getopt.sh
     '  -o|--output      output file'
 
   process_args "$@"
+  shift "$shifts"
 
   echo "output=$output"
 
