@@ -156,7 +156,7 @@ Lots of examples are available in examples/ subdirectory.
 
   1) pkgsrc (NetBSD, DragonFlyBSD, Linux, Solaris, ...)
 
-    RunAWK is packages in pkgsrc as wip/runawk.
+    RunAWK is packaged in pkgsrc as wip/runawk.
 
   2) Debian/lenny/x86
 
@@ -171,4 +171,4 @@ Lots of examples are available in examples/ subdirectory.
 
   3) FreeBSD
 
-    RunAWK is packages in FreeBSD ports as lang/runawk
+    RunAWK is packaged in FreeBSD ports as lang/runawk
