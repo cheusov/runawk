@@ -442,7 +442,7 @@ static int scan_file (const char *name, int safe_use)
 	buffer = xmalloc (file_size + 1);
 
 	n = fread (buffer, 1, file_size, fd);
-	if (n < file_size){
+	if (n < (size_t) file_size){
 		perror ("fread(3) failed");
 		clean_and_exit (35);
 	}
