@@ -105,4 +105,5 @@ installdirs:
 ##################################################
 
 .include "test.mk"
+.include <scripts.mk>
 .include <bsd.prog.mk>
