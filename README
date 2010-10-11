@@ -23,67 +23,66 @@ See section MOTIVATION of runawk.1 or runawk.pod.
 
                              INSTALLATION
 
-0) BSD make is required. I name it just 'make' but its real name may
-   vary on different systems.  bmake and pmake are possible names.
-   NOTE: GNU make IS NOT GOOD!
-   Latest sources of bmake, portable version of NetBSD make,
-   is available here:
+0)
+   Maybe runawk is already packaged for your platform. See PACKAGES
+   section below and your system's packages management tools.
+
+1)
+   We need bmake (portable version of NetBSD make) for building runawk.
+   I'd recommend to use latest stable version of bmake.
+
+   http://crufty.net/help/sjg/bmake.html
    http://freshmeat.net/projects/bmake/
 
-   If you need to change the default building options,
-   run make like this
+   NOTE:    !!! GNU make IS NOT GOOD !!!
 
-     env [YOUR_ASSIGNMENTS] make <target> [YOUR_ASSIGNMENTS]
+2)
+   We also need mk-configure >= 0.20.0.
 
-   See examples section below
+   http://sourceforge.net/projects/mk-configure/
 
-1) Uncompress tarball you've downloaded like this
+3) Uncompress tarball you've downloaded like this
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
 2) cd runawk-X.Y.Z
 
-3) make
+3) mkcmake
 
-4) (optional!) make installdirs
+4) mkcmake test
+   If this step fails on your system, PLEASE LET ME NOW.
 
-5) make install
+5) mkcmake install
 
-There are a lot of Makefile variables that can be changed during
-installation.  RunAWK's own variables (All they are at the begining of
-Makefile):
+There is a lot of Makefile variables that can be changed during
+build and installation.
 
- PREFIX         - where runawk is installed to             [/usr/local])
- MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
- AWK_PROG       - path to awk interpreter
- STDIN_FILENAME - path to stdin device file                [-]
+  AWK_PROG       - path to the default AWK interpreter
+  STDIN_FILENAME - path to stdin device file                [-]
+  MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
 
-BSD make's variables (most commonly used,
-for all others - see make's documentation and appropriate .mk files)
+  PREFIX         - where runawk(1) is installed to
+  MANDIR         - root directory for manual pages
+  DESTDIR        - fake root for installation
+  CPPFLAGS
+  CFLAGS
+  LDFLAGS
+  LDADD
+  ...
 
- BINDIR - where runawk executable itself is installed to
- MANDIR - where manual pages are installed to
+  See mk-configure(7) for details.
 
- BINOWN - runawk executable owner
- BINGRP - runawk executable group
+------------------------------
+Examples of build and installing:
 
- MANOWN - man page owner
- MANGRP - man page group
+   mkcmake installdirs install
 
-Examples:
-   make installdirs install
-
-   env CC=gcc \
+   env CC='icc -no-gcc' \
        PREFIX=/home/cheusov/local \
+       CPPFLAGS=-I/usr/pkg/include \
        LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
        LDADD=-lextralib \
-       CFLAGS='-Werror -Wall -O2 -fomit-frame-pointers' \
-       CPPFLAGS=-I/usr/pkg/include \
-       BINOWN=cheusov \
-       BINGRP=users \
-       MANOWN=cheusov \
-       MANGRP=users \
-       MKCATPAGES=yes \
-          make -s all installdirs install
+       CFLAGS='-O2 -fomit-frame-pointers' \
+          mkcmake -s all install
 
 ======================================================================
 
@@ -143,6 +142,8 @@ RunAWK also provides a few scripts:
                     In addition to alt_getopt(1) utility alt_getopt.sh
                     shell library is also provided that provides
                     an alternative way for handling options.
+   alt_getopt.sh  - shell library functionally equivalent
+                    to alt_getopt(1)
 
 ======================================================================
 
@@ -154,11 +155,14 @@ Lots of examples are available in examples/ subdirectory.
 
                            PACKAGES
 
-  1) pkgsrc (NetBSD, DragonFlyBSD, Linux, Solaris, ...)
+  1) NetBSD, DragonFlyBSD, Linux, Solaris... (pkgsrc)
 
     RunAWK is packaged in pkgsrc as wip/runawk.
 
-  2) Debian/lenny/x86
+  2) FreeBSD
+
+    RunAWK is packaged in FreeBSD ports as lang/runawk
+  3) Debian/lenny/x86
 
     Add the following lines
 
@@ -168,7 +172,3 @@ Lots of examples are available in examples/ subdirectory.
     to /etc/apt/sources.list and then using apt or aptitude commands.
     Binary packages are available only for Debian/Lenny/i386.
     Ubuntu users need to recompile the package for their system.
-
-  3) FreeBSD
-
-    RunAWK is packaged in FreeBSD ports as lang/runawk
