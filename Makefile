@@ -1,6 +1,7 @@
 ##################################################
 
 MODULESDIR?=		${PREFIX}/share/runawk
+WITH_ALT_GETOPT?=	yes
 
 # default directory for creating temp files and dirs
 TEMPDIR=		/tmp
@@ -44,7 +45,6 @@ CFLAGS+=		-DMODULESDIR='"${MODULESDIR}:${MODULESDIR}/gawk"'
 CFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
 CFLAGS+=		-DTEMPDIR='"${TEMPDIR}"'
 
-WITH_ALT_GETOPT?=	yes
 .if ${WITH_ALT_GETOPT} == "yes"
 SCRIPTS+=			alt_getopt
 MAN+=				alt_getopt.1
