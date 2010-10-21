@@ -333,6 +333,7 @@ done
 
 runtest ../examples/demo_heapsort < ../examples/demo_heapsort.in
 runtest ../examples/demo_heapsort3 < ../examples/demo_heapsort3.in
+runtest ../examples/demo_heapsort4 < ../examples/demo_heapsort4.in
 
 ####################    quicksort
 runtest_header ../examples/demo_quicksort2

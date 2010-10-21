@@ -798,6 +798,12 @@ D 1999
 C# 2001
 F# 2002
 --------------------------------------------------
+ ------ args: ../examples/demo_heapsort4
+sorted1: bilberry cranberry gooseberry raspberry strawberry
+sorted2: bilberry cranberry gooseberry raspberry strawberry
+sorted1: Earth Jupiter Moon Saturn Sun Venus
+sorted2: Earth Jupiter Moon Saturn Sun Venus
+--------------------------------------------------
  ------ args: ../examples/demo_quicksort2
 --------------------------------------------------
  ------ args: ../examples/demo_quicksort

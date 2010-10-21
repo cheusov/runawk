@@ -46,6 +46,14 @@
 #
 # Examples: demo_ini
 
+# heapsort_fields (dest_remap, [start, [end]])
+#     The same as function "heapsort0" but $1, $2... array is sorted.
+#     Note that $1, $2... are not changed, but dest_remap array is filled in!
+#     The variable "start" default to 1, "end" -- to NF.
+
+# heapsort0 ([start, [end]])
+#     The same as "heapsort_fields" but $1, $2... are changed.
+
 function sift_down (array, root, start, end, index_remap,               n0, v){
 	while (1){
 		n0 = root - start + 1 + root
@@ -136,4 +144,33 @@ function heapsort_indices (hash, remap_idx,
 	}
 
 	return cnt
+}
+
+function heapsort_fields (index_remap, start, end,               i,arr)
+{
+	if (start == "")
+		start = 1
+	if (end == "")
+		end = NF
+
+	for (i=start; i <= end; ++i){
+		arr [i] = $i
+	}
+	heapsort(arr, index_remap, start, end)
+}
+
+function heapsort0 (start, end,               i,arr,remap)
+{
+	if (start == "")
+		start = 1
+	if (end == "")
+		end = NF
+
+	for (i=start; i <= end; ++i){
+		arr [i] = $i
+	}
+	heapsort(arr, remap, start, end)
+	for (i=start; i <= end; ++i){
+		$i = arr [remap [i]]
+	}
 }

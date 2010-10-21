@@ -1,0 +1,24 @@
+#!/usr/bin/env runawk
+
+#use "heapsort.awk"
+
+# This demo sorts the input lines as (key, value) pair
+# and outputs sorted pairs.
+
+# Input file for this demo: examples/demo_heapsort4.in
+
+{
+	heapsort_fields(remap)
+	printf "sorted1:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $(remap [i])
+	}
+	printf "\n"
+
+	heapsort0()
+	printf "sorted2:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $i
+	}
+	printf "\n"
+}

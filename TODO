@@ -3,7 +3,6 @@ plan 0:
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 - xgetline writing fields to array
 - tokenre -> fields to array
-- quicksort0|heapsort0 for sorting $i
 - documentation for TMPDIR etc.
 
 plan 1:
