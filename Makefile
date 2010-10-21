@@ -37,7 +37,6 @@ MODULES!=		cd ${.CURDIR}; echo modules/*.awk modules/gawk/*.awk
 FILES=			${MODULES}
 FILESDIR=		${MODULESDIR}
 FILESNAME_modules/gawk/ord.awk=	gawk/ord.awk
-FILESNAME_ord.awk=	gawk/ord.awk # for FreeBSD mk files
 
 CFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
 CFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
