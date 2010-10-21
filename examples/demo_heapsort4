@@ -8,15 +8,51 @@
 # Input file for this demo: examples/demo_heapsort4.in
 
 {
+	# 1
 	heapsort_fields(remap)
-	printf "sorted1:"
+	printf "sorted1.1:"
 	for (i=1; i <= NF; ++i){
 		printf " %s", $(remap [i])
 	}
 	printf "\n"
 
+	heapsort_fields(remap, 1, NF, 1)
+	printf "sorted1.2:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $(remap [i])
+	}
+	printf "\n"
+
+	heapsort_fields(remap, 1, NF, 2)
+	printf "sorted1.3:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $(remap [i])
+	}
+	printf "\n"
+
+	# 2
+	orig = $0
+
 	heapsort0()
-	printf "sorted2:"
+	printf "sorted2.1:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $i
+	}
+	printf "\n"
+
+	$0 = orig
+
+	heapsort0(1, NF, 1)
+	printf "sorted2.2:"
+	for (i=1; i <= NF; ++i){
+		printf " %s", $i
+	}
+	printf "\n"
+
+	$0 = orig
+
+	heapsort0(1, NF, 2)
+	printf "sorted2.3:"
 	for (i=1; i <= NF; ++i){
 		printf " %s", $i
 	}

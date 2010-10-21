@@ -46,12 +46,14 @@
 #
 # Examples: demo_ini
 
-# heapsort_fields (dest_remap, [start, [end]])
+# heapsort_fields (dest_remap, [start [, end [, strnum]]])
 #     The same as function "heapsort0" but $1, $2... array is sorted.
 #     Note that $1, $2... are not changed, but dest_remap array is filled in!
 #     The variable "start" default to 1, "end" -- to NF.
+#     If "strnum" is set to 1, values are forcibly compared as strings.
+#     If "strnum" is set to 2, values are forcibly compared as numbers.
 
-# heapsort0 ([start, [end]])
+# heapsort0 ([start [, end [, strnum]]])
 #     The same as "heapsort_fields" but $1, $2... are changed.
 
 function sift_down (array, root, start, end, index_remap,               n0, v){
@@ -146,29 +148,50 @@ function heapsort_indices (hash, remap_idx,
 	return cnt
 }
 
-function heapsort_fields (index_remap, start, end,               i,arr)
+function heapsort_fields (index_remap, start, end, str,              i,arr)
 {
 	if (start == "")
 		start = 1
 	if (end == "")
 		end = NF
 
-	for (i=start; i <= end; ++i){
-		arr [i] = $i
+	if (str == 1){
+		for (i=start; i <= end; ++i){
+			arr [i] = ($i "")
+		}
+	}else if (str == 2){
+		for (i=start; i <= end; ++i){
+			arr [i] = $i + 0
+		}
+	}else{
+		for (i=start; i <= end; ++i){
+			arr [i] = $i
+		}
 	}
 	heapsort(arr, index_remap, start, end)
 }
 
-function heapsort0 (start, end,               i,arr,remap)
+function heapsort0 (start, end, str,              i,arr,remap)
 {
 	if (start == "")
 		start = 1
 	if (end == "")
 		end = NF
 
-	for (i=start; i <= end; ++i){
-		arr [i] = $i
+	if (str == 1){
+		for (i=start; i <= end; ++i){
+			arr [i] = ($i "")
+		}
+	}else if (str == 2){
+		for (i=start; i <= end; ++i){
+			arr [i] = $i + 0
+		}
+	}else{
+		for (i=start; i <= end; ++i){
+			arr [i] = $i
+		}
 	}
+
 	heapsort(arr, remap, start, end)
 	for (i=start; i <= end; ++i){
 		$i = arr [remap [i]]

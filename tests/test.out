@@ -799,10 +799,24 @@ C# 2001
 F# 2002
 --------------------------------------------------
  ------ args: ../examples/demo_heapsort4
-sorted1: bilberry cranberry gooseberry raspberry strawberry
-sorted2: bilberry cranberry gooseberry raspberry strawberry
-sorted1: Earth Jupiter Moon Saturn Sun Venus
-sorted2: Earth Jupiter Moon Saturn Sun Venus
+sorted1.1: bilberry cranberry gooseberry raspberry strawberry
+sorted1.2: bilberry cranberry gooseberry raspberry strawberry
+sorted1.3: gooseberry cranberry bilberry raspberry strawberry
+sorted2.1: bilberry cranberry gooseberry raspberry strawberry
+sorted2.2: bilberry cranberry gooseberry raspberry strawberry
+sorted2.3: 0 0 0 0 0
+sorted1.1: Earth Jupiter Moon Saturn Sun Venus
+sorted1.2: Earth Jupiter Moon Saturn Sun Venus
+sorted1.3: Jupiter Venus Moon Sun Earth Saturn
+sorted2.1: Earth Jupiter Moon Saturn Sun Venus
+sorted2.2: Earth Jupiter Moon Saturn Sun Venus
+sorted2.3: 0 0 0 0 0 0
+sorted1.1: 1 2 10 20 100 200
+sorted1.2: 1 10 100 2 20 200
+sorted1.3: 1 2 10 20 100 200
+sorted2.1: 1 2 10 20 100 200
+sorted2.2: 1 10 100 2 20 200
+sorted2.3: 1 2 10 20 100 200
 --------------------------------------------------
  ------ args: ../examples/demo_quicksort2
 --------------------------------------------------
