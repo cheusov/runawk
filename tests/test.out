@@ -388,6 +388,16 @@ http://freshmeat.net/projects
 dict://dictd.xdsl.by/
 vle@gmx.net
 faith@dict.org
+fake@domain.com
+foo@bar.baz.ru
+--------------------------------------------------
+ ------ args: ../examples/demo_tokenre4 ../examples/demo_tokenre3.in
+http://sourceforge.net/projects
+http://freshmeat.net/projects
+dict://dictd.xdsl.by/
+vle@gmx.net
+faith@dict.org
+fake@domain.com foo@bar.baz.ru
 --------------------------------------------------
  ------ args: ../examples/demo_alt_getopt -h -
 option `h'

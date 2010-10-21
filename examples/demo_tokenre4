@@ -1,0 +1,27 @@
+#!/usr/bin/env runawk
+
+#use "tokenre.awk"
+
+# This demo extracts e-mails and URLs from input text and outputs them
+# Using tokenre.awk for searching was inspired by talks with Vlad Shakhov
+
+# Input files for this demo: examples/demo_tokenre3.in*
+
+BEGIN { 
+	# regexp for emails and URLs are just examples and therefore don't
+	# conform to appropriate RFCs.
+	domains = "(com|org|net|ru|by|ua)"
+	re =         "[^ [:punct:]]+@([^ [:punct:]]+[.])+" domains
+	re = re "|" "(https?|ftp|dict)://([^ [:punct:]]+[.])+" domains "(/[^ [:punct:]]*)?"
+} 
+
+{ 
+	cnt = splitre($0, arr, re)
+	for (i=1; i <= cnt; ++i){ 
+		if (i > 1)
+			printf " "
+		printf "%s", arr [i]
+	}
+	if (cnt)
+		printf "\n"
+}

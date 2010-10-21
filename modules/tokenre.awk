@@ -18,6 +18,10 @@
 # tokenre0(REGEXP)
 #   Does the the same as `tokenre' but splits $0 instead.
 #
+# splitre(STRING, ARR, REGEXP)
+#    The same as `tokenre' but ARR[1], ARR[2]... are assigned.
+#    A number of extracted tokens is a return value.
+#
 # TRE - global variable. If it is set to non-empty string, all input
 # lines are splitted automatically.
 #
@@ -31,6 +35,16 @@ function tokenre (s, re){
 		$NF = substr(s, RSTART, RLENGTH)
 		s = substr(s, RSTART+RLENGTH)
 	}
+}
+
+function splitre (s, arr, re,             cnt){
+	cnt = 0
+	while (match(s, re)){
+		++cnt
+		arr [cnt] = substr(s, RSTART, RLENGTH)
+		s = substr(s, RSTART+RLENGTH)
+	}
+	return cnt
 }
 
 function tokenre0 (re){
