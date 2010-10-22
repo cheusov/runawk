@@ -1,4 +1,23 @@
 ======================================================================
+Version 1.2.0, by Aleksey Cheusov, Sat, 23 Oct 2010 00:35:35 +0300
+
+  Due to incompatibilities between traditional BSD mk files and mk
+  files shipped with bmake by Simon J. Gerraty, I've decided to switch
+  runawk from BSD mk files to mk-configure software build system. This
+  makes Makefile significantly smaller, easier to understand and use
+  and gives tons of new capabilities. Obviously this makes development
+  even easier than before. Updated installation instruction is in
+  README.
+
+  New functions in heapsort.awk: "heapsort_fields" and "heapsort0" for
+  sorting $1, $2 ...
+
+  New function in tokenre.awk: "splitre".
+
+  New samples of use (regression tests):
+    examples/demo_tokenre4, demo_heapsort4.
+
+======================================================================
 Version 1.1.0, by Aleksey Cheusov, Wed,  6 Oct 2010 22:51:56 +0300
 
   Makefile:

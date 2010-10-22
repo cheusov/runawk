@@ -20,7 +20,7 @@ STDIN_FILENAME?=	- #/dev/stdin
 
 ##################################################
 
-VERSION=		1.1.0
+VERSION=		1.2.0
 
 WARNS?=			4
 WARNERR?=		no
@@ -53,6 +53,8 @@ FILESDIR_sh/alt_getopt.sh=	${BINDIR}
 
 CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
 CLEANFILES+=  ChangeLog runawk.html _test.res
+
+MKC_REQD=		0.20.0
 
 ##################################################
 
