@@ -34,7 +34,7 @@ See section MOTIVATION of runawk.1 or runawk.pod.
    http://crufty.net/help/sjg/bmake.html
    http://freshmeat.net/projects/bmake/
 
-   NOTE:    !!! GNU make IS NOT GOOD !!!
+              <<<***!!! GNU make IS NOT GOOD !!!***>>>
 
 2)
    We also need mk-configure >= 0.20.0.
@@ -56,9 +56,9 @@ See section MOTIVATION of runawk.1 or runawk.pod.
 There is a lot of Makefile variables that can be changed during
 build and installation.
 
+  MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
   AWK_PROG       - path to the default AWK interpreter
   STDIN_FILENAME - path to stdin device file                [-]
-  MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
 
   PREFIX         - where runawk(1) is installed to
   MANDIR         - root directory for manual pages
@@ -72,11 +72,17 @@ build and installation.
   See mk-configure(7) for details.
 
 ------------------------------
-Examples of build and installing:
+Examples of building and installing:
 
-   mkcmake installdirs install
+   0)
+     mkcmake all install
 
-   env CC='icc -no-gcc' \
+   1)
+     export PREFIX=/usr SYSCONFDIR=/etc; \
+            mkcmake all install DESTDIR=/tmp/fakeroot
+
+   2)
+     env CC='icc -no-gcc' \
        PREFIX=/home/cheusov/local \
        CPPFLAGS=-I/usr/pkg/include \
        LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
