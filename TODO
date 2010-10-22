@@ -2,8 +2,6 @@ plan 0:
 - tr.awk ?
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 - xgetline writing fields to array
-- tokenre -> fields to array
-- documentation for TMPDIR etc.
 
 plan 1:
 - random numbers generator from /dev/[u]random
