@@ -1,4 +1,7 @@
 plan 0:
+- strtonum from gawk?
+- mkc.subprj.mk: subprojects "examples", "modules" and "alt_getopt"
+- support X11-like long options, e.g. -display, etc.
 - tr.awk ?
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 - xgetline writing fields to array
