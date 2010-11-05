@@ -292,7 +292,7 @@ static int add_file_uniq_safe (const char *dir, const char *name)
 
 typedef enum {
 	qstr_spaces,
-	qstr_str,
+	qstr_str
 } qstr_state_t;
 
 static void list_of_qstrings (
