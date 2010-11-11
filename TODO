@@ -1,12 +1,13 @@
 plan 0:
-- strtonum from gawk?
+- glob() - disable memoization
+- INSTALL file
 - mkc.subprj.mk: subprojects "examples", "modules" and "alt_getopt"
-- support X11-like long options, e.g. -display, etc.
-- tr.awk ?
+- support X11-like long options, e.g. -display, -geometry etc.
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 - xgetline writing fields to array
 
 plan 1:
+- strtonum from gawk?
 - random numbers generator from /dev/[u]random
 - tokenre_in.awk: synonym for tokenre.awk
 - reference to EGDIR from mk-configure.7
@@ -21,3 +22,4 @@ plan 1:
 - shquote(1) executable similar to that by Alan Barret?
 - remove fflush() ?
 - quicksort has quadratic complexity when sorting equal values
+- tr.awk ?
