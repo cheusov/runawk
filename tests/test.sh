@@ -39,7 +39,7 @@ runtest_nostderr (){
     $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
-PATH=${SRCDIR}/examples:${SRCDIR}:${SRCDIR}/sh:${OBJDIR}:$PATH
+PATH=${SRCDIR}/examples:${SRCDIR}:${SRCDIR}/a_getopt:${OBJDIR}:$PATH
 export PATH
 
 ####################
@@ -371,7 +371,7 @@ runtest ../examples/demo_ini '' ../examples/demo_ini.in
 
 ####################    alt_getopt(1)
 test_process_args (){
-    ../alt_getopt \
+    alt_getopt \
 	'v|verbose' 'verbose=1' \
 	'h help'    help \
 	'fake'      fake_flag=1 \

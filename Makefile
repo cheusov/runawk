@@ -1,62 +1,25 @@
 ##################################################
 
-MODULESDIR?=		${PREFIX}/share/runawk
+SUBPRJ =	runawk modules a_getopt doc
+SUBPRJ_DFLT ?=	runawk modules
+
 WITH_ALT_GETOPT?=	yes
 
-# default directory for creating temp files and dirs
-TEMPDIR=		/tmp
-
-.if exists(/usr/xpg4/bin/awk)
-# Solaris' /usr/bin/awk sucks so much... :-(
-# /usr/xpg4/bin/awk sucks too but sucks less.
-# I'd recommend you use GNU awk, nawk from NetBSD cvs tree
-# or mawk-1.3.4 or later.
-AWK_PROG?=		/usr/xpg4/bin/awk
-.else
-AWK_PROG?=		/usr/bin/awk
+.if ${WITH_ALT_GETOPT:tl} == "yes"
+SUBPRJ_DFLT +=		a_getopt
 .endif
-
-STDIN_FILENAME?=	- #/dev/stdin
-
-##################################################
-
-VERSION=		1.2.0
-
-WARNS?=			4
-WARNERR?=		no
-
-BIRTHDATE=		2007-09-24
-
-PROG=			runawk
-SRCS=			runawk.c
-
-MAN=			runawk.1
-
-MODULES!=		cd ${.CURDIR}; echo modules/*.awk modules/gawk/*.awk
-
-FILES=			${MODULES}
-FILESDIR=		${MODULESDIR}
-FILESNAME_modules/gawk/ord.awk=	gawk/ord.awk
-
-CFLAGS+=		-DAWK_PROG='"${AWK_PROG}"'
-CFLAGS+=		-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
-CFLAGS+=		-DMODULESDIR='"${MODULESDIR}:${MODULESDIR}/gawk"'
-CFLAGS+=		-DRUNAWK_VERSION='"${VERSION}"'
-CFLAGS+=		-DTEMPDIR='"${TEMPDIR}"'
-
-.if ${WITH_ALT_GETOPT} == "yes"
-SCRIPTS+=			alt_getopt
-MAN+=				alt_getopt.1
-FILES+=				sh/alt_getopt.sh
-FILESDIR_sh/alt_getopt.sh=	${BINDIR}
-.endif
-
-CLEANFILES+=   *~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
-CLEANFILES+=  ChangeLog runawk.html _test.res
 
 MKC_REQD=		0.20.0
 
 ##################################################
+.if defined(MAKEOBJDIRPREFIX)
+OBJDIR_runawk=${MAKEOBJDIRPREFIX/runawk}
+.elif defined(MAKEOBJDIR)
+OBJDIR_runawk=${MAKEOBJDIR}
+.else
+OBJDIR_runawk=${.CURDIR}/runawk
+.endif
 
 .include "test.mk"
-.include <mkc.prog.mk>
+.include "Makefile.inc"
+.include <mkc.subprj.mk>

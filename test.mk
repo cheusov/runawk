@@ -3,7 +3,7 @@ DIFF_PROG?=	diff -u
 .PHONY : test
 test : runawk
 	@echo 'running tests...'; \
-	export OBJDIR=${.OBJDIR}; \
+	export OBJDIR=${OBJDIR_runawk}; \
 	if { cd ${.CURDIR}/tests && ./test.sh > ${.OBJDIR}/_test.res; \
 	    ${DIFF_PROG} ${.CURDIR}/tests/test.out ${.OBJDIR}/_test.res; };\
 	then echo '   succeeded'; \
