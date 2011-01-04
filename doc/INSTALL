@@ -72,12 +72,16 @@ build and installation.
     mkcmake all install
 
 7) Non-standard variable you may want to change.
-   EGDIR - directiory where examples will be installed to
+   EGDIR - directiory where examples/ will be installed to
            ($PREFIX/share/doc/runawk/examples)
-   MODULESDIR - directory where modules will be installed to
+   MODULESDIR - directory where modules/ will be installed to
            ($PREFIX/share/runawk)
    DOCDIR - directory where doc/ will be installed to
            ($PREFIX/share/doc/runawk)
+   AWK_PROG       - path to the default AWK interpreter
+           (/usr/bin/awk)
+   STDIN_FILENAME - path to stdin device file
+           (-)
 
 ------------------------------
 Examples of building and installing:
@@ -90,6 +94,12 @@ Examples of building and installing:
             mkcmake all install DESTDIR=/tmp/fakeroot
 
    2)
+     export PREFIX=/usr SYSCONFDIR=/etc
+     export SUBPRJ_DFLT='runawk modules a_getopt examples doc'
+     export AWK_PROG=/bin/awk
+     mkcmake all install DESTDIR=/tmp/fakeroot
+
+   3)
      env CC='icc -no-gcc' \
        PREFIX=/home/cheusov/local \
        CPPFLAGS=-I/usr/pkg/include \

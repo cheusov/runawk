@@ -1,5 +1,3 @@
-EGDIR ?=	${DATADIR}/doc/runawk/examples
-
 EXAMPLES !=	cd ${.CURDIR}; echo demo_*
 
 FILES =		${EXAMPLES:N*~:M*.in}

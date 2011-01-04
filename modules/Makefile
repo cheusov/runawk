@@ -1,5 +1,3 @@
-MODULESDIR ?=			${PREFIX}/share/runawk
-
 MODULES !=			cd ${.CURDIR}; echo *.awk gawk/*.awk
 
 FILES =				${MODULES}
