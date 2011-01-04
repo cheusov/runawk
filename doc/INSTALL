@@ -1,0 +1,99 @@
+======================================================================
+
+                             INSTALLATION
+
+0)
+   Maybe runawk is already packaged for your platform. See PACKAGES
+   section below and your system's packages management tools.
+
+1)
+   We need bmake (portable version of NetBSD make) for building runawk.
+   I'd recommend to use latest stable version of bmake.
+
+   http://crufty.net/help/sjg/bmake.html
+   http://freshmeat.net/projects/bmake/
+
+              <<<***!!! GNU make IS NOT GOOD !!!***>>>
+
+2)
+   We also need mk-configure >= 0.20.0.
+
+   http://sourceforge.net/projects/mk-configure/
+
+3) Uncompress tarball you've downloaded like this
+   gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
+
+2) cd runawk-X.Y.Z
+
+3) mkcmake
+
+4) mkcmake test
+   If this step fails on your system, PLEASE LET ME NOW.
+
+5) mkcmake install
+
+There is a lot of Makefile variables that can be changed during
+build and installation.
+
+  MODULESDIR     - directory where modules are installed to [${PREFIX}/share/runawk]
+  AWK_PROG       - path to the default AWK interpreter
+  STDIN_FILENAME - path to stdin device file                [-]
+
+  PREFIX         - where runawk(1) is installed to
+  MANDIR         - root directory for manual pages
+  DESTDIR        - fake root for installation
+  CPPFLAGS
+  CFLAGS
+  LDFLAGS
+  LDADD
+  ...
+
+  See mk-configure(7) for details.
+
+6) RunAWK distribution consists of the following subprojects:
+   - runawk   -- runawk executable
+   - modules  -- modules written in .awk
+   - doc      -- README, COPYRIGHT, NEW, TODO files
+   - examples -- samples of use for runawk and its modules
+   - a_getopt -- alt_getopt(1) and alt_getopt.sh
+
+  By default only "runawk", "modules" and "a_getopt" are built and installed.
+  However you can easily build and install any subproject like the following
+
+    mkcmake all-examples install-examples
+    mkcmake all-doc install-doc
+    etc.
+
+  See mk-configure(7) and ./Makefile for details.
+
+  You can also set subprojects you need in SUBPRJ_DFLT variable.
+
+    export SUBPRJ_DFLT='runawk modules examples a_getopt doc'
+    mkcmake all install
+
+7) Non-standard variable you may want to change.
+   EGDIR - directiory where examples will be installed to
+           ($PREFIX/share/doc/runawk/examples)
+   MODULESDIR - directory where modules will be installed to
+           ($PREFIX/share/runawk)
+   DOCDIR - directory where doc/ will be installed to
+           ($PREFIX/share/doc/runawk)
+
+------------------------------
+Examples of building and installing:
+
+   0)
+     mkcmake all install
+
+   1)
+     export PREFIX=/usr SYSCONFDIR=/etc; \
+            mkcmake all install DESTDIR=/tmp/fakeroot
+
+   2)
+     env CC='icc -no-gcc' \
+       PREFIX=/home/cheusov/local \
+       CPPFLAGS=-I/usr/pkg/include \
+       LDFLAGS='-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib' \
+       LDADD=-lextralib \
+       CFLAGS='-O2 -fomit-frame-pointers' \
+          mkcmake -s all install

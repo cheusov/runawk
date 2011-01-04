@@ -1,6 +1,6 @@
 ##################################################
 
-SUBPRJ =	runawk modules a_getopt doc
+SUBPRJ =	runawk modules examples a_getopt doc
 SUBPRJ_DFLT ?=	runawk modules
 
 WITH_ALT_GETOPT?=	yes
