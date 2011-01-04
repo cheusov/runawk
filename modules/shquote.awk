@@ -28,9 +28,5 @@
 
 function shquote (str){
 	gsub(/'/, "'\\''", str)
-	str = "'" str "'"
-	sub(/^''/, "", str)
-	sub(/''$/, "", str)
-	# TODO: remove extraneous pairs of single quotes
-	return str
+	return "'" str "'"
 }

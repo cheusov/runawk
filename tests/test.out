@@ -580,11 +580,11 @@ file.txt
 dir
 --------------------------------------------------
  ------ args: ../examples/demo_shquote ../examples/demo_shquote.in
-\'
+''\'''
 printf: '
-\'''\'
+''\'''\'''
 printf: ''
-\'''\'''\'
+''\'''\'''\'''
 printf: '''
 '\'
 printf: \
@@ -592,10 +592,12 @@ printf: \
 printf: \\
 '\\\'
 printf: \\\
-'\\'\'
+'\\'\'''
 printf: \\'
-\''\'\'
+''\''\'\'''
 printf: '\'
+''
+printf: 
 'Apple'\''s'
 printf: Apple's
 'apple'
@@ -1228,6 +1230,7 @@ line3
 \\\
 \\'
 '\'
+
 Apple's
 apple
 file name.txt
