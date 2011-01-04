@@ -9,7 +9,7 @@ WITH_ALT_GETOPT?=	yes
 SUBPRJ_DFLT +=		a_getopt
 .endif
 
-MKC_REQD=		0.20.0
+MKC_REQD=		0.21.0
 
 ##################################################
 .if defined(MAKEOBJDIRPREFIX)
