@@ -20,6 +20,14 @@ OBJDIR_runawk=${MAKEOBJDIR}
 OBJDIR_runawk=${.CURDIR}/runawk
 .endif
 
+.PHONY: manpages
+manpages:
+	set -e; \
+	MKC_CACHEDIR=`pwd`; export MKC_CACHEDIR; \
+	cd runawk; ${MAKE} runawk.1; cd ..; \
+	cd a_getopt; ${MAKE} alt_getopt.1; cd ..; \
+	rm -f _mkc_*
+
 .include "test.mk"
 .include "Makefile.inc"
 .include <mkc.subprj.mk>
