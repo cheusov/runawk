@@ -3,6 +3,15 @@ plan 0:
 - support X11-like long options, e.g. -display, -geometry etc.
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
 - xgetline writing fields to array
+- gawk/hash.awk (using gawk extensions):
+    remove_by_key(@cond_func) and remove_by_value(@cond_func)
+- qstack.awk:
+    stack_push, stack_pop, stack_top, stack_isempty, stack_clean
+    queue_push, queue_pop, queue_back, queue_front, queue_isempty,
+        queue_clean, queue_push_back, queue_pop_front
+- runawk -T for tabbed input
+- inspect.awk: inspect_str, inspect_hash
+  for displaying invisible characters
 
 plan 1:
 - strtonum from gawk?
