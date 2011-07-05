@@ -1,3 +1,6 @@
+- tokenre.awk:
+  tokenre0() -> original $0 to _0
+
 plan 0:
 - glob() - disable memoization
 - support X11-like long options, e.g. -display, -geometry etc.
