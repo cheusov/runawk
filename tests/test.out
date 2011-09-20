@@ -1253,13 +1253,13 @@ baz
 #### end of - ####
 --------------------------------------------------
  ------ args: -F #1
-new_argv [0] = /usr/bin/awk
+new_argv [0] = awk
 new_argv [1] = -F
 new_argv [2] = :
 new_argv [3] = {print}
 --------------------------------------------------
  ------ args: -F #2
-new_argv [0] = /usr/bin/awk
+new_argv [0] = awk
 new_argv [1] = -F
 new_argv [2] = :
 new_argv [3] = {print}

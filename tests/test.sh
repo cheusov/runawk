@@ -459,9 +459,9 @@ baz
 EOF
 ####################    -F
 runtest_header '-F #1'
-$OBJDIR/runawk -F: -d -e '{print}'
+$OBJDIR/runawk -F: -d -e '{print}' | unify_paths
 runtest_header '-F #2'
-$OBJDIR/runawk -d -F: -e '{print}'
+$OBJDIR/runawk -d -F: -e '{print}' | unify_paths
 runtest_header '-F #3'
 echo '1:2:3:4' | $OBJDIR/runawk -F: -v a=1 -e '{print "a=" a, NF ":" $1, $2, $3, $4}'
 echo '1:2:3:4' | $OBJDIR/runawk -v b=2 -F: -e '{print "b=" b, NF ":" $1, $2, $3, $4}'
