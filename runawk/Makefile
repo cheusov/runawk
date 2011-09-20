@@ -21,7 +21,7 @@ WARNS ?=	4
 WARNERR ?=	no
 
 PROG =		runawk
-SRCS =		runawk.c
+SRCS =		runawk.c dynarray.c
 
 MAN =		runawk.1
 

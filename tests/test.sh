@@ -465,3 +465,9 @@ $OBJDIR/runawk -d -F: -e '{print}'
 runtest_header '-F #3'
 echo '1:2:3:4' | $OBJDIR/runawk -F: -v a=1 -e '{print "a=" a, NF ":" $1, $2, $3, $4}'
 echo '1:2:3:4' | $OBJDIR/runawk -v b=2 -F: -e '{print "b=" b, NF ":" $1, $2, $3, $4}'
+
+####################    xargs + runawk
+runtest_header 'xargs + runawk #1'
+awk 'BEGIN {for (i=0; i < 100000; ++i){print (i % 1000)}}' |
+xargs $OBJDIR/runawk -e 'BEGIN {for (i=1; i < ARGC; ++i) print ARGV [i]}' |
+awk '{cnt += $1} END {print cnt}'

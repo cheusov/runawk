@@ -32,6 +32,8 @@
 #include <limits.h>
 #include <signal.h>
 
+#include "dynarray.h"
+
 #ifdef HAVE_CONFIG_H
 /* if you need, add extra includes to config.h */
 #include "config.h"
@@ -99,9 +101,6 @@ static pid_t awk_pid = -1;
 
 static int killing_sig = 0;
 
-static char *includes [ARRAY_SZ];
-static int includes_count = 0;
-
 static int double_dash = 0;
 
 static char temp_fn [PATH_MAX] = "/tmp/runawk.XXXXXX";
@@ -123,8 +122,8 @@ static int debug = 0;
 
 static int add_stdin = 0;
 
-static char *new_argv [ARRAY_SZ];
-static int new_argc = 0;
+static dynarray_t new_argv;
+static dynarray_t includes;
 
 static void clean_and_exit (int status)
 {
@@ -460,20 +459,6 @@ static int scan_file (const char *name, int safe_use)
 	return 1;
 }
 
-static void ll_push (
-	const char *item,
-	char **array,
-	int *array_size)
-{
-	if (*array_size == ARRAY_SZ){
-		fprintf (stderr, "too big array\n");
-		clean_and_exit (31);
-	}
-
-	array [*array_size] = (item ? xstrdup (item) : NULL);
-	++*array_size;
-}
-
 static void add_buffer (const char *buffer, size_t len)
 {
 	int fd = -1;
@@ -481,8 +466,8 @@ static void add_buffer (const char *buffer, size_t len)
 	/* recursive snanning for #xxx directives */
 	scan_buffer ("", "-", buffer, len, 1);
 
-	if (includes_count == 0 && !double_dash){
-		ll_push (buffer, new_argv, &new_argc);
+	if (includes.size == 0 && !double_dash){
+		da_push_dup (&new_argv, buffer);
 	}else{
 		fd = mkstemp (temp_fn);
 		temp_fn_created = 1;
@@ -500,9 +485,9 @@ static void add_buffer (const char *buffer, size_t len)
 		}
 
 		/* add to queue */
-		ll_push ("-f", new_argv, &new_argc);
-		ll_push (temp_fn, new_argv, &new_argc);
-		ll_push (temp_fn, includes, &includes_count);
+		da_push_dup (&new_argv, "-f");
+		da_push_dup (&new_argv, temp_fn);
+		da_push_dup (&includes, temp_fn);
 	}
 }
 
@@ -532,9 +517,9 @@ static int add_file (const char *dir, const char *name, int safe_use)
 			create_tmpdir = 1;
 		}
 
-		ll_push ("-f", new_argv, &new_argc);
-		ll_push (name, new_argv, &new_argc);
-		ll_push (name, includes, &includes_count);
+		da_push_dup (&new_argv, "-f");
+		da_push_dup (&new_argv, name);
+		da_push_dup (&includes, name);
 		return 1;
 	}else{
 		return 0;
@@ -544,12 +529,12 @@ static int add_file (const char *dir, const char *name, int safe_use)
 static int add_file_uniq (
 	const char *dir, const char *name, int safe_use)
 {
-	int i;
+	size_t i;
 	const char *p;
 	const char *inc;
 
-	for (i=0; i < includes_count; ++i){
-		inc = includes [i];
+	for (i=0; i < includes.size; ++i){
+		inc = includes.array [i];
 		p = strstr (inc, name);
 
 		if (p && (p == inc || (p [-1] == '/' && p [strlen (p)] == 0))){
@@ -628,16 +613,18 @@ static void set_sig_handler (void)
 
 static void putenv_RUNAWK_MODx (void)
 {
-	int i;
+	size_t i;
 	char buf [30 + PATH_MAX];
 
 	/* RUNAWK_MODC */
-	snprintf (buf, sizeof (buf), "RUNAWK_MODC=%i", includes_count);
+	snprintf (buf, sizeof (buf), "RUNAWK_MODC=%u",
+			  (unsigned) includes.size);
 	xputenv (xstrdup (buf));
 
 	/* RUNAWK_MODV */
-	for (i=0; i < includes_count; ++i){
-		snprintf (buf, sizeof (buf), "RUNAWK_MODV_%i=%s", i, includes [i]);
+	for (i=0; i < includes.size; ++i){
+		snprintf (buf, sizeof (buf), "RUNAWK_MODV_%u=%s",
+				  (unsigned) i, includes.array [i]);
 		xputenv (xstrdup (buf));
 	}
 }
@@ -652,8 +639,11 @@ int main (int argc, char **argv)
 	const char *prog_specified = NULL;
 	const char *awkpath_env = NULL;
 
-	int i;
+	size_t i;
 	size_t j;
+
+	da_init (&new_argv);
+	da_init (&includes);
 
 	set_sig_handler ();
 
@@ -690,7 +680,7 @@ int main (int argc, char **argv)
 		clean_and_exit (32);
 	}
 
-	ll_push (NULL, new_argv, &new_argc); /* progname */
+	da_push_dup (&new_argv, NULL); /* progname */
 
 	/* options, no getopt(3) or getopt_long(3) here */
 	for (; argc && argv [0][0] == '-'; --argc, ++argv){
@@ -731,8 +721,8 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			ll_push ("-v",     new_argv, &new_argc);
-			ll_push (argv [1], new_argv, &new_argc);
+			da_push_dup (&new_argv, "-v");
+			da_push_dup (&new_argv, argv [1]);
 
 			--argc;
 			++argv;
@@ -746,8 +736,8 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
-			ll_push ("-F",     new_argv, &new_argc);
-			ll_push (argv [1], new_argv, &new_argc);
+			da_push_dup (&new_argv, "-F");
+			da_push_dup (&new_argv, argv [1]);
 
 			--argc;
 			++argv;
@@ -756,8 +746,8 @@ int main (int argc, char **argv)
 
 		/* -F<FS>*/
 		if (!strncmp (argv [0], "-F", 2)){
-			ll_push ("-F",     new_argv, &new_argc);
-			ll_push (argv [0]+2, new_argv, &new_argc);
+			da_push_dup (&new_argv, "-F");
+			da_push_dup (&new_argv, argv [0]+2);
 			continue;
 		}
 
@@ -845,21 +835,21 @@ int main (int argc, char **argv)
 		interp = interp_var;
 
 	/* exec */
-	new_argv [0] = xstrdup (progname);
+	new_argv.array [0] = xstrdup (progname);
 
-	if (includes_count)
-		ll_push ("--", new_argv, &new_argc);
+	if (includes.size)
+		da_push_dup (&new_argv, "--");
 
-	for (i=0; i < argc; ++i){
-		ll_push (argv [i], new_argv, &new_argc);
+	for (i=0; i < (size_t) argc; ++i){
+		da_push_dup (&new_argv, argv [i]);
 	}
 
 	if (add_stdin){
 		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
-		ll_push (STDIN_FILENAME, new_argv, &new_argc);
+		da_push_dup (&new_argv, STDIN_FILENAME);
 	}
 
-	ll_push (NULL, new_argv, &new_argc);
+	da_push_dup (&new_argv, NULL);
 
 	putenv_RUNAWK_MODx ();
 
@@ -872,8 +862,8 @@ int main (int argc, char **argv)
 
 	/**/
 	if (debug){
-		for (i=0; i < new_argc - 1; ++i){
-			printf ("new_argv [%d] = %s\n", i, new_argv [i]);
+		for (i=0; i < new_argv.size - 1; ++i){
+			printf ("new_argv [%u] = %s\n", (unsigned) i, new_argv.array [i]);
 		}
 	}else{
 		awk_pid = fork ();
@@ -885,7 +875,7 @@ int main (int argc, char **argv)
 
 			case 0:
 				/* child */
-				execvp (interp, (char *const *) new_argv);
+				execvp (interp, (char *const *) new_argv.array);
 				fprintf (stderr, "running '%s' failed: %s\n", interp, strerror (errno));
 				exit (1);
 				break;
@@ -893,6 +883,13 @@ int main (int argc, char **argv)
 			default:
 				/* parent */
 				waitpid (-1, &child_status, 0);
+
+				da_free_items (&new_argv);
+				da_destroy (&new_argv);
+
+				da_free_items (&includes);
+				da_destroy (&includes);
+
 				if (killing_sig){
 					clean_and_exit (0);
 				}else if (WIFSIGNALED (child_status)){
