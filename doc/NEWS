@@ -1,4 +1,11 @@
 ======================================================================
+Version 1.3.2, by Aleksey Cheusov
+
+  Internal arrays are relocated automatically.
+  This fixes use of runawk(1) in combination with xargs(1), e.g.
+  cat files.txt | xargs runawk -e '...'
+
+======================================================================
 Version 1.3.1, by Aleksey Cheusov, Fri,  7 Jan 2011 16:45:30 +0200
 
   runawk.1 and alt_getopt.1 are included to tarball, so pod2man is not
