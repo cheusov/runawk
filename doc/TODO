@@ -2,6 +2,7 @@
   tokenre0() -> original $0 to _0
 
 plan 0:
+- floor, ceil functions
 - glob() - disable memoization
 - support X11-like long options, e.g. -display, -geometry etc.
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
