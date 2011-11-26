@@ -3,7 +3,6 @@ plan 0:
 - glob() - disable memoization
 - support X11-like long options, e.g. -display, -geometry etc.
 - grep(1) in runawk? (POSIX grep -E with some of GNU grep extensions)
-- xgetline writing fields to array
 - gawk/hash.awk (using gawk extensions):
     remove_by_key(@cond_func) and remove_by_value(@cond_func)
 - qstack.awk:
@@ -19,7 +18,7 @@ plan 1:
 - random numbers generator from /dev/[u]random
 - tokenre_in.awk: synonym for tokenre.awk
 - reference to EGDIR from mk-configure.7
-- {string,hash,io,math}.awk -- accumulative modules
+- {string,hash,math}.awk -- accumulative modules
 - msub() - cleverer replacement for multisub
 - bre2ere.awk Basic RE to Extended RE convertor
 - libconfig/libconfuse analog written in/for AWK
