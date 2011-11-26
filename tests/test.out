@@ -399,6 +399,47 @@ vle@gmx.net
 faith@dict.org
 fake@domain.com foo@bar.baz.ru
 --------------------------------------------------
+ ------ args: ../examples/demo_splitre ../examples/demo_tokenre2.in
+a
+:=
+1
+<NL>
+b
+:=
+2.3
+<NL>
+<NL>
+while
+a
++
+b
+<
+10
+do
+<NL>
+a
+:=
+a
++
+1
+<NL>
+end
+<NL>
+<NL>
+print
+'Hello world!'
+<NL>
+print
+'a = '
+..
+a
+<NL>
+print
+'b = '
+..
+b
+<NL>
+--------------------------------------------------
  ------ args: ../examples/demo_alt_getopt -h -
 option `h'
 ARGV [2] = -

@@ -2,7 +2,7 @@
 #
 # This awk module is a part of RunAWK distribution,
 #        http://sourceforge.net/projects/runawk
-#    
+#
 ############################################################
 
 # By default AWK splits input lines into tokens according to regular
@@ -37,6 +37,10 @@ function tokenre (s, re){
 	}
 }
 
+function tokenre0 (re){
+	tokenre($0, re)
+}
+
 function splitre (s, arr, re,             cnt){
 	cnt = 0
 	while (match(s, re)){
@@ -47,8 +51,8 @@ function splitre (s, arr, re,             cnt){
 	return cnt
 }
 
-function tokenre0 (re){
-	tokenre($0, re)
+function splitre0 (arr, re){
+	return splitre($0, arr, re)
 }
 
 {

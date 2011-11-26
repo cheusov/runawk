@@ -244,6 +244,9 @@ runtest ../examples/demo_tokenre2 ../examples/demo_tokenre2.in
 runtest ../examples/demo_tokenre3 ../examples/demo_tokenre3.in
 runtest ../examples/demo_tokenre4 ../examples/demo_tokenre3.in
 
+####################    splitre
+runtest ../examples/demo_splitre ../examples/demo_tokenre2.in
+
 ####################    getopt
 runtest ../examples/demo_alt_getopt -h -
 runtest ../examples/demo_alt_getopt --help
