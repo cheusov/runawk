@@ -12,4 +12,5 @@
 	printf "trim_c(\"%s\")=\"%s\"\n", $0, trim_c($0)
 	printf "trim_lr(\"%s\")=\"%s\"\n", $0, trim_lr($0)
 	printf "trim_lrc(\"%s\")=\"%s\"\n", $0, trim_lrc($0)
+	printf "trim(\"%s\")=\"%s\"\n", $0, trim($0)
 }

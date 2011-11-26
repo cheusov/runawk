@@ -2,7 +2,6 @@
   tokenre0() -> original $0 to _0
 - file_size()
 - file_exists()
-- trim() == trim_lrc()
 
 plan 0:
 - floor, ceil functions

@@ -24,6 +24,9 @@
 # trim_lrc(STRING, REPL)
 #   Equal to trim_l(trim_r(trim_c(STRING, REPL)))
 
+# trim(STRING, REPL)
+#   Equivalent for trim_lcr
+
 # See example/demo_trim for the sample of usage
 
 function trim_l (s){
@@ -50,7 +53,7 @@ function trim_lr (s){
 	return s
 }
 
-function trim_lrc (s, repl){
+function trim (s, repl){
 	if (repl == "")
 		repl = " "
 
@@ -58,4 +61,8 @@ function trim_lrc (s, repl){
 	sub(/[ \t]+$/, "", s)
 	sub(/^[ \t]+/, "", s)
 	return s
+}
+
+function trim_lrc (s, repl){
+	return trim(s, repl)
 }
