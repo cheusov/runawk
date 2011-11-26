@@ -1321,15 +1321,31 @@ b=2 4:1 2 3 4
  ------ args: exitnow.awk #1
 --------------------------------------------------
  ------ args: ../examples/demo_io
-File ../Makefile is file: 1
+File ../Makefile is a generic file: 1
+File ../Makefile is a socket: 0
+File ../Makefile is a directory: 0
+File ../Makefile is executable: 0
+File ../Makefile is a FIFO: 0
 The size of ../Makefile is 710 bytes
 The type of ../Makefile is -
-File /nonexistent is file: 0
+File /nonexistent is a generic file: 0
+File /nonexistent is a socket: 0
+File /nonexistent is a directory: 0
+File /nonexistent is executable: 0
+File /nonexistent is a FIFO: 0
 The size of /nonexistent is -2 bytes
 The type of /nonexistent is 
-File /dev/null is file: 0
+File /dev/null is a generic file: 0
+File /dev/null is a socket: 0
+File /dev/null is a directory: 0
+File /dev/null is executable: 0
+File /dev/null is a FIFO: 0
 The size of /dev/null is -1 bytes
 The type of /dev/null is c
-File . is file: 0
+File . is a generic file: 0
+File . is a socket: 0
+File . is a directory: 1
+File . is executable: 1
+File . is a FIFO: 0
 The size of . is -1 bytes
 The type of . is d

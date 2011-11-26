@@ -10,14 +10,30 @@
 # is_file(FILENAME)
 #   `is_file' returns 1 if the specified FILENAME
 #   is a generic file or 0 otherwise.
-#   Return value:
-#     -2 if file doesn't exist
-#     -1 if file is not a generic file
-#     file size otherwise
+
+# is_socket(FILENAME)
+#   `is_socket' returns 1 if the specified FILENAME
+#   is a socket or 0 otherwise.
+
+# is_dir(FILENAME)
+#   `is_dir' returns 1 if the specified FILENAME
+#   is a dir or 0 otherwise.
+
+# is_exec(FILENAME)
+#   `is_exec' returns 1 if the specified FILENAME
+#   is executable or 0 otherwise.
+
+# is_fifo(FILENAME)
+#   `is_fifo' returns 1 if the specified FILENAME
+#   is a FIFO or 0 otherwise.
 
 # file_size(FILENAME, USE_STAT_NOT_LSTAT)
 #   `file_size' returns the size of the specified FILENAME.
 #   If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).
+#   Return value:
+#     -2 if file doesn't exist
+#     -1 if file is not a generic file
+#     filesize otherwise
 #
 # file_type(FILENAME, USE_STAT_NOT_LSTAT)
 #   `file_type' returns a single letter that corrspond to the file
@@ -38,6 +54,22 @@
 
 function is_file (fn){
 	return !system("test -f " shquote(fn))
+}
+
+function is_socket (fn){
+	return !system("test -S " shquote(fn))
+}
+
+function is_dir (fn){
+	return !system("test -d " shquote(fn))
+}
+
+function is_exec (fn){
+	return !system("test -x " shquote(fn))
+}
+
+function is_fifo (fn){
+	return !system("test -p " shquote(fn))
 }
 
 function file_size (fn, stat,          d0,arr,cmd){
