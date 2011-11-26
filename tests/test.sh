@@ -471,3 +471,8 @@ runtest_header 'xargs + runawk #1'
 awk 'BEGIN {for (i=0; i < 100000; ++i){print (i % 1000)}}' |
 xargs $OBJDIR/runawk -e 'BEGIN {for (i=1; i < ARGC; ++i) print ARGV [i]}' |
 awk '{cnt += $1} END {print cnt}'
+
+####################    exitnow.awk
+runtest_header 'exitnow.awk #1'
+echo '' | $OBJDIR/runawk -f exitnow.awk \
+    -e 'BEGIN {exitnow(0)} END {print "Bad!"}' | unify_paths

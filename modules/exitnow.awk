@@ -11,12 +11,13 @@
 #           
 function exitnow (exit_status){
 	__runawk_exit_status = exit_status
+	__runawk_exit        = 1
 
 	exit exit_status
 }
 
 END {
-	if (__runawk_exit_status){
+	if (__runawk_exit){
 		exit __runawk_exit_status
 	}
 }
