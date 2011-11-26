@@ -1326,6 +1326,9 @@ File ../Makefile is a socket: 0
 File ../Makefile is a directory: 0
 File ../Makefile is executable: 0
 File ../Makefile is a FIFO: 0
+File ../Makefile is a symlink: 0
+File ../Makefile is a block device file: 0
+File ../Makefile is a character device file: 0
 The size of ../Makefile is 710 bytes
 The type of ../Makefile is -
 File /nonexistent is a generic file: 0
@@ -1333,6 +1336,9 @@ File /nonexistent is a socket: 0
 File /nonexistent is a directory: 0
 File /nonexistent is executable: 0
 File /nonexistent is a FIFO: 0
+File /nonexistent is a symlink: 0
+File /nonexistent is a block device file: 0
+File /nonexistent is a character device file: 0
 The size of /nonexistent is -2 bytes
 The type of /nonexistent is 
 File /dev/null is a generic file: 0
@@ -1340,6 +1346,9 @@ File /dev/null is a socket: 0
 File /dev/null is a directory: 0
 File /dev/null is executable: 0
 File /dev/null is a FIFO: 0
+File /dev/null is a symlink: 0
+File /dev/null is a block device file: 0
+File /dev/null is a character device file: 1
 The size of /dev/null is -1 bytes
 The type of /dev/null is c
 File . is a generic file: 0
@@ -1347,5 +1356,8 @@ File . is a socket: 0
 File . is a directory: 1
 File . is executable: 1
 File . is a FIFO: 0
+File . is a symlink: 0
+File . is a block device file: 0
+File . is a character device file: 0
 The size of . is -1 bytes
 The type of . is d

@@ -1,6 +1,3 @@
-- file_size()
-- file_exists()
-
 plan 0:
 - floor, ceil functions
 - glob() - disable memoization

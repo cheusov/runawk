@@ -12,6 +12,9 @@
 	printf "File %s is a directory: %d\n", $0, is_dir($0)
 	printf "File %s is executable: %d\n", $0, is_exec($0)
 	printf "File %s is a FIFO: %d\n", $0, is_fifo($0)
+	printf "File %s is a symlink: %d\n", $0, is_symlink($0)
+	printf "File %s is a block device file: %d\n", $0, is_blockdev($0)
+	printf "File %s is a character device file: %d\n", $0, is_chardev($0)
 	printf "The size of %s is %d bytes\n", $0, file_size($0)
 	printf "The type of %s is %s\n", $0, file_type($0)
 }
