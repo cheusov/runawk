@@ -481,7 +481,13 @@ echo '' | $OBJDIR/runawk -f exitnow.awk \
     -e 'BEGIN {exitnow(0)} END {print "Bad!"}' | unify_paths
 
 ####################    exitnow.awk
-runtest ../examples/demo_io <<EOF
+demo_io_input_data (){
+    cat << 'EOF'
 ../Makefile
 /nonexistent
+/dev/null
+.
 EOF
+}
+
+demo_io_input_data | runtest ../examples/demo_io
