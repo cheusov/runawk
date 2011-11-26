@@ -1,5 +1,3 @@
-- tokenre.awk:
-  tokenre0() -> original $0 to _0
 - file_size()
 - file_exists()
 
