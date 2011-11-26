@@ -487,7 +487,12 @@ demo_io_input_data (){
 /nonexistent
 /dev/null
 .
+symlink.tmp
+fifo.tmp
 EOF
 }
 
+ln -s test.sh symlink.tmp
+mkfifo fifo.tmp
 demo_io_input_data | runtest ../examples/demo_io
+rm symlink.tmp fifo.tmp

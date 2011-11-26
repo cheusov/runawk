@@ -1361,3 +1361,23 @@ File . is a block device file: 0
 File . is a character device file: 0
 The size of . is -1 bytes
 The type of . is d
+File symlink.tmp is a generic file: 1
+File symlink.tmp is a socket: 0
+File symlink.tmp is a directory: 0
+File symlink.tmp is executable: 1
+File symlink.tmp is a FIFO: 0
+File symlink.tmp is a symlink: 1
+File symlink.tmp is a block device file: 0
+File symlink.tmp is a character device file: 0
+The size of symlink.tmp is -1 bytes
+The type of symlink.tmp is l
+File fifo.tmp is a generic file: 0
+File fifo.tmp is a socket: 0
+File fifo.tmp is a directory: 0
+File fifo.tmp is executable: 0
+File fifo.tmp is a FIFO: 1
+File fifo.tmp is a symlink: 0
+File fifo.tmp is a block device file: 0
+File fifo.tmp is a character device file: 0
+The size of fifo.tmp is -1 bytes
+The type of fifo.tmp is p
