@@ -1319,3 +1319,9 @@ b=2 4:1 2 3 4
 49950000
 --------------------------------------------------
  ------ args: exitnow.awk #1
+--------------------------------------------------
+ ------ args: ../examples/demo_io
+File ../Makefile exists
+The size of ../Makefile is 710 bytes
+File /nonexistent does not exist
+The size of /nonexistent is -1 bytes

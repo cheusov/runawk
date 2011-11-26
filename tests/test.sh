@@ -479,3 +479,9 @@ awk '{cnt += $1} END {print cnt}'
 runtest_header 'exitnow.awk #1'
 echo '' | $OBJDIR/runawk -f exitnow.awk \
     -e 'BEGIN {exitnow(0)} END {print "Bad!"}' | unify_paths
+
+####################    exitnow.awk
+runtest ../examples/demo_io <<EOF
+../Makefile
+/nonexistent
+EOF

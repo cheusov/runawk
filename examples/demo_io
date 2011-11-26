@@ -1,0 +1,17 @@
+#!/usr/bin/env runawk
+
+#use "io.awk"
+
+# This is a demo for io.awk module
+#
+# Input files for this demo: examples/demo_tokenre.in*
+
+{
+	if (file_exists($0)){
+		printf "File %s exists\n", $0
+	}else{
+		printf "File %s does not exist\n", $0
+	}
+
+	printf "The size of %s is %d bytes\n", $0, file_size($0)
+}
