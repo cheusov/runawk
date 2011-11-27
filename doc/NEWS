@@ -1,5 +1,5 @@
 ======================================================================
-Version 1.4.0, by Aleksey Cheusov, Sun, 27 Nov 2011 19:27:09 +0300
+Version 1.4.0, by Aleksey Cheusov, Sun, 27 Nov 2011 21:41:09 +0300
 
   exitnow.awk:
     - Fix: exitnow(status) finishes the execution of the script
@@ -11,9 +11,6 @@ Version 1.4.0, by Aleksey Cheusov, Sun, 27 Nov 2011 19:27:09 +0300
 
   tokenre.awk:
     - Function splitre0() was added that splits $0
-
-  trim.awk:
-    - Function trim() was added which is equivalent to function trim_lrc.
 
   More regression tests were added.
 
