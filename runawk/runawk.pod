@@ -36,7 +36,7 @@ so called libraries (modules).
 =item 2
 
 In order to pass arguments to C<#!/usr/bin/awk -f> script (not to awk
-interpreter), it is necessary to prepand a list of
+interpreter), it is necessary to prepend a list of
 arguments with -- (two minus signes). In my view, this looks badly.
 Also such behaviour violates POSIX/SUS "Utility Syntax Guidelines".
 
