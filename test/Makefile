@@ -26,7 +26,7 @@ test_all:
 .for awk in ${AWK_PROGS}
 	@if test -x ${awk}; then \
 		echo testing ${awk}; \
-		export RUNAWK_AWKPROG=${awk}; cd ${.CURDIR} && ${MAKE} test; \
+		export RUNAWK_AWKPROG=${awk}; cd ${.CURDIR} && ${MAKE} all; \
 		echo ''; \
 	fi
 .endfor

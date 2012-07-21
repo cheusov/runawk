@@ -13,10 +13,13 @@ MKC_REQD =		0.22.0
 
 ##################################################
 
+# "cleandir" also removes temporary files of regression tests
 cleandir: cleandir-test
 
-# avoid running test-runawk, test-modules etc.
+# Avoid running test-runawk, test-modules etc.
 test: all-test
+# Also implement test_all
+test_all: test_all-test
 
 # We use "target "manpages" for making a distribution tarball
 manpages: _manpages

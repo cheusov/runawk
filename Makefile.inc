@@ -7,4 +7,4 @@ MODULESDIR ?=	${DATADIR}/runawk
 DOCDIR ?=	${DATADIR}/doc/runawk
 
 # We use _manpages for making a distribution tarball
-TARGETS += _manpages
+TARGETS += _manpages test_all
