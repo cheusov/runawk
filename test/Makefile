@@ -3,9 +3,7 @@ DIFF_PROG ?=	diff -u
 TESTTEMPDIR = ${.CURDIR}/..
 .export TESTTEMPDIR
 
-.PHONY : test
-all: test
-test :
+all:
 	@echo 'running tests...'; \
 	export SRCDIR=${.CURDIR}/..; \
 	if { ${.CURDIR}/test.sh > ${.OBJDIR}/_test.res; \
