@@ -46,7 +46,7 @@ new_argv [6] = -
  ------ args: -d -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
 new_argv [0] = awk
 new_argv [1] = -f
-new_argv [2] = ROOT/../modules/abs.awk
+new_argv [2] = /ROOT/../modules/abs.awk
 new_argv [3] = -f
 new_argv [4] = /tmp/runawk.NNNNNN
 new_argv [5] = --
@@ -54,11 +54,11 @@ new_argv [5] = --
  ------ args: -d -f alt_assert.awk -e BEGIN {exit}
 new_argv [0] = awk
 new_argv [1] = -f
-new_argv [2] = ROOT/../modules/exitnow.awk
+new_argv [2] = /ROOT/../modules/exitnow.awk
 new_argv [3] = -f
-new_argv [4] = ROOT/../modules/abort.awk
+new_argv [4] = /ROOT/../modules/abort.awk
 new_argv [5] = -f
-new_argv [6] = ROOT/../modules/alt_assert.awk
+new_argv [6] = /ROOT/../modules/alt_assert.awk
 new_argv [7] = -f
 new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
@@ -103,7 +103,7 @@ Hello World 2.3
  ------ args: _test.tmp
 Cannot find module `module2.1.awk`, check AWKPATH environment variable
 --------------------------------------------------
- ------ args: ROOT/mods1/test_modinfo
+ ------ args: /ROOT/mods1/test_modinfo
 Hello World1.2
 Hello World1.3
 Hello World1.1
@@ -111,35 +111,35 @@ Hello World 2.2
 Hello World 2.1
 Hello World 2.3
 MODC=8
-MODV [0]=ROOT/mods1/module1.2.awk
-MODV [1]=ROOT/mods1/module1.3.awk
-MODV [2]=ROOT/mods1/module1.1.awk
-MODV [3]=ROOT/mods2/module2.2.awk
-MODV [4]=ROOT/mods2/module2.1.awk
-MODV [5]=ROOT/mods2/module2.3.awk
-MODV [6]=ROOT/../modules/modinfo.awk
-MODV [7]=ROOT/mods1/test_modinfo
-MODMAIN=ROOT/mods1/test_modinfo
+MODV [0]=/ROOT/mods1/module1.2.awk
+MODV [1]=/ROOT/mods1/module1.3.awk
+MODV [2]=/ROOT/mods1/module1.1.awk
+MODV [3]=/ROOT/mods2/module2.2.awk
+MODV [4]=/ROOT/mods2/module2.1.awk
+MODV [5]=/ROOT/mods2/module2.3.awk
+MODV [6]=/ROOT/../modules/modinfo.awk
+MODV [7]=/ROOT/mods1/test_modinfo
+MODMAIN=/ROOT/mods1/test_modinfo
 --------------------------------------------------
- ------ args: ROOT/mods3/failed1.awk
+ ------ args: /ROOT/mods3/failed1.awk
 error: invalid directive at line #1,
  line=`#use `
- file=`ROOT/mods3/failed1.awk`
+ file=`/ROOT/mods3/failed1.awk`
 --------------------------------------------------
- ------ args: ROOT/mods3/failed2.awk
+ ------ args: /ROOT/mods3/failed2.awk
 error: invalid directive at line #2,
  line=`#interp      "trtrtr`
- file=`ROOT/mods3/failed2.awk`
+ file=`/ROOT/mods3/failed2.awk`
 --------------------------------------------------
- ------ args: ROOT/mods3/failed3.awk
+ ------ args: /ROOT/mods3/failed3.awk
 error: invalid directive at line #3,
  line=`#env 'LC_ALL=C'                   `
- file=`ROOT/mods3/failed3.awk`
+ file=`/ROOT/mods3/failed3.awk`
 --------------------------------------------------
- ------ args: ROOT/mods3/failed4.awk
+ ------ args: /ROOT/mods3/failed4.awk
 running '/invalid/path' failed: No such file or directory
 --------------------------------------------------
- ------ args: ROOT/mods3/test5.awk
+ ------ args: /ROOT/mods3/test5.awk
 1
 0
 1
@@ -267,11 +267,11 @@ env FOO2=bar2
      /dev/null
 new_argv [0] = awk
 new_argv [1] = -f
-new_argv [2] = ROOT/../modules/exitnow.awk
+new_argv [2] = /ROOT/../modules/exitnow.awk
 new_argv [3] = -f
-new_argv [4] = ROOT/../modules/abort.awk
+new_argv [4] = /ROOT/../modules/abort.awk
 new_argv [5] = -f
-new_argv [6] = ROOT/../modules/alt_assert.awk
+new_argv [6] = /ROOT/../modules/alt_assert.awk
 new_argv [7] = -f
 new_argv [8] = /tmp/runawk.NNNNNN
 new_argv [9] = --
@@ -530,16 +530,16 @@ ARGV [1] = -
 --------------------------------------------------
  ------ args: ../examples/demo_modinfo
 A number of modules: 9
-MODV [0]=ROOT/../modules/abs.awk
-MODV [1]=ROOT/../modules/exitnow.awk
-MODV [2]=ROOT/../modules/abort.awk
-MODV [3]=ROOT/../modules/alt_assert.awk
-MODV [4]=ROOT/../modules/min.awk
-MODV [5]=ROOT/../modules/max.awk
-MODV [6]=ROOT/../modules/alt_getopt.awk
-MODV [7]=ROOT/../modules/modinfo.awk
-MODV [8]=ROOT/../examples/demo_modinfo
-program name: ROOT/../examples/demo_modinfo
+MODV [0]=/ROOT/../modules/abs.awk
+MODV [1]=/ROOT/../modules/exitnow.awk
+MODV [2]=/ROOT/../modules/abort.awk
+MODV [3]=/ROOT/../modules/alt_assert.awk
+MODV [4]=/ROOT/../modules/min.awk
+MODV [5]=/ROOT/../modules/max.awk
+MODV [6]=/ROOT/../modules/alt_getopt.awk
+MODV [7]=/ROOT/../modules/modinfo.awk
+MODV [8]=/ROOT/../examples/demo_modinfo
+program name: /ROOT/../examples/demo_modinfo
 --------------------------------------------------
  ------ args: ../examples/demo_has_suffix ../examples/demo_has_suffix.in
 no, `mama' does not end with `mamam'

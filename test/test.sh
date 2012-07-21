@@ -7,12 +7,8 @@ export LC_ALL
 
 cd ${SRCDIR}/test
 
-unset AWKPATH || true
-
-OBJDIR=${OBJDIR:=..}
-
 unify_paths (){
-    sed -e "s,/.*/test/,ROOT/," \
+    sed -e "s,/.*/test/,/ROOT/," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk.*,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk.*,ARGV[0]=awk,' \
@@ -26,7 +22,7 @@ runtest_header (){
 }
 
 runtest_main (){
-    $OBJDIR/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
+    $OBJDIR_runawk/runawk "$@" 2>&1 | grep -v '/_test_program' | unify_paths
 }
 
 runtest (){
@@ -37,10 +33,10 @@ runtest (){
 runtest_nostderr (){
     runtest_header "$@"
 #    runtest_main "$@" '2>/dev/null'
-    $OBJDIR/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
+    $OBJDIR_runawk/runawk "$@" 2>/dev/null | grep -v '/_test_program' | unify_paths
 }
 
-PATH=${SRCDIR}/examples:${SRCDIR}:${SRCDIR}/a_getopt:${OBJDIR}:$PATH
+PATH=${SRCDIR}/examples:${SRCDIR}/a_getopt:${OBJDIR_runawk}:$PATH
 export PATH
 
 ####################
@@ -119,7 +115,7 @@ BEGIN {print "Hello World!"}
 runtest_header '#interp-var directive'
 
 interp_var_test (){
-    $OBJDIR/runawk -e '
+    $OBJDIR_runawk/runawk -e '
 #interp-var "INTERP_VAR_TEST"
 
 BEGIN {
@@ -141,12 +137,12 @@ unset INTERP_VAR_TEST
 ####################
 runtest_header '#safe-use directive'
 
-touch $OBJDIR/temp1.awk
-touch $OBJDIR/temp2.awk
+touch $TESTTEMPDIR/temp1.awk
+touch $TESTTEMPDIR/temp2.awk
 
 safe_use_test (){
     echo "--- #safe-use test: ---"
-    $OBJDIR/runawk -d -e "
+    $OBJDIR_runawk/runawk -d -e "
 #safe-use \"$1\" \"$2\" \"$3\"
 
 BEGIN {
@@ -159,9 +155,9 @@ BEGIN {
 	-e 's,/[^ ]*/temp2.awk,/path/temp2.awk,'
 }
 
-safe_use_test "/bad/path1" "$OBJDIR/temp1.awk" "/bad/path2"
-safe_use_test "$OBJDIR/temp1.awk" "/bad/path2"  "/bad/path1"
-safe_use_test "/bad/path1" "$OBJDIR/temp3.awk" "$OBJDIR/temp2.awk"
+safe_use_test "/bad/path1" "$TESTTEMPDIR/temp1.awk" "/bad/path2"
+safe_use_test "$TESTTEMPDIR/temp1.awk" "/bad/path2"  "/bad/path1"
+safe_use_test "/bad/path1" "$TESTTEMPDIR/temp3.awk" "$TESTTEMPDIR/temp2.awk"
 safe_use_test "/bad/path3" "/bad/path2" "/bad/path1"
 
 ####################
@@ -463,22 +459,22 @@ baz
 EOF
 ####################    -F
 runtest_header '-F #1'
-$OBJDIR/runawk -F: -d -e '{print}' | unify_paths
+$OBJDIR_runawk/runawk -F: -d -e '{print}' | unify_paths
 runtest_header '-F #2'
-$OBJDIR/runawk -d -F: -e '{print}' | unify_paths
+$OBJDIR_runawk/runawk -d -F: -e '{print}' | unify_paths
 runtest_header '-F #3'
-echo '1:2:3:4' | $OBJDIR/runawk -F: -v a=1 -e '{print "a=" a, NF ":" $1, $2, $3, $4}'
-echo '1:2:3:4' | $OBJDIR/runawk -v b=2 -F: -e '{print "b=" b, NF ":" $1, $2, $3, $4}'
+echo '1:2:3:4' | $OBJDIR_runawk/runawk -F: -v a=1 -e '{print "a=" a, NF ":" $1, $2, $3, $4}'
+echo '1:2:3:4' | $OBJDIR_runawk/runawk -v b=2 -F: -e '{print "b=" b, NF ":" $1, $2, $3, $4}'
 
 ####################    xargs + runawk
 runtest_header 'xargs + runawk #1'
 awk 'BEGIN {for (i=0; i < 100000; ++i){print (i % 1000)}}' |
-xargs $OBJDIR/runawk -e 'BEGIN {for (i=1; i < ARGC; ++i) print ARGV [i]}' |
+xargs $OBJDIR_runawk/runawk -e 'BEGIN {for (i=1; i < ARGC; ++i) print ARGV [i]}' |
 awk '{cnt += $1} END {print cnt}'
 
 ####################    exitnow.awk
 runtest_header 'exitnow.awk #1'
-echo '' | $OBJDIR/runawk -f exitnow.awk \
+echo '' | $OBJDIR_runawk/runawk -f exitnow.awk \
     -e 'BEGIN {exitnow(0)} END {print "Bad!"}' | unify_paths
 
 ####################    exitnow.awk
