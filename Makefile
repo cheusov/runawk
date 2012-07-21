@@ -1,15 +1,15 @@
 ##################################################
 
-SUBPRJ =	runawk modules examples a_getopt doc
+SUBPRJ       =	runawk modules examples a_getopt doc
 SUBPRJ_DFLT ?=	runawk modules
 
-WITH_ALT_GETOPT?=	yes
+WITH_ALT_GETOPT ?=	yes
 
 .if ${WITH_ALT_GETOPT:tl} == "yes"
 SUBPRJ_DFLT +=		a_getopt
 .endif
 
-MKC_REQD=		0.22.0
+MKC_REQD =		0.22.0
 
 ##################################################
 
@@ -26,6 +26,5 @@ manpages:
 .include <mkc.subprj.mk>
 
 .if !empty(OBJDIR_runawk:N/*)
-qqq := 1
 OBJDIR_runawk := ${.CURDIR}/${OBJDIR_runawk}
 .endif
