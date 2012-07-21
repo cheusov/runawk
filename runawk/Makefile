@@ -34,6 +34,9 @@ CFLAGS +=	-DTEMPDIR='"${TEMPDIR}"'
 CLEANFILES +=	*~ core* *.core ktrace* *.tmp tests/_* *.html1 *.cat1 *.1
 CLEANFILES +=	ChangeLog runawk.html _test.res
 
+.PHONY: _manpages
+_manpages: ${MAN}
+
 ##################################################
 
 .include <mkc.prog.mk>

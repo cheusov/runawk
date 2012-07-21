@@ -28,3 +28,6 @@ test_all:
 		echo ''; \
 	fi
 .endfor
+
+CLEANFILES += ${OBJDIR_runawk}/temp1.awk ${OBJDIR_runawk}/temp2.awk ${OBJDIR_runawk}/temp3.awk
+DISTCLEANFILES += _test.res

@@ -13,13 +13,8 @@ MKC_REQD =		0.22.0
 
 ##################################################
 
-.PHONY: manpages
-manpages:
-	set -e; \
-	MKC_CACHEDIR=`pwd`; export MKC_CACHEDIR; \
-	cd runawk; ${MAKE} runawk.1; cd ..; \
-	cd a_getopt; ${MAKE} alt_getopt.1; cd ..; \
-	rm -f _mkc_*
+manpages: _manpages
+	rm ${MKC_CACHEDIR}/_mkc*
 
 .include "test.mk"
 .include "Makefile.inc"
