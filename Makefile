@@ -9,16 +9,9 @@ WITH_ALT_GETOPT?=	yes
 SUBPRJ_DFLT +=		a_getopt
 .endif
 
-MKC_REQD=		0.21.0
+MKC_REQD=		0.22.0
 
 ##################################################
-.if defined(MAKEOBJDIRPREFIX)
-OBJDIR_runawk=${MAKEOBJDIRPREFIX/runawk}
-.elif defined(MAKEOBJDIR)
-OBJDIR_runawk=${MAKEOBJDIR}
-.else
-OBJDIR_runawk=${.CURDIR}/runawk
-.endif
 
 .PHONY: manpages
 manpages:
@@ -31,3 +24,8 @@ manpages:
 .include "test.mk"
 .include "Makefile.inc"
 .include <mkc.subprj.mk>
+
+.if !empty(OBJDIR_runawk:N/*)
+qqq := 1
+OBJDIR_runawk := ${.CURDIR}/${OBJDIR_runawk}
+.endif

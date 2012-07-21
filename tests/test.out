@@ -1323,7 +1323,7 @@ File ../Makefile is a FIFO: 0
 File ../Makefile is a symlink: 0
 File ../Makefile is a block device file: 0
 File ../Makefile is a character device file: 0
-The size of ../Makefile is 710 bytes
+The size of ../Makefile is 632 bytes
 The type of ../Makefile is -
 File /nonexistent is a generic file: 0
 File /nonexistent is a socket: 0
