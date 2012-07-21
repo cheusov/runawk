@@ -1,6 +1,6 @@
 ##################################################
 
-SUBPRJ       =	runawk modules examples a_getopt doc
+SUBPRJ       =	runawk:test modules examples a_getopt doc
 SUBPRJ_DFLT ?=	runawk modules
 
 WITH_ALT_GETOPT ?=	yes
@@ -13,13 +13,20 @@ MKC_REQD =		0.22.0
 
 ##################################################
 
+cleandir: cleandir-test
+
+# avoid running test-runawk, test-modules etc.
+test: all-test
+
+# We use "target "manpages" for making a distribution tarball
 manpages: _manpages
 	rm ${MKC_CACHEDIR}/_mkc*
 
-.include "test.mk"
 .include "Makefile.inc"
 .include <mkc.subprj.mk>
 
+# workaround for relative path in OBJDIR_<subdir>,
+# this will be fixed in mk-configure>0.22.0
 .if !empty(OBJDIR_runawk:N/*)
 OBJDIR_runawk := ${.CURDIR}/${OBJDIR_runawk}
 .endif

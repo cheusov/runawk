@@ -1,11 +1,12 @@
 DIFF_PROG?=	diff -u
 
 .PHONY : test
-test : runawk
+all: test
+test :
 	@echo 'running tests...'; \
-	export OBJDIR=${OBJDIR_runawk}; \
-	if { cd ${.CURDIR}/tests && ./test.sh > ${.OBJDIR}/_test.res; \
-	    ${DIFF_PROG} ${.CURDIR}/tests/test.out ${.OBJDIR}/_test.res; };\
+	export OBJDIR=${OBJDIR_runawk} SRCDIR=${.CURDIR}/.. AWKPATH=${.CURDIR}/../modules; \
+	if { ${.CURDIR}/test.sh > ${.OBJDIR}/_test.res; \
+	    ${DIFF_PROG} ${.CURDIR}/test.out ${.OBJDIR}/_test.res; };\
 	then echo '   succeeded'; \
 	else echo '   failed'; false; \
 	fi
@@ -31,3 +32,5 @@ test_all:
 
 CLEANFILES += ${OBJDIR_runawk}/temp1.awk ${OBJDIR_runawk}/temp2.awk ${OBJDIR_runawk}/temp3.awk
 DISTCLEANFILES += _test.res
+
+.include <mkc.files.mk>

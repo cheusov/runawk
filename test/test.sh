@@ -5,13 +5,14 @@ set -e
 LC_ALL=C
 export LC_ALL
 
+cd ${SRCDIR}/test
+
 unset AWKPATH || true
 
 OBJDIR=${OBJDIR:=..}
-SRCDIR=`pwd`/..
 
 unify_paths (){
-    sed -e "s,/.*/tests,ROOT," \
+    sed -e "s,/.*/test/,ROOT/," \
 	-e 's,/tmp/runawk[.]......,/tmp/runawk.NNNNNN,' \
 	-e 's,new_argv \[0\] = .*awk.*,new_argv [0] = awk,' \
 	-e 's,ARGV\[0\]=.*awk.*,ARGV[0]=awk,' \
@@ -72,8 +73,8 @@ unset AWKPATH || true
 
 ################## use
 cat > _test.tmp <<EOF
-#use "`pwd`/mods1/module1.1.awk"
-#use "`pwd`/mods1/module1.3.awk"
+#use "mods1/module1.1.awk"
+#use "mods1/module1.3.awk"
 #use "module2.1.awk"
 #use "module2.3.awk"
 EOF
