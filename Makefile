@@ -9,7 +9,7 @@ WITH_ALT_GETOPT ?=	yes
 SUBPRJ_DFLT +=		a_getopt
 .endif
 
-MKC_REQD =		0.22.0
+MKC_REQD =		0.23.0
 
 ##################################################
 
@@ -18,6 +18,8 @@ cleandir: cleandir-test
 
 # Avoid running test-runawk, test-modules etc.
 test: all-test
+	@:
+
 # Also implement test_all
 test_all: test_all-test
 
@@ -27,9 +29,3 @@ manpages: _manpages
 
 .include "Makefile.inc"
 .include <mkc.subprj.mk>
-
-# workaround for relative path in OBJDIR_<subdir>,
-# this will be fixed in mk-configure>0.22.0
-.if !empty(OBJDIR_runawk:N/*)
-OBJDIR_runawk := ${.CURDIR}/${OBJDIR_runawk}
-.endif
