@@ -3,15 +3,18 @@
 # default directory for creating temp files and dirs
 TEMPDIR =		/tmp
 
+.if !defined(AWK_PROG)
 .if exists(/usr/xpg4/bin/awk)
 # Solaris' /usr/bin/awk sucks so much... :-(
 # /usr/xpg4/bin/awk sucks too but sucks less.
 # I'd recommend you use GNU awk, nawk from NetBSD cvs tree
 # or mawk-1.3.4 or later.
-AWK_PROG ?=		/usr/xpg4/bin/awk
+AWK_PROG           =	/usr/xpg4/bin/awk
 .else
-AWK_PROG ?=		/usr/bin/awk
+MKC_REQUIRE_PROGS +=	awk
+AWK_PROG           =	${PROG.awk}
 .endif
+.endif # !defined(AWK_PROG)
 
 STDIN_FILENAME?=	- #/dev/stdin
 
