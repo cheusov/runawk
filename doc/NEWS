@@ -1,4 +1,14 @@
 ======================================================================
+Version 1.4.1, by Aleksey Cheusov, Sun, 22 Jul 2012 14:57:19 +0300
+
+  Minor fixes in documentation
+
+  Path to AWK interpreter is detected at build time (not hardcoded
+  /usr/bin/awk).  This fixes runawk on, for example, Haiku.
+
+  Clean-ups in build system. mk-configure-0.23.0 is required.
+
+======================================================================
 Version 1.4.0, by Aleksey Cheusov, Sun, 27 Nov 2011 21:41:09 +0300
 
   exitnow.awk:
