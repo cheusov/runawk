@@ -7,10 +7,19 @@
 
 #use "has_suffix.awk"
 
-# basename -- return filename portion of pathname
-# (the same as dirname(1))
-
+# =head2 basename.awk
+#
+# =over 2
+#
+# =item basename (PATH)
+#
+# return filename portion of the PATH
+# (the same as dirname(3))
+#
+# =back
+#
 # See example/demo_basename for the sample of usage
+#
 
 function basename (pathname, suffix){
 	sub(/\/$/, "", pathname)

@@ -5,25 +5,36 @@
 #
 ############################################################
 
+# =head2 tokenre.awk
+#
 # By default AWK splits input lines into tokens according to regular
 # expression that defines "spaces" between tokens using special
 # variable FS. In many situations it is more useful to define regular
 # expressions for tokens themselves. This is what this module does.
-
-# tokenre(STRING, REGEXP)
-#   `tokenre' extracts substrings from STRING
-#   according to REGEXP from the left to the right and assigns $1, $2
-#   etc. and NF variable.
 #
-# tokenre0(REGEXP)
-#   Does the the same as `tokenre' but splits $0 instead.
+# =over 2
 #
-# splitre(STRING, ARR, REGEXP)
-#    The same as `tokenre' but ARR[1], ARR[2]... are assigned.
-#    A number of extracted tokens is a return value.
+# =item tokenre(STRING, REGEXP)
 #
-# TRE - global variable. If it is set to non-empty string, all input
+# extracts substrings from STRING
+# according to REGEXP from the left to the right and assigns $1, $2
+# etc. and NF variable.
+#
+# =item tokenre0(REGEXP)
+#
+# Does the the same as `tokenre' but splits $0 instead.
+#
+# =item splitre(STRING, ARR, REGEXP)
+#
+# The same as `tokenre' but ARR[1], ARR[2]... are assigned.
+# A number of extracted tokens is a return value.
+#
+# =item TRE
+#
+# global variable. If it is set to non-empty string, all input
 # lines are splitted automatically.
+#
+# =back
 #
 
 # See example/demo_tokenre for the sample of usage

@@ -7,7 +7,19 @@
 
 #use "abort.awk"
 
-# assert -- expression verification function
+# =head2 alt_assert.awk
+#
+# =over 2
+#
+# =item assert (CONDITION, MSG, STATUS)
+#
+# print an
+# error message MSG to standard error and terminates
+# the program with STATUS exit code if CONDITION is false.
+#
+# =back
+#
+
 function assert (cond, msg, status){
 	if (!cond){
 		abort("assertion failed: " msg, status)

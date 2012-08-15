@@ -5,11 +5,19 @@
 #
 ############################################################
 
-# glob2ere(PATTERN)
-#   converts glob PATTERN
-#   (http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13)
-#   to equivalent extended regular expression
-#   (http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap09.html#tag_09_04)
+# =head2 glob.awk
+#
+# =over 2
+#
+# =item glob2ere (PATTERN)
+#
+# convert glob PATTERN
+# (http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13)
+# to equivalent extended regular expression
+# (http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap09.html#tag_09_04)
+#
+# =back
+#
 
 #use "multisub.awk"
 

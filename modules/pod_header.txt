@@ -1,0 +1,9 @@
+=head1 NAME
+
+runawk - wrapper for AWK interpreter
+
+=head1 MODULES
+
+B<runawk> provides dozens of modules.
+Below is the documentation for them.
+

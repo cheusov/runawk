@@ -5,7 +5,17 @@
 #    
 ############################################################
 
-# isnum -- returns 1 if an argument is a number
+# =head2 isnum.awk
+#
+# =over 2
+#
+# =item isnum (NUM)
+#
+# returns 1 if an argument is a number
+#
+# =back
+#
+
 function isnum (v){
 	return v == v + 0
 }

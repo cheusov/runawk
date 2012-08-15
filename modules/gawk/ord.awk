@@ -8,6 +8,21 @@
 # 16 January, 1992
 # 20 July, 1992, revised
 
+# =head2 ord.awk
+#
+# =over 2
+#
+# =item ord (CHAR)
+#
+# return numeral code of CHAR
+#
+# =item chr (CODE)
+#
+# return symbol from the CODE
+#
+# =back
+#
+
 BEGIN    { _ord_init() }
 
 function _ord_init(    low, high, i, t)

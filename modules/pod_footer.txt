@@ -1,0 +1,16 @@
+=head1 AUTHOR
+
+Copyright (c) 2007-2012 Aleksey Cheusov <vle@gmx.net>
+
+=head1 BUGS/FEEDBACK
+
+Please send any comments, questions, bug reports etc. to me by e-mail
+or register them at sourceforge project home.  Feature requests are
+also welcomed.
+
+=head1 HOME
+
+L<http://sourceforge.net/projects/runawk/>
+
+=head1 SEE ALSO
+L<awk(1)>

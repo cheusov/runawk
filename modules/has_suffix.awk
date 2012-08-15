@@ -5,10 +5,18 @@
 #
 ############################################################
 
-# has_suffix(STRING, SUFFIX)
-#   `has_suffix' returns TRUE if STRING ends with SUFFIX
-
+# =head2 has_suffix.awk
+#
+# =over 2
+#
+# =item has_suffix(STRING, SUFFIX)
+#
+# return TRUE if STRING ends with SUFFIX
+#
+# =back
+#
 # See example/demo_has_suffix for the sample of usage
+#
 
 function has_suffix (s, suf,                 suf_len, s_len){
 	suf_len = length(suf)

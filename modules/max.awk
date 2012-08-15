@@ -5,16 +5,28 @@
 #    
 ############################################################
 
-# max, max3, max4, max5 -- maximum function
+# =head2 max.awk
 #
-# max_key(HASH, DFLT)
-#    returns a maximum key in HASH or DFLT is HASH is empty
+# =over 2
 #
-# max_value(HASH, DFLT)
-#    returns a maximum value in HASH or DFLT is HASH is empty
+# =item max, max3, max4, max5
 #
-# key_of_max_value(HASH, DFLT)
-#    returns A KEY OF maximum value in HASH or DFLT is HASH is empty
+# maximum functions
+#
+# =item max_key(HASH, DFLT)
+#
+# returns a maximum key in HASH or DFLT if it is empty
+#
+# =item max_value(HASH, DFLT)
+#
+# returns a maximum value in HASH or DFLT if it is empty
+#
+# =item key_of_max_value(HASH, DFLT)
+#
+# returns A KEY OF maximum value in HASH or DFLT if it is empty
+#
+# =back
+#
 
 function max (a, b){
 	return (a > b ? a : b)

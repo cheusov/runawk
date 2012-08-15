@@ -5,19 +5,28 @@
 #
 ############################################################
 
+# =head2 tmpfile.awk
+#
 # This module provides a function `tmpfile' for generating temporary
 # filenames. All these filenames are under temporary directory created
 # (if necessary) by runawk(1) which is removed automatically during
 # normal exit or when runawk(1) reveives SIGINT, SIGQUIT, SIGTERM,
 # SIGHUP or SIGPIPE.
-
-# tmpfile()
-#   `tmpfile' returns a temporary file name.
 #
-# runawk_tmpdir - global variable that keeps tempdir created by runawk -t
+# =over 2
 #
-
+# =item tmpfile()
+#
+# returns a temporary file name.
+#
+# =item runawk_tmpdir
+#
+# global variable that keeps tempdir created by runawk -t
+#
+# =back
+#
 # See example/demo_tmpfile for the sample of usage
+#
 
 #use "alt_assert.awk"
 

@@ -5,8 +5,17 @@
 #    
 ############################################################
 
-# xsystem(FILE) -- safe wrapper for 'system'.
+# =head2 xsystem.awk
+#
+# =over 2
+#
+# =item xsystem(FILE)
+#
+# safe wrapper for 'system'.
 # awk exits with error if system() function failed.
+#
+# =back
+#
 
 #use "alt_assert.awk"
 

@@ -5,6 +5,7 @@
 #
 ############################################################
 
+# =head2 init_getopt.awk
 #
 # Initialization step for power_getopt.awk module.  In some cases it
 # makes sense to process options in a while() loop.  This module

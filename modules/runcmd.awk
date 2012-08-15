@@ -5,16 +5,25 @@
 #    
 ############################################################
 
-# runcmd1(CMD, OPTS, FILE):
-#   wrapper for system() function
-#   that runs a command CMD with options OPTS and one filename FILE.
-#   Unlike system(CMD " " OPTS " " FILE) the function runcmd1 handles
-#   correctly FILE containing spaces, single quote, double quote,
-#   tilde etc.
+# =head2 runcwd.awk
 #
-# xruncmd1(FILE):
-#   safe wrapper for 'runcmd1'.
-#   awk exits with error if runcmd1() function failed.
+# =over 2
+#
+# =item runcmd1 (CMD, OPTS, FILE)
+#
+# wrapper for system() function
+# that runs a command CMD with options OPTS and one filename FILE.
+# Unlike system(CMD " " OPTS " " FILE) the function runcmd1 handles
+# correctly FILE containing spaces, single quote, double quote,
+# tilde etc.
+#
+# =item xruncmd1 (FILE)
+#
+# safe wrapper for 'runcmd1'.
+# awk exits with error if runcmd1() function failed.
+#
+# =back
+#
 
 #use "alt_assert.awk"
 #use "shquote.awk"

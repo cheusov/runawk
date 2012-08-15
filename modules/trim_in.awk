@@ -5,6 +5,8 @@
 #
 ############################################################
 
+# =head2 trim_in.awk
+#
 # As the name of this module says (_in suffix) this module reads and
 # potentially changes input lines.
 # 
@@ -20,6 +22,7 @@
 #   "cr" - See c and r
 # By default TRIM variable is set to "lr". TRIM set to a single space
 # character means no trimming.
+#
 
 BEGIN {
 	if (TRIM == ""){

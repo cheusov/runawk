@@ -8,10 +8,18 @@
 #use "xgetline.awk"
 #use "xclose.awk"
 
-# readfile(FILENAME)
-#   read entire file and return its content as a string
-
+# =head2 readfile.awk
+#
+# =over 2
+#
+# =item readfile(FILENAME)
+#
+# read entire file and return its content as a string
+#
+# =back
+#
 # See example/demo_readfile for the sample of usage
+#
 
 function readfile (fn,                      ret){
 	# Unfortunately there is no way portable accross all awk flavours

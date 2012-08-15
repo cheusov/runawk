@@ -5,16 +5,26 @@
 #
 ############################################################
 
+# =head2 alt_join.awk
 #
-# join_keys(HASH, SEP):
-#     returns string consisting of all keys from HASH separated by SEP.
-# join_values(HASH, SEP):
-#     returns string consisting of all values from HASH separated by SEP.
-# join_by_numkeys (ARRAY, SEP [, START [, END]]):
-#     returns string consisting of all values from ARRAY
-#     separated by SEP. Indices from START (default: 1) to END
-#     (default: +inf) are analysed. Collecting values is stopped
-#     on index absent in ARRAY.
+# =over 2
+#
+# =item  join_keys (HASH, SEP)
+#
+# return string consisting of all keys from HASH separated by SEP.
+#
+# =item join_values (HASH, SEP)
+#
+# return string consisting of all values from HASH separated by SEP.
+#
+# =item join_by_numkeys (ARRAY, SEP [, START [, END]])
+#
+# return string consisting of all values from ARRAY
+# separated by SEP. Indices from START (default: 1) to END
+# (default: +inf) are analysed. Collecting values is stopped
+# on index absent in ARRAY.
+#
+# =back
 #
 
 function join_keys (hash, sep,                   k,ret,flag){

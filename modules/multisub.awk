@@ -5,20 +5,27 @@
 #
 ############################################################
 
-# multisub(STRING, SUBST_REPLS[, KEEP])
-#   `multisub' is a substitution function. It searches for
-#   a list of substrings, specified in SUBST_REPL
-#   in a left-most longest order and (if found) replaces
-#   found fragments with appropriate replacement.
-#   SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
-#   Three spaces separate substring:replacement pairs from each other.
-#   If KEEP is specified and some REPLACEMENT<N> is equal to it, then
-#   appropriate SUBSTRING<N> is treated as a regular expression
-#   and matched text is kept as is, i.e. not changed.
+# =head2 multisub.awk
+#
+# =over 2
+#
+# =item multisub(STRING, SUBST_REPLS[, KEEP])
+#
+# is a substitution function. It searches for
+# a list of substrings, specified in SUBST_REPL
+# in a left-most longest order and (if found) replaces
+# found fragments with appropriate replacement.
+# SUBST_REPL format: "SUBSTRING1:REPLACEMENT1   SUBSTRING2:REPLACEMENT2...".
+# Three spaces separate substring:replacement pairs from each other.
+# If KEEP is specified and some REPLACEMENT(N) is equal to it, then
+# appropriate SUBSTRING(N) is treated as a regular expression
+# and matched text is kept as is, i.e. not changed.
 #
 # For example:
 #      print multisub("ABBABBBBBBAAB", "ABB:c   BBA:d   AB:e")
 #      |- ccBBde
+#
+# =back
 #
 
 #use "alt_assert.awk"

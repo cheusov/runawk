@@ -5,10 +5,18 @@
 #
 ############################################################
 
-# has_prefix(STRING, PREFIX)
-#   `has_prefix' returns TRUE if STRING begins with PREFIX
-
+# =head2 has_prefix.awk
+#
+# =over 2
+#
+# =item has_prefix (STRING, PREFIX)
+#
+# return TRUE if STRING begins with PREFIX
+#
+# =back
+#
 # See example/demo_has_prefix for the sample of usage
+#
 
 function has_prefix (s, pre,                 pre_len, s_len){
 	pre_len = length(pre)

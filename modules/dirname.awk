@@ -5,10 +5,19 @@
 #    
 ############################################################
 
-# basename -- return filename portion of pathname
-# (the same as dirname(1))
-
+# =head2 dirname.awk
+#
+# =over 2
+#
+# =item dirname (PATH)
+#
+# return dirname portion of the PATH
+# (the same as dirname(3))
+#
+# =back
+#
 # See example/demo_dirname for the sample of usage
+#
 
 function dirname (pathname){
 	if (!sub(/\/[^\/]*\/?$/, "", pathname))

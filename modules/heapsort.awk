@@ -5,56 +5,68 @@
 #
 ############################################################
 
-# heapsort (src_array, dest_remap, start, end)
-#     The content of `src_array' is sorted using awk's rules for
-#     comparing values. Values with indices in range [start, end] are
-#     sorted.  `src_array' array is not changed.
-#     Instead dest_remap array is generated such that
+# =head2 heapsort.awk
 #
-#     Result:
+# =over 2
+#
+# =item heapsort (src_array, dest_remap, start, end)
+#
+# The content of `src_array' is sorted using awk's rules for
+# comparing values. Values with indices in range [start, end] are
+# sorted.  `src_array' array is not changed.
+# Instead dest_remap array is generated such that
+#
+#   Result:
 #     src_array [dest_remap [start]] <=
 #        <= src_array [dest_remap [start+1]] <=
 #        <= src_array [dest_remap [start+2]] <= ... <=
 #        <= src_array [dest_remap [end]]
 #
-#     `heapsort' algorithm is used.
+#   `heapsort' algorithm is used.
 # Examples: see demo_heapsort and demo_heapsort2 executables.
-
-# heapsort_values (src_hash, dest_remap)
-#     The same as `heapsort' described above, but hash values are sorted.
 #
-#     Result: 
+# =item heapsort_values (src_hash, dest_remap)
+#
+# The same as `heapsort' described above, but hash values are sorted.
+#
+#   Result: 
 #     src_array [dest_remap [1]] <=
 #        <= src_array [dest_remap [2]] <=
 #        <= src_array [dest_remap [3]] <= ... <=
 #        <= src_array [dest_remap [count]]
 #
-#     `count', a number of elements in `src_hash', is a return value.
+#   `count', a number of elements in `src_hash', is a return value.
 #
 # Examples: see demo_heapsort3 executable.
-
-# heapsort_indices (src_hash, dest_remap)
-#     The same as `heapsort' described above, but hash indices are sorted.
 #
-#     Result: 
+# =item heapsort_indices (src_hash, dest_remap)
+#
+# The same as `heapsort' described above, but hash indices are sorted.
+#
+#   Result: 
 #     dest_remap [1] <=
 #        <= dest_remap [2] <=
 #        <= dest_remap [3] <= ... <=
 #        <= dest_remap [count]
 #
-#     `count', a number of elements in `src_hash', is a return value.
+#   `count', a number of elements in `src_hash', is a return value.
 #
 # Examples: demo_ini
-
-# heapsort_fields (dest_remap, [start [, end [, strnum]]])
-#     The same as function "heapsort0" but $1, $2... array is sorted.
-#     Note that $1, $2... are not changed, but dest_remap array is filled in!
-#     The variable "start" default to 1, "end" -- to NF.
-#     If "strnum" is set to 1, values are forcibly compared as strings.
-#     If "strnum" is set to 2, values are forcibly compared as numbers.
-
-# heapsort0 ([start [, end [, strnum]]])
-#     The same as "heapsort_fields" but $1, $2... are changed.
+#
+# =item heapsort_fields (dest_remap, [start [, end [, strnum]]])
+#
+# The same as function "heapsort0" but $1, $2... array is sorted.
+# Note that $1, $2... are not changed, but dest_remap array is filled in!
+# The variable "start" default to 1, "end" -- to NF.
+# If "strnum" is set to 1, values are forcibly compared as strings.
+# If "strnum" is set to 2, values are forcibly compared as numbers.
+#
+# =item heapsort0 ([start [, end [, strnum]]])
+#
+# The same as "heapsort_fields" but $1, $2... are changed.
+#
+# =back
+#
 
 function sift_down (array, root, start, end, index_remap,               n0, v){
 	while (1){

@@ -5,15 +5,23 @@
 #
 ############################################################
 
+# =head2 ini.awk
+#
 # This module provides functions for manipulating .ini files.
 # See example/demo_ini  for the sample of use.
 #
-# read_inifile(FILENAME, RESULT [, SEPARATOR])
-#   Reads .ini file FILENAME and fills array RESULT, e.g.
-#   RESULT [<section5><SEPARATOR><name6>] = <value5.6> etc.
-#   If SEPARATOR is not specified, `.' symbols is used by default.
+# =over 2
+#
+# =item read_inifile(FILENAME, RESULT [, SEPARATOR])
+#
+# Reads .ini file FILENAME and fills array RESULT, e.g.
+# RESULT [<section5><SEPARATOR><name6>] = <value5.6> etc.
+# If SEPARATOR is not specified, `.' symbols is used by default.
+#
+# =back
+#
 # Features:
-
+#
 #   - spaces are allowed everywhere, i.e. at the beginning and end of
 #     line, around `=' separator. THEY ARE STRIPPED!
 #   - comment lines start with `;' or `#' sign. Comment lines are ignored.
@@ -22,6 +30,7 @@
 #     beginning and at the end of line and replaced with single space
 #     in the middle of the line.
 #   - Escape character are not supported (yet?).
+#
 
 #use "alt_assert.awk"
 #use "xgetline.awk"

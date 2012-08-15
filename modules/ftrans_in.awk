@@ -6,8 +6,12 @@
 # Aleksey Cheusov, vle@gmx.net, Public Domain, September 2010
 #   (fix and adaptation for nawk by B.Kernighan)
 
+# =head2 ftrans_in.awk
+#
 # beginfile() function provided by user is called before file reading
+#
 # endfile()   function provided by user is called after file reading
+#
 
 FNR == 1 {
 	if (_filename_ != "")

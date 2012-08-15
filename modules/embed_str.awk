@@ -5,6 +5,7 @@
 #
 ############################################################
 
+# =head2 embed_str.awk
 #
 # This module reads a program's file, find .begin-str/.end-str pairs
 # and reads lines between them.
@@ -12,16 +13,16 @@
 # EMBED_STR - Associative array with string index
 #
 # Example:
-#                     Input:
-#.begin-str mymsg
-# Line1
-# Line2
-#.end-str
-#                     Output (result)
-#EMBED_STR ["mymsg"]="Line1\nLine2"
+#  Input:
+#   .begin-str mymsg
+#    Line1
+#    Line2
+#   .end-str
+#  Output (result)
+#   EMBED_STR ["mymsg"]="Line1\nLine2"
 #
-
 # See example/demo_embed_str for the sample of usage
+#
 
 #use "xgetline.awk"
 #use "modinfo.awk"

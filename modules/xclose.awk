@@ -5,8 +5,17 @@
 #    
 ############################################################
 
-# xclose(FILE) -- safe wrapper for 'close'.
+# =head2 xclose.awk
+#
+# =over 2
+#
+# =item xclose(FILE)
+#
+# safe wrapper for 'close'.
 # awk exits with error if close() function failed.
+#
+# =back
+#
 
 #use "alt_assert.awk"
 

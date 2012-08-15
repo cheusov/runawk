@@ -5,16 +5,28 @@
 #    
 ############################################################
 
-# min, min3, min4, min5 -- minimum function
+# =head2 min.awk
 #
-# min_key(HASH, DFLT)
-#    returns a minimum key in HASH or DFLT is HASH is empty
+# =over 2
 #
-# min_value(HASH, DFLT)
-#    returns a minimum value in HASH or DFLT is HASH is empty
+# =item min, min3, min4, min5
 #
-# key_of_min_value(HASH, DFLT)
-#    returns A KEY OF minimum value in HASH or DFLT is HASH is empty
+# minimum functions
+#
+# =item min_key(HASH, DFLT)
+#
+# returns a minimum key in HASH or DFLT if it is empty
+#
+# =item min_value(HASH, DFLT)
+#
+# returns a minimum value in HASH or DFLT if it is empty
+#
+# =item key_of_min_value(HASH, DFLT)
+#
+# returns A KEY OF minimum value in HASH or DFLT if it is empty
+#
+# =back
+#
 
 function min (a, b){
 	return (a < b ? a : b)

@@ -5,16 +5,22 @@
 #
 ############################################################
 
-# getopt(SHORT_OPTS) -- like standard getopt(3) function (NOT EQUIVALENT!)
-#   This function processes ARGV array and
-#   returns TRUE value if option is recieved, 
-#   recieved option is saved in 'optopt' variable, option argument (if any)
-#   is saved in 'optarg' variable. Long options (like --help or
-#   --long-option) present in GNU libc and BSD systems are also supported.
-# NOTE: 'getopt' function from alt_getopt.awk is not compatible
-#       to the function from GNU awk (getopt.awk)
+# =head2 alt_getopt.awk
+#
+# =over 2
+#
+# =item getopt(SHORT_OPTS)
+#
+# This function processes ARGV array and
+# returns TRUE if option is recieved, 
+# recieved option is saved in 'optopt' variable, option argument (if any)
+# is saved in 'optarg' variable. Long options (like --help or
+# --long-option) present in GNU libc and BSD systems are also supported.
+#
 # NOTE: alt_getopt.awk module follows rules
-#       from SUS/POSIX "Utility Syntax Guidelines"
+# from SUS/POSIX "Utility Syntax Guidelines"
+#
+# =back
 #
 
 ###############################################################

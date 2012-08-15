@@ -5,46 +5,53 @@
 #
 ############################################################
 
-# quicksort (src_array, dest_remap, start, end)
-#     The content of `src_array' is sorted using awk's rules for
-#     comparing values. Values with indices in range [start, end] are
-#     sorted.  `src_array' array is not changed.
-#     Instead dest_remap array is generated such that
+# =head2 quicksort.awk
 #
-#     Result:
+# =over 2
+#
+# =item quicksort (src_array, dest_remap, start, end)
+#
+# The content of `src_array' is sorted using awk's rules for
+# comparing values. Values with indices in range [start, end] are
+# sorted.  `src_array' array is not changed.
+# Instead dest_remap array is generated such that
+#
+#   Result:
 #     src_array [dest_remap [start]] <=
 #        <= src_array [dest_remap [start+1]] <=
 #        <= src_array [dest_remap [start+2]] <= ... <=
 #        <= src_array [dest_remap [end]]
 #
-#     `quicksort' algorithm is used.
+# `quicksort' algorithm is used.
 # Examples: see demo_quicksort and demo_quicksort2 executables
-
-# quicksort_values (src_hash, dest_remap)
-#     The same as `quicksort' described above, but hash values are sorted.
 #
-#     Result: 
+# =item quicksort_values (src_hash, dest_remap)
+#
+# The same as `quicksort' described above, but hash values are sorted.
+#
+#   Result: 
 #     src_hash [dest_remap [1]] <=
 #        <= src_hash [dest_remap [2]] <=
 #        <= src_hash [dest_remap [3]] <= ... <=
 #        <= src_hash [dest_remap [count]]
 #
-#     `count', a number of elements in `src_hash', is a return value.
-#
+# `count', a number of elements in `src_hash', is a return value.
 # Examples: see demo_quicksort* executables.
-
-# quicksort_indices (src_hash, dest_remap)
-#     The same as `quicksort' described above, but hash indices are sorted.
 #
-#     Result:
+# =item quicksort_indices (src_hash, dest_remap)
+#
+# The same as `quicksort' described above, but hash indices are sorted.
+#
+#   Result:
 #     dest_remap [1] <=
 #        <= dest_remap [2] <=
 #        <= dest_remap [3] <= ... <=
 #        <= dest_remap [count]
 #
-#     `count', a number of elements in `src_hash', is a return value.
+# `count', a number of elements in `src_hash', is a return value.
 #
-# Examples: demo_ini
+# =back
+#
 
 function __quicksort (array, index_remap, start, end,
        MedIdx,Med,v,i,storeIdx)

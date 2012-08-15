@@ -1,3 +1,4 @@
+
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
@@ -5,21 +6,33 @@
 #
 ############################################################
 
-# sort (src, dest_remap, start, end)
-#   Call either heapsort function from heapsort.awk (if
-#   RUNAWK_SORTTYPE environment variable is "heapsort") or quicksort
-#   from quicksort.awk (if RUNAWK_SORTTYPE is "quicksort").
-#   Sorttype defaults to "heapsort".
-# sort_values (src, dest_remap)
-#   Call either heapsort_values function from heapsort.awk (if
-#   RUNAWK_SORTTYPE environment variable is "heapsort") or
-#   quicksort_values from quicksort.awk (if RUNAWK_SORTTYPE is
-#   "quicksort").  Sorttype defaults to "heapsort".
-# sort_indices (src, dest_remap)
-#   Call either heapsort_indices function from heapsort.awk (if
-#   RUNAWK_SORTTYPE environment variable is "heapsort") or
-#   quicksort_indices from quicksort.awk (if RUNAWK_SORTTYPE is
-#   "quicksort").  Sorttype defaults to "heapsort".
+# =head2 sort.awk
+#
+# =over 2
+#
+# =item sort (src, dest_remap, start, end)
+#
+# Call either heapsort function from heapsort.awk (if
+# RUNAWK_SORTTYPE environment variable is "heapsort") or quicksort
+# from quicksort.awk (if RUNAWK_SORTTYPE is "quicksort").
+# Sorttype defaults to "heapsort".
+#
+# =item sort_values (src, dest_remap)
+#
+# Call either heapsort_values function from heapsort.awk (if
+# RUNAWK_SORTTYPE environment variable is "heapsort") or
+# quicksort_values from quicksort.awk (if RUNAWK_SORTTYPE is
+# "quicksort").  Sorttype defaults to "heapsort".
+#
+# =item sort_indices (src, dest_remap)
+#
+# Call either heapsort_indices function from heapsort.awk (if
+# RUNAWK_SORTTYPE environment variable is "heapsort") or
+# quicksort_indices from quicksort.awk (if RUNAWK_SORTTYPE is
+# "quicksort").  Sorttype defaults to "heapsort".
+#
+# =back
+#
 
 #use "abort.awk"
 #use "heapsort.awk"

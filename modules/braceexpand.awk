@@ -5,12 +5,19 @@
 #    
 ############################################################
 
-# braceexp(STRING)
-#   implement shell-like brace expansion
+# =head2 braceexpand.awk
+#
+# =over 2
+#
+# =item braceexp(STRING)
+#
+# shell-like brace expansion.
 #
 # For example:
 #	print braceexpand("ab{,22{,7,8}}z{8,9}")
 #   -| abz8 abz9 ab22z8 ab22z9 ab227z8 ab227z9 ab228z8 ab228z9
+#
+# =back
 #
 
 #use "match_br.awk"

@@ -5,13 +5,21 @@
 #    
 ############################################################
 
-# xgetline0([FILE])
-#  Safe analog to 'getline < FILE' or 'getline' (if no FILE is specified).
-#  0 at the end means that input line is assigned to $0.
+# =head2 xgetline.awk
 #
-# xgetline([FILE])
-#  Safe analog to 'getline __input < FILE' and 'getline __input'
-#    (if no FILE is specified)
+# =over 2
+#
+# =item xgetline0([FILE])
+#
+# Safe analog to 'getline < FILE' or 'getline' (if no FILE is specified).
+# 0 at the end means that input line is assigned to $0.
+#
+# =item xgetline([FILE])
+#
+# Safe analog to 'getline __input < FILE' and 'getline __input'
+# (if no FILE is specified)
+#
+# =back
 #
 # In both cases "safe" means that returned value is analysed and
 # if it is less tha zero (file reading error happens) program will
@@ -22,6 +30,7 @@
 #       while (xgetline("/etc/passwd")){
 #           print "user: " __input
 #       }
+#
 
 #use "alt_assert.awk"
 

@@ -7,6 +7,8 @@
 
 #use "init_getopt.awk"
 
+# =head2 power_getopt.awk
+#
 # power_getopt.awk module provides a very easy way to add options
 # to AWK application and follows rules from
 # SUS/POSIX "Utility Syntax Guidelines"
@@ -25,14 +27,17 @@
 # (lines between ".begin-str help" and ".end-str") replacing leading
 # `=' character with `-'.
 #
-# power_getopt.awk also provides the function getarg.
+# =over 2
 #
-# getarg(OPT, DEFAULT)
-#  returns either 1 (option OPT was applied) or 0 (OPT was not
-#  applied) for options not accepting the argument, and either
-#  specified value or DEFAULT for options accepting the argument.
+# =item getarg(OPT, DEFAULT)
+#
+# returns either 1 (option OPT was applied) or 0 (OPT was not
+# applied) for options not accepting the argument, and either
+# specified value or DEFAULT for options accepting the argument.
 #
 # See example/demo_power_getopt for the sample of usage
+#
+# =back
 #
 
 function print_help (            i){

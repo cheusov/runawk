@@ -5,25 +5,29 @@
 #
 ############################################################
 
+# =head2 backslash_in.awk
+#
 # As the name of this module (_in suffix) says this module
-# reads and potentially changes input lines.
+# reads and optionally changes input lines.
 # 
 # Backslash character at the end of line is treated as a sign
 # that current line is continued on the next one.
 # Example is below.
 #
 # Input:
-#   a b c\
-#   d e f g
-#   a
-#   b
-#   e\
-#     f
-# What your program #use-ing backslash_in.awk will obtain:
-#   a b cd e f g
-#   a
-#   b
-#   e  f
+#     a b c\
+#     d e f g
+#     a
+#     b
+#     e\
+#       f
+#
+# What your program using backslash_in.awk will obtain:
+#     a b cd e f g
+#     a
+#     b
+#     e  f
+#
 
 #use "xgetline.awk"
 

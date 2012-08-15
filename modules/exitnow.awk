@@ -5,10 +5,18 @@
 #    
 ############################################################
 
-# exitnow -- similar to the statement 'exit' but do not run program's
-# END sections. The code is trivial, see below.  'exitnow' function is
-# used by alt_assert.awk and abort.awk modules.
-#           
+# =head2 exitnow.awk
+#
+# =over 2
+#
+# =item exitnow (STATUS)
+#
+# similar to the statement 'exit' but do not run
+# END sections.
+#
+# =back
+#
+
 function exitnow (exit_status){
 	__runawk_exit_status = exit_status
 	__runawk_exit        = 1

@@ -5,8 +5,15 @@
 #
 ############################################################
 
-# str2regex(STRING)
-#   returns a regular expression that matches given STRING
+# =head2 str2regexp.awk
+#
+# =over 2
+#
+# =item str2regex(STRING)
+#
+# returns a regular expression that matches given STRING
+#
+# =back
 #
 # For example:
 #   print str2regexp("all special symbols: ^$(){}[].*+?|\\")

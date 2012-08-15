@@ -6,9 +6,18 @@
 
 #use "exitnow.awk"
 
-# abort(MSG, [EXIT_STATUS]) -- print MSG to stderr and exits programwith
-# EXIT_STATUS.  if EXIT_STATUS is zero of is not specified, 1 is
-# assigned.
+# =head2 abort.awk
+#
+# =over 2
+#
+# =item abort (MSG, [EXIT_STATUS])
+#
+# print MSG to stderr and exits program with
+# EXIT_STATUS.  EXIT_STATUS defaults to 1.
+#
+# =back
+#
+
 function abort (msg, status){
 	printf "error: %s\n", msg > "/dev/stderr"
 	printf "       ARGV[0]=%s\n", ARGV[0] > "/dev/stderr"

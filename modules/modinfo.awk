@@ -5,17 +5,28 @@
 #    
 ############################################################
 
+# =head2 modinfo.awk
 #
 # This module provides the following variables
 #
-# MODC - A number of modules (-f <filename>) passed to an awk
-#        interpreter
-# MODV - Array with [0..MODC) indexes of those modules
+# =over 2
 #
-# MODMAIN - Path to the main module, i.e. program filename
+# =item MODC
 #
-
+# A number of modules (-f <filename>) passed to an awk interpreter
+#
+# =item MODV
+#
+# Array with [0..MODC) indexes of those modules
+#
+# =item MODMAIN
+#
+# Path to the main module, i.e. program filename
+#
+# =back
+#
 # See example/demo_modinfo for the sample of usage
+#
 
 BEGIN {
 	MODC = ENVIRON ["RUNAWK_MODC"] + 0 # force to number

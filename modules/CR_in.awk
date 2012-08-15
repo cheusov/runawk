@@ -5,15 +5,20 @@
 #
 ############################################################
 
+# =head2 CR_in.awk
+#
 # As the name of this module says (_in suffix) this module reads and
-# potentially changes input lines.
+# optionally changes input lines.
 # 
 # Carriage-Return symbol at the end of input lines is removed.
 # This symbol usually appears in Windows text files.
 # If you want to adapt your script to accept windows files on input,
 # just put
+#
 #    #use "CR_in.awk"
+#
 # in the very beginning of your script.
+#
 
 {
 	gsub(/\r+$/, "")

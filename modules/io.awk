@@ -5,52 +5,67 @@
 #
 ############################################################
 
+# =head2 io.awk
+#
 # This module provides a number of IO functions.
-
-# is_file(FILENAME)
-#   `is_file' returns 1 if the specified FILENAME
-#   is a regular file or 0 otherwise.
-
-# is_socket(FILENAME)
-#   `is_socket' returns 1 if the specified FILENAME
-#   is a socket or 0 otherwise.
-
-# is_dir(FILENAME)
-#   `is_dir' returns 1 if the specified FILENAME
-#   is a dir or 0 otherwise.
-
-# is_exec(FILENAME)
-#   `is_exec' returns 1 if the specified FILENAME
-#   is executable or 0 otherwise.
-
-# is_fifo(FILENAME)
-#   `is_fifo' returns 1 if the specified FILENAME
-#   is a FIFO or 0 otherwise.
-
-# is_blockdev(FILENAME)
-#   `is_blockdev' returns 1 if the specified FILENAME
-#   is a block special file or 0 otherwise.
-
-# is_chardev(FILENAME)
-#   `is_chardev' returns 1 if the specified FILENAME
-#   is a character special file or 0 otherwise.
-
-# is_symlink(FILENAME)
-#   `is_symlink' returns 1 if the specified FILENAME
-#   is a symlink or 0 otherwise.
-
-# file_size(FILENAME, USE_STAT_NOT_LSTAT)
-#   `file_size' returns the size of the specified FILENAME.
-#   If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).
+#
+# =over 2
+#
+# =item is_file(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a regular file or 0 otherwise.
+#
+# =item is_socket(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a socket or 0 otherwise.
+#
+# =item is_dir(FILENAME)
+#
+# returns 1 if the specified FILENAME
+#  is a dir or 0 otherwise.
+#
+# =item is_exec(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is executable or 0 otherwise.
+#
+# =item is_fifo(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a FIFO or 0 otherwise.
+#
+# =item is_blockdev(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a block special file or 0 otherwise.
+#
+# =item is_chardev(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a character special file or 0 otherwise.
+#
+# =item is_symlink(FILENAME)
+#
+# returns 1 if the specified FILENAME
+# is a symlink or 0 otherwise.
+#
+# =item file_size(FILENAME, USE_STAT_NOT_LSTAT)
+#
+# returns the size of the specified FILENAME.
+# If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).
+#
 #   Return value:
 #     -2 if file doesn't exist
 #     -1 if file is not a regular file
 #     filesize otherwise
 #
-# file_type(FILENAME, USE_STAT_NOT_LSTAT)
-#   `file_type' returns a single letter that corrspond to the file
-#   type. If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of
-#   lstat(2).
+# =item file_type(FILENAME, USE_STAT_NOT_LSTAT)
+#
+# returns a single letter that corrspond to the file
+# type. If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).
+#
 #   Return value:
 #     -  --  regular file
 #     d  -- directory
@@ -59,8 +74,11 @@
 #     p  -- FIFO
 #     l  -- symlink
 #     s  -- socket
-
-# See example/demo_tokenre for the sample of usage
+#
+# =back
+#
+# See example/demo_io for the sample of usage
+#
 
 #use "shquote.awk"
 
