@@ -5,8 +5,6 @@
 # replacement for dirname(1) written in AWK
 
 BEGIN {
-	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
-
 	if (ARGC != 2){
 		print "Usage: dirname path"
 		exit 1

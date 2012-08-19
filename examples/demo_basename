@@ -5,8 +5,6 @@
 # replacement for basename(1) written in AWK
 
 BEGIN {
-	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
-
 	if (ARGC != 2 && ARGC != 3){
 		print "Usage: basename path"
 		exit 1

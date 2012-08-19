@@ -8,8 +8,6 @@
 # Input files for this demo: examples/demo_readfile.in*
 
 BEGIN {
-	ARGC -= ENVIRON ["RUNAWK_ART_STDIN"] # hackish runawk :-)
-
 	if (ARGC != 2){
 		print "usage: demo_readfile <filename>"
 		exit 1
