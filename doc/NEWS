@@ -1,4 +1,16 @@
 ======================================================================
+Version 1.4.2, by Aleksey Cheusov, Sun, 19 Aug 2012 23:00:39 +0300
+
+  runawk_modules.3 was added where all modules are documented
+
+  Long options are considered deprecated
+
+  -i and -I options were removed
+
+  man pages are included to a distribution tarball,
+  so pod2man is not needed for building
+
+======================================================================
 Version 1.4.1, by Aleksey Cheusov, Sun, 22 Jul 2012 14:57:19 +0300
 
   Minor fixes in documentation
