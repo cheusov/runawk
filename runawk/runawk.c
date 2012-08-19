@@ -74,17 +74,17 @@ runawk - wrapper for an AWK interpreter\n\
 usage: runawk [OPTIONS] program_file [arguments...]\n\
        runawk [OPTIONS] -e program [arguments...]\n\
 OPTIONS:\n\
-  -h|--help           display this screen\n\
-  -V|--version        display version information\n\
-  -d|--debug          debugging mode, just list argv array for awk,\n\
-                      awk interpreter is not run\n\
-  -e|--execute <program>  program to run\n\
-  -v|--assign <var=val>   assign the value val to the variable var\n\
-  -f|--file <awk_module>  add awk_module to a program\n\
-  -t                  create a temporary directory and pass it to\n\
-                      AWK interpreter subprocess\n\
-  -i|--with-stdin     always add \"stdin\" file name to awk arguments\n\
-  -I|--without-stdin  do not add \"stdin\" file name to awk arguments\n\
+  -h        display this screen\n\
+  -V        display version information\n\
+  -d        debugging mode, just list argv array for awk,\n\
+            awk interpreter is not run\n\
+  -e <program>     program to run\n\
+  -v <var=val>     assign the value val to the variable var\n\
+  -f <awk_module>  add awk_module to a program\n\
+  -t        create a temporary directory and pass it to\n\
+            AWK interpreter subprocess\n\
+  -i        always add \"stdin\" file name to awk arguments\n\
+  -I        do not add \"stdin\" file name to awk arguments\n\
 ");
 }
 
