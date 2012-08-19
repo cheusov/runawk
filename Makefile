@@ -11,6 +11,9 @@ SUBPRJ_DFLT +=		a_getopt
 
 MKC_REQD =		0.23.0
 
+# for making a tarball
+DIST_TARGETS =	manpages
+
 ##################################################
 
 # "cleandir" also removes temporary files of regression tests
