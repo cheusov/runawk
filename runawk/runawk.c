@@ -76,15 +76,13 @@ usage: runawk [OPTIONS] program_file [arguments...]\n\
 OPTIONS:\n\
   -h        display this screen\n\
   -V        display version information\n\
-  -d        debugging mode, just list argv array for awk,\n\
-            awk interpreter is not run\n\
+  -d        debugging mode, list argv array for awk and\n\
+            do not run AWK interpreter\n\
   -e <program>     program to run\n\
   -v <var=val>     assign the value val to the variable var\n\
   -f <awk_module>  add awk_module to a program\n\
   -t        create a temporary directory and pass it to\n\
             AWK interpreter subprocess\n\
-  -i        always add \"stdin\" file name to awk arguments\n\
-  -I        do not add \"stdin\" file name to awk arguments\n\
 ");
 }
 
