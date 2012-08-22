@@ -118,6 +118,8 @@ static char *interp_var = NULL;
 
 static int debug = 0;
 
+static int add_stdin = 0;
+
 static dynarray_t new_argv;
 static dynarray_t includes;
 
@@ -553,6 +555,12 @@ static void process_opt (char opt)
 		case 'd':
 			debug = 1;
 			break;
+		case 'i':
+			add_stdin = 1;
+			break;
+		case 'I':
+			add_stdin = 0;
+			break;
 		case 't':
 			create_tmpdir = 1;
 			break;
@@ -784,6 +792,8 @@ int main (int argc, char **argv)
 				case 'V':
 				case 'd':
 				case 't':
+				case 'i':
+				case 'I':
 					process_opt (*p);
 					break;
 				default:
@@ -830,6 +840,11 @@ int main (int argc, char **argv)
 
 	for (i=0; i < (size_t) argc; ++i){
 		da_push_dup (&new_argv, argv [i]);
+	}
+
+	if (add_stdin){
+		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
+		da_push_dup (&new_argv, STDIN_FILENAME);
 	}
 
 	da_push_dup (&new_argv, NULL);
