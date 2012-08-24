@@ -28,6 +28,10 @@ SRCS =		runawk.c dynarray.c file_hier.c
 
 MAN =		runawk.1
 
+MKC_COMMON_HEADERS  = string.h
+MKC_SOURCE_FUNCLIBS = strlcat strlcpy
+MKC_CHECK_FUNCS3    = strlcat strlcpy
+
 CFLAGS +=	-DAWK_PROG='"${AWK_PROG}"'
 CFLAGS +=	-DSTDIN_FILENAME='"${STDIN_FILENAME}"'
 CFLAGS +=	-DMODULESDIR='"${MODULESDIR}:${MODULESDIR}/gawk"'

@@ -30,6 +30,14 @@
 
 #include "file_hier.h"
 
+#if HAVE_FUNC3_STRLCPY
+size_t strlcpy(char *dst, const char *src, size_t size);
+#endif
+
+#if HAVE_FUNC3_STRLCAT
+size_t strlcat(char *dst, const char *src, size_t size);
+#endif
+
 void file_hier (
 	const char *dir,
 	void (*proc_file) (const char *fn),
