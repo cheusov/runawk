@@ -33,6 +33,7 @@
 #include <signal.h>
 
 #include "dynarray.h"
+#include "file_hier.h"
 
 #ifdef HAVE_CONFIG_H
 /* if you need, add extra includes to config.h */
@@ -123,17 +124,27 @@ static int add_stdin = 0;
 static dynarray_t new_argv;
 static dynarray_t includes;
 
+static void remove_file (const char *fn)
+{
+	if (unlink (fn)){
+		fprintf (stderr, "rm(\"%s\") failed: %s\n", fn, strerror (errno));
+	}
+}
+
+static void remove_dir (const char *dir)
+{
+	if (rmdir (dir)){
+		fprintf (stderr, "rmdir(\"%s\") failed: %s\n", dir, strerror (errno));
+	}
+}
+
 static void clean_and_exit (int status)
 {
-	char buffer [4000];
-
 	if (temp_fn_created)
 		unlink (temp_fn);
 
 	if (temp_dir){
-		snprintf (buffer, sizeof (buffer), "rm -rf %s", temp_dir);
-		if (-1 == system (buffer))
-			perror ("system(3) failed:");
+		file_hier (temp_dir, remove_file, remove_dir);
 
 		if (temp_dir)
 			free (temp_dir);
