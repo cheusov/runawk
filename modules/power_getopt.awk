@@ -40,15 +40,6 @@
 # =back
 #
 
-function print_help (            i){
-	for (i = 1; i <= _help_msg_cnt; ++i){
-		if (_help_msg_arr [i] ~ /^[ \t]*=/){
-			sub(/=/, "-", _help_msg_arr [i])
-		}
-		print _help_msg_arr [i] > "/dev/stderr"
-	}
-}
-
 function getarg (opt, dflt,              tmp){
 	assert(opt in __getopt_opts, "Bad option `" opt "`")
 

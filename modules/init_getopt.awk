@@ -12,9 +12,22 @@
 # allows to do this.  See the documentation about how options are
 # initialized in power_getopt.awk module.
 #
+# =item print_help ()
+#
+# display help message.
+#
 
 #use "alt_getopt.awk"
 #use "embed_str.awk"
+
+function print_help (            i){
+	for (i = 1; i <= _help_msg_cnt; ++i){
+		if (_help_msg_arr [i] ~ /^[ \t]*=/){
+			sub(/=/, "-", _help_msg_arr [i])
+		}
+		print _help_msg_arr [i] > "/dev/stderr"
+	}
+}
 
 BEGIN {
 	if ("help" in EMBED_STR){
