@@ -11,9 +11,6 @@ SUBPRJ_DFLT +=		a_getopt
 
 MKC_REQD =		0.23.0
 
-# for making a tarball
-DIST_TARGETS =	manpages
-
 ##################################################
 
 # "cleandir" also removes temporary files of regression tests
@@ -27,6 +24,8 @@ test: all-test
 test_all: test_all-test
 
 # We use "target "manpages" for making a distribution tarball
+TARGETS += _manpages # _manpages is a new recursive target
+DIST_TARGETS =	manpages
 manpages: _manpages
 	rm ${MKC_CACHEDIR}/_mkc*
 
