@@ -1,4 +1,14 @@
 ======================================================================
+Version 1.4.3, by Aleksey Cheusov, Sun,  9 Sep 2012 21:54:21 +0300
+
+  runawk:
+    - Clean-ups in usage message
+    - system(3) is not used anymore for removing temporary directory
+  modules:
+    - Function print_help() has been moved
+      from power_getopt.awk to init_getopt.awk
+
+======================================================================
 Version 1.4.2, by Aleksey Cheusov, Sun, 19 Aug 2012 23:00:39 +0300
 
   runawk_modules.3 was added where all modules are documented
