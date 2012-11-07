@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item xsystem(FILE)
+# =item I<xsystem(FILE)>
 #
 # safe wrapper for 'system'.
 # awk exits with error if system() function failed.

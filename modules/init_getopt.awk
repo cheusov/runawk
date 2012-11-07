@@ -14,7 +14,7 @@
 #
 # =over 2
 #
-# =item print_help ()
+# =item I<print_help ()>
 #
 # display help message.
 #

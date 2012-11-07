@@ -11,15 +11,15 @@
 #
 # =over 2
 #
-# =item MODC
+# =item I<MODC>
 #
 # A number of modules (-f <filename>) passed to an awk interpreter
 #
-# =item MODV
+# =item I<MODV>
 #
 # Array with [0..MODC) indexes of those modules
 #
-# =item MODMAIN
+# =item I<MODMAIN>
 #
 # Path to the main module, i.e. program filename
 #

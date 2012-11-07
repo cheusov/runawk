@@ -9,10 +9,10 @@
 #
 # =over 2
 #
-# =item dirname (PATH)
+# =item I<dirname (PATH)>
 #
 # return dirname portion of the PATH
-# (the same as dirname(3))
+# (the same as I<dirname(3)>)
 #
 # =back
 #

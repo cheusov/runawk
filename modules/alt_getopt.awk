@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item getopt(SHORT_OPTS)
+# =item I<getopt(SHORT_OPTS)>
 #
 # This function processes ARGV array and
 # returns TRUE if option is recieved, 

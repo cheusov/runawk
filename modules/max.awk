@@ -9,19 +9,19 @@
 #
 # =over 2
 #
-# =item max, max3, max4, max5
+# =item I<max, max3, max4, max5>
 #
 # maximum functions
 #
-# =item max_key(HASH, DFLT)
+# =item I<max_key(HASH, DFLT)>
 #
 # returns a maximum key in HASH or DFLT if it is empty
 #
-# =item max_value(HASH, DFLT)
+# =item I<max_value(HASH, DFLT)>
 #
 # returns a maximum value in HASH or DFLT if it is empty
 #
-# =item key_of_max_value(HASH, DFLT)
+# =item I<key_of_max_value(HASH, DFLT)>
 #
 # returns A KEY OF maximum value in HASH or DFLT if it is empty
 #

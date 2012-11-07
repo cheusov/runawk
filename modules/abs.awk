@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item abs (V)
+# =item I<abs (V)>
 #
 # return absolute value of V.
 #

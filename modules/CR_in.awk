@@ -15,7 +15,7 @@
 # If you want to adapt your script to accept windows files on input,
 # just put
 #
-#    #use "CR_in.awk"
+#     #use "CR_in.awk"
 #
 # in the very beginning of your script.
 #

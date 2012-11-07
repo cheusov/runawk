@@ -16,18 +16,18 @@
 #
 # =over 2
 #
-# =item fieldwidths(STRING, FW)
+# =item I<fieldwidths(STRING, FW)>
 #
 # extracts substrings from STRING according to FW
 # from the left to the right and assigns $1, $2 etc. and NF
 # variable. FW is a space separated list of numbers that specify
 # fields widths.
 #
-# =item fieldwidths0(FW)
+# =item I<fieldwidths0(FW)>
 #
 # Does the the same as `fieldwidths' function but splits $0 instead.
 #
-# =item FW
+# =item I<FW>
 #
 # global variable. If it is set to non-empty string, all input
 # lines are splitted automatically and the value of variable FS is

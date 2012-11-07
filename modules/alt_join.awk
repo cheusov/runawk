@@ -9,15 +9,15 @@
 #
 # =over 2
 #
-# =item  join_keys (HASH, SEP)
+# =item I<join_keys (HASH, SEP)>
 #
 # return string consisting of all keys from HASH separated by SEP.
 #
-# =item join_values (HASH, SEP)
+# =item I<join_values (HASH, SEP)>
 #
 # return string consisting of all values from HASH separated by SEP.
 #
-# =item join_by_numkeys (ARRAY, SEP [, START [, END]])
+# =item I<join_by_numkeys (ARRAY, SEP [, START [, END]])>
 #
 # return string consisting of all values from ARRAY
 # separated by SEP. Indices from START (default: 1) to END

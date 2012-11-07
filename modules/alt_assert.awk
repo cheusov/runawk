@@ -11,7 +11,7 @@
 #
 # =over 2
 #
-# =item assert (CONDITION, MSG, STATUS)
+# =item I<assert (CONDITION, MSG, STATUS)>
 #
 # print an
 # error message MSG to standard error and terminates

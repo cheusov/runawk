@@ -10,7 +10,7 @@
 # This module reads a program's file, find .begin-str/.end-str pairs
 # and reads lines between them.
 #
-# EMBED_STR - Associative array with string index
+# I<EMBED_STR> - Associative array with string index
 #
 # Example:
 #  Input:

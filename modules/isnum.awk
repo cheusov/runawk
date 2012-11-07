@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item isnum (NUM)
+# =item I<isnum (NUM)>
 #
 # returns 1 if an argument is a number
 #

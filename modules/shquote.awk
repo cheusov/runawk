@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item shquote(str)
+# =item I<shquote(str)>
 #
 # transforms the string `str' by adding shell escape and
 # quoting characters to include it to the system() and popen()

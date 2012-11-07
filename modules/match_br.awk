@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item match_br(STRING, BR_OPEN, BR_CLOSE)
+# =item I<match_br(STRING, BR_OPEN, BR_CLOSE)>
 #
 # return start position (or zero if failure) of the substring
 # surrounded by balanced (), [], {} or similar characters

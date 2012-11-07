@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item multisub(STRING, SUBST_REPLS[, KEEP])
+# =item I<multisub(STRING, SUBST_REPLS[, KEEP])>
 #
 # is a substitution function. It searches for
 # a list of substrings, specified in SUBST_REPL

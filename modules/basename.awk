@@ -11,10 +11,10 @@
 #
 # =over 2
 #
-# =item basename (PATH)
+# =item I<basename (PATH)>
 #
 # return filename portion of the PATH
-# (the same as dirname(3))
+# (the same as I<dirname(3)>)
 #
 # =back
 #

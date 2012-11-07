@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item has_suffix(STRING, SUFFIX)
+# =item I<has_suffix(STRING, SUFFIX)>
 #
 # return TRUE if STRING ends with SUFFIX
 #

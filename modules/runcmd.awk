@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item runcmd1 (CMD, OPTS, FILE)
+# =item I<runcmd1 (CMD, OPTS, FILE)>
 #
 # wrapper for system() function
 # that runs a command CMD with options OPTS and one filename FILE.
@@ -17,7 +17,7 @@
 # correctly FILE containing spaces, single quote, double quote,
 # tilde etc.
 #
-# =item xruncmd1 (FILE)
+# =item I<xruncmd1 (FILE)>
 #
 # safe wrapper for 'runcmd1'.
 # awk exits with error if runcmd1() function failed.
