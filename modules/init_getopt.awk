@@ -12,9 +12,13 @@
 # allows to do this.  See the documentation about how options are
 # initialized in power_getopt.awk module.
 #
+# =over 2
+#
 # =item print_help ()
 #
 # display help message.
+#
+# =back
 #
 
 #use "alt_getopt.awk"
