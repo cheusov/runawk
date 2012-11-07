@@ -127,7 +127,7 @@ static dynarray_t includes;
 static void remove_file (const char *fn)
 {
 	if (unlink (fn)){
-		fprintf (stderr, "rm(\"%s\") failed: %s\n", fn, strerror (errno));
+		fprintf (stderr, "unlink(\"%s\") failed: %s\n", fn, strerror (errno));
 	}
 }
 

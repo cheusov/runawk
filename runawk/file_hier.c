@@ -73,7 +73,6 @@ void file_hier (
 			if (0 == lstat (buffer, &sb)){
 				if (S_ISDIR (sb.st_mode)){
 					file_hier (buffer, proc_file, proc_dir);
-					proc_dir (buffer);
 				}else{
 					proc_file (buffer);
 				}
