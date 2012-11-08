@@ -22,7 +22,7 @@
 # =back
 #
 # In both cases "safe" means that returned value is analysed and
-# if it is less tha zero (file reading error happens) program will
+# if it is less than zero (file reading error happens) program will
 # be terminated emmidiately with appropriate error message sent to stderr.
 # Both functions return zero if end of file is reached or non-zero otherwise.
 #
