@@ -11,47 +11,47 @@
 #
 # =over 2
 #
-# =item is_file(FILENAME)
+# =item I<is_file(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a regular file or 0 otherwise.
 #
-# =item is_socket(FILENAME)
+# =item I<is_socket(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a socket or 0 otherwise.
 #
-# =item is_dir(FILENAME)
+# =item I<is_dir(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 #  is a dir or 0 otherwise.
 #
-# =item is_exec(FILENAME)
+# =item I<is_exec(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is executable or 0 otherwise.
 #
-# =item is_fifo(FILENAME)
+# =item I<is_fifo(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a FIFO or 0 otherwise.
 #
-# =item is_blockdev(FILENAME)
+# =item I<is_blockdev(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a block special file or 0 otherwise.
 #
-# =item is_chardev(FILENAME)
+# =item I<is_chardev(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a character special file or 0 otherwise.
 #
-# =item is_symlink(FILENAME)
+# =item I<is_symlink(FILENAME)>
 #
 # returns 1 if the specified FILENAME
 # is a symlink or 0 otherwise.
 #
-# =item file_size(FILENAME, USE_STAT_NOT_LSTAT)
+# =item I<file_size(FILENAME, USE_STAT_NOT_LSTAT)>
 #
 # returns the size of the specified FILENAME.
 # If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).
@@ -61,7 +61,7 @@
 #     -1 if file is not a regular file
 #     filesize otherwise
 #
-# =item file_type(FILENAME, USE_STAT_NOT_LSTAT)
+# =item I<file_type(FILENAME, USE_STAT_NOT_LSTAT)>
 #
 # returns a single letter that corrspond to the file
 # type. If USE_STAT_NOT_LSTAT is True, stat(2) is used instead of lstat(2).

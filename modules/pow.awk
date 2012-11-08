@@ -10,7 +10,7 @@
 #
 # =over 2
 #
-# =item pow (X, Y)
+# =item I<pow (X, Y)>
 #
 # returns the value of X to the exponent Y
 #

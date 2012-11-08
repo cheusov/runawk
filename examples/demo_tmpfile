@@ -6,13 +6,24 @@
 # This demo generates temporary file names and outputs them to stdout
 
 BEGIN {
-	tmpfile1 = tmpfile()
-	tmpfile2 = tmpfile()
-	tmpfile3 = tmpfile()
+	tmpfile1  = tmpfile()
+	tmpfile2  = tmpfile()
+	tmpsubdir = tmpfile()
 
-	print tmpfile1
-	print tmpfile2
-	print tmpfile3
+	print "file 1" > tmpfile1
+
+	print "file 2" > tmpfile2
+
+	system("mkdir " tmpsubdir)
+
+	tmpfile3 = tmpsubdir "/file3"
+	print "file 3" > tmpfile3
+
+	close(tmpfile1)
+	close(tmpfile2)
+	close(tmpfile3)
+
+	system("cat " tmpfile1 " " tmpfile2 " " tmpfile3)
 
 	exitnow(0)
 }

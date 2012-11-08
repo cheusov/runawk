@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item str2regex(STRING)
+# =item I<str2regex(STRING)>
 #
 # returns a regular expression that matches given STRING
 #

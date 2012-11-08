@@ -15,11 +15,11 @@
 #
 # =over 2
 #
-# =item tmpfile()
+# =item I<tmpfile()>
 #
 # returns a temporary file name.
 #
-# =item runawk_tmpdir
+# =item I<runawk_tmpdir>
 #
 # global variable that keeps tempdir created by runawk -t
 #

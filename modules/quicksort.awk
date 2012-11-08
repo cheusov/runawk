@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item quicksort (src_array, dest_remap, start, end)
+# =item I<quicksort (src_array, dest_remap, start, end)>
 #
 # The content of `src_array' is sorted using awk's rules for
 # comparing values. Values with indices in range [start, end] are
@@ -25,7 +25,7 @@
 # `quicksort' algorithm is used.
 # Examples: see demo_quicksort and demo_quicksort2 executables
 #
-# =item quicksort_values (src_hash, dest_remap)
+# =item I<quicksort_values (src_hash, dest_remap)>
 #
 # The same as `quicksort' described above, but hash values are sorted.
 #
@@ -38,7 +38,7 @@
 # `count', a number of elements in `src_hash', is a return value.
 # Examples: see demo_quicksort* executables.
 #
-# =item quicksort_indices (src_hash, dest_remap)
+# =item I<quicksort_indices (src_hash, dest_remap)>
 #
 # The same as `quicksort' described above, but hash indices are sorted.
 #

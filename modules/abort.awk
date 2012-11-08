@@ -10,7 +10,7 @@
 #
 # =over 2
 #
-# =item abort (MSG, [EXIT_STATUS])
+# =item I<abort (MSG, [EXIT_STATUS])>
 #
 # print MSG to stderr and exits program with
 # EXIT_STATUS.  EXIT_STATUS defaults to 1.

@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item has_prefix (STRING, PREFIX)
+# =item I<has_prefix (STRING, PREFIX)>
 #
 # return TRUE if STRING begins with PREFIX
 #

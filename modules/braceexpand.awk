@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item braceexp(STRING)
+# =item I<braceexp(STRING)>
 #
 # shell-like brace expansion.
 #

@@ -12,7 +12,7 @@
 #
 # =over 2
 #
-# =item readfile(FILENAME)
+# =item I<readfile(FILENAME)>
 #
 # read entire file and return its content as a string
 #

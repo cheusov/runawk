@@ -14,22 +14,22 @@
 #
 # =over 2
 #
-# =item tokenre(STRING, REGEXP)
+# =item I<tokenre(STRING, REGEXP)>
 #
 # extracts substrings from STRING
 # according to REGEXP from the left to the right and assigns $1, $2
 # etc. and NF variable.
 #
-# =item tokenre0(REGEXP)
+# =item I<tokenre0(REGEXP)>
 #
 # Does the the same as `tokenre' but splits $0 instead.
 #
-# =item splitre(STRING, ARR, REGEXP)
+# =item I<splitre(STRING, ARR, REGEXP)>
 #
 # The same as `tokenre' but ARR[1], ARR[2]... are assigned.
 # A number of extracted tokens is a return value.
 #
-# =item TRE
+# =item I<TRE>
 #
 # global variable. If it is set to non-empty string, all input
 # lines are splitted automatically.

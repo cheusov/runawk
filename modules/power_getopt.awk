@@ -29,7 +29,7 @@
 #
 # =over 2
 #
-# =item getarg(OPT, DEFAULT)
+# =item I<getarg(OPT, DEFAULT)>
 #
 # returns either 1 (option OPT was applied) or 0 (OPT was not
 # applied) for options not accepting the argument, and either

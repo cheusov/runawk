@@ -12,7 +12,7 @@
 #
 # =over 2
 #
-# =item read_inifile(FILENAME, RESULT [, SEPARATOR])
+# =item I<read_inifile(FILENAME, RESULT [, SEPARATOR])>
 #
 # Reads .ini file FILENAME and fills array RESULT, e.g.
 # RESULT [<section5><SEPARATOR><name6>] = <value5.6> etc.

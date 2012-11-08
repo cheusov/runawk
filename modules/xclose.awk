@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item xclose(FILE)
+# =item I<xclose(FILE)>
 #
 # safe wrapper for 'close'.
 # awk exits with error if close() function failed.

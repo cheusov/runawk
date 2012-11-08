@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item exitnow (STATUS)
+# =item I<exitnow (STATUS)>
 #
 # similar to the statement 'exit' but do not run
 # END sections.

@@ -9,19 +9,19 @@
 #
 # =over 2
 #
-# =item min, min3, min4, min5
+# =item I<min, min3, min4, min5>
 #
 # minimum functions
 #
-# =item min_key(HASH, DFLT)
+# =item I<min_key(HASH, DFLT)>
 #
 # returns a minimum key in HASH or DFLT if it is empty
 #
-# =item min_value(HASH, DFLT)
+# =item I<min_value(HASH, DFLT)>
 #
 # returns a minimum value in HASH or DFLT if it is empty
 #
-# =item key_of_min_value(HASH, DFLT)
+# =item I<key_of_min_value(HASH, DFLT)>
 #
 # returns A KEY OF minimum value in HASH or DFLT if it is empty
 #

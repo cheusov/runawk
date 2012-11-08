@@ -9,12 +9,12 @@
 #
 # =over 2
 #
-# =item xgetline0([FILE])
+# =item I<xgetline0([FILE])>
 #
 # Safe analog to 'getline < FILE' or 'getline' (if no FILE is specified).
 # 0 at the end means that input line is assigned to $0.
 #
-# =item xgetline([FILE])
+# =item I<xgetline([FILE])>
 #
 # Safe analog to 'getline __input < FILE' and 'getline __input'
 # (if no FILE is specified)

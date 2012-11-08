@@ -969,9 +969,9 @@ $1=12
 NF=0
 --------------------------------------------------
  ------ args: ../examples/demo_tmpfile
-/tmp/awk.XXXX/0
-/tmp/awk.XXXX/1
-/tmp/awk.XXXX/2
+file 1
+file 2
+file 3
 --------------------------------------------------
  ------ args: ../examples/demo_trim ../examples/demo_trim.in
 trim_l("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator  "
