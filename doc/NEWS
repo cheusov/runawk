@@ -1,11 +1,9 @@
 ======================================================================
-Version 1.4.4, by Aleksey Cheusov, Sat, 10 Nov 2012 13:24:57 +0300
+Version 1.4.4, by Aleksey Cheusov, Sat, 10 Nov 2012 13:57:35 +0300
 
   Fix for bug in removing subdirs in temporary directory.
 
-  Fix for build failures with non-default .OBJDIR
-
-  Minor improvements and fix in runawk_modules.3
+  Improvements and bug fix in runawk_modules.3
 
 ======================================================================
 Version 1.4.3, by Aleksey Cheusov, Sun,  9 Sep 2012 21:54:21 +0300
