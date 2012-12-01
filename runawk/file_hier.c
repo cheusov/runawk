@@ -30,11 +30,11 @@
 
 #include "file_hier.h"
 
-#if HAVE_FUNC3_STRLCPY
+#if !HAVE_FUNC3_STRLCPY
 size_t strlcpy(char *dst, const char *src, size_t size);
 #endif
 
-#if HAVE_FUNC3_STRLCAT
+#if !HAVE_FUNC3_STRLCAT
 size_t strlcat(char *dst, const char *src, size_t size);
 #endif
 
