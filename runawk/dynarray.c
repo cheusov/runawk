@@ -33,7 +33,7 @@ void da_init (dynarray_t * array)
 	array->array     = NULL;
 }
 
-void da_push (dynarray_t * array, const char *item)
+void da_push (dynarray_t * array, char *item)
 {
 	if (array->allocated == array->size){
 		array->allocated = array->allocated * 4 / 3 + 100;

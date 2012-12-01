@@ -27,11 +27,11 @@
 typedef struct {
 	size_t size;
 	size_t allocated;
-	const char **array;
+	char **array;
 } dynarray_t;
 
 void da_init (dynarray_t * array);
-void da_push (dynarray_t * array, const char *item);
+void da_push (dynarray_t * array, char *item);
 void da_push_dup (dynarray_t * array, const char *item);
 void da_destroy (dynarray_t * array);
 void da_free_items (dynarray_t * array);
