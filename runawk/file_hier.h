@@ -29,4 +29,4 @@ void file_hier (
 	void (*proc_file) (const char *fn),
 	void (*proc_dir) (const char *fn));
 
-#endif // _FILE_HIER_H_
+#endif /* _FILE_HIER_H_ */

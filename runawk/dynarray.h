@@ -36,4 +36,4 @@ void da_push_dup (dynarray_t * array, const char *item);
 void da_destroy (dynarray_t * array);
 void da_free_items (dynarray_t * array);
 
-#endif // _DYNARRAY_H_
+#endif /* _DYNARRAY_H_ */

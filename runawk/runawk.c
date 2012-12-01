@@ -582,23 +582,10 @@ static void process_opt (char opt)
 
 static void handler (int sig)
 {
-//	if (temp_fn_created)
-//		unlink (temp_fn);
-
-//	fprintf (stderr, "sig=%li\n", (long) sig);
-//	fprintf (stderr, "pid=%li\n", (long) awk_pid);
 	killing_sig = sig;
 	if (awk_pid != -1){
 		kill (awk_pid, sig);
 	}
-
-//	struct sigaction sa;
-//	sa.sa_handler = SIG_DFL;
-//	sigemptyset (&sa.sa_mask);
-//	sa.sa_flags = 0;
-//	sigaction (sig, &sa, NULL);
-
-//	kill (getpid (), sig);
 }
 
 static void set_sig_handler (void)
