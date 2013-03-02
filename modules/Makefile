@@ -9,6 +9,8 @@ MAN =				runawk_modules.3
 .PHONY: _manpages
 _manpages: ${MAN}
 
+.PATH:				${.OBJDIR}
+
 CLEANFILES += runawk_modules.3 runawk_modules.pod
 
 runawk_modules.pod: ${MODULES} pod_header.txt pod_footer.txt
