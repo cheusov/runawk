@@ -768,6 +768,11 @@ int main (int argc, char **argv)
 				clean_and_exit (39);
 			}
 
+			if (prog_specified){
+				fprintf (stderr, "multiple -e are not allowed\n");
+				clean_and_exit (39);
+			}
+
 			prog_specified = argv [1];
 
 			--argc;

@@ -229,6 +229,9 @@ BEGIN {
 0
 env FOO2=bar2
 --------------------------------------------------
+ ------ args: -e BEGIN {print 1} -e BEGIN {print 2}
+multiple -e are not allowed
+--------------------------------------------------
  ------ args: -d -e 
     #use "alt_assert.awk"
 

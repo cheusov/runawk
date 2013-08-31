@@ -201,6 +201,8 @@ BEGIN {
 }
 '
 
+runtest -e 'BEGIN {print 1}' -e 'BEGIN {print 2}'
+
 ####################
 AWKPATH=${SRCDIR}/modules
 export AWKPATH
