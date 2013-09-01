@@ -126,25 +126,24 @@ B<runawk> was created to solve all these problems
 
 =item B<-d>
 
-Turn on a debugging mode in which B<runawk> prints argument list
-with which real B<awk> interpreter will be run.
+Turn on a debugging mode.
 
 =item B<-e> I<program>
 
-Specify program. If I<-e> is not specified program is read from
+Specify program. If I<-e> is not specified, the AWK code is read from
 I<program_file>.
 
 =item B<-f> I<awk_module>
 
-Specify an AWK module to use. It works the same way as
+Activate I<awk_module>. This works the same way as
 
     #use "awk_module.awk"
 
-directive in the program. Multiple B<-f> options are allowed.
+directive in the code. Multiple B<-f> options are allowed.
 
 =item B<-F> I<fs>
 
-Set the input field separator FS to the regular expression fs.
+Set the input field separator FS to the regular expression I<fs>.
 
 =item B<-h>
 
@@ -152,7 +151,7 @@ Display help information.
 
 =item B<-i>
 
-Add stdin file name to a list of awk arguments
+Add stdin file name to the list of B<awk> arguments
 
 =item B<-I>
 
@@ -160,9 +159,9 @@ Do not add stdin file name to a list of awk arguments (the default)
 
 =item B<-t>
 
-If this option is applied a temporary directory is created by
-B<runawk> and path to it is passed to child AWK subprocess. Temporary
-directory is created under ${RUNAWK_TMPDIR} (if it is set), ${TMPDIR}
+If this option is applied, a temporary directory is created by
+B<runawk> and path to it is passed to B<awk> child process. Temporary
+directory is created under ${RUNAWK_TMPDIR} (if it is set), or ${TMPDIR}
 (if it is set) or /tmp directory otherwise.
 If I<#use "tmpfile.awk"> is detected
 in a program this option is activated automatically.
