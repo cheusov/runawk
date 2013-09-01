@@ -554,32 +554,6 @@ static int add_file_uniq (
 	return add_file (dir, name, safe_use);
 }
 
-static void process_opt (char opt)
-{
-	switch (opt){
-		case 'h':
-			usage ();
-			clean_and_exit (0);
-		case 'V':
-			version ();
-			clean_and_exit (0);
-		case 'd':
-			debug = 1;
-			break;
-		case 'i':
-			add_stdin = 1;
-			break;
-		case 'I':
-			add_stdin = 0;
-			break;
-		case 't':
-			create_tmpdir = 1;
-			break;
-		default:
-			abort ();
-	}
-}
-
 static void handler (int sig)
 {
 	killing_sig = sig;
@@ -630,10 +604,10 @@ int main (int argc, char **argv)
 	char buffer [4000];
 	const char *progname   = NULL;
 	int child_status       = 0;
-	const char *p          = NULL;
 	const char *env_interp = getenv ("RUNAWK_AWKPROG");
 	const char *prog_specified = NULL;
 	const char *awkpath_env = NULL;
+	int c;
 
 	size_t i;
 	size_t j;
@@ -647,8 +621,6 @@ int main (int argc, char **argv)
 	if (env_interp){
 		interp = env_interp;
 	}
-
-	--argc, ++argv;
 
 	if (argc == 0){
 		usage ();
@@ -678,133 +650,55 @@ int main (int argc, char **argv)
 
 	da_push_dup (&new_argv, NULL); /* progname */
 
-	/* options, no getopt(3) or getopt_long(3) here */
-	for (; argc && argv [0][0] == '-'; --argc, ++argv){
-		/* --help */
-		if (!strcmp (argv [0], "--help")){
-			process_opt ('h');
-			abort ();
-		}
+	while (c = getopt (argc, argv, "+hVF:diIe:f:tv:"), c != EOF){
+		switch (c){
+			case 'h':
+				usage ();
+				clean_and_exit (0);
+				break;
+			case 'V':
+				version ();
+				clean_and_exit (0);
+				break;
+			case 'd':
+				debug = 1;
+				break;
+			case 'i':
+				add_stdin = 1;
+				break;
+			case 'I':
+				add_stdin = 0;
+				break;
+			case 'v':
+				da_push_dup (&new_argv, "-v");
+				da_push_dup (&new_argv, optarg);
+				break;
+			case 'F':
+				da_push_dup (&new_argv, "-F");
+				da_push_dup (&new_argv, optarg);
+				break;
+			case 'f':
+				add_file (cwd, optarg, 0);
+				break;
+			case 'e':
+				if (prog_specified){
+					fprintf (stderr, "multiple -e are not allowed\n");
+					clean_and_exit (39);
+				}
 
-		/* --version */
-		if (!strcmp (argv [0], "--version")){
-			process_opt ('V');
-			abort ();
-		}
-
-		/* --debug */
-		if (!strcmp (argv [0], "--debug")){
-			process_opt ('d');
-			continue;
-		}
-
-		/* --with-stdin */
-		if (!strcmp (argv [0], "--with-stdin")){
-			process_opt ('i');
-			continue;
-		}
-
-		/* --without-stdin */
-		if (!strcmp (argv [0], "--without-stdin")){
-			process_opt ('I');
-			continue;
-		}
-
-		/* -v|--assign */
-		if (!strcmp (argv [0], "-v") || !strcmp (argv [0], "--assign")){
-			if (argc == 1){
-				fprintf (stderr, "missing argument for -v option\n");
-				clean_and_exit (39);
-			}
-
-			da_push_dup (&new_argv, "-v");
-			da_push_dup (&new_argv, argv [1]);
-
-			--argc;
-			++argv;
-			continue;
-		}
-
-		/* -F <FS>*/
-		if (!strcmp (argv [0], "-F")){
-			if (argc == 1){
-				fprintf (stderr, "missing argument for -F option\n");
-				clean_and_exit (39);
-			}
-
-			da_push_dup (&new_argv, "-F");
-			da_push_dup (&new_argv, argv [1]);
-
-			--argc;
-			++argv;
-			continue;
-		}
-
-		/* -F<FS>*/
-		if (!strncmp (argv [0], "-F", 2)){
-			da_push_dup (&new_argv, "-F");
-			da_push_dup (&new_argv, argv [0]+2);
-			continue;
-		}
-
-		/* -f|--file */
-		if (!strcmp (argv [0], "-f") || !strcmp (argv [0], "--file")){
-			if (argc == 1){
-				fprintf (stderr, "missing argument for -f option\n");
-				clean_and_exit (39);
-			}
-
-			add_file (cwd, argv [1], 0);
-
-			--argc;
-			++argv;
-			continue;
-		}
-
-		/* -e */
-		if (!strcmp (argv [0], "-e") || !strcmp (argv [0], "--execute")){
-			if (argc == 1){
-				fprintf (stderr, "missing argument for -e option\n");
-				clean_and_exit (39);
-			}
-
-			if (prog_specified){
-				fprintf (stderr, "multiple -e are not allowed\n");
-				clean_and_exit (39);
-			}
-
-			prog_specified = argv [1];
-
-			--argc;
-			++argv;
-			continue;
-		}
-
-		/* -- */
-		if (!strcmp (argv [0], "--")){
-			double_dash = 1;
-			--argc;
-			++argv;
-			break;
-		}
-
-		/* -h -V -d -i -I etc. */
-		for (p = argv [0]+1; *p; ++p){
-			switch (*p){
-				case 'h':
-				case 'V':
-				case 'd':
-				case 't':
-				case 'i':
-				case 'I':
-					process_opt (*p);
-					break;
-				default:
-					fprintf (stderr, "unknown option -%c\n", *p);
-					clean_and_exit (1);
-			}
+				prog_specified = optarg;
+				break;
+			case 't':
+				create_tmpdir = 1;
+				break;
+			default:
+				usage ();
+				exit (1);
 		}
 	}
+
+	argv += optind;
+	argc -= optind;
 
 	progname = interp;
 
@@ -818,13 +712,13 @@ int main (int argc, char **argv)
 			clean_and_exit (30);
 		}
 
-		--argc;
 		add_file (cwd, *argv, 0);
 		progname = *argv;
 #if 0
 		setprogname (*argv);
 		setproctitle (*argv);
 #endif
+		--argc;
 		++argv;
 	}
 

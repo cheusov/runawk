@@ -10,7 +10,7 @@ new_argv [1] = -f
 new_argv [3] = --
 new_argv [4] = --long-option
 --------------------------------------------------
- ------ args: --debug _test_program -o=file
+ ------ args: -d _test_program -o=file
 new_argv [0] = _test_program
 new_argv [1] = -f
 new_argv [3] = --
@@ -58,10 +58,10 @@ Hello World
  ------ args: -v two=2 -e BEGIN {print two}
 2
 --------------------------------------------------
- ------ args: --execute BEGIN {print "Hello World"} /dev/null
+ ------ args: -e BEGIN {print "Hello World"} /dev/null
 Hello World
 --------------------------------------------------
- ------ args: --assign var1=123 -v var2=321 -e BEGIN {print var1, var2}
+ ------ args: -v var1=123 -v var2=321 -e BEGIN {print var1, var2}
 123 321
 --------------------------------------------------
  ------ args: _test.tmp
@@ -175,12 +175,15 @@ BEGIN {
    }
 } -- -a -b -c
 new_argv [0] = awk
-new_argv [1] = -f
-new_argv [2] = /tmp/runawk.NNNNNN
-new_argv [3] = --
-new_argv [4] = -a
-new_argv [5] = -b
-new_argv [6] = -c
+new_argv [1] = 
+BEGIN {
+   for (i=0; i < ARGC; ++i){
+      printf "ARGV [%s]=%s\n", i, ARGV [i]
+   }
+}
+new_argv [2] = -a
+new_argv [3] = -b
+new_argv [4] = -c
 --------------------------------------------------
  ------ args: -e 
 BEGIN {

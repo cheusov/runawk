@@ -49,7 +49,7 @@ touch _test_program
 
 runtest -d  _test_program
 runtest -d  _test_program --long-option
-runtest --debug  _test_program -o=file
+runtest -d  _test_program -o=file
 runtest -d  _test_program fn1 fn2
 runtest -d -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
 runtest -d -f alt_assert.awk -e 'BEGIN {exit}'
@@ -58,8 +58,8 @@ runtest -h | awk 'NR <= 3'
 runtest -e 'BEGIN {print "Hello World"}'
 runtest -v one=1 -e 'BEGIN {print one} {print "unbelievably"}' /dev/null
 runtest -v two=2 -e 'BEGIN {print two}'
-runtest --execute 'BEGIN {print "Hello World"}' /dev/null
-runtest --assign var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
+runtest -e 'BEGIN {print "Hello World"}' /dev/null
+runtest -v var1=123 -v var2=321 -e 'BEGIN {print var1, var2}'
 
 unset AWKPATH || true
 
