@@ -9,7 +9,6 @@ plan 0:
     stack_push, stack_pop, stack_top, stack_isempty, stack_clean
     queue_push, queue_pop, queue_back, queue_front, queue_isempty,
         queue_clean, queue_push_back, queue_pop_front
-- runawk -T for tabbed input
 - inspect.awk: inspect_str, inspect_hash
   for displaying invisible characters
 

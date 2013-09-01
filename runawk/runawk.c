@@ -119,8 +119,6 @@ static char *interp_var = NULL;
 
 static int debug = 0;
 
-static int add_stdin = 0;
-
 static dynarray_t new_argv;
 static dynarray_t includes;
 
@@ -650,35 +648,10 @@ int main (int argc, char **argv)
 
 	da_push_dup (&new_argv, NULL); /* progname */
 
-	while (c = getopt (argc, argv, "+hVF:diIe:f:tv:"), c != EOF){
+	while (c = getopt (argc, argv, "+de:f:F:htTVv:"), c != EOF){
 		switch (c){
-			case 'h':
-				usage ();
-				clean_and_exit (0);
-				break;
-			case 'V':
-				version ();
-				clean_and_exit (0);
-				break;
 			case 'd':
 				debug = 1;
-				break;
-			case 'i':
-				add_stdin = 1;
-				break;
-			case 'I':
-				add_stdin = 0;
-				break;
-			case 'v':
-				da_push_dup (&new_argv, "-v");
-				da_push_dup (&new_argv, optarg);
-				break;
-			case 'F':
-				da_push_dup (&new_argv, "-F");
-				da_push_dup (&new_argv, optarg);
-				break;
-			case 'f':
-				add_file (cwd, optarg, 0);
 				break;
 			case 'e':
 				if (prog_specified){
@@ -688,8 +661,31 @@ int main (int argc, char **argv)
 
 				prog_specified = optarg;
 				break;
+			case 'F':
+				da_push_dup (&new_argv, "-F");
+				da_push_dup (&new_argv, optarg);
+				break;
+			case 'f':
+				add_file (cwd, optarg, 0);
+				break;
+			case 'h':
+				usage ();
+				clean_and_exit (0);
+				break;
 			case 't':
 				create_tmpdir = 1;
+				break;
+			case 'T':
+				da_push_dup (&new_argv, "-F");
+				da_push_dup (&new_argv, "\t");
+				break;
+			case 'v':
+				da_push_dup (&new_argv, "-v");
+				da_push_dup (&new_argv, optarg);
+				break;
+			case 'V':
+				version ();
+				clean_and_exit (0);
 				break;
 			default:
 				usage ();
@@ -737,11 +733,6 @@ int main (int argc, char **argv)
 
 	for (i=0; i < (size_t) argc; ++i){
 		da_push_dup (&new_argv, argv [i]);
-	}
-
-	if (add_stdin){
-		xputenv (xstrdup ("RUNAWK_ART_STDIN=1"));
-		da_push_dup (&new_argv, STDIN_FILENAME);
 	}
 
 	da_push_dup (&new_argv, NULL);

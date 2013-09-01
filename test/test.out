@@ -280,6 +280,17 @@ error: assertion failed: Hello assert!
        FNR=0
        FILENAME=
 --------------------------------------------------
+ ------ args: -Te
+    BEGIN {
+       for (i=1; i <= NF; ++i){
+          printf "$i=\n", $i
+       }
+    }
+$1=   a b c   
+$1=a
+$2= v 
+$3=c 
+--------------------------------------------------
  ------ args: ../examples/demo_multisub
 --------------------------------------------------
  ------ args: ../examples/demo_tokenre ../examples/demo_tokenre.in

@@ -227,6 +227,15 @@ runtest -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
 
 runtest -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
+####################
+printf '   a b c   \na\t b \tc \n' |
+runtest -Te '
+    BEGIN {
+       for (i=1; i <= NF; ++i){
+          printf "$i=\n", $i
+       }
+    }'
+
 ############################################################
 AWKPATH=${SRCDIR}/modules:${SRCDIR}/modules/gawk
 export AWKPATH

@@ -149,14 +149,6 @@ Set the input field separator FS to the regular expression I<fs>.
 
 Display help information.
 
-=item B<-i>
-
-Add stdin file name to the list of B<awk> arguments
-
-=item B<-I>
-
-Do not add stdin file name to a list of awk arguments (the default)
-
 =item B<-t>
 
 If this option is applied, a temporary directory is created by
@@ -165,6 +157,10 @@ directory is created under ${RUNAWK_TMPDIR} (if it is set), or ${TMPDIR}
 (if it is set) or /tmp directory otherwise.
 If I<#use "tmpfile.awk"> is detected
 in a program this option is activated automatically.
+
+=item B<-T>
+
+Set FS to TAB character. This is equivalent to B<-F'\t'>
 
 =item B<-V>
 
