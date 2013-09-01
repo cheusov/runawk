@@ -280,15 +280,15 @@ error: assertion failed: Hello assert!
        FNR=0
        FILENAME=
 --------------------------------------------------
- ------ args: -Te
-    BEGIN {
+ ------ args: -Te 
+    {
        for (i=1; i <= NF; ++i){
-          printf "$i=\n", $i
+          printf "$%d=%s\n", i, $i
        }
     }
 $1=   a b c   
 $1=a
-$2= v 
+$2= b 
 $3=c 
 --------------------------------------------------
  ------ args: ../examples/demo_multisub

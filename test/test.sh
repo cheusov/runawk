@@ -230,9 +230,9 @@ runtest -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 ####################
 printf '   a b c   \na\t b \tc \n' |
 runtest -Te '
-    BEGIN {
+    {
        for (i=1; i <= NF; ++i){
-          printf "$i=\n", $i
+          printf "$%d=%s\n", i, $i
        }
     }'
 
