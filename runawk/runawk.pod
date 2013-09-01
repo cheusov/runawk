@@ -136,6 +136,11 @@ Display version information.
 
 Set the input field separator FS to the regular expression fs.
 
+=item B<-v> I<var>=I<val>
+
+Assign the value I<val> to the variable I<var>
+before execution of the program begins.
+
 =item B<-d>
 
 Turn on a debugging mode in which B<runawk> prints argument list
