@@ -1,4 +1,19 @@
 ======================================================================
+Version 1.5.0, by Aleksey Cheusov, Sun,  8 Sep 2013 12:10:47 +0300
+
+  Options -i, -I and all long options were completely removed.
+
+  Option -T was added. For details see the man page.
+
+  Option -v is documented in manpage.
+
+  Fixes for gcc compilation warnings.
+
+  Fixes for compilation with non-empty MAKEOBJDIR.
+
+  Typo fixes in NEW, runcmd.awk and man pages.
+
+======================================================================
 Version 1.4.4, by Aleksey Cheusov, Sat, 10 Nov 2012 13:57:35 +0300
 
   Fix for bug in removing subdirs in temporary directory.
