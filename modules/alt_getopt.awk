@@ -12,8 +12,8 @@
 # =item I<getopt(SHORT_OPTS)>
 #
 # This function processes ARGV array and
-# returns TRUE if option is recieved, 
-# recieved option is saved in 'optopt' variable, option argument (if any)
+# returns TRUE if option is received, 
+# received option is saved in 'optopt' variable, option argument (if any)
 # is saved in 'optarg' variable. Long options (like --help or
 # --long-option) present in GNU libc and BSD systems are also supported.
 #

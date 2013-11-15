@@ -30,7 +30,7 @@
 # =item I<FW>
 #
 # global variable. If it is set to non-empty string, all input
-# lines are splitted automatically and the value of variable FS is
+# lines are split automatically and the value of variable FS is
 # ignored in this case.
 #
 # =back
