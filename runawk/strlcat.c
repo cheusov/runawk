@@ -25,6 +25,9 @@
  * If retval >= siz, truncation occurred.
  */
 size_t
+strlcat (char *dst, const char *src, size_t siz);
+
+size_t
 strlcat (char *dst, const char *src, size_t siz)
 {
 	char *d = dst;
