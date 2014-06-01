@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Aleksey Cheusov <vle@gmx.net>
+ * Copyright (c) 2012 Aleksey Cheusov <vle@gmx.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -21,53 +21,15 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <string.h>
+#ifndef _COMMON_H_
+#define _COMMON_H_
 
-#include "common.h"
+#if !HAVE_FUNC3_STRLCPY
+size_t strlcpy(char *dst, const char *src, size_t size);
+#endif
 
-#include "dynarray.h"
+#if !HAVE_FUNC3_STRLCAT
+size_t strlcat(char *dst, const char *src, size_t size);
+#endif
 
-void da_init (dynarray_t * array)
-{
-	array->size      = 0;
-	array->allocated = 0;
-	array->array     = NULL;
-}
-
-void da_push (dynarray_t * array, char *item)
-{
-	if (array->allocated == array->size){
-		array->allocated = array->allocated * 4 / 3 + 100;
-		array->array = realloc (
-			array->array, array->allocated * sizeof (*array->array));
-	}
-
-	array->array [array->size++] = item;
-}
-
-void da_push_dup (dynarray_t * array, const char *item)
-{
-	char *dup = (item ? strdup (item) : NULL);
-	da_push (array, dup);
-}
-
-void da_free_items (dynarray_t * array)
-{
-	size_t i;
-	for (i=0; i < array->size; ++i){
-		if (array->array [i]){
-			free ((void *) array->array [i]);
-			array->array [i] = NULL;
-		}
-	}
-}
-
-void da_destroy (dynarray_t * array)
-{
-	if (array->array)
-		free (array->array);
-	array->array     = NULL;
-	array->size      = 0;
-	array->allocated = 0;
-}
+#endif // _COMMON_H_

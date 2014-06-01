@@ -32,13 +32,10 @@
 #include <limits.h>
 #include <signal.h>
 
+#include "common.h"
+
 #include "dynarray.h"
 #include "file_hier.h"
-
-#ifdef HAVE_CONFIG_H
-/* if you need, add extra includes to config.h */
-#include "config.h"
-#endif
 
 #ifndef BUFSIZ
 #define BUFSIZ 4096
