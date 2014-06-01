@@ -27,4 +27,8 @@
 #include <mkc_strlcpy.h>
 #include <mkc_strlcat.h>
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096 /* Some systems doesn't have PATH_MAX */
+#endif
+
 #endif // _COMMON_H_
