@@ -9,7 +9,7 @@ WITH_ALT_GETOPT ?=	yes
 SUBPRJ_DFLT +=		a_getopt
 .endif
 
-MKC_REQD =		0.23.0
+MKC_REQD =		0.26.0
 
 ##################################################
 

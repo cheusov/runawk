@@ -24,12 +24,7 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#if !HAVE_FUNC3_STRLCPY
-size_t strlcpy(char *dst, const char *src, size_t size);
-#endif
-
-#if !HAVE_FUNC3_STRLCAT
-size_t strlcat(char *dst, const char *src, size_t size);
-#endif
+#include <mkc_strlcpy.h>
+#include <mkc_strlcat.h>
 
 #endif // _COMMON_H_
