@@ -1,4 +1,11 @@
 ======================================================================
+Version 1.5.1, by Aleksey Cheusov, Sat, 28 Jun 2014 18:00:25 +0300
+
+  Compilation failure on Hurd were fixed.
+
+  mk-configure >= 0.26.0 is required for build.
+
+======================================================================
 Version 1.5.0, by Aleksey Cheusov, Sun,  8 Sep 2013 12:10:47 +0300
 
   Options -i, -I and all long options were completely removed.
