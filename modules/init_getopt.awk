@@ -9,7 +9,7 @@
 #
 # Initialization step for power_getopt.awk module.  In some cases it
 # makes sense to process options in a while() loop.  This module
-# allows to do this.  See the documentation about how options are
+# allows doing this.  See the documentation about how options are
 # initialized in power_getopt.awk module.
 #
 # =over 2

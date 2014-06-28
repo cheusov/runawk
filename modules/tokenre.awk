@@ -32,7 +32,7 @@
 # =item I<TRE>
 #
 # global variable. If it is set to non-empty string, all input
-# lines are splitted automatically.
+# lines are split automatically.
 #
 # =back
 #
