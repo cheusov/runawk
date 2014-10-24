@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Aleksey Cheusov <vle@gmx.net>
+ * Copyright (c) 2012-2014 Aleksey Cheusov <vle@gmx.net>
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the

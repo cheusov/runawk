@@ -434,7 +434,7 @@ If set, temporary files are not deleted.
 
 =head1 AUTHOR
 
-Copyright (c) 2007-2011 Aleksey Cheusov <vle@gmx.net>
+Copyright (c) 2007-2014 Aleksey Cheusov <vle@gmx.net>
 
 =head1 BUGS/FEEDBACK
 
