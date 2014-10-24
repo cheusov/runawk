@@ -135,11 +135,14 @@ static void remove_dir (const char *dir)
 
 static void clean_and_exit (int status)
 {
-	if (temp_fn_created)
+	const char *keep = getenv ("RUNAWK_KEEPTMP");
+
+	if (!keep && temp_fn_created)
 		unlink (temp_fn);
 
 	if (temp_dir){
-		file_hier (temp_dir, remove_file, remove_dir);
+		if (!keep)
+			file_hier (temp_dir, remove_file, remove_dir);
 
 		if (temp_dir)
 			free (temp_dir);

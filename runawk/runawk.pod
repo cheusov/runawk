@@ -425,6 +425,11 @@ Sets the path to the AWK interpreter, used by default,
 i.e. this variable overrides the compile-time default.
 Note that #interp directive overrides this.
 
+
+=item I<RUNAWK_KEEPTMP>
+
+If set, temporary files are not deleted.
+
 =back
 
 =head1 AUTHOR
