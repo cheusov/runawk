@@ -1,7 +1,7 @@
 ======================================================================
 Version 1.5.1, by Aleksey Cheusov, Sat, 28 Jun 2014 18:00:25 +0300
 
-  Compilation failure on Hurd were fixed.
+  Compilation failure on Hurd was fixed.
 
   mk-configure >= 0.26.0 is required for build.
 
