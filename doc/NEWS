@@ -1,4 +1,17 @@
 ======================================================================
+Version 1.6.0, by Aleksey Cheusov, Fri, 26 Dec 2014 12:34:12 +0300
+
+  Environment variable RUNAWK_KEEPTMP was introduced. If it set,
+  temporary files are kept.  This is useful for debugging.
+
+  io.awk:file_size was fixed (its behaviour depended on FS value)
+
+  AWK_PROGS used for testing is now settable from environment.
+
+  A few typos in runawk_modules.3 were fixed.
+  Thanks to Andrew Shadura!
+
+======================================================================
 Version 1.5.1, by Aleksey Cheusov, Sat, 28 Jun 2014 18:00:25 +0300
 
   Compilation failure on Hurd was fixed.
