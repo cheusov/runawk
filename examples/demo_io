@@ -6,6 +6,10 @@
 #
 # Input files for this demo: examples/demo_tokenre.in*
 
+BEGIN {
+	FS = "\t" # a part of regression test, useless here
+}
+
 {
 	printf "File %s is a generic file: %d\n", $0, is_file($0)
 	printf "File %s is a socket: %d\n", $0, is_socket($0)

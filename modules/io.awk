@@ -119,7 +119,7 @@ function file_size (fn, stat,          d0,arr,cmd){
 	if (0 < (cmd | getline d0)){
 		close(cmd)
 		if (d0 ~ /^-/){
-			split(d0, arr)
+			split(d0, arr, " ")
 			return arr [5]
 		}else{
 			return -1;
