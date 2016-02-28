@@ -1,4 +1,4 @@
-MODULES !=			cd ${.CURDIR}; echo *.awk gawk/*.awk
+MODULES !=			cd ${.CURDIR}; LC_ALL=C ls *.awk gawk/*.awk
 
 FILES =				${MODULES}
 FILESDIR =			${MODULESDIR}
