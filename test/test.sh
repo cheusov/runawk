@@ -184,8 +184,7 @@ runtest -d -e '
 
 BEGIN {
    ...
-}
-'
+}'
 
 runtest -e '
 #env "LC_ALL=C"
