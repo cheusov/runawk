@@ -202,7 +202,6 @@ ARGV [3]=file3
 BEGIN {
    ...
 }
-
 new_argv [0] = awk
 new_argv [1] = 
 #env "LC_ALL=C"
@@ -211,7 +210,6 @@ new_argv [1] =
 BEGIN {
    ...
 }
-
 --------------------------------------------------
  ------ args: -e 
 #env "LC_ALL=C"
