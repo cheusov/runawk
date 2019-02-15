@@ -1,4 +1,10 @@
 ======================================================================
+Version 1.6.1, by Aleksey Cheusov, Fri, 15 Feb 2019 21:19:26 +0300
+
+  Fix in regression test (broken Solaris shell)
+  Sort .awk files locale-independently to get reproducible build
+
+======================================================================
 Version 1.6.0, by Aleksey Cheusov, Fri, 26 Dec 2014 12:34:12 +0300
 
   Environment variable RUNAWK_KEEPTMP was introduced. If it set,

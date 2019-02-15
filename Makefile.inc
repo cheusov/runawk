@@ -1,4 +1,4 @@
-VERSION   =	1.6.0
+VERSION   =	1.6.1
 
 BIRTHDATE =	2007-09-24
 
