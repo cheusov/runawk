@@ -3,7 +3,8 @@ DIFF_PROG ?=	diff -u
 TESTTEMPDIR = ${.CURDIR}/..
 .export TESTTEMPDIR
 
-all:
+.PHONY: test_one
+test_one:
 	@echo 'running tests...'; \
 	export SRCDIR=${.CURDIR}/..; \
 	if { ${.CURDIR}/test.sh > ${.OBJDIR}/_test.res; \
@@ -21,12 +22,12 @@ AWK_PROGS ?= /usr/bin/awk /usr/bin/nawk /usr/bin/gawk \
 #   /usr/pkg/heirloom/bin/nawk
 #   /usr/bin/mawk /usr/pkg/bin/mawk /usr/pkg/bin/mawk-uxre
 
-.PHONY: test_all
-test_all:
+.PHONY: all
+all:
 .for awk in ${AWK_PROGS}
 	@if test -x ${awk}; then \
 		echo testing ${awk}; \
-		export RUNAWK_AWKPROG=${awk}; cd ${.CURDIR} && ${MAKE} all; \
+		export RUNAWK_AWKPROG=${awk}; cd ${.CURDIR} && ${MAKE} test_one; \
 		echo ''; \
 	fi
 .endfor
