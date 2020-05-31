@@ -29,5 +29,6 @@ DIST_TARGETS =	manpages
 manpages: _manpages
 	rm ${MKC_CACHEDIR}/_mkc*
 
+.include "help.mk"
 .include "Makefile.inc"
 .include <mkc.subprj.mk>
