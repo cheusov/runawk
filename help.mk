@@ -1,3 +1,6 @@
 HELP_MSG.runawk   =	"runawk executable"
 HELP_MSG.modules  =	"modules written in AWK"
 HELP_MSG.a_getopt =	"shell function for handling command line options"
+HELP_MSG.doc      =	"LICENSE, README, TODO and NEWS"
+HELP_MSG.examples =	"Samples of use of runawk and modules"
+HELP_MSG.test    =	"Tests for runawk and modules"
