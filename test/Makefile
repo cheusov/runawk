@@ -33,6 +33,6 @@ all:
 .endfor
 
 CLEANFILES += ${TESTTEMPDIR}/temp1.awk ${TESTTEMPDIR}/temp2.awk ${TESTTEMPDIR}/temp3.awk
-DISTCLEANFILES += _test.res
+CLEANDIRFILES += _test.res
 
 .include <mkc.files.mk>
