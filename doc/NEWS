@@ -1,4 +1,14 @@
 ======================================================================
+Version 1.6.2, by Aleksey Cheusov, Fri, 18 Nov 2022 19:47:10 +0400
+
+  "mkcmake test" tests all available AWK implementations
+
+  With latest mk-configure >= 0.34.0 "mkcmake help" show descriptions
+  for subprojects.
+
+  build system: replace deprecated DISTCLEANFILES with CLEANDIRFILES
+
+======================================================================
 Version 1.6.1, by Aleksey Cheusov, Fri, 15 Feb 2019 21:19:26 +0300
 
   Fix in regression test (broken Solaris shell)
