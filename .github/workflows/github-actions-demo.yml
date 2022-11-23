@@ -16,11 +16,9 @@ jobs:
         run: apt-get install mk-configure gawk
 
       - name: Build runawk
-        run: |
-	  cd ${{ github.workspace }} && mkcmake all
+        run: cd ${{ github.workspace }} && mkcmake all
 
       - name: Test runawk
-        run: |
-	  cd ${{ github.workspace }} && mkcmake test
+        run: cd ${{ github.workspace }} && mkcmake test
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
