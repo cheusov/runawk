@@ -89,26 +89,3 @@ RunAWK also provides a few scripts:
                            EXAMPLES
 
 Lots of examples are available in examples/ subdirectory.
-
-======================================================================
-
-                           PACKAGES
-
-  1) NetBSD, DragonFlyBSD, Linux, Solaris... (pkgsrc)
-
-    RunAWK is packaged in pkgsrc as wip/runawk.
-
-  2) FreeBSD
-
-    RunAWK is packaged in FreeBSD ports as lang/runawk
-
-  3) Debian/lenny/x86
-
-    Add the following lines
-
-        deb     http://mova.org/~cheusov/pub/debian       lenny    main
-        deb-src http://mova.org/~cheusov/pub/debian       lenny    main
-
-    to /etc/apt/sources.list and then using apt or aptitude commands.
-    Binary packages are available only for Debian/Lenny/i386.
-    Ubuntu users need to recompile the package for their system.
