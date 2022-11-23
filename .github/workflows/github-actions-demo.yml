@@ -17,12 +17,10 @@ jobs:
 
       - name: Build runawk
         run: |
-	  cd ${{ github.workspace }}
-          mkcmake all
+	  cd ${{ github.workspace }} && mkcmake all
 
       - name: Test runawk
         run: |
-	  cd ${{ github.workspace }}
-          mkcmake test
+	  cd ${{ github.workspace }} && mkcmake test
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
