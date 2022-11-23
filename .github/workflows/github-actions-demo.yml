@@ -14,12 +14,15 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Install build and test environment
         run: apt-get install mk-configure gawk
+
       - name: Build runawk
         run: |
 	  cd ${{ github.workspace }}
           mkcmake all
+
       - name: Test runawk
         run: |
 	  cd ${{ github.workspace }}
           mkcmake test
+
       - run: echo "🍏 This job's status is ${{ job.status }}."
