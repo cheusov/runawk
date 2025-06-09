@@ -1,3 +1,6 @@
+plan -2:
+- module for working with TSV
+
 plan -1:
 - gener{it,ate}/chpp/m1/m5 -- general purpose text preprocessor
 
