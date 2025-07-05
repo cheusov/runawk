@@ -1,0 +1,20 @@
+#!/usr/bin/env runawk
+
+#use "tsv.awk"
+
+# This demo reads TSV file and makes trivial calculations
+
+# Input files for this demo: examples/demo_tsv.in
+
+BEGIN {
+	FS = "\t"
+}
+
+NR == 1 {
+	init_tsv_header()
+	next
+}
+
+{
+	print $(get_tsv_col("A")) + $(get_tsv_col("B"))
+}
