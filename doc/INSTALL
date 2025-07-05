@@ -2,11 +2,11 @@
 
                              INSTALLATION
 
-0)
+*
    Maybe runawk is already packaged for your platform. See PACKAGES
    section below and your system's packages management tools.
 
-1)
+*
    We need bmake (portable version of NetBSD make) for building runawk.
    I'd recommend to use latest stable version of bmake.
 
@@ -15,22 +15,24 @@
 
               <<<***!!! GNU make IS NOT GOOD !!!***>>>
 
-2)
-   We also need mk-configure >= 0.21.0.
+*
+   We also need mk-configure >= 0.39.0.
 
-   http://sourceforge.net/projects/mk-configure/
+   https://github.com/cheusov/runawk
 
-3) Uncompress tarball you've downloaded like this
+* Uncompress tarball you've downloaded like this
    gzip -dc runawk-X-Y-Z.tar.gz | tar -xf-
 
-2) cd runawk-X.Y.Z
+* cd runawk-X.Y.Z
 
-3) mkcmake
+* mkcmake help
 
-4) mkcmake test
+* mkcmake
+
+* mkcmake test
    If this step fails on your system, PLEASE LET ME KNOW.
 
-5) mkcmake install
+* mkcmake install
 
 There is a lot of Makefile variables that can be changed during
 build and installation.
@@ -50,7 +52,7 @@ build and installation.
 
   See mk-configure(7) for details.
 
-6) RunAWK distribution consists of the following subprojects:
+* RunAWK distribution consists of the following subprojects:
    - runawk   -- runawk executable
    - modules  -- modules written in .awk
    - doc      -- README, COPYRIGHT, NEW, TODO files
@@ -71,7 +73,7 @@ build and installation.
     export SUBPRJ_DFLT='runawk modules examples a_getopt doc'
     mkcmake all install
 
-7) Non-standard variable you may want to change.
+*  Non-standard variable you may want to change.
    EGDIR - directiory where examples/ will be installed to
            ($PREFIX/share/doc/runawk/examples)
    MODULESDIR - directory where modules/ will be installed to
