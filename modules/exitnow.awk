@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #    
 ############################################################
 
@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item I<exitnow (STATUS)>
+# =item I<exitnow(STATUS)>
 #
 # similar to the statement 'exit' but do not run
 # END sections.

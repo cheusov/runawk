@@ -1,16 +1,17 @@
 =head1 AUTHOR
 
-Copyright (c) 2007-2014 Aleksey Cheusov <vle@gmx.net>
+Copyright (c) 2007-2025 Aleksey Cheusov <vle@gmx.net>
 
 =head1 BUGS/FEEDBACK
 
-Please send any comments, questions, bug reports etc. to me by e-mail
-or register them at sourceforge project home.  Feature requests are
-also welcomed.
+Please register all bugs and suggestions on github page.
 
 =head1 HOME
 
-L<http://sourceforge.net/projects/runawk/>
+L<https://github.com/cheusov/runawk>
+
+Tarball with prebuilt man pages is available here
+L<http://sourceforge.net/projects/runawk>
 
 =head1 SEE ALSO
 L<awk(1)>

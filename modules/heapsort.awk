@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #
 ############################################################
 
@@ -9,7 +9,7 @@
 #
 # =over 2
 #
-# =item I<heapsort (src_array, dest_remap, start, end)>
+# =item I<heapsort(src_array, dest_remap, start, end)>
 #
 # The content of `src_array' is sorted using awk's rules for
 # comparing values. Values with indices in range [start, end] are
@@ -25,7 +25,7 @@
 #   `heapsort' algorithm is used.
 # Examples: see demo_heapsort and demo_heapsort2 executables.
 #
-# =item I<heapsort_values (src_hash, dest_remap)>
+# =item I<heapsort_values(src_hash, dest_remap)>
 #
 # The same as `heapsort' described above, but hash values are sorted.
 #
@@ -39,7 +39,7 @@
 #
 # Examples: see demo_heapsort3 executable.
 #
-# =item I<heapsort_indices (src_hash, dest_remap)>
+# =item I<heapsort_indices(src_hash, dest_remap)>
 #
 # The same as `heapsort' described above, but hash indices are sorted.
 #
@@ -53,7 +53,7 @@
 #
 # Examples: demo_ini
 #
-# =item I<heapsort_fields (dest_remap, [start [, end [, strnum]]])>
+# =item I<heapsort_fields(dest_remap, [start [, end [, strnum]]])>
 #
 # The same as function "heapsort0" but $1, $2... array is sorted.
 # Note that $1, $2... are not changed, but dest_remap array is filled in!
@@ -61,7 +61,7 @@
 # If "strnum" is set to 1, values are forcibly compared as strings.
 # If "strnum" is set to 2, values are forcibly compared as numbers.
 #
-# =item I<heapsort0 ([start [, end [, strnum]]])>
+# =item I<heapsort0([start [, end [, strnum]]])>
 #
 # The same as "heapsort_fields" but $1, $2... are changed.
 #

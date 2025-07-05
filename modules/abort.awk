@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #    
 
 #use "exitnow.awk"
@@ -10,7 +10,7 @@
 #
 # =over 2
 #
-# =item I<abort (MSG, [EXIT_STATUS])>
+# =item I<abort(MSG, [EXIT_STATUS])>
 #
 # print MSG to stderr and exits program with
 # EXIT_STATUS.  EXIT_STATUS defaults to 1.

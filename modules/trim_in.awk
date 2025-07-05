@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #
 ############################################################
 
@@ -9,7 +9,7 @@
 #
 # As the name of this module says (_in suffix) this module reads and
 # potentially changes input lines.
-# 
+#
 # Leading, ending spaces and/or spaces in the middle of input lines
 # are removed depending on TRIM variable.
 # TRIM values:

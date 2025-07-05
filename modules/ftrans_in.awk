@@ -8,9 +8,9 @@
 
 # =head2 ftrans_in.awk
 #
-# beginfile() function provided by user is called before file reading
+# beginfile( ) function provided by user is called before file reading
 #
-# endfile()   function provided by user is called after file reading
+# endfile( )   function provided by user is called after file reading
 #
 
 FNR == 1 {

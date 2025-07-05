@@ -62,13 +62,14 @@ under modules/ subdirectory. They are installed by default.
     tmpfile.awk      - generates names of automatically deleted tempfiles
     fieldwidths.awk  - portable equivalent of GNU awk's FIELDWIDTHS ;-)
     CR_in.awk        - removes CR symbols from input lines.
-    trim.awk         - functions for trimming spaces from the string.
-    trim_in.awk      - trims spaces from input lines.
+    trim.awk         - functions for trimming spaces from the string
+    trim_in.awk      - trims spaces from input lines
     backslash_in.awk - treats backslash symbol at the end of line as
-                       "this line will continue on the next one".
-    ini.awk          - functions for reading Win .ini files.
+                       "this line will continue on the next one"
+    ini.awk          - functions for reading Win .ini files
     ftrans_in.awk    - handle data file transitions
     ord.awk          - character to id and id to character convertors
+    tsv.awk          - functions for working with TSV input
 
 ======================================================================
 

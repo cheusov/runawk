@@ -12,11 +12,11 @@
 #
 # =over 2
 #
-# =item I<ord (CHAR)>
+# =item I<ord(CHAR)>
 #
 # return numeral code of CHAR
 #
-# =item I<chr (CODE)>
+# =item I<chr(CODE)>
 #
 # return symbol from the CODE
 #
