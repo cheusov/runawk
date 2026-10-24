@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #    
 ############################################################
 
@@ -11,7 +11,7 @@
 #
 # =over 2
 #
-# =item I<basename (PATH)>
+# =item I<basename(PATH)>
 #
 # return filename portion of the PATH
 # (the same as I<dirname(3)>)

@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #
 ############################################################
 
@@ -15,7 +15,7 @@
 #
 # =over 2
 #
-# =item I<tmpfile()>
+# =item I<tmpfile( )>
 #
 # returns a temporary file name.
 #

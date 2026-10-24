@@ -1,7 +1,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #
 ############################################################
 
@@ -18,7 +18,7 @@
 #
 # Removes Tab and Space characters at the end of STRING and returns
 # the result.
-# 
+#
 # =item I<trim_c(STRING, REPL)>
 #
 # Replaces sequences of Tab and Space characters in STRING with REPL

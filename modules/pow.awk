@@ -2,7 +2,7 @@
 # Written by Aleksey Cheusov <vle@gmx.net>, public domain
 #
 # This awk module is a part of RunAWK distribution,
-#        http://sourceforge.net/projects/runawk
+#        https://github.com/cheusov/runawk
 #    
 ############################################################
 
@@ -10,7 +10,7 @@
 #
 # =over 2
 #
-# =item I<pow (X, Y)>
+# =item I<pow(X, Y)>
 #
 # returns the value of X to the exponent Y
 #

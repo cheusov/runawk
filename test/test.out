@@ -1046,6 +1046,11 @@ Jan Anderson
 --------------------------------------------------
  ------ args: ../examples/demo_glob2ere
 --------------------------------------------------
+ ------ args: ../examples/demo_tsv ../examples/demo_tsv.in
+13
+25
+15
+--------------------------------------------------
  ------ args: ../examples/demo_backslash_in ../examples/demo_backslash_in.in
 Some text here and here too. This is still the first line.
 This is the second.

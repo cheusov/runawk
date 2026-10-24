@@ -1,10 +1,10 @@
-SCRIPTS +=			alt_getopt
+SCRIPTS    +=	alt_getopt
 
-MAN +=				alt_getopt.1
+MAN        +=	alt_getopt.1
 
-FILES +=			alt_getopt.sh
+FILES      +=	alt_getopt.sh
 
-CLEANFILES =			alt_getopt.1
+CLEANFILES  =	alt_getopt.1
 
 .PHONY: _manpages
 _manpages: ${MAN}
