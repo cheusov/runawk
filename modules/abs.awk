@@ -17,6 +17,7 @@
 #
 
 function abs (v){
+	v = v + 0
 	if (v < 0)
 		return -v
 	else

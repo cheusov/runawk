@@ -222,8 +222,6 @@ runtest -e '
     }
     '
 
-runtest -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
-
 runtest -f alt_assert.awk -e 'BEGIN {assert(0, "Hello assert!")}'
 
 ####################
@@ -240,6 +238,11 @@ AWKPATH=${SRCDIR}/modules:${SRCDIR}/modules/gawk
 export AWKPATH
 ####################    multisub
 runtest ../examples/demo_multisub
+
+####################    abs
+runtest -f abs.awk -e 'BEGIN {print abs(-123), abs(234); exit}'
+runtest -f abs.awk -e 'BEGIN {print abs("+0.0001"), abs(" 0.0001"); exit}'
+runtest -f abs.awk -e 'BEGIN {print abs(sprintf("%+.20f", exp(1))), abs("+" exp(1)), abs(exp(1)); exit}'
 
 ####################    tokenre
 runtest ../examples/demo_tokenre  ../examples/demo_tokenre.in

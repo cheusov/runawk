@@ -267,9 +267,6 @@ error: just a test
        FNR=0
        FILENAME=
 --------------------------------------------------
- ------ args: -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
-123 234
---------------------------------------------------
  ------ args: -f alt_assert.awk -e BEGIN {assert(0, "Hello assert!")}
 error: assertion failed: Hello assert!
        ARGV[0]=awk
@@ -290,6 +287,15 @@ $2= b
 $3=c 
 --------------------------------------------------
  ------ args: ../examples/demo_multisub
+--------------------------------------------------
+ ------ args: -f abs.awk -e BEGIN {print abs(-123), abs(234); exit}
+123 234
+--------------------------------------------------
+ ------ args: -f abs.awk -e BEGIN {print abs("+0.0001"), abs(" 0.0001"); exit}
+0.0001 0.0001
+--------------------------------------------------
+ ------ args: -f abs.awk -e BEGIN {print abs(sprintf("%+.20f", exp(1))), abs("+" exp(1)), abs(exp(1)); exit}
+2.71828 2.71828 2.71828
 --------------------------------------------------
  ------ args: ../examples/demo_tokenre ../examples/demo_tokenre.in
 NF=5
