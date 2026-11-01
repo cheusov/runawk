@@ -1,0 +1,24 @@
+#!/usr/bin/env runawk
+
+#use "tsv.awk"
+
+# This demo reads TSV file and outputs records in different format
+
+# Input files for this demo: examples/demo_tsv.in
+
+BEGIN {
+	FS = "\t"
+}
+
+NR == 1 {
+	init_tsv_header()
+	next
+}
+
+{
+	for (i = 1; i <= TSV_COL_COUNT; ++i) {
+		printf "%5s: %s\n", TSV_COL_NAME[i], $i
+#		printf "%5s: %s\n", get_tsv_col_name(i), $i
+	}
+	print ""
+}
