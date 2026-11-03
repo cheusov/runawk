@@ -1,0 +1,18 @@
+#!/usr/bin/env runawk
+
+#use "csv.awk"
+
+# This demo reads CSV file and makes trivial calculations
+
+# Input files for this demo: examples/demo_csv.in
+
+NR == 1 {
+	csv_parse0()
+	init_tsv_header0()
+	next
+}
+
+{
+	csv_parse0()
+	print $(get_tsv_col("A")) + $(get_tsv_col("B"))
+}

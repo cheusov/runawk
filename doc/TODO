@@ -1,6 +1,3 @@
-plan -2:
-- module for working with TSV
-
 plan -1:
 - gener{it,ate}/chpp/m1/m5 -- general purpose text preprocessor
 
@@ -27,7 +24,6 @@ plan 1:
 - msub() - cleverer replacement for multisub
 - bre2ere.awk Basic RE to Extended RE convertor
 - libconfig/libconfuse analog written in/for AWK
-- csv.awk -- module for "comma separated values" format described in RFC4180
 - hash.awk - functions for working with hashes.
   items_count() ?
 - support for Windows

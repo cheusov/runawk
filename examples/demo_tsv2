@@ -11,7 +11,7 @@ BEGIN {
 }
 
 NR == 1 {
-	init_tsv_header()
+	init_tsv_header0()
 	next
 }
 

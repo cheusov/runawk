@@ -9,33 +9,49 @@
 #
 # =over 2
 #
-# =item I<init_tsv_header( )>
+# =item I<init_tsv_header0( )>
 #
-# initialize the header raw of TSV input.
+# process the header row $0 of TSV input, and save results to TSV_COL_COUNT, TSV_COL and TSV_COL_NAME.
+#
+# =item I<init_tsv_header( array )>
+#
+# process the column names in array, and save results to TSV_COL_COUNT, TSV_COL and TSV_COL_NAME.
 #
 # =item I<get_tsv_col(col_name)>
 #
-# return a column index for the specified name.
+# return a column index for the specified column name.
+#
+# =item I<get_tsv_col_name(col_num)>
+#
+# return a column name for the specified column index.
 #
 # =item I<TSV_COL>
 #
-# array with column indices, keys are column names.
+# array with column indices, keys are column names, values -- column indices.
 #
 # =item I<TSV_COL_NAME>
 #
-# array with column names, keys are column indices.
+# array with column names, keys are column indices, values -- column names.
 #
 # =back
 #
 
 #use "alt_assert.awk"
 
-function init_tsv_header(               i) {
+function init_tsv_header0(               i) {
 	TSV_COL_COUNT = NF
 	for (i = 1; i <= NF; ++i){
 		TSV_COL[$i] = i
 		TSV_COL_NAME[i] = $i
 	}
+}
+
+function init_tsv_header(a,               i) {
+	for (i = 1; i in a; ++i){
+		TSV_COL[a[i]] = i
+		TSV_COL_NAME[i] = a[i]
+	}
+	TSV_COL_COUNT = i-1
 }
 
 function get_tsv_col(col_name,           ret){

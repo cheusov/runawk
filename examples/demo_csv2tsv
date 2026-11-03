@@ -1,0 +1,16 @@
+#!/usr/bin/env runawk
+
+#use "csv.awk"
+
+# This demo converts CSV to TSV
+
+# Input files for this demo: examples/demo_csv2tsv.in
+
+BEGIN {
+	OFS = "\t"
+}
+
+{
+	csv_parse0()
+	print $0
+}

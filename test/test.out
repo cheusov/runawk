@@ -1057,6 +1057,59 @@ Jan Anderson
 25
 15
 --------------------------------------------------
+ ------ args: ../examples/demo_tsv2 ../examples/demo_tsv.in
+    A: 11
+    B: 2
+
+    A: 17
+    B: 8
+
+    A: 9
+    B: 6
+
+--------------------------------------------------
+ ------ args: ../examples/demo_tsv3 ../examples/demo_tsv.in
+ First: 11
+Second: 2
+
+ First: 17
+Second: 8
+
+ First: 9
+Second: 6
+
+--------------------------------------------------
+ ------ args: ../examples/demo_csv ../examples/demo_csv.in
+13
+25
+15
+--------------------------------------------------
+ ------ args: ../examples/demo_csv2tsv ../examples/demo_csv2tsv.in
+A<TAB>B<TAB><TAB>
+<TAB><TAB>11<TAB>2
+<TAB>17<TAB>8<TAB>
+9<TAB><TAB><TAB>6
+Double-quotes (") are allowed even if they (") appear multiple times<TAB> Spaces         are allowed too
+    Trailing spaces are not removed:    <TAB> 
+--------------------------------------------------
+ ------ args: ../examples/demo_csv2tsv
+1
+2
+--------------------------------------------------
+error: assertion failed: failed on input `"123`
+--------------------------------------------------
+error: assertion failed: failed on input `""",1,2,3`
+--------------------------------------------------
+error: assertion failed: failed on input `""q,2,3`
+--------------------------------------------------
+ ------ args: ../examples/demo_tsv2csv
+A,B,,
+,,11,2
+,17,8,
+9,,,6
+"Double-quotes ("") are allowed even if they ("") appear multiple times", Spaces         are allowed too
+    Trailing spaces are not removed:    , 
+--------------------------------------------------
  ------ args: ../examples/demo_backslash_in ../examples/demo_backslash_in.in
 Some text here and here too. This is still the first line.
 This is the second.

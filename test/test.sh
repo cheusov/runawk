@@ -373,6 +373,18 @@ runtest ../examples/demo_glob2ere
 
 ####################    tsv.awk
 runtest ../examples/demo_tsv ../examples/demo_tsv.in
+runtest ../examples/demo_tsv2 ../examples/demo_tsv.in
+runtest ../examples/demo_tsv3 ../examples/demo_tsv.in
+
+####################    csv.awk
+runtest ../examples/demo_csv ../examples/demo_csv.in
+runtest ../examples/demo_csv2tsv ../examples/demo_csv2tsv.in | sed 's/	/<TAB>/g'
+printf '1\n2\n' | runtest ../examples/demo_csv2tsv | sed 's/	/<TAB>/g'
+echo '1,2,3,"123' | runtest ../examples/demo_csv2tsv 2>&1 | grep -E '^(---|error)'
+echo ',""",1,2,3' | runtest ../examples/demo_csv2tsv 2>&1 | grep -E '^(---|error)'
+echo '1,,""q,2,3' | runtest ../examples/demo_csv2tsv 2>&1 | grep -E '^(---|error)'
+
+runtest_main ../examples/demo_csv2tsv ../examples/demo_csv2tsv.in | runtest ../examples/demo_tsv2csv
 
 ####################    backslash_in
 runtest ../examples/demo_backslash_in ../examples/demo_backslash_in.in
