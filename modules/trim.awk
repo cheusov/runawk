@@ -33,6 +33,10 @@
 #
 # Equal to trim_l(trim_r(trim_c(STRING, REPL)))
 #
+# =item I<trim_clr(STRING, REPL)>
+#
+# Equal to trim_c(trim_l(trim_r(STRING)),REPL)
+#
 # =back
 #
 # See example/demo_trim for the sample of usage
@@ -69,5 +73,15 @@ function trim_lrc (s, repl){
 	gsub(/[ \t]+/, repl, s)
 	sub(/[ \t]+$/, "", s)
 	sub(/^[ \t]+/, "", s)
+	return s
+}
+
+function trim_clr (s, repl){
+	if (repl == "")
+		repl = " "
+
+	sub(/[ \t]+$/, "", s)
+	sub(/^[ \t]+/, "", s)
+	gsub(/[ \t]+/, repl, s)
 	return s
 }

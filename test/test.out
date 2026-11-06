@@ -998,33 +998,59 @@ file 3
 trim_l("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator  "
 trim_r("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator"
 trim_c("Van Der   Graaf   Generator  ")="Van Der Graaf Generator "
+trim_c("Van Der   Graaf   Generator  ","-")="Van-Der-Graaf-Generator-"
 trim_lr("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator"
 trim_lrc("Van Der   Graaf   Generator  ")="Van Der Graaf Generator"
+trim_clr("Van Der   Graaf   Generator  ")="Van Der Graaf Generator"
+trim_clr("Van Der   Graaf   Generator  ","\n")="Van
+Der
+Graaf
+Generator"
 trim_l("    Peter Hammill")="Peter Hammill"
 trim_r("    Peter Hammill")="    Peter Hammill"
 trim_c("    Peter Hammill")=" Peter Hammill"
+trim_c("    Peter Hammill","-")="-Peter-Hammill"
 trim_lr("    Peter Hammill")="Peter Hammill"
 trim_lrc("    Peter Hammill")="Peter Hammill"
+trim_clr("    Peter Hammill")="Peter Hammill"
+trim_clr("    Peter Hammill","\n")="Peter
+Hammill"
 trim_l("  King  Crimson")="King  Crimson"
 trim_r("  King  Crimson")="  King  Crimson"
 trim_c("  King  Crimson")=" King Crimson"
+trim_c("  King  Crimson","-")="-King-Crimson"
 trim_lr("  King  Crimson")="King  Crimson"
 trim_lrc("  King  Crimson")="King Crimson"
+trim_clr("  King  Crimson")="King Crimson"
+trim_clr("  King  Crimson","\n")="King
+Crimson"
 trim_l("Robert    Fripp")="Robert    Fripp"
 trim_r("Robert    Fripp")="Robert    Fripp"
 trim_c("Robert    Fripp")="Robert Fripp"
+trim_c("Robert    Fripp","-")="Robert-Fripp"
 trim_lr("Robert    Fripp")="Robert    Fripp"
 trim_lrc("Robert    Fripp")="Robert Fripp"
+trim_clr("Robert    Fripp")="Robert Fripp"
+trim_clr("Robert    Fripp","\n")="Robert
+Fripp"
 trim_l("   Jethro   Tull")="Jethro   Tull"
 trim_r("   Jethro   Tull")="   Jethro   Tull"
 trim_c("   Jethro   Tull")=" Jethro Tull"
+trim_c("   Jethro   Tull","-")="-Jethro-Tull"
 trim_lr("   Jethro   Tull")="Jethro   Tull"
 trim_lrc("   Jethro   Tull")="Jethro Tull"
+trim_clr("   Jethro   Tull")="Jethro Tull"
+trim_clr("   Jethro   Tull","\n")="Jethro
+Tull"
 trim_l("Jan Anderson")="Jan Anderson"
 trim_r("Jan Anderson")="Jan Anderson"
 trim_c("Jan Anderson")="Jan Anderson"
+trim_c("Jan Anderson","-")="Jan-Anderson"
 trim_lr("Jan Anderson")="Jan Anderson"
 trim_lrc("Jan Anderson")="Jan Anderson"
+trim_clr("Jan Anderson")="Jan Anderson"
+trim_clr("Jan Anderson","\n")="Jan
+Anderson"
 --------------------------------------------------
  ------ args: ../examples/demo_trim_in ../examples/demo_trim.in
 Van Der   Graaf   Generator
