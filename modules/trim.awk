@@ -52,7 +52,7 @@ function trim_c (s, repl){
 	if (repl == "")
 		repl = " "
 
-	gsub(/[ \t][ \t]+/, repl, s)
+	gsub(/[ \t]+/, repl, s)
 	return s
 }
 
@@ -66,7 +66,7 @@ function trim_lrc (s, repl){
 	if (repl == "")
 		repl = " "
 
-	gsub(/[ \t][ \t]+/, repl, s)
+	gsub(/[ \t]+/, repl, s)
 	sub(/[ \t]+$/, "", s)
 	sub(/^[ \t]+/, "", s)
 	return s
