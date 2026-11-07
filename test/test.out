@@ -994,6 +994,9 @@ file 1
 file 2
 file 3
 --------------------------------------------------
+ ------ args: text.awk #1
+ababababab
+--------------------------------------------------
  ------ args: ../examples/demo_trim ../examples/demo_trim.in
 trim_l("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator  "
 trim_r("Van Der   Graaf   Generator  ")="Van Der   Graaf   Generator"

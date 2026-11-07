@@ -6,7 +6,7 @@ MODULES       =	CR_in.awk abort.awk abs.awk alt_assert.awk \
    io.awk isnum.awk match_br.awk max.awk min.awk modinfo.awk \
    multisub.awk pow.awk power_getopt.awk quicksort.awk readfile.awk \
    runcmd.awk shquote.awk sort.awk str2regexp.awk tmpfile.awk \
-   tokenre.awk trim.awk trim_in.awk tsv.awk csv.awk xclose.awk \
+   tokenre.awk text.awk trim.awk trim_in.awk tsv.awk csv.awk xclose.awk \
    xgetline.awk xsystem.awk gawk/ord.awk
 
 FILES         =	${MODULES}

@@ -360,6 +360,11 @@ runtest ../examples/demo_fieldwidths < ../examples/demo_fieldwidths.in
 ####################    tmpfile
 runtest ../examples/demo_tmpfile
 
+####################    text.awk
+runtest_header 'text.awk #1'
+$OBJDIR_runawk/runawk -f text.awk \
+    -e 'BEGIN {print repeat("ab", 5)}'
+
 ####################    trim
 runtest ../examples/demo_trim ../examples/demo_trim.in
 
