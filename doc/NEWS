@@ -1,4 +1,16 @@
 ======================================================================
+Version 1.7.0, by Aleksey Cheusov, Sun,  8 Nov 2026 21:45:04 +0400
+
+  New module "tsv.awk" for handling TSV input.
+  New module "csv.awk" for handling CSV input.
+  New module "text.awk" with text functions (only one for now :-) )
+
+  abs.awk: explicitely convert argument to a number,
+  this fixes github issue #5
+
+  trim.awk: add new function trim_clr
+
+======================================================================
 Version 1.6.2, by Aleksey Cheusov, Thu, 15 Oct 2026 23:32:27 +0400
 
   "mkcmake test" tests all available AWK implementations
