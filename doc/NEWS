@@ -8,7 +8,9 @@ Version 1.7.0, by Aleksey Cheusov, Sun,  8 Nov 2026 21:45:04 +0400
   abs.awk: explicitely convert argument to a number,
   this fixes github issue #5
 
-  trim.awk: add new function trim_clr
+  trim.awk:
+     * fix trim_c and trim_lrc (incorrect handling of argument "repl")
+     * add new function trim_clr
 
 ======================================================================
 Version 1.6.2, by Aleksey Cheusov, Thu, 15 Oct 2026 23:32:27 +0400
